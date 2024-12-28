@@ -1,0 +1,45 @@
+\section{Introduction}
+
+  \begin{definition}[Mesure de Gibbs]
+    Soit $\mu$ une mesure de probabilité $\sigma$-invariante sur $\s_n$.
+    On dit $\mu$ est une mesure de Gibbs pour un potentiel $\phi \colon \s_n \longrightarrow \R$ s'il existe $P \in \R$ et $c_1, c_2 > 0$ tels que
+    pour tout $x \in \s_n$ et $m \in \N$ on ait
+    $$c_1 \leq \frac{\mu\{y \in \s_n \mid \forall i \in \llbracket 0, m-1 \rrbracket, x_i = y_i\}}{\exp{(-Pm + \sum_{k=0}^{m-1}\phi(\sigma^kx))}} \leq c_2.$$
+  \end{definition}
+
+  Dans une première partie on se concentre sur la construction d'une mesure de Gibbs ergodique $\mu$ sur l'espace métrique $\s_n$,
+  afin de montrer le théorème principal.
+
+  \begin{theorem}
+    Soit $\phi$ une fonction de potentiel hölderienne. Alors il existe une unique mesure de Gibbs pour cette fonction $\phi$.
+  \end{theorem}
+
+  Pour ce faire, on se ramène au cas où la fonction de potentiel $\phi$ ne dépend plus des coordonnées négatives.
+  Ensuite, on considère l'opérateur de transfert $\L$ défini par
+  $$\forall f \in \Csp{n}, \forall x \in \sp_n, \hspace{0.5em} \L f(x) = \sum_{y \in \sigma^{-1}x}f(y)e^{\phi(y)},$$
+  où $\sp_n$ est l'ensemble des suites à valeurs dans $\llbracket 1, n\rrbracket$ et indéxées sur $\N$.
+
+  Le théorème suivant établit que cet opérateur admet une mesure propre et une fonction propre.
+
+  \begin{theorem}[Ruelle-Perron-Frobenius]
+    Soit $\phi$ un potentiel et $\L$ l'opérateur de transfert.
+    Alors il existe $\lambda > 0, \nu \in \Msp{n}$ et $h \in \Csp{n}, h > 0$ tels que :
+    \begin{enumerate}
+      \item $\nu$ vérifie $\L^*\nu = \lambda\nu$,
+      \item $h$ vérifie $\L h = \lambda h$ et $\nu(h) = 1$,
+      \item et pour toute fonction $g \in \Csp{n}$,
+	$\lim_{m\to\infty}\No{\frac 1 {\lambda^m} \L^mg - \nu(g)h} = 0$.
+    \end{enumerate}
+  \end{theorem}
+
+  Pour prouver ce théorème, on utilisera le théorème de Schauder-Tychonoff afin de construire la mesure propre $\mu$
+  et la fonction propre $h$ comme des points fixes de certains opérateurs, pour cela nous devrons d'abord établir la compacité de $\s_n$
+  et d'un certain ensemble de fonctions notamment grâce au théorème d'Ascoli.
+  Puis pour établir la limite nous aurons besoin de la densité des fonctions en escaliers dans $\Csp{n}$ et des propriétés de l'opérateur de transfert.
+
+  Grâce à cette mesure propre $\nu$ et cette fonction propre $h$, on peut construire $\mu = h \cdot \nu$.
+  Cette dernière mesure sur $\sp_n$ est alors $\sigma$-invariante, ce qui se montre grâce aux propriétés algébriques de l'opérateur de transfert et
+  permettra de construire une forme linéaire $G$ sur $\s_n$ qui s'identifiera grâce au théorème de Riesz en une mesure $\tilde\mu$ sur $\s_n$,
+  qui sera la mesure de Gibbs pour le potentiel höldérien $\phi$.
+  Une fois $\tilde\mu$ construite, on montrera qu'elle est ergodique (et même mélangeante), ce qui permettra d'établir l'unicité.
+

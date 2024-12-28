@@ -27,3 +27,31 @@
  {\clist_map_inline:nn{#1}{\vphantom{\ref{##1}}}%
   \ignorespaces}
 \ExplSyntaxOff
+
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage{titlesec}
+\geometry{a4paper, margin=1in}
+\linespread{1.25}
+
+% \usepackage{minted}
+% \usemintedstyle{tango}
+
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{stmaryrd}
+\usepackage{graphicx}
+\usepackage{bbold}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{csquotes}
+
+\addto\captionsfrench{\renewcommand*\contentsname{\textsc{Table des matières}}}
+
+\titleformat{\section}[frame]{\Large\bfseries}{\hspace{1em}\thesection.\hspace{1em}}{1em}{\centering}
+\titlespacing{\section}{0pt}{2em}{3em}

@@ -4,15 +4,55 @@
 
 % The theorem-like environments defined below are those that appear by default
 % in the dependency graph. See the README of leanblueprint if you need help to
-% customize this. 
+% customize this.
 % The configuration below use the theorem counter for all those environments
 % (this is what the [theorem] arguments mean) and never resets it.
 % If you want for instance to number them within chapters then you can add
 % [chapter] at the end of the next line.
-\newtheorem{theorem}{Theorem}
+\newtheorem{theorem}{Théoreme}
 \newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemme}
+\newtheorem{corollary}[theorem]{Corollaire}
 
 \theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
+\newtheorem{definition}[theorem]{Définition}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remarque}
+
+\addto\captionsfrench{\renewcommand\proofname{Preuve}}
+
+% Math command
+
+\newcommand{\R}{\mathbf R}
+\newcommand{\C}{\mathbf C}
+\newcommand{\N}{\mathbf N}
+\newcommand{\Z}{\mathbf Z}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\K}{\mathbf K}
+\newcommand{\T}{\mathbf T}
+\renewcommand{\S}{\mathbf S}
+\newcommand{\s}{\Sigma}
+\renewcommand{\sp}{\Sigma^+}
+\newcommand{\Sp}{\Sigma^+}
+\newcommand{\Cs}[1]{\mathcal{C} (\Sigma_{#1})}
+\newcommand{\Csp}[1]{\mathcal{C} (\Sigma_{#1}^+)}
+\newcommand{\Hs}[1]{\mathcal{H} (\Sigma_{#1})}
+\newcommand{\Hsp}[1]{\mathcal{H} (\Sigma_{#1}^+)}
+\renewcommand{\L}{\mathcal{L}}
+\newcommand{\Ms}[1]{\mathcal{M}(\Sigma_{#1})}
+\newcommand{\Mss}[1]{\mathcal{M}_{\sigma}(\Sigma_{#1})}
+\newcommand{\Msp}[1]{\mathcal{M} (\Sigma_{#1}^+)}
+\renewcommand{\No}[1]{\left\lVert #1\right\rVert}
+\newcommand{\Cr}[1]{\mathcal C_{#1}}
+\newcommand{\ind}[1]{\mathbf{1}_{#1}}
+\newcommand{\Bo}[1]{\mathcal{B}(#1)}
+\newcommand{\Ws}[2][\varepsilon]{W^s_{#1}(#2)}
+\newcommand{\Wu}[2][\varepsilon]{W^u_{#1}(#2)}
+
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\var}{var}
+\DeclareMathOperator{\Spe}{Sp}
+\DeclareMathOperator{\Card}{Card}
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\diam}{diam}
