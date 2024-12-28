@@ -1,0 +1,10 @@
+name = "bowen"
+version = "0.1.0"
+defaultTargets = ["bowen"]
+
+[[lean_lib]]
+name = "Bowen"
+
+[[lean_exe]]
+name = "bowen"
+root = "Main"
