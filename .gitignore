@@ -1,2 +1,3 @@
 /.lake
-blueprint/src/build/*
+/blueprint/src/build
+/blueprint/web

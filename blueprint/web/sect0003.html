@@ -66,25 +66,8 @@
 
 <div class="main-text">
 <h1 id="a0000000004"> Unicité de la mesure de Gibbs</h1>
-<p>Dans cette section, on montre la partie concernant l’unicité du théorème suivant. </p>
-<p><div class="theorem_thmwrapper " id="thm:gibbs">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Théoreme
-    </span>
-    <span class="theorem_thmlabel">14</span>
-  </div>
-  <div class="theorem_thmcontent">
-  <p> Soit \(\phi \in \mathcal H(\Sigma _n)\), alors il existe une unique mesure \(\mu _{\phi } = \mu \in \mathcal M_{\sigma }(\Sigma _n)\) tel qu’il existe \(P(\phi ) = P \in \mathbf R\), \(c_1, c_2 {\gt} 0\) vérifiant </p>
-<div class="displaymath" id="a0000000038">
-  \[ \frac{\mu (C(x, m))}{\exp (-Pm + S_m\phi (x))} \in [c_1, c_2] \]
-</div>
-<p> pour tout \(x \in \Sigma _n\) et \(m \in \mathbf N\), où \(S_m\phi (x) = \sum _{k=0}^{m-1}(\phi (\sigma ^k x))\) </p>
-
-  </div>
-</div> </p>
-<p>Dans les sections suivantes, on construira une mesure de Gibbs mélangeante notamment grâce au théorème de Ruelle. C’est l’ergodicité de cette mesure qui entrainera l’unicité de la mesure de Gibbs. </p>
-<p><div class="definition_thmwrapper " id="def:ergodicity">
+<p>Dans un premier temps, on introduit quelques notations. </p>
+<p><div class="definition_thmwrapper " id="def:meas_set">
   <div class="definition_thmheading">
     <span class="definition_thmcaption">
     Définition
@@ -92,7 +75,49 @@
     <span class="definition_thmlabel">15</span>
   </div>
   <div class="definition_thmcontent">
-  <p> Soit \(\mu \in \mathcal{M}(\Sigma _{n})\). On dit que \(\mu \) est ergodique (par rapport à \(\sigma \)) si pour tout borélien \(E \in \mathcal{B}(\Sigma _n)\) tels que \(\sigma ^{-1}E=E\), on a </p>
+  <p> On note \(\mathcal{M}(\Sigma _{n})\) l’ensemble des mesures de probabilité sur \(\Sigma _n\), et \(\mathcal{M}_{\sigma }(\Sigma _{n})\) le sous-ensemble de \(\mathcal{M}(\Sigma _{n})\) constitué des mesures \(\sigma \)-invariantes. </p>
+
+  </div>
+</div> </p>
+<p><div class="definition_thmwrapper " id="def:gibbs_meas">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Définition
+    </span>
+    <span class="definition_thmlabel">16</span>
+  </div>
+  <div class="definition_thmcontent">
+  <p> def:meas_set, def:shift, def:fn_c0 Soit \(\phi \in \mathcal{C} (\Sigma _{n})\) et \(\mu \in \mathcal{M}(\Sigma _{n})\). On dit que \(\mu \) est une mesure de Gibbs pour un potentiel \(\phi \) si \(\mu \in \mathcal{M}_{\sigma }(\Sigma _{n})\) et s’il existe \(P(\phi ) \in \mathbf R\) et \(c_1, c_2 {\gt} 0\) tels qu’on ait </p>
+<div class="displaymath" id="a0000000038">
+  \[ \frac{\mu (C(x, m))}{\exp (-Pm + \sum _{k=1}^{m-1}{\phi (\sigma ^k(x))})} \in [c_1, c_2] \]
+</div>
+<p> pour tout \(x \in \Sigma _n\) et \(m \in \mathbf N\). </p>
+
+  </div>
+</div> </p>
+<p>Dans cette section, on montre la partie concernant l’unicité du théorème suivant. </p>
+<p><div class="theorem_thmwrapper " id="thm:gibbs">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Théoreme
+    </span>
+    <span class="theorem_thmlabel">17</span>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> def:holder_fn_set, def:meas_set, def:gibbs_meas Soit \(\phi \in \mathcal H(\Sigma _n)\), alors il existe une unique mesure de Gibbs \(\mu _{\phi } = \mu \in \mathcal M_{\sigma }(\Sigma _n)\) </p>
+
+  </div>
+</div> </p>
+<p>Dans les sections suivantes, on construira une mesure de Gibbs mélangeante notamment grâce au théorème de Ruelle. C’est l’ergodicité de cette mesure qui entrainera l’unicité de la mesure de Gibbs. </p>
+<p><div class="definition_thmwrapper " id="def:ergodique">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Définition
+    </span>
+    <span class="definition_thmlabel">18</span>
+  </div>
+  <div class="definition_thmcontent">
+  <p> def:meas_set, def:shift Soit \(\mu \in \mathcal{M}(\Sigma _{n})\). On dit que \(\mu \) est ergodique (par rapport à \(\sigma \)) si pour tout borélien \(E \in \mathcal{B}(\Sigma _n)\) tels que \(\sigma ^{-1}E=E\), on a </p>
 <div class="displaymath" id="a0000000039">
   \[ \mu (E) = 0 \text{ ou } \mu (E^c) = 0, \]
 </div>
@@ -104,10 +129,10 @@
     <span class="definition_thmcaption">
     Définition
     </span>
-    <span class="definition_thmlabel">16</span>
+    <span class="definition_thmlabel">19</span>
   </div>
   <div class="definition_thmcontent">
-  <p> Soit \(\mu \in \mathcal{M}(\Sigma _{n})\). On dit que \(\mu \) est mélangeante (par rapport à \(\sigma \)) si pour tout borélien \(E, F \in \mathcal{B}(\Sigma _n)\), on a </p>
+  <p> def:meas_set, def:shift Soit \(\mu \in \mathcal{M}(\Sigma _{n})\). On dit que \(\mu \) est mélangeante (par rapport à \(\sigma \)) si pour tout borélien \(E, F \in \mathcal{B}(\Sigma _n)\), on a </p>
 <div class="displaymath" id="a0000000040">
   \[ \mu (E\cap \sigma ^{-n}F) \underset {n\to \infty }{\longrightarrow } \mu (E)\mu (F). \]
 </div>
@@ -130,10 +155,10 @@
     <span class="lemma_thmcaption">
     Lemme
     </span>
-    <span class="lemma_thmlabel">17</span>
+    <span class="lemma_thmlabel">20</span>
   </div>
   <div class="lemma_thmcontent">
-  <p> Soit \(f \colon \Sigma _n \longrightarrow \mathbf R\) intégrable par rapport à une mesure \(\mu \in \mathcal{M}_{\sigma }(\Sigma _{n})\) ergodique. Supposons que \(f \circ \sigma = f\) \(\mu \)-presque partout. Alors \(f\) est constante \(\mu \)-presque partout. </p>
+  <p> def:ergodique Soit \(f \colon \Sigma _n \longrightarrow \mathbf R\) intégrable par rapport à une mesure \(\mu \in \mathcal{M}_{\sigma }(\Sigma _{n})\) ergodique. Supposons que \(f \circ \sigma = f\) \(\mu \)-presque partout. Alors \(f\) est constante \(\mu \)-presque partout. </p>
 
   </div>
 </div> </p>
@@ -147,7 +172,7 @@
   <div class="proof_content">
   
   </div>
-</div> Pour montrer ce lemme on considére les ensembles \(E_c = f^{-1}(\{ c\} )\) pour tout \(c\in \mathbf R\). Comme \(f \circ \sigma = f\) \(\mu \)-p.p., on a \(\sigma ^{-1}E_c = E_c\), et donc par ergodicité de \(\mu \), </p>
+</div> lem:sig_inv_imp_cst Pour montrer ce lemme on considére les ensembles \(E_c = f^{-1}(\{ c\} )\) pour tout \(c\in \mathbf R\). Comme \(f \circ \sigma = f\) \(\mu \)-p.p., on a \(\sigma ^{-1}E_c = E_c\), et donc par ergodicité de \(\mu \), </p>
 <div class="displaymath" id="a0000000043">
   \[ \mu (E_c) = 0 \text{ ou } \mu (E_c) = 1. \]
 </div>
@@ -167,10 +192,10 @@
     <span class="proposition_thmcaption">
     Proposition
     </span>
-    <span class="proposition_thmlabel">18</span>
+    <span class="proposition_thmlabel">21</span>
   </div>
   <div class="proposition_thmcontent">
-  <p> Supposons qu’il existe une mesure de Gibbs \(\mu \) ergodique pour \(\phi \in \mathcal{C} (\Sigma _{n})\). Alors cette mesure est l’unique mesure de Gibbs associé à \(\phi \). </p>
+  <p> def:ergodique, def:gibbs_meas Supposons qu’il existe une mesure de Gibbs \(\mu \) ergodique pour \(\phi \in \mathcal{C} (\Sigma _{n})\). Alors cette mesure est l’unique mesure de Gibbs associé à \(\phi \). </p>
 
   </div>
 </div> </p>
@@ -184,7 +209,7 @@
   <div class="proof_content">
   
   </div>
-</div> Soit \(\mu , \mu ' \in \mathcal{M} (\Sigma _{n}^+)\) deux mesures de Gibbs avec \(\mu \) ergodique, \(c_1, c_1', c_2, c_2' {\gt} 0\) et \(P, P' \in \mathbf R\) des constantes telles que pour tout \(m \in \mathbf N\) et \(x \in \Sigma _n\) on ait </p>
+</div> prop:unique lem:sig_inv_imp_cst, prop:boules Soit \(\mu , \mu ' \in \mathcal{M} (\Sigma _{n}^+)\) deux mesures de Gibbs avec \(\mu \) ergodique, \(c_1, c_1', c_2, c_2' {\gt} 0\) et \(P, P' \in \mathbf R\) des constantes telles que pour tout \(m \in \mathbf N\) et \(x \in \Sigma _n\) on ait </p>
 <div class="displaymath" id="a0000000046">
   \[ \left\{ \begin{array}{lll} c_1 & \leq \frac{\mu (C(x,m))}{\exp {(-Pm + S_m\phi (x))}} & \leq c_2 \vspace{1em} \\ c_1’ & \leq \frac{\mu '(C(x,m))}{\exp {(-P’m + S_m\phi (x))}} & \leq c_2’ \end{array}\right. \]
 </div>
@@ -201,7 +226,7 @@
 <div class="displaymath" id="a0000000049">
   \[ \mu '(C(x, m)) \leq \frac{c_2'}{c_1}\mu (C(x, m)). \]
 </div>
-<p> Comme \(\mu \) et \(\mu '\) sont invariantes par \(\sigma \), on peut étendre le résultat sur les ensembles de la forme \(\left\{ y\in \Sigma _n \mid \forall i \in [\! [-m, m]\! ], x_i = y_i\right\} \) pour tout \(x \in \Sigma _n\) et \(m \in \mathbf N\), c’est-à-dire sur une base de la topologie de \(\Sigma _n\). De plus, comme tout ouvert de \(\Sigma _n\) est une union disjointe dénombrable de ces éléments d’après la proposition <a href="sect0002.html#prop:boules">11</a>, on peut alors étendre cette inégalité aux ouverts de \(\Sigma _n\). Par régularité extérieure par rapport aux ouverts, on a pour tout borélien \(B \in \mathcal{B}(\Sigma _n)\), </p>
+<p> Comme \(\mu \) et \(\mu '\) sont invariantes par \(\sigma \), on peut étendre le résultat sur les ensembles de la forme \(\left\{ y\in \Sigma _n \mid \forall i \in [\! [-m, m]\! ], x_i = y_i\right\} \) pour tout \(x \in \Sigma _n\) et \(m \in \mathbf N\), c’est-à-dire sur une base de la topologie de \(\Sigma _n\). De plus, comme tout ouvert de \(\Sigma _n\) est une union disjointe dénombrable de ces éléments d’après la proposition <a href="sect0002.html#prop:boules">12</a>, on peut alors étendre cette inégalité aux ouverts de \(\Sigma _n\). Par régularité extérieure par rapport aux ouverts, on a pour tout borélien \(B \in \mathcal{B}(\Sigma _n)\), </p>
 <div class="displaymath" id="a0000000050">
   \[ \mu '(B) = \inf \left\{ \mu '(O) \mid O \text{ ouvert }, B \subseteq O\right\} . \]
 </div>

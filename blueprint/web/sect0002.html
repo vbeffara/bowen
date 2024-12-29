@@ -91,7 +91,7 @@
     <span class="proposition_thmlabel">5</span>
   </div>
   <div class="proposition_thmcontent">
-  <p> L’espace métrique \((\Sigma _n, d)\) est compact. </p>
+  <p> def:topo_sn L’espace métrique \((\Sigma _n, d)\) est compact. </p>
 
   </div>
 </div> </p>
@@ -105,7 +105,7 @@
   <div class="proof_content">
   
   </div>
-</div> Chacun des \([\! [1, n]\! ]\) est compact pour sa topologie. En tant que produit \(\Sigma _n\) est donc également compact, grâce au théorème de Tychonoff. <div class="proof_wrapper" id="a0000000017">
+</div> prop:sn_compact Chacun des \([\! [1, n]\! ]\) est compact pour sa topologie. En tant que produit \(\Sigma _n\) est donc également compact, grâce au théorème de Tychonoff. <div class="proof_wrapper" id="a0000000017">
   <div class="proof_heading">
     <span class="proof_caption">
     
@@ -124,7 +124,7 @@
     <span class="proposition_thmlabel">6</span>
   </div>
   <div class="proposition_thmcontent">
-  <p> Pour \(x, y \in \Sigma _n\) distincts, notons \(N = \min \left\{ i \in \mathbf N\mid x_i \not= y_i \text{ ou } x_{-i} \not= y_{-i}\right\} \). Alors \(d_{\beta }(x, y) = \beta ^N\) et \(d_{\beta }(x, x) = 0\) définit une distance sur \(\Sigma _n\) et est équivalente à la distance \(d\), et ce pour tout \(\beta \in ]0, 1[\). </p>
+  <p> def:topo_sn Pour \(x, y \in \Sigma _n\) distincts, notons \(N = \min \left\{ i \in \mathbf N\mid x_i \not= y_i \text{ ou } x_{-i} \not= y_{-i}\right\} \). Alors \(d_{\beta }(x, y) = \beta ^N\) et \(d_{\beta }(x, x) = 0\) définit une distance sur \(\Sigma _n\) et est équivalente à la distance \(d\), et ce pour tout \(\beta \in ]0, 1[\). </p>
 
   </div>
 </div> </p>
@@ -138,7 +138,7 @@
   <div class="proof_content">
   
   </div>
-</div> Soit \(\beta \in ]0, 1[\). Alors \(d_{\beta }\) est distance car \(d_{\beta }\) est clairement symétrique, \(d(x, y) = 0 \iff x = y\) pour tout \(x,y\in \Sigma _n\) et \(d_{\beta }\) vérifie l’inégalité triangulaire. </p>
+</div> prop:dist_equiv Soit \(\beta \in ]0, 1[\). Alors \(d_{\beta }\) est distance car \(d_{\beta }\) est clairement symétrique, \(d(x, y) = 0 \iff x = y\) pour tout \(x,y\in \Sigma _n\) et \(d_{\beta }\) vérifie l’inégalité triangulaire. </p>
 <p>De plus, \(d_{\beta }\) est équivalente à \(d\). En effet pour \(r {\gt} 0\), montrons qu’il existe \(r_1, r_2 {\gt} 0\) tel que pour tout \(x \in \Sigma _n\) on ait </p>
 <div class="displaymath" id="a0000000019">
   \[ B_{\beta }(x, r_1) \subseteq B_d(x, r) \subseteq B_{\beta }(x, r_2). \]
@@ -168,7 +168,7 @@
   \[ \forall i \in [\! [-m_r, m_r ]\! ], \hspace{1em} x_i = y_i. \]
 </div>
 <h2 id="a0000000014"> Propriétés topologiques de \(\Sigma _n\)</h2>
-<p><div class="definition_thmwrapper " id="def:var_potentiel">
+<p><div class="definition_thmwrapper " id="def:fn_c0">
   <div class="definition_thmheading">
     <span class="definition_thmcaption">
     Définition
@@ -176,7 +176,19 @@
     <span class="definition_thmlabel">7</span>
   </div>
   <div class="definition_thmcontent">
-  <p> Soit \(\phi \in \mathcal{C} (\Sigma _{n})\). La fonction de variation d’ordre \(k\) est donné par : </p>
+  <p> On notera \(\mathcal{C} (\Sigma _{n})\) l’ensemble des fonctions continues \(f \colon \Sigma _n \longrightarrow \mathbf R\). </p>
+
+  </div>
+</div> </p>
+<p><div class="definition_thmwrapper " id="def:var_potentiel">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Définition
+    </span>
+    <span class="definition_thmlabel">8</span>
+  </div>
+  <div class="definition_thmcontent">
+  <p> def:fn_c0 Soit \(\phi \in \mathcal{C} (\Sigma _{n})\). La fonction de variation d’ordre \(k\) est donné par : </p>
 <div class="displaymath" id="a0000000024">
   \[ \var _k(\phi ) = \sup \left\{ |\phi (x) - \phi (y)| : \forall i \in [\! [-k, k]\! ], x_i = y_i \right\} . \]
 </div>
@@ -188,10 +200,10 @@
     <span class="proposition_thmcaption">
     Proposition
     </span>
-    <span class="proposition_thmlabel">8</span>
+    <span class="proposition_thmlabel">9</span>
   </div>
   <div class="proposition_thmcontent">
-  <p> Soit \(\beta \in ]0, 1[\). Soit \(\phi \in \mathcal{C} (\Sigma _{n})\), si pour tout \(k \in \mathbf N\) on \(\var _k(\phi ) \leq b\alpha ^k\) pour certaines constantes \(b {\gt} 0\) et \(\alpha \in ]0, 1[\), alors il existe \(\beta \in ]0, 1[\) tel que \(\phi \) soit hölderienne pour \(d_{\beta }\). </p>
+  <p> def:var_potentiel Soit \(\beta \in ]0, 1[\). Soit \(\phi \in \mathcal{C} (\Sigma _{n})\), si pour tout \(k \in \mathbf N\) on \(\var _k(\phi ) \leq b\alpha ^k\) pour certaines constantes \(b {\gt} 0\) et \(\alpha \in ]0, 1[\), alors il existe \(\beta \in ]0, 1[\) tel que \(\phi \) soit hölderienne pour \(d_{\beta }\). </p>
 
   </div>
 </div> </p>
@@ -200,10 +212,10 @@
     <span class="definition_thmcaption">
     Définition
     </span>
-    <span class="definition_thmlabel">9</span>
+    <span class="definition_thmlabel">10</span>
   </div>
   <div class="definition_thmcontent">
-  <p> On notera \(\mathcal{H} (\Sigma _{n})\) l’ensemble des fonctions \(\phi \in \mathcal{C} (\Sigma _{n})\) pour lesquels il existe \(\alpha \in ]0, 1[\) et \(b {\gt} 0\) vérifiant </p>
+  <p> def:var_potentiel On notera \(\mathcal{H} (\Sigma _{n})\) l’ensemble des fonctions \(\phi \in \mathcal{C} (\Sigma _{n})\) pour lesquels il existe \(\alpha \in ]0, 1[\) et \(b {\gt} 0\) vérifiant </p>
 <div class="displaymath" id="a0000000025">
   \[ \forall k \in \mathbf N, \hspace{1em} \var _k(\phi ) \leq b\alpha ^k. \]
 </div>
@@ -215,7 +227,7 @@
     <span class="proposition_thmcaption">
     Proposition
     </span>
-    <span class="proposition_thmlabel">10</span>
+    <span class="proposition_thmlabel">11</span>
   </div>
   <div class="proposition_thmcontent">
   <p> Pour tout \(m \in \mathbf N\), soit \(T_m = \left\{ x \in \Sigma _n \mid \forall |i|{\gt}m, x_i=1\right\} \) et \(T = \bigcup _{m\geq 0}{T_m}\). L’ensemble \(T\) est dense dans \(\Sigma _n\) et est dénombrable. Ainsi, \(\Sigma _n\) est séparable. </p>
@@ -232,7 +244,7 @@
   <div class="proof_content">
   
   </div>
-</div> Soit \(O\) un ouvert non vide et \(x \in O\), alors il existe \(r = 2^{-m+1} {\gt} 0\) tel que \(B(x, r) \subseteq O\). Si on prend \(y \in \Sigma _n\) tel que si \(i \in [\! [-m, m ]\! ]\) alors \(y_i = x_i\) et sinon \(y_i = 1\), alors \(y \in T_m\) et \(y \in B(x, r)\), donc \(O \cap T \not= \emptyset \). Ainsi \(T\) est dense dans \(\Sigma _n\). </p>
+</div> prop:separable def:topo_sn, prop:dist_equiv Soit \(O\) un ouvert non vide et \(x \in O\), alors il existe \(r = 2^{-m+1} {\gt} 0\) tel que \(B(x, r) \subseteq O\). Si on prend \(y \in \Sigma _n\) tel que si \(i \in [\! [-m, m ]\! ]\) alors \(y_i = x_i\) et sinon \(y_i = 1\), alors \(y \in T_m\) et \(y \in B(x, r)\), donc \(O \cap T \not= \emptyset \). Ainsi \(T\) est dense dans \(\Sigma _n\). </p>
 <p>Pour tout \(m \in \mathbf N\), l’ensemble \(T_m\) contient exactement \(n^{2m+1}\) élements, <i class="itshape">ie.</i> \(T_m\) est fini. Donc par union dénombrable, \(T\) est dénombrable. <div class="proof_wrapper" id="a0000000027">
   <div class="proof_heading">
     <span class="proof_caption">
@@ -249,7 +261,7 @@
     <span class="proposition_thmcaption">
     Proposition
     </span>
-    <span class="proposition_thmlabel">11</span>
+    <span class="proposition_thmlabel">12</span>
   </div>
   <div class="proposition_thmcontent">
   <p> Soit \(O\) un ouvert de \(\Sigma _n\). Pour tout \(x \in O\), on note \(r_x {\gt} 0\) tel que \(B(x, r_x) \subseteq O\). Alors il existe \(\mathcal R \subseteq \Sigma _n\) dénombrable tel que </p>
@@ -270,7 +282,7 @@
   <div class="proof_content">
   
   </div>
-</div> Soit \(O\) un ouvert de \(\Sigma _n\), alors \(O = \bigcup _{x \in O}{B(x, r_x)}\). Cette union n’est pas disjointe et indicée sur un ensemble fini. On introduit alors la relation : </p>
+</div> prop:boules prop:separable, prop:dist_equiv Soit \(O\) un ouvert de \(\Sigma _n\), alors \(O = \bigcup _{x \in O}{B(x, r_x)}\). Cette union n’est pas disjointe et indicée sur un ensemble fini. On introduit alors la relation : </p>
 <div class="displaymath" id="a0000000030">
   \[ \forall x,y \in O, x\sim y \iff B(x, r_x) \cap B(y, r_y) \not= \emptyset . \]
 </div>
@@ -302,7 +314,7 @@
     <span class="definition_thmcaption">
     Définition
     </span>
-    <span class="definition_thmlabel">12</span>
+    <span class="definition_thmlabel">13</span>
   </div>
   <div class="definition_thmcontent">
   <p> L’application de décalage (<i class="itshape">shift</i> en anglais) \(\sigma \) sur \(\Sigma _n\) est donnée par </p>
@@ -318,10 +330,10 @@
     <span class="definition_thmcaption">
     Définition
     </span>
-    <span class="definition_thmlabel">13</span>
+    <span class="definition_thmlabel">14</span>
   </div>
   <div class="definition_thmcontent">
-  <p> Soit \(x\in \Sigma _n\). On définit les cyclindres de centre \(x\) et de rayon \(m \in \mathbf N\) par </p>
+  <p> prop:dist_equiv, def:topo_sn Soit \(x\in \Sigma _n\). On définit les cyclindres de centre \(x\) et de rayon \(m \in \mathbf N\) par </p>
 <div class="displaymath" id="a0000000036">
   \[ C(x, m) = \left\{ y \in \Sigma _n \mid \forall i \in [\! [0, m - 1 ]\! ], x_i = y_i\right\} . \]
 </div>

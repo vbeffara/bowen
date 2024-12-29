@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024/Arch Linux) (preloaded format=xelatex 2024.12.11)  29 DEC 2024 19:05
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024/Arch Linux) (preloaded format=xelatex 2024.12.11)  29 DEC 2024 20:15
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -532,19 +532,19 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 58.
+(hyperref)                removing `math shift' on input line 60.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\Sigma' on input line 58.
+(hyperref)                removing `\Sigma' on input line 60.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 58.
+(hyperref)                removing `subscript' on input line 60.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 58.
+(hyperref)                removing `math shift' on input line 60.
 
 [3] [4]) (./sections/unicite.tex [5] [6]) (./sections/reduction.tex
 
@@ -583,33 +583,21 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 1.
 
-[7] [8]) (./sections/rpf_theorem.tex [9] [10] [11] [12] [13]
-
-LaTeX Warning: Reference `rpf_3' on page 14 undefined on input line 275.
-
-) (./sections/construction.tex [14] [15] [16]
-
-LaTeX Warning: Reference `lemma:fF' on page 17 undefined on input line 144.
-
-)) [17] [18] (build/print.aux)
+[7] [8]) (./sections/rpf_theorem.tex [9] [10] [11] [12] [13] [14]) (./sections/construction.tex [15] [16] [17])) [18] (build/print.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
-
-
-LaTeX Warning: There were undefined references.
-
 Package rerunfilecheck Info: File `print.out' has not changed.
 (rerunfilecheck)             Checksum: FEA8DA6FB46794B08D85FCFB218AB571;1512.
  ) 
 Here is how much of TeX's memory you used:
- 14701 strings out of 476745
- 225308 string characters out of 5802376
+ 14702 strings out of 476745
+ 225331 string characters out of 5802376
  1934839 words of memory out of 5000000
- 36492 multiletter control sequences out of 15000+600000
+ 36493 multiletter control sequences out of 15000+600000
  610587 words of font info for 99 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 72i,15n,79p,542b,543s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 72i,15n,79p,542b,533s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on build/print.pdf (18 pages).

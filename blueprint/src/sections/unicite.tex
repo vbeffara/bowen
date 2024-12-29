@@ -1,20 +1,36 @@
 \section{Unicité de la mesure de Gibbs}
 
+  Dans un premier temps, on introduit quelques notations.
+
+  \begin{definition}
+    \label{def:meas_set}
+    On note $\Ms{n}$ l'ensemble des mesures de probabilité sur $\s_n$, et $\Mss{n}$ le sous-ensemble de $\Ms{n}$
+    constitué des mesures $\sigma$-invariantes.
+  \end{definition}
+
+  \begin{definition}
+    \label{def:gibbs_meas}
+    \uses{def:meas_set, def:shift, def:fn_c0}
+    Soit $\phi \in \Cs{n}$ et $\mu \in \Ms{n}$.
+    On dit que $\mu$ est une mesure de Gibbs pour un potentiel $\phi$ si $\mu \in \Mss{n}$ et s'il existe $P(\phi) \in \R$ et $c_1, c_2 > 0$ tels qu'on ait
+    $$\frac{\mu(C(x, m))}{\exp(-Pm + \sum_{k=1}^{m-1}{\phi(\sigma^k(x))})} \in [c_1, c_2]$$
+    pour tout $x \in \s_n$ et $m \in \N$.
+  \end{definition}
+
   Dans cette section, on montre la partie concernant l'unicité du théorème suivant.
 
   \begin{theorem}
     \label{thm:gibbs}
-    Soit $\phi \in \mathcal H(\s_n)$, alors il existe une unique mesure $\mu_{\phi} = \mu \in \mathcal M_{\sigma}(\s_n)$ tel qu'il existe
-    $P(\phi) = P \in \R$, $c_1, c_2 > 0$ vérifiant
-    $$\frac{\mu(C(x, m))}{\exp(-Pm + S_m\phi(x))} \in [c_1, c_2]$$
-    pour tout $x \in \s_n$ et $m \in \N$, où $S_m\phi(x) = \sum_{k=0}^{m-1}(\phi(\sigma^k x))$
+    \uses{def:holder_fn_set, def:meas_set, def:gibbs_meas}
+    Soit $\phi \in \mathcal H(\s_n)$, alors il existe une unique mesure de Gibbs $\mu_{\phi} = \mu \in \mathcal M_{\sigma}(\s_n)$
   \end{theorem}
 
   Dans les sections suivantes, on construira une mesure de Gibbs mélangeante notamment grâce au théorème de Ruelle.
   C'est l'ergodicité de cette mesure qui entrainera l'unicité de la mesure de Gibbs.
 
   \begin{definition}
-    \label{def:ergodicity}
+    \label{def:ergodique}
+    \uses{def:meas_set, def:shift}
     Soit $\mu \in \Ms{n}$.
     On dit que $\mu$ est ergodique (par rapport à $\sigma$) si pour tout borélien $E \in \mathcal{B}(\s_n)$ tels que $\sigma^{-1}E=E$, on a
 	$$\mu(E) = 0 \text{ ou } \mu(E^c) = 0,$$
@@ -22,6 +38,7 @@
 
   \begin{definition}
     \label{def:mixing}
+    \uses{def:meas_set, def:shift}
     Soit $\mu \in \Ms{n}$. On dit que $\mu$ est mélangeante (par rapport à $\sigma$) si pour tout borélien $E, F \in \mathcal{B}(\s_n)$, on a
 	$$\mu(E\cap\sigma^{-n}F) \underset{n\to\infty}{\longrightarrow} \mu(E)\mu(F).$$
   \end{definition}
@@ -32,6 +49,7 @@
 
   \begin{lemma}
     \label{lem:sig_inv_imp_cst}
+    \uses{def:ergodique}
     Soit $f \colon \s_n \longrightarrow \R$ intégrable par rapport à une mesure $\mu \in \Mss{n}$ ergodique.
     Supposons que $f \circ \sigma = f$ $\mu$-presque partout.
     Alors $f$ est constante $\mu$-presque partout.
@@ -47,12 +65,14 @@
 
   \begin{proposition}
     \label{prop:unique}
+    \uses{def:ergodique, def:gibbs_meas}
     Supposons qu'il existe une mesure de Gibbs $\mu$ ergodique pour $\phi \in \Cs{n}$.
     Alors cette mesure est l'unique mesure de Gibbs associé à $\phi$.
   \end{proposition}
 
   \begin{proof}
     \proves{prop:unique}
+    \uses{lem:sig_inv_imp_cst, prop:boules} % + Radon-nikodym & régularité extérieure
     Soit $\mu, \mu' \in \Msp{n}$ deux mesures de Gibbs avec $\mu$ ergodique, $c_1, c_1', c_2, c_2' > 0$ et $P, P' \in \R$
     des constantes telles que pour tout $m \in \N$ et $x \in \s_n$ on ait
     $$\left\{\begin{array}{lll}

@@ -6,6 +6,7 @@
 
   \begin{definition}
     \label{def:fn_equiv}
+    \uses{def:fn_c0, def:shift}
     Soit $\phi, \psi \in \Cs{n}$. On dit que $\phi$ et $\psi$ sont équivalentes et on note $\phi \sim \psi$ dès lors
     qu'il existe $u \in \Cs{n}$ vérifiant :
     $$\phi = \psi - u + u \circ \sigma.$$
@@ -15,6 +16,7 @@
 
   \begin{lemma}
     \label{lem:fn_equiv_imp_gibbs_eq}
+    \uses{def:fn_equiv, def:gibbs_meas}
     Soit $\phi \sim \psi \in \Hs{n}$. Dans ce cas, $\mu_{\phi} = \mu_{\psi}$ et $P(\phi) = P(\psi)$.
   \end{lemma}
 
@@ -73,6 +75,7 @@
 
   \begin{lemma}
     \label{lem:fn_equiv_pos_coords}
+    \uses{def:fn_equiv, def:holder_fn_set}
     Soit $\phi \in \Hs{n}$, et
     $$\psi := \phi \circ r + \left(\sum_{k=0}^{\infty}{\phi \circ \sigma^k}\right)\circ(\sigma \circ r - r \circ \sigma).$$
     Alors,

@@ -14,6 +14,7 @@
 
   \begin{proposition}
     \label{prop:sn_compact}
+    \uses{def:topo_sn}
     L'espace métrique $(\s_n, d)$ est compact.
   \end{proposition}
 
@@ -25,6 +26,7 @@
 
   \begin{proposition}
     \label{prop:dist_equiv}
+    \uses{def:topo_sn}
     Pour $x, y \in \s_n$ distincts, notons $N = \min\left\{i \in \N \mid x_i \not= y_i \text{ ou } x_{-i} \not= y_{-i}\right\}$.
     Alors $d_{\beta}(x, y) = \beta^N$ et $d_{\beta}(x, x) = 0$ définit une distance sur $\s_n$ et est équivalente à la distance $d$,
     et ce pour tout $\beta \in ]0, 1[$.
@@ -58,13 +60,20 @@
   \subsection{Propriétés topologiques de $\s_n$}
 
   \begin{definition}
+    \label{def:fn_c0}
+    On notera $\Cs{n}$ l'ensemble des fonctions continues $f \colon \s_n \longrightarrow \R$.
+  \end{definition}
+
+  \begin{definition}
     \label{def:var_potentiel}
+    \uses{def:fn_c0}
     Soit $\phi \in \Cs{n}$. La fonction de variation d'ordre $k$ est donné par :
     $$\var_k(\phi) = \sup\left\{|\phi(x) - \phi(y)| : \forall i \in \llbracket -k, k\rrbracket, x_i = y_i \right\}.$$
   \end{definition}
 
   \begin{proposition}
     \label{prop:equiv_holder}
+    \uses{def:var_potentiel}
     Soit $\beta \in ]0, 1[$.
     Soit $\phi \in \Cs{n}$, si pour tout $k \in \N$ on $\var_k(\phi) \leq b\alpha^k$ pour certaines constantes $b > 0$ et $\alpha \in ]0, 1[$,
     alors il existe $\beta \in ]0, 1[$ tel que $\phi$ soit hölderienne pour $d_{\beta}$.
@@ -72,6 +81,7 @@
 
   \begin{definition}
     \label{def:holder_fn_set}
+    \uses{def:var_potentiel}
     On notera $\Hs{n}$ l'ensemble des fonctions $\phi \in \Cs{n}$ pour lesquels il existe $\alpha \in ]0, 1[$ et $b > 0$ vérifiant
     $$\forall k \in \N, \hspace{1em} \var_k(\phi) \leq b\alpha^k.$$
   \end{definition}
@@ -87,6 +97,7 @@
 
   \begin{proof}
     \proves{prop:separable}
+    \uses{def:topo_sn, prop:dist_equiv}
     Soit $O$ un ouvert non vide et $x \in O$, alors il existe $r = 2^{-m+1} > 0$ tel que $B(x, r) \subseteq O$.
     Si on prend $y \in \s_n$ tel que si $i \in \llbracket -m, m \rrbracket$ alors $y_i = x_i$ et sinon $y_i = 1$,
     alors $y \in T_m$ et $y \in B(x, r)$, donc $O \cap T \not= \emptyset$. Ainsi $T$ est dense dans $\s_n$.
@@ -105,6 +116,7 @@
 
   \begin{proof}
     \proves{prop:boules}
+    \uses{prop:separable, prop:dist_equiv}
     Soit $O$ un ouvert de $\s_n$, alors $O = \bigcup_{x \in O}{B(x, r_x)}$.
     Cette union n'est pas disjointe et indicée sur un ensemble fini. On introduit alors la relation :
     $$\forall x,y \in O, x\sim y \iff B(x, r_x) \cap B(y, r_y) \not= \emptyset.$$
@@ -137,6 +149,7 @@
 
   \begin{definition}
     \label{def:cylindres}
+    \uses{prop:dist_equiv, def:topo_sn}
     Soit $x\in \s_n$. On définit les cyclindres de centre $x$ et de rayon $m \in \N$ par
     $$C(x, m) = \left\{y \in \s_n \mid \forall i \in \llbracket 0, m - 1 \rrbracket, x_i = y_i\right\}.$$
     de cette manière on peut les relier aux boules pour la distance $d_{\beta}$ aux cyclindres :

@@ -5,6 +5,7 @@
 
   \begin{lemma}
     \label{lem:hNu_sig_inv}
+    \uses{def:shift, thm:rpf}
     La mesure de probabilité $\mu = h \cdot \nu$ est invariante par $\sigma$ :
     $$\sigma_*\mu = \mu.$$
   \end{lemma}
@@ -31,6 +32,7 @@
 
   \begin{lemma}
     \label{lem:meas_seq_conv_to_sig_inv}
+    \uses{lem:hNu_sig_inv} % + Riesz
     Pour tout $f \in \Cs{n}$, la suite $(\mu([f\circ\sigma^m]))_{m \geq 0}$ admet une limite, que l'on note $G(f)$.
     De plus $G$ vérifie $G(1) = 1$ et pour toute fonction $f \in \Cs{n}$, $f \geq 0$, on a $G(f) \geq 0$.
 
@@ -39,6 +41,7 @@
 
   \begin{proof}
     \proves{lem:meas_seq_conv_to_sig_inv}
+    \uses{lem:hNu_sig_inv}
     Soit $f \in \Cs{n}$, on va montrer que $(\mu([f\circ\sigma^n]))$ est une suite de Cauchy. Soit $m, k \in \N$,
     alors pour tout $x \in \sp_n$, il existe $y, y' \in \s_n$ tel que
     \begin{align*}
@@ -67,6 +70,7 @@
 
   \begin{theorem}
     \label{thm:existence}
+    \uses{lem:meas_seq_conv_to_sig_inv, def:gibbs_meas, def:holder_fn_set}
     La mesure $\tilde\mu$ est une mesure de Gibbs pour $\phi \in \Hsp{n}$.
   \end{theorem}
 
@@ -75,6 +79,7 @@
 
   \begin{lemma}
     \label{lem:birkhoff_sum_ineq}
+    \uses{def:shift, def:topo_sn}
     Soit $x, y \in \s_n$ et $m \in \N$ tels que $y \in C(x, m)$.
     Alors,
     $$\left| S_m\phi(x) - S_m\phi(y)\right| \leq a.$$
@@ -96,6 +101,7 @@
 
   \begin{proof}[Preuve du théorème \ref{thm:existence}]
     \proves{thm:existence}
+    \uses{lem:birkhoff_sum_ineq, lem:meas_seq_conv_to_sig_inv}
     Soit $E = C(x,m) = \left\{y \in \s_n \mid \forall i \in \llbracket 0, m - 1\rrbracket, x_i = y_i\right\}$, et on veut montrer que
     $$c_1 e^{-Pm+S_m\phi(x)} \leq \tilde\mu(E) \leq c_2 e^{-Pm + S_m\phi(x)},$$
     pour certaines constantes $c_1, c_2 > 0$ et $P \in \R$.
@@ -121,12 +127,14 @@
 
   \begin{proposition}
     \label{prop:mu_mixing}
+    \uses{def:mixing, thm:existence}
     La mesure $\tilde\mu$ est mélangeante par rapport à $\sigma$ : pour tout boréliens $E, F \in \mathcal B(\s_n)$ on a
     $$\tilde\mu(E \cap \sigma^{-m} F) \underset{m\to\infty}{\longrightarrow} \tilde\mu(E)\tilde\mu(F).$$
   \end{proposition}
 
   \begin{proof}
     \proves{prop:mu_mixing}
+    \uses{lem:rpf_3_LambdaCr, def:topo_sn}
     Soit $x \in \s_n$, et $f \in \Csp{n}$. On prouve par récurrence que
     $$\L^mf(x) = \sum_{\sigma^my=x}{e^{S_m\phi(y)}f(y)}.$$
     Ainsi, si $g \in \Csp{n}$, on a
@@ -141,7 +149,7 @@
 				   &= \lambda^{-m}\L^{*m}\nu(h\ind{E}(\ind{F}\circ\sigma^m)) \\
 				   &= \nu(\lambda^{-m}\L^m(h\ind{E})\ind{F}).
     \end{align*}
-    De là, on obtient grâce au lemme \ref{lemma:fF} et au fait que $\ind{E} \in \Cr{s}$
+    De là, on obtient grâce au lemme \ref{lem:rpf_3_LambdaCr} et au fait que $\ind{E} \in \Cr{s}$
     \begin{align*}
       \left|\tilde\mu(E\cap\sigma^{-m}F)-\tilde\mu(E)\tilde\mu(F)\right| &= \left|\mu(E\cap\sigma^{-m}F) - \nu(h\ind{E})\nu(h\ind{F})\right| \\
 									 &= \left|\nu\left[(\lambda^{-m}\L^m(h\ind{E})-\nu(h\ind{E})h)\ind{F}\right]\right| \\
