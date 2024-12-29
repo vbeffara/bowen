@@ -19,6 +19,7 @@
   \end{lemma}
 
   \begin{proof}
+    \proves{lem:fn_equiv_imp_gibbs_eq}
     Soit $u \in \Cs{n}$ tel que $\phi - \psi = u\circ \sigma - u$. Alors
     \begin{align*}\left|S_m\phi(x) - S_m\psi(x)\right| &= \left|\sum_{k=0}^{m-1}(\phi - \psi)(\sigma^k x)\right|
 							= \left|\sum_{k=0}^{m-1}(u(\sigma^{k+1}x) - u(\sigma^k x))\right| \\
@@ -34,6 +35,7 @@
   \end{proof}
 
   \begin{remark}
+    \label{rm:eq_if_equiv}
     Soit $\phi \overset{u}{\sim} \psi \in \Cs{n}$. Si $\sum_k{u\circ\sigma^k}$ converge,
     alors
     $$u = \sum_{k=0}^{\infty}{(\phi - \psi) \circ \sigma^k}$$
@@ -43,6 +45,7 @@
   \end{remark}
 
   \begin{proof}[Preuve de la remarque précédente]
+    \proves{rm:eq_if_equiv}
     La convergence de $\sum_{k \geq 0}{(u - u\circ\sigma)\circ\sigma^k} = \sum_k{(\phi - \psi)\circ\sigma^k}$ est assuré
     par celle de $\sum_k{u\circ\sigma^k}$.
     Ainsi par téléscopage,
@@ -81,6 +84,7 @@
   \end{lemma}
 
   \begin{proof}
+    \proves{lem:fn_equiv_pos_coords}
     Soit $b \in \R$ et $\alpha \in ]0, 1[$ tels que $var_k\phi \leq b\alpha^k$.
     Pour $k \geq 0$, $\sigma^k x$ et $\sigma^k r(x)$ coïncident de $-k$ à $+\infty$ donc
     $\left|\phi(\sigma^k x) - \phi(\sigma^k r(x))\right| \leq b\alpha^k$ et ainsi comme $|\alpha| < 1$, la série converge normalement
@@ -126,5 +130,4 @@
   \begin{remark}
     On remarque que la construction de $\psi$ dépend entièrement de la fonction $r$, ce qui signifie qu'il existe d'autres fonctions $\psi_r \in \Hs{n}$
     ne dépendant que des coordonnées positives et équivalentes à $\phi$.
-    %On a montré ici une construction possible parmi l'infinité de fonctions $\psi = \psi_r$ existante.
   \end{remark}

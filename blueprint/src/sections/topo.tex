@@ -18,6 +18,7 @@
   \end{proposition}
 
   \begin{proof}
+    \proves{prop:sn_compact}
     Chacun des $\llbracket 1, n\rrbracket$ est compact pour sa topologie.
     En tant que produit $\s_n$ est donc également compact, grâce au théorème de Tychonoff.
   \end{proof}
@@ -30,6 +31,7 @@
   \end{proposition}
 
   \begin{proof}
+    \proves{prop:dist_equiv}
     Soit $\beta \in ]0, 1[$. Alors $d_{\beta}$ est distance car $d_{\beta}$ est clairement symétrique, $d(x, y) = 0 \iff x = y$ pour tout $x,y\in\s_n$
     et $d_{\beta}$ vérifie l'inégalité triangulaire.
 
@@ -84,6 +86,7 @@
   \end{proposition}
 
   \begin{proof}
+    \proves{prop:separable}
     Soit $O$ un ouvert non vide et $x \in O$, alors il existe $r = 2^{-m+1} > 0$ tel que $B(x, r) \subseteq O$.
     Si on prend $y \in \s_n$ tel que si $i \in \llbracket -m, m \rrbracket$ alors $y_i = x_i$ et sinon $y_i = 1$,
     alors $y \in T_m$ et $y \in B(x, r)$, donc $O \cap T \not= \emptyset$. Ainsi $T$ est dense dans $\s_n$.
@@ -101,6 +104,7 @@
   \end{proposition}
 
   \begin{proof}
+    \proves{prop:boules}
     Soit $O$ un ouvert de $\s_n$, alors $O = \bigcup_{x \in O}{B(x, r_x)}$.
     Cette union n'est pas disjointe et indicée sur un ensemble fini. On introduit alors la relation :
     $$\forall x,y \in O, x\sim y \iff B(x, r_x) \cap B(y, r_y) \not= \emptyset.$$

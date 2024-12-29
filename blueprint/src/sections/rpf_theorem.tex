@@ -33,6 +33,7 @@
   \end{proposition}
 
   \begin{proof}
+    \proves{prop:rpf_1}
     Comme $\L1(x) = \sum_{\sigma y = x}{e^{\phi(y)}} > 0$ pour tout $x \in \s_n$, on a nécessairement $\L^*\mu(1) > 0$ pour tout $\mu \in \Msp{n}$.
     On peut alors poser $G(\mu) = \frac 1 {\L^*\mu(1)}\L^*\mu \in \Msp{n}$ pour toute mesure $\mu \in \Msp{n}$,
     ce qui donne une application $G\colon \Msp{n} \longrightarrow \Msp{n}$,
@@ -61,6 +62,7 @@
   \end{lemma}
 
   \begin{proof}
+    \proves{lem:Lambda_compact}
     Pour ce faire on va utiliser le théorème d'Ascoli. Dans un premier temps, on va montrer que $\Lambda(x) \subseteq [0, K]$.
     Soit $f \in \Lambda$ et $x \in \sp_n$. Remarquons que pour $z \in \sp_n$ et $x_0 \in \llbracket 1, n \rrbracket$ arbitraire, on a
     \begin{align*}
@@ -83,6 +85,7 @@
   \end{proposition}
 
   \begin{proof}
+    \proves{prop:rpf_2}
     On pose $F \colon \Csp{n} \longrightarrow \Csp{n}$ définie par
     $$\forall f \in \Csp{n}, F(f) = \frac 1 \lambda \L f.$$
     On vérifie que $\Lambda$ est stable par $F$. Soit $f \in \Lambda$,
@@ -116,6 +119,7 @@
   \end{lemma}
 
   \begin{proof}
+    \proves{lem:Lf_decomp}
     Soit $\eta \in ]0, 1[$ comme ci-dessus. Soit $f \in \Lambda$ et on pose la fonction $g = \frac 1 \lambda \L f - \eta h$.
     Alors si $\eta \leq \min{(\frac{u_1}{u_2} \frac{1-\alpha}{4\No{h}K}, \frac 1 {K\lVert h\rVert})}$,
     on a $\frac 1 {1-\eta}g \in \Lambda$.
@@ -160,6 +164,7 @@
   \end{lemma}
 
   \begin{proof}
+    \proves{lem:conv_expo}
     Remarquons qu'en itérant le lemme précédent,
     \begin{align*}
       \lambda^{-1}\L f   &= \eta h + (1 - \eta)f'_1 = (1 - (1 - \eta)^1)h + (1 - \eta)f_1', \vspace{1em}\\
@@ -187,6 +192,7 @@
   \end{lemma}
 
   \begin{proof}
+    \proves{lem:Lambda_stb_mult_Cr}
     La positivité de $g = \lambda^{-r}\L^r(fF)$ découle de la positivité de $f$ et de $F$.
     Ensuite, soit $x, x' \in \sp_n$ et $m \in \N$ tels que $x' \in C(x,m)$.
     Remarquons d'abord que, grâce à une récurrence, on a
@@ -225,6 +231,7 @@
   \end{remark}
 
   \begin{proof}
+    \proves{lem:rpf_3_LambdaCr}
     Décomposons $f$ en sa partie positive $f^+$ et sa partie négative $f^-$ toute deux positives et vérifiant $f = f^+ - f^-$.
     Si $f^{\pm}F \not= 0$, alors grâce aux lemmes \ref{lem:Lambda_stb_mult_Cr} et \ref{lem:conv_expo}, on a
     $$\No{\frac{1}{\lambda^{n+r}}\L^{n+r} (f^{\pm}F) - \nu(f^{\pm}F)h} = \nu(f^{\pm}F)\No{\frac{1}{\lambda^{n+r}\nu(f^{\pm}F)}\L^{n+r}(f^{\pm}F) - h}
@@ -242,6 +249,7 @@
   \end{lemma}
 
   \begin{proof}
+    \proves{lem:unionCr_strong_density}
     Soit $f \in \Csp{n}$ et $\varepsilon > 0$. Alors il existe $r \in \N$ tel que pour tout $x \in \sp_n$ et $x' \in C(x, r)$ on ait
     $\left|f(x) - f(x')\right| \leq \varepsilon$, car $f$ est continue sur le compact $\sp_n$ donc uniformément continue par le théorème de Heine.
     On pose alors pour $x \in \sp_n$,
@@ -264,6 +272,7 @@
   \end{proposition}
 
   \begin{proof}
+    \proves{rpf_3}
     Soit $\varepsilon > 0$, $r \in \N$ et $g_1, g_2 \in \Cr{r}$ comme dans le précédent lemme.
     On applique le lemme \ref{lem:rpf_3_LambdaCr} avec $F = 1$, ce qui donne pour $m$ assez grand,
     \begin{align*}

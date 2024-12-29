@@ -10,6 +10,7 @@
   \end{lemma}
 
   \begin{proof}
+    \proves{lem:hNu_sig_inv}
     Soit $f, g \in \Csp{n}$, on remarque que $(\L f)g = \L (f\cdot(g\circ\sigma))$.
     En effet, pour $x \in \s_n$, on a
     \begin{align*}
@@ -37,6 +38,7 @@
   \end{lemma}
 
   \begin{proof}
+    \proves{lem:meas_seq_conv_to_sig_inv}
     Soit $f \in \Cs{n}$, on va montrer que $(\mu([f\circ\sigma^n]))$ est une suite de Cauchy. Soit $m, k \in \N$,
     alors pour tout $x \in \sp_n$, il existe $y, y' \in \s_n$ tel que
     \begin{align*}
@@ -72,13 +74,14 @@
   $$a = \sum_{k=0}^{\infty}{\var_k(\phi)} < \infty.$$
 
   \begin{lemma}
-    \label{birkhoff_sum_ineq}
+    \label{lem:birkhoff_sum_ineq}
     Soit $x, y \in \s_n$ et $m \in \N$ tels que $y \in C(x, m)$.
     Alors,
     $$\left| S_m\phi(x) - S_m\phi(y)\right| \leq a.$$
   \end{lemma}
 
   \begin{proof}
+    \proves{lem:birkhoff_sum_ineq}
     Pour $y \in \s_n$, on définit $y' \in \s_n$ par
     $$y'_i = \left\{\begin{array}{ll}
 	x_i &\text{ si } i < 0, \\
@@ -92,6 +95,7 @@
   \end{proof}
 
   \begin{proof}[Preuve du théorème \ref{thm:existence}]
+    \proves{thm:existence}
     Soit $E = C(x,m) = \left\{y \in \s_n \mid \forall i \in \llbracket 0, m - 1\rrbracket, x_i = y_i\right\}$, et on veut montrer que
     $$c_1 e^{-Pm+S_m\phi(x)} \leq \tilde\mu(E) \leq c_2 e^{-Pm + S_m\phi(x)},$$
     pour certaines constantes $c_1, c_2 > 0$ et $P \in \R$.
@@ -122,6 +126,7 @@
   \end{proposition}
 
   \begin{proof}
+    \proves{prop:mu_mixing}
     Soit $x \in \s_n$, et $f \in \Csp{n}$. On prouve par récurrence que
     $$\L^mf(x) = \sum_{\sigma^my=x}{e^{S_m\phi(y)}f(y)}.$$
     Ainsi, si $g \in \Csp{n}$, on a
