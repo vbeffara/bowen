@@ -226,7 +226,7 @@
 
   \begin{proof}
     Décomposons $f$ en sa partie positive $f^+$ et sa partie négative $f^-$ toute deux positives et vérifiant $f = f^+ - f^-$.
-    Si $f^{\pm}F \not= 0$, alors grâce aux lemmes \ref{lemma:Cr} et \ref{lemma:expo}, on a
+    Si $f^{\pm}F \not= 0$, alors grâce aux lemmes \ref{lem:Lambda_stb_mult_Cr} et \ref{lem:conv_expo}, on a
     $$\No{\frac{1}{\lambda^{n+r}}\L^{n+r} (f^{\pm}F) - \nu(f^{\pm}F)h} = \nu(f^{\pm}F)\No{\frac{1}{\lambda^{n+r}\nu(f^{\pm}F)}\L^{n+r}(f^{\pm}F) - h}
 	\leq A\nu(f^{\pm}F)\beta^n.$$
     Dans le cas où $f^{\pm}F = 0$ l'inégalité est triviale.
@@ -265,7 +265,7 @@
 
   \begin{proof}
     Soit $\varepsilon > 0$, $r \in \N$ et $g_1, g_2 \in \Cr{r}$ comme dans le précédent lemme.
-    On applique le lemme \ref{lemma:fF} avec $F = 1$, ce qui donne pour $m$ assez grand,
+    On applique le lemme \ref{lem:rpf_3_LambdaCr} avec $F = 1$, ce qui donne pour $m$ assez grand,
     \begin{align*}
       \No{\frac 1 {\lambda^m}\L^m g_i - \nu(f)h} &\leq \No{\lambda^{-m}\L^mg_i - \nu(g_i)h} + \left|\nu(g_i) - \nu(f)\right|\No{h} \\
 						 &\leq \varepsilon(1 + \No{h}).
