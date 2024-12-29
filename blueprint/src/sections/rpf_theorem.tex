@@ -62,7 +62,7 @@
 
   \begin{lemma}
     \label{lem:Lambda_compact}
-    \uses{def:fn_c0}
+    \uses{def:fn_c0, def:transfert_operator}
     L'ensemble $\Lambda$ est compact. De plus si $f \in \Csp{n}$, alors $\inf \frac 1 \lambda \L f \geq K^{-1}$.
   \end{lemma}
 
@@ -121,6 +121,7 @@
 
   \begin{lemma}
     \label{lem:Lf_decomp}
+    \uses{def:transfert_operator}
     Il existe $\eta \in ]0, 1[$ tel que pour toute fonction $f \in \Lambda$, il existe $f' \in \Lambda$ vérifiant
     $$\frac 1 \lambda \L f = \eta h + (1-\eta)f'.$$
     De plus, $\eta \leq \min{(\frac{u_1}{u_2} \frac{1-\alpha}{4\No{h}K}, \frac 1 {K\lVert h\rVert})}$.
@@ -168,6 +169,7 @@
 
   \begin{lemma}
     \label{lem:conv_expo}
+    \uses{def:transfert_operator}
     Pour tout $n \in \N$ et tout $f\in\Lambda$, on a $\No{\lambda^{-n}\L^nf - h} \leq (\lVert h\rVert + K)(1 - \eta)^n = A\beta^n$
     avec $0 < \beta < 1$ et $A > 0$.
   \end{lemma}
@@ -197,6 +199,7 @@
 
   \begin{lemma}
     \label{lem:Lambda_stb_mult_Cr}
+    \uses{prop:rpf_1, lem:Lambda_compact}
     Soit $F \in \Lambda$ et $f \in \Cr{r}$ tels que $fF\not= 0$ et $f \geq 0$.
     Alors, $\frac{1}{\nu(fF)\lambda}\L^r(fF) \in \Lambda$.
   \end{lemma}
@@ -255,6 +258,7 @@
 
   \begin{lemma}
     \label{lem:unionCr_strong_density}
+    \uses{def:fn_c0}
     L'ensemble $\mathcal C = \bigcup_{r\geq 0}{\Cr{r}}$ vérifie la propriété suivante :
     $$\forall f \in \Csp{n}, \forall \varepsilon > 0, \exists g_1, g_2 \in \mathcal C, \No{g_1 - g_2} \leq \varepsilon \text{ et } g_1\leq f\leq g_2,$$
     et donc $\mathcal C$ est dense dans $\Csp{n}$.
@@ -280,6 +284,7 @@
 
   \begin{proposition}
     \label{prop:rpf_3}
+    \uses{def:transfert_operator}
     Soit $f \in \Csp{n}$, alors
     $$\No{\frac 1 {\lambda^m} \L^mf - \nu(f)h} \underset{m \to \infty}{\longrightarrow} 0.$$
   \end{proposition}
