@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  MathJax = { 
+    tex: {
+		    inlineMath: [['$','$'], ['\\(','\\)']]
+	} }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<meta name="generator" content="plasTeX" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Existence et unicité des mesures de Gibbs.: Théorème de Perron-Frobenius de Ruelle</title>
+<link rel="next" href="sect0006.html" title="Construction d’une mesure de Gibbs" />
+<link rel="prev" href="sect0004.html" title="Réduction de Σn à Σ+n" />
+<link rel="up" href="index.html" title="Existence et unicité des mesures de Gibbs." />
+<link rel="stylesheet" href="styles/theme-white.css" />
+<link rel="stylesheet" href="styles/extra_styles.css" />
+</head>
+
+<body>
+<header>
+<svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
+<h1 id="doc_title"><a href="index.html">Existence et unicité des mesures de Gibbs.</a></h1>
+</header>
+
+<div class="wrapper">
+<nav class="toc">
+<ul class="sub-toc-0">
+<li class="">
+  <a href="sect0001.html"><span class="toc_ref"></span> <span class="toc_entry">Introduction</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html"><span class="toc_ref"></span> <span class="toc_entry">Topologie de \(\Sigma _n\)</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0002.html#a0000000013"><span class="toc_ref"></span> <span class="toc_entry">Définition de l’espace métrique \(\Sigma _n\)</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000014"><span class="toc_ref"></span> <span class="toc_entry">Propriétés topologiques de \(\Sigma _n\)</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0003.html"><span class="toc_ref"></span> <span class="toc_entry">Unicité de la mesure de Gibbs</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html"><span class="toc_ref"></span> <span class="toc_entry">Réduction de \(\Sigma _n\) à \(\Sigma ^+_n\)</span></a>
+ </li>
+<li class=" active current">
+  <a href="sect0005.html"><span class="toc_ref"></span> <span class="toc_entry">Théorème de Perron-Frobenius de Ruelle</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html"><span class="toc_ref"></span> <span class="toc_entry">Construction d’une mesure de Gibbs</span></a>
+ </li>
+</ul>
+</nav>
+
+<div class="content">
+<div class="content-wrapper">
+
+
+<div class="main-text">
+<h1 id="a0000000006"> Théorème de Perron-Frobenius de Ruelle</h1>
+<p><div class="definition_thmwrapper " id="a0000000082">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Définition
+    </span>
+    <span class="definition_thmlabel">22</span>
+  </div>
+  <div class="definition_thmcontent">
+  <p>Soit \(\phi \in \mathcal{H} (\Sigma _{n}^+) = \mathcal{C} (\Sigma _{n}^+) \cap \mathcal{H} (\Sigma _{n})\). On appelle opérateur de transfert ou opérateur de Ruelle l’application \(\L _{\phi } \colon \mathcal{C} (\Sigma _{n}^+) \longrightarrow \mathcal{C} (\Sigma _{n}^+) \) définie par : </p>
+<div class="displaymath" id="a0000000083">
+  \[  \forall f \in \mathcal{C} (\Sigma _{n}^+), \forall x \in \Sigma _n, \L _{\phi }f(x) = \sum _{\sigma y = x}{e^{\phi (y)}f(y)}. \]
+</div>
+
+  </div>
+</div> </p>
+<p><div class="remark_thmwrapper " id="a0000000084">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remarque
+    </span>
+  </div>
+  <div class="remark_thmcontent">
+  <p>A noter que le passage aux fonctions définies sur \(\mathcal{C} (\Sigma _{n}^+)\) rend \(\sigma \) non injective, et donc \(\L \) a toujours \(n\) termes dans la somme qui le définit. C’est grâce à cette restriction que l’opérateur de transfert \(\L \) devient intéressant. </p>
+
+  </div>
+</div> </p>
+<p>Pour la suite on fixe \(\phi \in \mathcal{H} (\Sigma _{n}^+)\) et des constantes \(b {\gt} 0, \alpha \in ]0, 1[\) vérifiant \(\var _k\phi \leq b\alpha ^k\), pour tout \(k \in \mathbf N\). </p>
+<p><div class="theorem_thmwrapper " id="thm:rpf">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Théoreme
+    </span>
+    <span class="theorem_thmlabel">23</span>
+    <span class="theorem_thmtitle">Théorème de Perron-Frobenius de Ruelle</span>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>  Soit \(\phi \in \mathcal{H} (\Sigma _{n}^+)\) et \(\L = \L _{\phi }\). Alors il existe \(\lambda {\gt} 0, \nu \in \mathcal{M} (\Sigma _{n}^+)\) et \(h \in \mathcal{C} (\Sigma _{n}^+), h {\gt} 0\) tels que : </p>
+<ol class="enumerate">
+  <li><p>\(\nu \) vérifie \(\L ^*\nu = \lambda \nu \), </p>
+</li>
+  <li><p>\(h\) vérifie \(\L h = \lambda h\) et \(\nu (h) = 1\), </p>
+</li>
+  <li><p>et pour toute fonction \(g \in \mathcal{C} (\Sigma _{n}^+)\), on a </p>
+<div class="displaymath" id="a0000000085">
+  \[ \left\lVert \frac1{\lambda ^m} \L ^mg - \nu (g)h\right\rVert  \underset {m\to \infty }{\longrightarrow } 0. \]
+</div>
+</li>
+</ol>
+
+  </div>
+</div> </p>
+<p>Pour prouver ce théorème, nous allons avoir besoin de quelques lemmes. </p>
+<p><div class="proposition_thmwrapper " id="a0000000086">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">24</span>
+  </div>
+  <div class="proposition_thmcontent">
+  <p>Il existe \(\nu \in \mathcal{M} (\Sigma _{n}^+)\) tel que \(\L ^*\nu = \lambda \nu \). </p>
+
+  </div>
+</div> </p>
+<p><div class="proof_wrapper" id="a0000000087">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+  </div>
+</div> Comme \(\L 1(x) = \sum _{\sigma y = x}{e^{\phi (y)}} {\gt} 0\) pour tout \(x \in \Sigma _n\), on a nécessairement \(\L ^*\mu (1) {\gt} 0\) pour tout \(\mu \in \mathcal{M} (\Sigma _{n}^+)\). On peut alors poser \(G(\mu ) = \frac1{\L ^*\mu (1)}\L ^*\mu \in \mathcal{M} (\Sigma _{n}^+)\) pour toute mesure \(\mu \in \mathcal{M} (\Sigma _{n}^+)\), ce qui donne une application \(G\colon \mathcal{M} (\Sigma _{n}^+) \longrightarrow \mathcal{M} (\Sigma _{n}^+)\), (on peut se permettre \(\mathcal{C} (\Sigma _{n}^+)^* = \mathcal{M} (\Sigma _{n}^+)\) grâce au théorème de Riesz). Ainsi définie, \(G\) est continue de \(\mathcal{M} (\Sigma _{n}^+)\) dans lui-même. Or \(\mathcal{M} (\Sigma _{n}^+)\) est un compact convexe. Par le théorème de Schauder-Tychonoff, on en déduit que \(G\) admet un point fixe \(\nu \in \mathcal{M} (\Sigma _{n}^+)\). On pose alors \(\lambda = \L ^*\nu (1)\) et on a la relation voulue : \(\L \nu = \lambda \nu \). <div class="proof_wrapper" id="a0000000088">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+  </div>
+</div> </p>
+<p>Pour la suite on notera pour tout \(m \in \mathbf N\), les constantes </p>
+<div class="displaymath" id="a0000000089">
+  \[ B_m = \exp {\left(\sum _{k\geq m+1}{2b\alpha ^k}\right)} \hspace{0.5em}\text{ et }\hspace{0.5em} K = \lambda B_0 e^{\lVert \phi \rVert }. \]
+</div>
+<p>On cherche à construire \(h\) comme un point fixe vérifiant (2), pour ce faire on considère l’ensemble \(\Lambda \subseteq \mathcal{C} (\Sigma _{n}^+)\) définie par : </p>
+<div class="displaymath" id="a0000000090">
+  \[ \forall f \in \mathcal{C} (\Sigma _{n}^+), f\in \Lambda \iff \left\{ \begin{array}{l} f \geq 0, \\ \nu (f) = 1, \\ \forall m \in \mathbf N, \forall x \in \Sigma _n, x’ \in C(x, m), f(x) \leq B_m f(x’). \end{array}\right. \]
+</div>
+<p> On remarque que \(1 \in \Lambda \), ce qui assure que \(\Lambda \not= \emptyset \). </p>
+<p><div class="lemma_thmwrapper " id="lemma:compact">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemme
+    </span>
+    <span class="lemma_thmlabel">25</span>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> L’ensemble \(\Lambda \) est compact. De plus si \(f \in \mathcal{C} (\Sigma _{n}^+)\), alors \(\inf \frac1\lambda \L f \geq K^{-1}\). </p>
+
+  </div>
+</div> </p>
+<p><div class="proof_wrapper" id="a0000000091">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+  </div>
+</div> Pour ce faire on va utiliser le théorème d’Ascoli. Dans un premier temps, on va montrer que \(\Lambda (x) \subseteq [0, K]\). Soit \(f \in \Lambda \) et \(x \in \Sigma ^+_n\). Remarquons que pour \(z \in \Sigma ^+_n\) et \(x_0 \in [\! [1, n ]\! ]\) arbitraire, on a <div class="displaymath" id="a0000000092">
+  
+</div> Łf(x) = ∑_σy = xe^φ(y)f(y) ≥λ^-1e^-φf(x_0x) <br />≥λ^-1e^-φB_0^-1f(z) =  f(z). <div class="displaymath" id="a0000000093">
+  
+</div> Donc comme \(1 = \nu (f) = \nu (\frac1\lambda \L f) \geq \frac1K f(z)\), on en déduit que \(\lVert f\rVert \leq K\). De plus, comme \(\nu (f) = 1\), il existe \(z \in \Sigma ^+_n\) tel que \(f(z) \geq 1\). En appliquant l’inégalité précédente à un tel \(z\), on obtient \(\inf {\frac1\lambda \L f} \geq \frac1K\) </p>
+<p>Soit \(f \in \Lambda \) et \(x, x' \in \Sigma ^+_n\) tels que \(x' \in C(x, m)\) pour un certain \(m \in \mathbf N\), alors \(f(x) \leq B_mf(x')\) et \(f(x') \leq B_mf(x)\). Donc </p>
+<div class="displaymath" id="a0000000094">
+  \[ \left|f(x) - f(x')\right| \leq (B_m - 1)\lVert f\rVert \leq (B_m - 1)K \underset {m\to \infty }{\longrightarrow } 0. \]
+</div>
+<p> Ainsi comme la majoration est indépendante de \(f\), \(\Lambda \) est équicontinue. <div class="proof_wrapper" id="a0000000095">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+  </div>
+</div> </p>
+<p><div class="proposition_thmwrapper " id="a0000000096">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">26</span>
+  </div>
+  <div class="proposition_thmcontent">
+  <p>Il existe \(h \in \Lambda \) tel que \(h {\gt} 0\) et vérifie (2) (<i class="itshape">ie.</i> \(\nu (h) = 1\) et \(\L h = \lambda h\)). </p>
+
+  </div>
+</div> </p>
+<p><div class="proof_wrapper" id="a0000000097">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+  </div>
+</div> On pose \(F \colon \mathcal{C} (\Sigma _{n}^+) \longrightarrow \mathcal{C} (\Sigma _{n}^+)\) définie par </p>
+<div class="displaymath" id="a0000000098">
+  \[ \forall f \in \mathcal{C} (\Sigma _{n}^+), F(f) = \frac1\lambda \L f. \]
+</div>
+<p> On vérifie que \(\Lambda \) est stable par \(F\). Soit \(f \in \Lambda \), il est clair que \(\frac1\lambda \L f\) est positif car \(f\) l’est. Aussi, \(\nu (\frac1\lambda \L f) = \frac1\lambda \L ^*\nu (f) = \nu (f) = 1\). Enfin, pour \(x, x' \in \Sigma ^+_n\) tels que \(x' \in C(x,m)\) pour un certain \(m \in \mathbf N\), on a pour tout \(j \in [\! [1, n]\! ]\) </p>
+<div class="displaymath" id="a0000000099">
+  \[ e^{\phi (jx)}f(jx) \leq e^{\phi (jx') + b\alpha ^{m+1}}B_{m+1}f(jx') \leq B_me^{\phi (jx')}f(jx'). \]
+</div>
+<p> En sommant tous ces termes, on obtient l’inégalité voulue : \(\L f(x) \leq B_m\L f(x')\). Par ailleurs, \(F\) est continue car \(ne^{\lVert \phi \rVert }\)-lipschitizienne : pour tout \(f,g \in \mathcal{C} (\Sigma _{n}^+)\) et \(x\in \Sigma ^+_n\), on a </p>
+<div class="displaymath" id="a0000000100">
+  \[ \left|\L f(x) - \L g(x) \right| \leq \sum _{\sigma y = x}{e^{\phi (y)}\lVert f-g\rVert } \leq ne^{\lVert \phi \rVert }\lVert f-g\rVert , \]
+</div>
+<p> et donc \(\lVert \L f - \L g\rVert \leq ne^{\lVert \phi \rVert }\lVert f-g\rVert \). </p>
+<p>En appliquant le théorème de Schauder-Tychonoff à \(F\) sur \(\Lambda \), on obtient un point fixe \(h \in \Lambda \) qui vérifie alors \(\nu (h) = 1\) et \(\L h = \lambda h\). De plus, par le lemme précédent, \(0 {\lt} K^{-1} \leq \inf {\lambda ^{-1}\L h} = \inf {h}\), d’où \(h {\gt} 0\). <div class="proof_wrapper" id="a0000000101">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+  </div>
+</div> </p>
+<p><div class="lemma_thmwrapper " id="a0000000102">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemme
+    </span>
+    <span class="lemma_thmlabel">27</span>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>Il existe \(\eta \in ]0, 1[\) tel que pour toute fonction \(f \in \Lambda \), il existe \(f' \in \Lambda \) vérifiant </p>
+<div class="displaymath" id="a0000000103">
+  \[ \frac1\lambda \L f = \eta h + (1-\eta )f'. \]
+</div>
+<p> De plus, \(\eta \leq \min {(\frac{u_1}{u_2} \frac{1-\alpha }{4\left\lVert h\right\rVert K}, \frac1{K\lVert h\rVert })}\). </p>
+
+  </div>
+</div> </p>
+<p><div class="proof_wrapper" id="a0000000104">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+  </div>
+</div> Soit \(\eta \in ]0, 1[\) comme ci-dessus. Soit \(f \in \Lambda \) et on pose la fonction \(g = \frac1\lambda \L f - \eta h\). Alors si \(\eta \leq \min {(\frac{u_1}{u_2} \frac{1-\alpha }{4\left\lVert h\right\rVert K}, \frac1{K\lVert h\rVert })}\), on a \(\frac1{1-\eta }g \in \Lambda \). En effet, l’intégrale de \(g\) vaut \(\nu (g) = \nu (\lambda ^{-1}\L f) -\eta \nu (h) = 1 - \eta \), car \(f\) et \(h\) sont dans \(\Lambda \). </p>
+<p>Aussi \(g \geq 0\) dès lors que \(\eta \lVert h\rVert \leq \frac1K\) car </p>
+<div class="displaymath" id="a0000000105">
+  \[ g = \lambda ^{-1}\L f - \eta h \geq \inf {\lambda ^{-1}\L f} - \eta \lVert h\rVert \geq 0, \]
+</div>
+<p> d’après le lemme <a href="sect0005.html#lemma:compact">25</a>. </p>
+<p>Finalement, pour que \(\frac1{1 - \eta }g \in \Lambda \) on doit avoir \(g(x) \leq B_mg(x')\) pour \(x \in \Sigma ^+_n\) et \(x'\in C(x,m)\) pour \(m \geq 0\), ce qui équivaut à : </p>
+<div class="displaymath" id="a0000000106">
+  \[ \eta (B_mh(x') - h(x)) \leq B_m \lambda ^{-1}\L f(x') - \lambda ^{-1}\L f(x). \]
+</div>
+<p> Or, \(\L f(x) \leq B_{m+1}e^{b\alpha ^{m+1}}\L f(x')\) (comme vu dans la preuve du lemme <a href="sect0005.html#lemma:compact">25</a>). Une condition suffisante est </p>
+<div class="displaymath" id="a0000000107">
+  \[ \eta (B_m - B_m^{-1})\lVert h\rVert \leq (B_m - B_{m+1}e^{b\alpha ^{m+1}})K^{-1}, \]
+</div>
+<p> car, </p>
+<div class="displaymath" id="a0000000108">
+  \[ \left\{  \begin{array}{l} \eta (B_mh(x’) - h(x)) \leq \eta (B_mh(x’) - B_m^{-1}h(x’)) \leq \eta (B_m-B_m^{-1})\lVert h\rVert , \vspace{1.5em}\\ (B_m - B_{m+1}e^{b\alpha ^{m+1}})K^{-1} \leq (B_m - B_{m+1}e^{b\alpha ^{m+1}})\lambda ^{-1}\L f(x’) \leq \lambda ^{-1}(B_m\L f(x’) - \L f(x)). \end{array}\right. \]
+</div>
+<p> On rappelle que pour tout compact \(K \subseteq \mathbf R^2\) et tout \(x,y \in K\), on a \(u_1(x-y) \leq e^x - e^y \leq u_2(x-y)\), ce qu’on applique ici avec le compact \(K = [-L, L]^2\) de sorte que \(\pm \log B_m, \log {B_m e^{b\alpha ^m}}\) soient dans \([-L, L]\). </p>
+<p>Ainsi il suffit de vérifier </p>
+<div class="displaymath" id="a0000000109">
+  \[ \eta u_2\lVert h\rVert (\log {B_m} - \log {B_m^{-1}}) \leq K^{-1}u_1(\log {B_m} - \log {B_{m+1}} - b\alpha ^{m+1}), \]
+</div>
+<p> qui est équivalent à </p>
+<div class="displaymath" id="a0000000110">
+  \[ \eta \lVert h\rVert u_2 \left(\frac{4b\alpha ^{m+1}}{1-\alpha }\right) \leq K^{-1}u_1b\alpha ^{m+1}, \]
+</div>
+<p> ou encore </p>
+<div class="displaymath" id="a0000000111">
+  \[ \eta \leq \frac{u_1}{u_2}\frac{1-\alpha }{4\lVert h\rVert K}, \]
+</div>
+<p> afin d’avoir \(\frac1{\eta - 1}g \in \Lambda \). <div class="proof_wrapper" id="a0000000112">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+  </div>
+</div> </p>
+<p>Le lemme suivant est le cas particulier du théorème <a href="sect0005.html#thm:rpf">23</a> pour les fonctions dans \(\Lambda \), pour lesquelles en plus de la limite on a une convergence exponentielle. </p>
+<p><div class="lemma_thmwrapper " id="lemma:expo">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemme
+    </span>
+    <span class="lemma_thmlabel">28</span>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> Pour tout \(n \in \mathbf N\) et tout \(f\in \Lambda \), on a \(\left\lVert \lambda ^{-n}\L ^nf - h\right\rVert  \leq (\lVert h\rVert + K)(1 - \eta )^n = A\beta ^n\) avec \(0 {\lt} \beta {\lt} 1\) et \(A {\gt} 0\). </p>
+
+  </div>
+</div> </p>
+<p><div class="proof_wrapper" id="a0000000113">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+  </div>
+</div> Remarquons qu’en itérant le lemme précédent, <div class="displaymath" id="a0000000114">
+  
+</div> λ^-1Łf = ηh + (1 - η)f’_1 = (1 - (1 - η)^1)h + (1 - η)f_1’, <br />λ^-2Ł^2 f = λ^-1Ł((1 - (1 - η))h + (1 - η)f’_1) = (1 - (1 - η))h + λ^-1(1 - η)Łf’_1 <br />= (1 - (1 - η) + η(1 - η))h + (1 - η)^2f’_2 <br />= (1 - (1 - η)^2)h + (1 - η)^2f’_2, <div class="displaymath" id="a0000000115">
+  
+</div> </p>
+<p>Ainsi, par récurrence et grâce au lemme précédent, on a pour tout \(n \in \mathbf N\) et \(f \in \Lambda \), </p>
+<div class="displaymath" id="a0000000116">
+  \[ \frac1{\lambda ^n}\L ^n f = (1 - (1 - \eta )^n)h + (1 - \eta )^nf_n, \]
+</div>
+<p> où \(f_n \in \Lambda \). Comme \(\lVert f_n\rVert \leq K\), on obtient </p>
+<div class="displaymath" id="a0000000117">
+  \[ \left\lVert \frac1{\lambda ^n}\L ^n f - h\right\rVert  = (1-\eta )^n\lVert h + f_n\rVert \leq (1-\eta )^n(K + \lVert h\rVert ). \]
+</div>
+<p> <div class="proof_wrapper" id="a0000000118">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+  </div>
+</div> </p>
+<p>Avant d’étendre le résultat à toutes les fonctions de \(\mathcal{C} (\Sigma _{n}^+)\), on l’étend d’abord à un sous-ensemble dense constitué des fonctions "en escaliers". On pose alors </p>
+<div class="displaymath" id="a0000000119">
+  \[ \mathcal C_{r} = \left\{ f \in \mathcal{C} (\Sigma _{n}^+) \mid \var _r(f) = 0 \right\}  \text{ et } \mathcal C = \bigcup _{r\geq 0}{\mathcal C_{r}}. \]
+</div>
+<p> On établira la densité de \(\mathcal C\) dans un prochain lemme. </p>
+<p><div class="lemma_thmwrapper " id="lemma:Cr">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemme
+    </span>
+    <span class="lemma_thmlabel">29</span>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> Soit \(F \in \Lambda \) et \(f \in \mathcal C_{r}\) tels que \(fF\not= 0\) et \(f \geq 0\). Alors, \(\frac{1}{\nu (fF)\lambda }\L ^r(fF) \in \Lambda \). </p>
+
+  </div>
+</div> </p>
+<p><div class="proof_wrapper" id="a0000000120">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+  </div>
+</div> La positivité de \(g = \lambda ^{-r}\L ^r(fF)\) découle de la positivité de \(f\) et de \(F\). Ensuite, soit \(x, x' \in \Sigma ^+_n\) et \(m \in \mathbf N\) tels que \(x' \in C(x,m)\). Remarquons d’abord que, grâce à une récurrence, on a </p>
+<div class="displaymath" id="a0000000121">
+  \[ \L ^r(fF)(x) = \sum _{j_1, \hdots , j_r \in [\! [1, n]\! ]}{\exp {\left(\sum _{k=0}^{r-1}{\phi (\sigma ^k(j_1\hdots j_rx))}\right)}} f(j_1\hdots j_r x)F(j_1\hdots j_r x). \]
+</div>
+<p> Soit \(j_1, \hdots , j_r \in [\! [1, n]\! ]\), alors comme \(f \in \mathcal C_{r}\) on a \(f(j_1\hdots j_r x) = f(j_1\hdots j_r x')\). <br />Aussi, \(F(j_1\hdots j_r x) \leq B_{m+r} F(j_1\hdots j_r x')\) car les deux suites coïncident sur les \(m+r\) premières coordonnées. Enfin, <div class="displaymath" id="a0000000122">
+  
+</div> B_m+r∑_k=0^r-1φ(σ^k(j_1j_r x))  ≤B_m+r ∑_k=0^r-1_m+r-k(φ) + φ(σ^k(j_1j_r x’)) <br />≤B_m+r ∑_k = m+1^m+r bα^k ∑_k=0^r-1φ(σ^k(j_1j_r x’)) <br />≤B_m ∑_k=0^r-1φ(σ^k(j_1j_r x’)). <div class="displaymath" id="a0000000123">
+  
+</div> Ainsi, chacun des termes de \(\L ^r(fF)(x)\) est majoré par \(B_m\) fois le terme correspondant dans \(\L ^r(fF)(x')\), d’où \(\L ^r(fF)(x) \leq B_m\L ^r(fF)(x')\). </p>
+<p>Finalement, il reste à vérifier que \(\nu (fF) {\gt} 0\). Pour ce faire, si \(x, z \in \Sigma ^+_n\) alors, </p>
+<div class="displaymath" id="a0000000124">
+  \[ \frac1\lambda \L (\L ^r(fF))(x) = \lambda ^{-1}\sum _{\sigma y=x}{e^{\phi (y)}\L ^r(fF)(y)} \geq \lambda ^{-1}e^{-\left\lVert \phi \right\rVert }B_0^{-1}\L ^r(fF)(z) = K^{-1}\L ^r(fF)(z). \]
+</div>
+<p> Or comme \(fF \not= 0\), il existe \(z \in \Sigma ^+_n\) tel que \((fF)(z) {\gt} 0\), donc \(\L ^r(fF)(\sigma ^r z) {\gt} 0\). Ainsi, </p>
+<div class="displaymath" id="a0000000125">
+  \[ \nu (fF) = \frac1{\lambda ^r}\nu (\lambda ^{-1}\L (\L ^r(fF))) \geq \frac1{K\lambda ^r} \L ^r(fF)(\sigma ^r z) {\gt} 0. \]
+</div>
+<p> Et enfin, on a bien \(\nu (\nu (fF)^{-1}\lambda ^{-r}\L ^r(fF)) = 1\), ce qui conclut ce lemme. <div class="proof_wrapper" id="a0000000126">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+  </div>
+</div> </p>
+<p><div class="lemma_thmwrapper " id="lemma:fF">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemme
+    </span>
+    <span class="lemma_thmlabel">30</span>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> Soit \(f \in \mathcal C_{r}\), \(F \in \Lambda \) et \(n \in \mathbf N\). Alors, </p>
+<div class="displaymath" id="a0000000127">
+  \[ \left\lVert \frac1{\lambda ^{n+r}} \L ^{n+r}(fF) - \nu (fF)h\right\rVert  \leq A\nu (|fF|)\beta ^n. \]
+</div>
+
+  </div>
+</div> </p>
+<p><div class="remark_thmwrapper " id="a0000000128">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remarque
+    </span>
+  </div>
+  <div class="remark_thmcontent">
+  <p>La fonction \(F \in \Lambda \) n’a aucune utilité dans la preuve du théorème <a href="sect0005.html#thm:rpf">23</a> (pour le montrer on prendra \(F = 1\)), elle sert plus tard pour montrer que \(h\cdot \nu \) est la mesure de Gibbs du théorème <a href="sect0003.html#thm:gibbs">14</a>. </p>
+
+  </div>
+</div> </p>
+<p><div class="proof_wrapper" id="a0000000129">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+  </div>
+</div> Décomposons \(f\) en sa partie positive \(f^+\) et sa partie négative \(f^-\) toute deux positives et vérifiant \(f = f^+ - f^-\). Si \(f^{\pm }F \not= 0\), alors grâce aux lemmes <a href="sect0005.html#lemma:Cr">29</a> et <a href="sect0005.html#lemma:expo">28</a>, on a </p>
+<div class="displaymath" id="a0000000130">
+  \[ \left\lVert \frac{1}{\lambda ^{n+r}}\L ^{n+r} (f^{\pm }F) - \nu (f^{\pm }F)h\right\rVert  = \nu (f^{\pm }F)\left\lVert \frac{1}{\lambda ^{n+r}\nu (f^{\pm }F)}\L ^{n+r}(f^{\pm }F) - h\right\rVert  \leq A\nu (f^{\pm }F)\beta ^n. \]
+</div>
+<p> Dans le cas où \(f^{\pm }F = 0\) l’inégalité est triviale. Ainsi, </p>
+<div class="displaymath" id="a0000000131">
+  \[ \left\lVert \frac1{\lambda ^{n+r}} \L ^{n+r} (fF) - \nu (fF)h\right\rVert  \leq A(\nu (f^+F) + \nu (f^-F))\beta ^n = A\nu (|fF|)\beta ^n. \]
+</div>
+<p> <div class="proof_wrapper" id="a0000000132">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+  </div>
+</div> </p>
+<p><div class="lemma_thmwrapper " id="a0000000133">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemme
+    </span>
+    <span class="lemma_thmlabel">31</span>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>L’ensemble \(\mathcal C = \bigcup _{r\geq 0}{\mathcal C_{r}}\) vérifie la propriété suivante : </p>
+<div class="displaymath" id="a0000000134">
+  \[ \forall f \in \mathcal{C} (\Sigma _{n}^+), \forall \varepsilon {\gt} 0, \exists g_1, g_2 \in \mathcal C, \left\lVert g_1 - g_2\right\rVert  \leq \varepsilon \text{ et } g_1\leq f\leq g_2, \]
+</div>
+<p> et donc \(\mathcal C\) est dense dans \(\mathcal{C} (\Sigma _{n}^+)\). </p>
+
+  </div>
+</div> </p>
+<p><div class="proof_wrapper" id="a0000000135">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+  </div>
+</div> Soit \(f \in \mathcal{C} (\Sigma _{n}^+)\) et \(\varepsilon {\gt} 0\). Alors il existe \(r \in \mathbf N\) tel que pour tout \(x \in \Sigma ^+_n\) et \(x' \in C(x, r)\) on ait \(\left|f(x) - f(x')\right| \leq \varepsilon \), car \(f\) est continue sur le compact \(\Sigma ^+_n\) donc uniformément continue par le théorème de Heine. On pose alors pour \(x \in \Sigma ^+_n\), </p>
+<div class="displaymath" id="a0000000136">
+  \[ \left\{ \begin{array}{l} g_1(x) = \inf \limits _{z \in \Sigma ^+_n}{f(x_1\cdots x_r z)}, \\ g_2(x) = \sup \limits _{z \in \Sigma ^+_n}{f(x_1\cdots x_r z)}, \end{array}\right. \]
+</div>
+<p> de sorte que \(g_1 \leq f \leq g_2\) et \(g_1, g_2 \in \mathcal C_{r} \subseteq \mathcal C\). De plus, si on note \(z, z' \in \Sigma ^+_n\) tel que \(g_1(x) = f(x_1\cdots x_r z)\) et \(g_2(x) = f(x_1 \cdots x_r z')\), alors </p>
+<div class="displaymath" id="a0000000137">
+  \[ \left|g_1(x) - g_2(x)\right| \leq \left|f(x_1\cdots x_r z) - f(x_1\cdots x_r z')\right| \leq \varepsilon . \]
+</div>
+<p> <div class="proof_wrapper" id="a0000000138">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+  </div>
+</div> </p>
+<p>Enfin, on arrive au dernier lemme permettant d’établir le (3) du théorème <a href="sect0005.html#thm:rpf">23</a>, pour lequel il ne reste plus que la limite sans la convergence exponentielle. </p>
+<p><div class="proposition_thmwrapper " id="a0000000139">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">32</span>
+  </div>
+  <div class="proposition_thmcontent">
+  <p>Soit \(f \in \mathcal{C} (\Sigma _{n}^+)\), alors </p>
+<div class="displaymath" id="a0000000140">
+  \[ \left\lVert \frac1{\lambda ^m} \L ^mf - \nu (f)h\right\rVert  \underset {m \to \infty }{\longrightarrow } 0. \]
+</div>
+
+  </div>
+</div> </p>
+<p><div class="proof_wrapper" id="a0000000141">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+  </div>
+</div> Soit \(\varepsilon {\gt} 0\), \(r \in \mathbf N\) et \(g_1, g_2 \in \mathcal C_{r}\) comme dans le précédent lemme. On applique le lemme <a href="sect0005.html#lemma:fF">30</a> avec \(F = 1\), ce qui donne pour \(m\) assez grand, <div class="displaymath" id="a0000000142">
+  
+</div> Ł^m g_i - ν(f)h ≤λ^-mŁ^mg_i - ν(g_i)h + ν(g_i) - ν(f)h <br />≤ε(1 + h). <div class="displaymath" id="a0000000143">
+  
+</div> De plus, on a \(\lambda ^{-m}\L ^mg_1 \leq \lambda ^{-m}\L ^mf \leq \lambda ^{-m}\L ^mg_2\) et donc pour \(m\) assez grand, </p>
+<div class="displaymath" id="a0000000144">
+  \[ -\varepsilon (1 + \left\lVert h\right\rVert ) \leq \lambda ^{-m}\L ^mg_1 - \nu (f)h \leq \lambda ^{-m}\L ^mf - \nu (f)h \leq \lambda ^{-m}\L ^mg_2 - \nu (f)h \leq \varepsilon (1+\left\lVert h\right\rVert ).  \]
+</div>
+<p> Finalement, on a bien \(\lim _{m\to \infty }{\left\lVert \lambda ^{-m}\L ^mf - \nu (f)h\right\rVert } = 0\), pour tout \(f \in \mathcal{C} (\Sigma _{n}^+)\). <div class="proof_wrapper" id="a0000000145">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+  </div>
+</div> </p>
+<p><div class="remark_thmwrapper " id="a0000000146">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remarque
+    </span>
+  </div>
+  <div class="remark_thmcontent">
+  <p>La densité de \(\mathcal C\) dans \(\mathcal{C} (\Sigma _{n}^+)\), à savoir </p>
+<div class="displaymath" id="a0000000147">
+  \[ \forall f \in \mathcal{C} (\Sigma _{n}^+), \forall \varepsilon {\gt} 0, \exists r \in \mathbf N, \exists f_r\in \mathcal C_{r}, \left\lVert f - f_r\right\rVert  \leq \varepsilon , \]
+</div>
+<p> ne suffit pas pour conclure. En effet, si on a un telle fonction \(f_r \in \mathcal C_{r}\) pour un certain \(r \in \mathbf N\), <div class="displaymath" id="a0000000148">
+  
+</div> Ł^mf - ν(f)h ≤Ł^mf - Ł^mf_r + Ł^mf_r - ν(f_r)h + |ν(f_r) - ν(f)|h <br />≤Ł^mf - Ł^mf_r + Aν(|f_r|)β^m - r + εh. <div class="displaymath" id="a0000000149">
+  
+</div> Or, on n’arrive pas à majorer le premier terme, notamment car on ne possède aucune estimation de \(\lambda \). </p>
+
+  </div>
+</div>  </p>
+
+</div> <!--main-text -->
+</div> <!-- content-wrapper -->
+</div> <!-- content -->
+</div> <!-- wrapper -->
+
+<nav class="prev_up_next">
+  <a href="sect0004.html" title="Réduction de \(\Sigma _n\) à \(\Sigma ^+_n\)"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+</a>
+  <a href="index.html" title="Existence et unicité des mesures de Gibbs."><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+</a>
+  <a href="sect0006.html" title="Construction d’une mesure de Gibbs"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+</a>
+</nav>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/plastex.js"></script>
+<script type="text/javascript" src="js/svgxuse.js"></script>
+</body>
+</html>

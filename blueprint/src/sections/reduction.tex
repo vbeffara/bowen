@@ -5,6 +5,7 @@
   ne dépendant que des coordonnées positives ayant la même mesure de Gibbs que $\phi$.
 
   \begin{definition}
+    \label{def:fn_equiv}
     Soit $\phi, \psi \in \Cs{n}$. On dit que $\phi$ et $\psi$ sont équivalentes et on note $\phi \sim \psi$ dès lors
     qu'il existe $u \in \Cs{n}$ vérifiant :
     $$\phi = \psi - u + u \circ \sigma.$$
@@ -13,6 +14,7 @@
   Le prochain lemme justifie l'introduction de cette relation :
 
   \begin{lemma}
+    \label{lem:fn_equiv_imp_gibbs_eq}
     Soit $\phi \sim \psi \in \Hs{n}$. Dans ce cas, $\mu_{\phi} = \mu_{\psi}$ et $P(\phi) = P(\psi)$.
   \end{lemma}
 
@@ -67,6 +69,7 @@
     Donc $\sigma \circ r$ et $r \circ \sigma$ diffèrent seulement à la coordonnées -1 et ne dépendent que des coordonnées positives de $x$.
 
   \begin{lemma}
+    \label{lem:fn_equiv_pos_coords}
     Soit $\phi \in \Hs{n}$, et
     $$\psi := \phi \circ r + \left(\sum_{k=0}^{\infty}{\phi \circ \sigma^k}\right)\circ(\sigma \circ r - r \circ \sigma).$$
     Alors,

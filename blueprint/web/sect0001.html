@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  MathJax = { 
+    tex: {
+		    inlineMath: [['$','$'], ['\\(','\\)']]
+	} }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<meta name="generator" content="plasTeX" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Existence et unicité des mesures de Gibbs.: Introduction</title>
+<link rel="next" href="sect0002.html" title="Topologie de Σn" />
+<link rel="prev" href="index.html" title="Existence et unicité des mesures de Gibbs." />
+<link rel="up" href="index.html" title="Existence et unicité des mesures de Gibbs." />
+<link rel="stylesheet" href="styles/theme-white.css" />
+<link rel="stylesheet" href="styles/extra_styles.css" />
+</head>
+
+<body>
+<header>
+<svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
+<h1 id="doc_title"><a href="index.html">Existence et unicité des mesures de Gibbs.</a></h1>
+</header>
+
+<div class="wrapper">
+<nav class="toc">
+<ul class="sub-toc-0">
+<li class=" active current">
+  <a href="sect0001.html"><span class="toc_ref"></span> <span class="toc_entry">Introduction</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html"><span class="toc_ref"></span> <span class="toc_entry">Topologie de \(\Sigma _n\)</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0002.html#a0000000013"><span class="toc_ref"></span> <span class="toc_entry">Définition de l’espace métrique \(\Sigma _n\)</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000014"><span class="toc_ref"></span> <span class="toc_entry">Propriétés topologiques de \(\Sigma _n\)</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0003.html"><span class="toc_ref"></span> <span class="toc_entry">Unicité de la mesure de Gibbs</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html"><span class="toc_ref"></span> <span class="toc_entry">Réduction de \(\Sigma _n\) à \(\Sigma ^+_n\)</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html"><span class="toc_ref"></span> <span class="toc_entry">Théorème de Perron-Frobenius de Ruelle</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html"><span class="toc_ref"></span> <span class="toc_entry">Construction d’une mesure de Gibbs</span></a>
+ </li>
+</ul>
+</nav>
+
+<div class="content">
+<div class="content-wrapper">
+
+
+<div class="main-text">
+<h1 id="a0000000002"> Introduction</h1>
+<p><div class="definition_thmwrapper " id="a0000000008">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Définition
+    </span>
+    <span class="definition_thmlabel">1</span>
+    <span class="definition_thmtitle">Mesure de Gibbs</span>
+  </div>
+  <div class="definition_thmcontent">
+  <p> Soit \(\mu \) une mesure de probabilité \(\sigma \)-invariante sur \(\Sigma _n\). On dit \(\mu \) est une mesure de Gibbs pour un potentiel \(\phi \colon \Sigma _n \longrightarrow \mathbf R\) s’il existe \(P \in \mathbf R\) et \(c_1, c_2 {\gt} 0\) tels que pour tout \(x \in \Sigma _n\) et \(m \in \mathbf N\) on ait </p>
+<div class="displaymath" id="a0000000009">
+  \[ c_1 \leq \frac{\mu \{ y \in \Sigma _n \mid \forall i \in [\! [0, m-1 ]\! ], x_i = y_i\} }{\exp {(-Pm + \sum _{k=0}^{m-1}\phi (\sigma ^kx))}} \leq c_2. \]
+</div>
+
+  </div>
+</div> </p>
+<p>L’objectif est de démontrer le théorème suivant, dû à R. Bowen. </p>
+<p><div class="theorem_thmwrapper " id="a0000000010">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Théoreme
+    </span>
+    <span class="theorem_thmlabel">2</span>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>Soit \(\phi \) une fonction de potentiel hölderienne. Alors il existe une unique mesure de Gibbs pour cette fonction \(\phi \). </p>
+
+  </div>
+</div> </p>
+<p>Pour ce faire, on se ramène au cas où la fonction de potentiel \(\phi \) ne dépend plus des coordonnées négatives. Ensuite, on considère l’opérateur de transfert \(\L \) défini par </p>
+<div class="displaymath" id="a0000000011">
+  \[ \forall f \in \mathcal{C} (\Sigma _{n}^+), \forall x \in \Sigma ^+_n, \hspace{0.5em} \L f(x) = \sum _{y \in \sigma ^{-1}x}f(y)e^{\phi (y)}, \]
+</div>
+<p> où \(\Sigma ^+_n\) est l’ensemble des suites à valeurs dans \([\! [1, n]\! ]\) et indéxées sur \(\mathbf N\). </p>
+<p>Le théorème suivant établit que cet opérateur admet une mesure propre et une fonction propre. </p>
+<p><div class="theorem_thmwrapper " id="a0000000012">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Théoreme
+    </span>
+    <span class="theorem_thmlabel">3</span>
+    <span class="theorem_thmtitle">Ruelle-Perron-Frobenius</span>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> Soit \(\phi \) un potentiel et \(\L \) l’opérateur de transfert. Alors il existe \(\lambda {\gt} 0, \nu \in \mathcal{M} (\Sigma _{n}^+)\) et \(h \in \mathcal{C} (\Sigma _{n}^+), h {\gt} 0\) tels que : </p>
+<ol class="enumerate">
+  <li><p>\(\nu \) vérifie \(\L ^*\nu = \lambda \nu \), </p>
+</li>
+  <li><p>\(h\) vérifie \(\L h = \lambda h\) et \(\nu (h) = 1\), </p>
+</li>
+  <li><p>et pour toute fonction \(g \in \mathcal{C} (\Sigma _{n}^+)\), \(\lim _{m\to \infty }\left\lVert \frac1{\lambda ^m} \L ^mg - \nu (g)h\right\rVert  = 0\). </p>
+</li>
+</ol>
+
+  </div>
+</div> </p>
+<p>Pour prouver ce théorème, on utilisera le théorème de Schauder-Tychonoff afin de construire la mesure propre \(\mu \) et la fonction propre \(h\) comme des points fixes de certains opérateurs, pour cela nous devrons d’abord établir la compacité de \(\Sigma _n\) et d’un certain ensemble de fonctions notamment grâce au théorème d’Ascoli. Puis pour établir la limite nous aurons besoin de la densité des fonctions en escaliers dans \(\mathcal{C} (\Sigma _{n}^+)\) et des propriétés de l’opérateur de transfert. </p>
+<p>Grâce à cette mesure propre \(\nu \) et cette fonction propre \(h\), on peut construire \(\mu = h \cdot \nu \). Cette dernière mesure sur \(\Sigma ^+_n\) est alors \(\sigma \)-invariante, ce qui se montre grâce aux propriétés algébriques de l’opérateur de transfert et permettra de construire une forme linéaire \(G\) sur \(\Sigma _n\) qui s’identifiera grâce au théorème de Riesz en une mesure \(\tilde\mu \) sur \(\Sigma _n\), qui sera la mesure de Gibbs pour le potentiel höldérien \(\phi \). Une fois \(\tilde\mu \) construite, on montrera qu’elle est ergodique (et même mélangeante), ce qui permettra d’établir l’unicité. </p>
+<p> <br /></p>
+
+</div> <!--main-text -->
+</div> <!-- content-wrapper -->
+</div> <!-- content -->
+</div> <!-- wrapper -->
+
+<nav class="prev_up_next">
+  <a href="index.html" title="Existence et unicité des mesures de Gibbs."><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+</a>
+  <a href="index.html" title="Existence et unicité des mesures de Gibbs."><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+</a>
+  <a href="sect0002.html" title="Topologie de \(\Sigma _n\)"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+</a>
+</nav>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/plastex.js"></script>
+<script type="text/javascript" src="js/svgxuse.js"></script>
+</body>
+</html>

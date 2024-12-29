@@ -3,6 +3,7 @@
   \subsection{Définition de l'espace métrique $\s_n$}
 
   \begin{definition}
+    \label{def:topo_sn}
     Soit $n \in \N$.
     L'ensemble des suites bi-infinies à valeurs dans $\llbracket 1, n\rrbracket$ est noté $\s_n = \prod_{\Z}{\llbracket 1, n\rrbracket}$.
     Chaque $\llbracket 1, n\rrbracket$ est muni de la topologie discrète,
@@ -12,6 +13,7 @@
   \end{definition}
 
   \begin{proposition}
+    \label{prop:sn_compact}
     L'espace métrique $(\s_n, d)$ est compact.
   \end{proposition}
 
@@ -20,16 +22,8 @@
     En tant que produit $\s_n$ est donc également compact, grâce au théorème de Tychonoff.
   \end{proof}
 
-  %\begin{proposition}
-    %L'ensemble $\s_n$ est compact.
-  %\end{proposition}
-
-  %\begin{proof}
-    %Chacun des $\llbracket 1, n\rrbracket$ est compact pour sa topologie.
-    %En tant que produit $\s_n$ est donc également compact, grâce au théorème de Tychonoff.
-  %\end{proof}
-
   \begin{proposition}
+    \label{prop:dist_equiv}
     Pour $x, y \in \s_n$ distincts, notons $N = \min\left\{i \in \N \mid x_i \not= y_i \text{ ou } x_{-i} \not= y_{-i}\right\}$.
     Alors $d_{\beta}(x, y) = \beta^N$ et $d_{\beta}(x, x) = 0$ définit une distance sur $\s_n$ et est équivalente à la distance $d$,
     et ce pour tout $\beta \in ]0, 1[$.
@@ -62,17 +56,20 @@
   \subsection{Propriétés topologiques de $\s_n$}
 
   \begin{definition}
+    \label{def:var_potentiel}
     Soit $\phi \in \Cs{n}$. La fonction de variation d'ordre $k$ est donné par :
     $$\var_k(\phi) = \sup\left\{|\phi(x) - \phi(y)| : \forall i \in \llbracket -k, k\rrbracket, x_i = y_i \right\}.$$
   \end{definition}
 
   \begin{proposition}
+    \label{prop:equiv_holder}
     Soit $\beta \in ]0, 1[$.
     Soit $\phi \in \Cs{n}$, si pour tout $k \in \N$ on $\var_k(\phi) \leq b\alpha^k$ pour certaines constantes $b > 0$ et $\alpha \in ]0, 1[$,
     alors il existe $\beta \in ]0, 1[$ tel que $\phi$ soit hölderienne pour $d_{\beta}$.
   \end{proposition}
 
   \begin{definition}
+    \label{def:holder_fn_set}
     On notera $\Hs{n}$ l'ensemble des fonctions $\phi \in \Cs{n}$ pour lesquels il existe $\alpha \in ]0, 1[$ et $b > 0$ vérifiant
     $$\forall k \in \N, \hspace{1em} \var_k(\phi) \leq b\alpha^k.$$
   \end{definition}
@@ -80,7 +77,8 @@
   %Les résultats présentés dans la section Préliminaires s'appliquent donc pour $\s_n$. Cependant on peut caractériser de manière plus précise
   %la forme des ouverts de $\s_n$.
 
-  \begin{proposition} \label{prop:separable}
+  \begin{proposition}
+    \label{prop:separable}
     Pour tout $m \in \N$, soit $T_m = \left\{x \in \s_n \mid \forall|i|>m, x_i=1\right\}$ et $T = \bigcup_{m\geq 0}{T_m}$.
     L'ensemble $T$ est dense dans $\s_n$ et est dénombrable. Ainsi, $\s_n$ est séparable.
   \end{proposition}
@@ -94,7 +92,8 @@
     Donc par union dénombrable, $T$ est dénombrable.
   \end{proof}
 
-  \begin{proposition} \label{prop:boules}
+  \begin{proposition}
+    \label{prop:boules}
     Soit $O$ un ouvert de $\s_n$. Pour tout $x \in O$, on note $r_x > 0$ tel que $B(x, r_x) \subseteq O$.
     Alors il existe $\mathcal R \subseteq \s_n$ dénombrable tel que
     $$O = \bigsqcup_{x\in\mathcal R}{B(x, r_x)},$$
@@ -125,6 +124,7 @@
   \end{proof}
 
   \begin{definition}
+    \label{def:shift}
     L'application de décalage (\textit{shift} en anglais) $\sigma$ sur $\s_n$ est donnée par
     $$(\sigma x)_i = x_{i+1}$$
     pour tout $x \in \s_n$ et $i \in \Z$.
@@ -132,24 +132,9 @@
   \end{definition}
 
   \begin{definition}
+    \label{def:cylindres}
     Soit $x\in \s_n$. On définit les cyclindres de centre $x$ et de rayon $m \in \N$ par
     $$C(x, m) = \left\{y \in \s_n \mid \forall i \in \llbracket 0, m - 1 \rrbracket, x_i = y_i\right\}.$$
     de cette manière on peut les relier aux boules pour la distance $d_{\beta}$ aux cyclindres :
     $$C(x,2m+1) = \sigma^{-m}(B_{\beta}(\sigma^mx, \beta^m)).$$
   \end{definition}
-
-  %\begin{definition}
-    %Soit $\phi \in \Cs{n}$. On introduit la fonction de variation d'ordre $k$ par
-    %$$\var_k(\phi) = \sup\left\{|\phi(x) - \phi(y)| : \forall i \in \llbracket -k, k\rrbracket, x_i = y_i \right\}.$$
-  %\end{definition}
-
-  %\begin{proposition}
-    %Soit $\phi \in \Cs{n}$, si pour tout $k \in \N$ on $\var_k(\phi) \leq b\alpha^k$ pour certaines constantes $b > 0$ et $\alpha \in ]0, 1[$,
-    %alors il existe $\beta \in ]0, 1[$ tel que $\phi$ soit hölderienne pour $d_{\beta}$.
-  %\end{proposition}
-
-  %\begin{definition}
-    %On notera $\Hs{n}$ l'ensemble des fonctions $\phi \in \Cs{n}$ pour lesquels il existe $\alpha \in ]0, 1[$ et $b > 0$ vérifiant
-    %$$\forall k \in \N, \var_k(\phi) \leq b\alpha^k.$$
-  %\end{definition}
-

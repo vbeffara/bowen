@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  MathJax = { 
+    tex: {
+		    inlineMath: [['$','$'], ['\\(','\\)']]
+	} }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<meta name="generator" content="plasTeX" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Existence et unicité des mesures de Gibbs.: Unicité de la mesure de Gibbs</title>
+<link rel="next" href="sect0004.html" title="Réduction de Σn à Σ+n" />
+<link rel="prev" href="sect0002.html" title="Topologie de Σn" />
+<link rel="up" href="index.html" title="Existence et unicité des mesures de Gibbs." />
+<link rel="stylesheet" href="styles/theme-white.css" />
+<link rel="stylesheet" href="styles/extra_styles.css" />
+</head>
+
+<body>
+<header>
+<svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
+<h1 id="doc_title"><a href="index.html">Existence et unicité des mesures de Gibbs.</a></h1>
+</header>
+
+<div class="wrapper">
+<nav class="toc">
+<ul class="sub-toc-0">
+<li class="">
+  <a href="sect0001.html"><span class="toc_ref"></span> <span class="toc_entry">Introduction</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html"><span class="toc_ref"></span> <span class="toc_entry">Topologie de \(\Sigma _n\)</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0002.html#a0000000013"><span class="toc_ref"></span> <span class="toc_entry">Définition de l’espace métrique \(\Sigma _n\)</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000014"><span class="toc_ref"></span> <span class="toc_entry">Propriétés topologiques de \(\Sigma _n\)</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class=" active current">
+  <a href="sect0003.html"><span class="toc_ref"></span> <span class="toc_entry">Unicité de la mesure de Gibbs</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html"><span class="toc_ref"></span> <span class="toc_entry">Réduction de \(\Sigma _n\) à \(\Sigma ^+_n\)</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html"><span class="toc_ref"></span> <span class="toc_entry">Théorème de Perron-Frobenius de Ruelle</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html"><span class="toc_ref"></span> <span class="toc_entry">Construction d’une mesure de Gibbs</span></a>
+ </li>
+</ul>
+</nav>
+
+<div class="content">
+<div class="content-wrapper">
+
+
+<div class="main-text">
+<h1 id="a0000000004"> Unicité de la mesure de Gibbs</h1>
+<p>Dans cette section, on montre la partie concernant l’unicité du théorème suivant. </p>
+<p><div class="theorem_thmwrapper " id="thm:gibbs">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Théoreme
+    </span>
+    <span class="theorem_thmlabel">14</span>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> Soit \(\phi \in \mathcal H(\Sigma _n)\), alors il existe une unique mesure \(\mu _{\phi } = \mu \in \mathcal M_{\sigma }(\Sigma _n)\) tel qu’il existe \(P(\phi ) = P \in \mathbf R\), \(c_1, c_2 {\gt} 0\) vérifiant </p>
+<div class="displaymath" id="a0000000038">
+  \[ \frac{\mu (C(x, m))}{\exp (-Pm + S_m\phi (x))} \in [c_1, c_2] \]
+</div>
+<p> pour tout \(x \in \Sigma _n\) et \(m \in \mathbf N\), où \(S_m\phi (x) = \sum _{k=0}^{m-1}(\phi (\sigma ^k x))\) </p>
+
+  </div>
+</div> </p>
+<p>Dans les sections suivantes, on construira une mesure de Gibbs mélangeante notamment grâce au théorème de Ruelle. C’est l’ergodicité de cette mesure qui entrainera l’unicité de la mesure de Gibbs. </p>
+<p><div class="definition_thmwrapper " id="def:ergodicity">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Définition
+    </span>
+    <span class="definition_thmlabel">15</span>
+  </div>
+  <div class="definition_thmcontent">
+  <p> Soit \(\mu \in \mathcal{M}(\Sigma _{n})\). On dit que \(\mu \) est ergodique (par rapport à \(\sigma \)) si pour tout borélien \(E \in \mathcal{B}(\Sigma _n)\) tels que \(\sigma ^{-1}E=E\), on a </p>
+<div class="displaymath" id="a0000000039">
+  \[ \mu (E) = 0 \text{ ou } \mu (E^c) = 0, \]
+</div>
+
+  </div>
+</div> </p>
+<p><div class="definition_thmwrapper " id="def:mixing">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Définition
+    </span>
+    <span class="definition_thmlabel">16</span>
+  </div>
+  <div class="definition_thmcontent">
+  <p> Soit \(\mu \in \mathcal{M}(\Sigma _{n})\). On dit que \(\mu \) est mélangeante (par rapport à \(\sigma \)) si pour tout borélien \(E, F \in \mathcal{B}(\Sigma _n)\), on a </p>
+<div class="displaymath" id="a0000000040">
+  \[ \mu (E\cap \sigma ^{-n}F) \underset {n\to \infty }{\longrightarrow } \mu (E)\mu (F). \]
+</div>
+
+  </div>
+</div> </p>
+<p><div class="remark_thmwrapper " id="a0000000041">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remarque
+    </span>
+  </div>
+  <div class="remark_thmcontent">
+  <p>On a l’implication "mélangeante" \(\implies \) "ergodique". </p>
+
+  </div>
+</div> </p>
+<p><div class="lemma_thmwrapper " id="lem:sig_inv_imp_cst">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemme
+    </span>
+    <span class="lemma_thmlabel">17</span>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> Soit \(f \colon \Sigma _n \longrightarrow \mathbf R\) intégrable par rapport à une mesure \(\mu \in \mathcal{M}_{\sigma }(\Sigma _{n})\) ergodique. Supposons que \(f \circ \sigma = f\) \(\mu \)-presque partout. Alors \(f\) est constante \(\mu \)-presque partout. </p>
+
+  </div>
+</div> </p>
+<p><div class="proof_wrapper" id="a0000000042">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+  </div>
+</div> Pour montrer ce lemme on considére les ensembles \(E_c = f^{-1}(\{ c\} )\) pour tout \(c\in \mathbf R\). Comme \(f \circ \sigma = f\) \(\mu \)-p.p., on a \(\sigma ^{-1}E_c = E_c\), et donc par ergodicité de \(\mu \), </p>
+<div class="displaymath" id="a0000000043">
+  \[ \mu (E_c) = 0 \text{ ou } \mu (E_c) = 1. \]
+</div>
+<p> Il est donc clair qu’il existe au plus un \(c\in \mathbf R\) tel que \(f = c\) pour \(\mu \)-presque tout \(x \in \Sigma _n\). <div class="proof_wrapper" id="a0000000044">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+  </div>
+</div> </p>
+<p><div class="proposition_thmwrapper " id="prop:unique">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">18</span>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> Supposons qu’il existe une mesure de Gibbs \(\mu \) ergodique pour \(\phi \in \mathcal{C} (\Sigma _{n})\). Alors cette mesure est l’unique mesure de Gibbs associé à \(\phi \). </p>
+
+  </div>
+</div> </p>
+<p><div class="proof_wrapper" id="a0000000045">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+  </div>
+</div> Soit \(\mu , \mu ' \in \mathcal{M} (\Sigma _{n}^+)\) deux mesures de Gibbs avec \(\mu \) ergodique, \(c_1, c_1', c_2, c_2' {\gt} 0\) et \(P, P' \in \mathbf R\) des constantes telles que pour tout \(m \in \mathbf N\) et \(x \in \Sigma _n\) on ait </p>
+<div class="displaymath" id="a0000000046">
+  \[ \left\{ \begin{array}{lll} c_1 & \leq \frac{\mu (C(x,m))}{\exp {(-Pm + S_m\phi (x))}} & \leq c_2 \vspace{1em} \\ c_1’ & \leq \frac{\mu '(C(x,m))}{\exp {(-P’m + S_m\phi (x))}} & \leq c_2’ \end{array}\right. \]
+</div>
+<p>D’abord, montrons que \(P = P'\). Soit \(m \in \mathbf N\) et \(T_m = \left\{ x \in \Sigma _n \mid x_i = 1 \text{ si } i \not\in [\! [0, m-1 ]\! ]\right\} \), de telle sorte que \(\Sigma _n = \bigsqcup _{x\in T_m}{C(x,m)}\), et \(T_m\) est fini. On a alors </p>
+<div class="displaymath" id="a0000000047">
+  \[ c_1'e^{-P'm}\sum _{x\in T_m}{e^{S_m\phi (x)}} \leq \sum _{x\in T_m}{\mu ’(C(x,m))} = 1 = \sum _{x\in T_m}{\mu ’(C(x, m))} \leq c_2'e^{-P'm}\sum _{x\in T_m}{e^{S_m\phi (x)}}, \]
+</div>
+<p> et donc </p>
+<div class="displaymath" id="a0000000048">
+  \[ P - \frac1m \log {c_2’} \leq \frac1m \log {\sum _{x\in T_m}{e^{S_m\phi (x)}}} \leq P - \frac1m \log {c_1’}. \]
+</div>
+<p> Par le théorème des gendarmes, on trouve donc \(P' = \lim _{m\to \infty }{\frac1m\sum _{x\in T_m}{e^{S_m\phi (x)}}}\). Grâce au même raisonnement, on en conclut que \(P = P'\) car ils sont tout deux égaux à la même limite. </p>
+<p>Grâce aux estimations sur \(\mu \) et \(\mu '\) sur les cylindres, on a alors pour tout \(x \in \Sigma _n\) et \(m \in \mathbf N\), </p>
+<div class="displaymath" id="a0000000049">
+  \[ \mu '(C(x, m)) \leq \frac{c_2'}{c_1}\mu (C(x, m)). \]
+</div>
+<p> Comme \(\mu \) et \(\mu '\) sont invariantes par \(\sigma \), on peut étendre le résultat sur les ensembles de la forme \(\left\{ y\in \Sigma _n \mid \forall i \in [\! [-m, m]\! ], x_i = y_i\right\} \) pour tout \(x \in \Sigma _n\) et \(m \in \mathbf N\), c’est-à-dire sur une base de la topologie de \(\Sigma _n\). De plus, comme tout ouvert de \(\Sigma _n\) est une union disjointe dénombrable de ces éléments d’après la proposition <a href="sect0002.html#prop:boules">11</a>, on peut alors étendre cette inégalité aux ouverts de \(\Sigma _n\). Par régularité extérieure par rapport aux ouverts, on a pour tout borélien \(B \in \mathcal{B}(\Sigma _n)\), </p>
+<div class="displaymath" id="a0000000050">
+  \[ \mu '(B) = \inf \left\{ \mu '(O) \mid O \text{ ouvert }, B \subseteq O\right\} . \]
+</div>
+<p> De là, on a pour tout ouvert \(B \subseteq O\), </p>
+<div class="displaymath" id="a0000000051">
+  \[ \mu '(B) \leq \mu '(O) \leq \frac{c'_2}{c_1} \mu (O), \]
+</div>
+<p> et donc \(\mu '(B) \leq \frac{c'_2}{c_1}\inf \{ \mu (O) \mid O \text{ ouvert }, B \subseteq O\}  = \frac{c_2'}{c_1}\mu (B)\). Donc pour tout borélien \(B \in \mathcal{B}(\Sigma _n)\) on a \(\mu '(B) \leq \frac{c_2'}{c_1}\mu (B)\), ainsi \(\mu '\) est absolument continue par rapport à \(\mu \). D’après le théorème de Radon-Nikodym, \(\mu '\) admet une densité \(f\) par rapport à \(\mu \). En appliquant \(\sigma \), on obtient </p>
+<div class="displaymath" id="a0000000052">
+  \[ \mu ' = \sigma _*\mu ' = (f\circ \sigma ^{-1})\cdot \sigma _*\mu = (f\circ \sigma ^{-1})\cdot \mu . \]
+</div>
+<p> Par unicité de la dérivée de Radon-Nikodym, \(f = f \circ \sigma ^{-1}\) \(\mu \)-presque partout. Or comme \(\mu \) est ergodique par hypothèse, alors il existe une constante \(c \in \mathbf R\) tel que \(f = c\) \(\mu \)-presque partout. Finalement, </p>
+<div class="displaymath" id="a0000000053">
+  \[ 1 = \mu '(\Sigma _n) = \int _{\Sigma _n}{c\, d\mu } = c. \]
+</div>
+<p> Donc \(\mu = \mu '\), ce qui prouve l’unicité. <div class="proof_wrapper" id="a0000000054">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+  </div>
+</div>  </p>
+
+</div> <!--main-text -->
+</div> <!-- content-wrapper -->
+</div> <!-- content -->
+</div> <!-- wrapper -->
+
+<nav class="prev_up_next">
+  <a href="sect0002.html" title="Topologie de \(\Sigma _n\)"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+</a>
+  <a href="index.html" title="Existence et unicité des mesures de Gibbs."><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+</a>
+  <a href="sect0004.html" title="Réduction de \(\Sigma _n\) à \(\Sigma ^+_n\)"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+</a>
+</nav>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/plastex.js"></script>
+<script type="text/javascript" src="js/svgxuse.js"></script>
+</body>
+</html>

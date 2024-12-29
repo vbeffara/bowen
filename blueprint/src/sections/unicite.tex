@@ -1,6 +1,9 @@
 \section{Unicité de la mesure de Gibbs}
 
-\begin{theorem} \label{thm:gibbs}
+  Dans cette section, on montre la partie concernant l'unicité du théorème suivant.
+
+  \begin{theorem}
+    \label{thm:gibbs}
     Soit $\phi \in \mathcal H(\s_n)$, alors il existe une unique mesure $\mu_{\phi} = \mu \in \mathcal M_{\sigma}(\s_n)$ tel qu'il existe
     $P(\phi) = P \in \R$, $c_1, c_2 > 0$ vérifiant
     $$\frac{\mu(C(x, m))}{\exp(-Pm + S_m\phi(x))} \in [c_1, c_2]$$
@@ -11,13 +14,16 @@
   C'est l'ergodicité de cette mesure qui entrainera l'unicité de la mesure de Gibbs.
 
   \begin{definition}
-    Soit $\mu \in \Ms{n}$. On dit que
-    \begin{itemize}
-      \item $\mu$ est ergodique (par rapport à $\sigma$) si pour tout borélien $E \in \mathcal{B}(\s_n)$ tels que $\sigma^{-1}E=E$, on a
+    \label{def:ergodicity}
+    Soit $\mu \in \Ms{n}$.
+    On dit que $\mu$ est ergodique (par rapport à $\sigma$) si pour tout borélien $E \in \mathcal{B}(\s_n)$ tels que $\sigma^{-1}E=E$, on a
 	$$\mu(E) = 0 \text{ ou } \mu(E^c) = 0,$$
-      \item $\mu$ est mélangeante (par rapport à $\sigma$) si pour tout borélien $E, F \in \mathcal{B}(\s_n)$, on a
+  \end{definition}
+
+  \begin{definition}
+    \label{def:mixing}
+    Soit $\mu \in \Ms{n}$. On dit que $\mu$ est mélangeante (par rapport à $\sigma$) si pour tout borélien $E, F \in \mathcal{B}(\s_n)$, on a
 	$$\mu(E\cap\sigma^{-n}F) \underset{n\to\infty}{\longrightarrow} \mu(E)\mu(F).$$
-    \end{itemize}
   \end{definition}
 
   \begin{remark}
@@ -25,6 +31,7 @@
   \end{remark}
 
   \begin{lemma}
+    \label{lem:sig_inv_imp_cst}
     Soit $f \colon \s_n \longrightarrow \R$ intégrable par rapport à une mesure $\mu \in \Mss{n}$ ergodique.
     Supposons que $f \circ \sigma = f$ $\mu$-presque partout.
     Alors $f$ est constante $\mu$-presque partout.
@@ -37,7 +44,8 @@
     Il est donc clair qu'il existe au plus un $c\in\R$ tel que $f = c$ pour $\mu$-presque tout $x \in \s_n$.
   \end{proof}
 
-  \begin{proposition} \label{prop:unique}
+  \begin{proposition}
+    \label{prop:unique}
     Supposons qu'il existe une mesure de Gibbs $\mu$ ergodique pour $\phi \in \Cs{n}$.
     Alors cette mesure est l'unique mesure de Gibbs associé à $\phi$.
   \end{proposition}

@@ -1,6 +1,7 @@
 \section{Théorème de Perron-Frobenius de Ruelle}
 
   \begin{definition}
+    \label{def:transfert_operator}
     Soit $\phi \in \Hsp{n} = \Csp{n} \cap \Hs{n}$. On appelle opérateur de transfert ou opérateur de Ruelle l'application
     $\L_{\phi} \colon \Csp{n} \longrightarrow \Csp{n} $ définie par :
     $$ \forall f \in \Csp{n}, \forall x \in \s_n, \L_{\phi}f(x) = \sum_{\sigma y = x}{e^{\phi(y)}f(y)}.$$
@@ -13,7 +14,8 @@
 
   Pour la suite on fixe $\phi \in \Hsp{n}$ et des constantes $b > 0, \alpha \in ]0, 1[$ vérifiant $\var_k\phi \leq b\alpha^k$, pour tout $k \in \N$.
 
-  \begin{theorem}[Théorème de Perron-Frobenius de Ruelle] \label{thm:rpf}
+  \begin{theorem}[Théorème de Perron-Frobenius de Ruelle]
+    \label{thm:rpf}
     Soit $\phi \in \Hsp{n}$ et $\L = \L_{\phi}$. Alors il existe $\lambda > 0, \nu \in \Msp{n}$ et $h \in \Csp{n}, h > 0$ tels que :
     \begin{enumerate}
       \item $\nu$ vérifie $\L^*\nu = \lambda\nu$,
@@ -26,6 +28,7 @@
   Pour prouver ce théorème, nous allons avoir besoin de quelques lemmes.
 
   \begin{proposition}
+    \label{prop:rpf_1}
     Il existe $\nu \in \Msp{n}$ tel que $\L^*\nu = \lambda\nu$.
   \end{proposition}
 
@@ -52,7 +55,8 @@
   \end{array}\right.$$
   On remarque que $1 \in \Lambda$, ce qui assure que $\Lambda \not= \emptyset$.
 
-  \begin{lemma} \label{lemma:compact}
+  \begin{lemma}
+    \label{lem:Lambda_compact}
     L'ensemble $\Lambda$ est compact. De plus si $f \in \Csp{n}$, alors $\inf \frac 1 \lambda \L f \geq K^{-1}$.
   \end{lemma}
 
@@ -74,6 +78,7 @@
   \end{proof}
 
   \begin{proposition}
+    \label{prop:rpf_2}
     Il existe $h \in \Lambda$ tel que $h > 0$ et vérifie (2) (\textit{ie.} $\nu(h) = 1$ et $\L h = \lambda h$).
   \end{proposition}
 
@@ -104,6 +109,7 @@
   %$$u_1(x-y)\leq e^x - e^y\leq u_2(x-y).$$
 
   \begin{lemma}
+    \label{lem:Lf_decomp}
     Il existe $\eta \in ]0, 1[$ tel que pour toute fonction $f \in \Lambda$, il existe $f' \in \Lambda$ vérifiant
     $$\frac 1 \lambda \L f = \eta h + (1-\eta)f'.$$
     De plus, $\eta \leq \min{(\frac{u_1}{u_2} \frac{1-\alpha}{4\No{h}K}, \frac 1 {K\lVert h\rVert})}$.
@@ -117,12 +123,12 @@
 
     Aussi $g \geq 0$ dès lors que $\eta \lVert h\rVert \leq \frac 1 K$ car
     $$g = \lambda^{-1}\L f - \eta h \geq \inf{\lambda^{-1}\L f} - \eta\lVert h\rVert \geq 0,$$
-    d'après le lemme \ref{lemma:compact}.
+    d'après le lemme \ref{lem:Lambda_compact}.
 
     Finalement, pour que $\frac 1 {1 - \eta}g \in \Lambda$ on doit avoir $g(x) \leq B_mg(x')$ pour $x \in \sp_n$ et $x'\in C(x,m)$ pour $m \geq 0$,
     ce qui équivaut à :
     $$\eta(B_mh(x') - h(x)) \leq B_m \lambda^{-1}\L f(x') - \lambda^{-1}\L f(x).$$
-    Or, $\L f(x) \leq B_{m+1}e^{b\alpha^{m+1}}\L f(x')$ (comme vu dans la preuve du lemme \ref{lemma:compact}).
+    Or, $\L f(x) \leq B_{m+1}e^{b\alpha^{m+1}}\L f(x')$ (comme vu dans la preuve du lemme \ref{lem:Lambda_compact}).
     Une condition suffisante est
     $$\eta(B_m - B_m^{-1})\lVert h\rVert \leq (B_m - B_{m+1}e^{b\alpha^{m+1}})K^{-1},$$
     car,
@@ -147,7 +153,8 @@
   Le lemme suivant est le cas particulier du théorème \ref{thm:rpf} pour les fonctions dans $\Lambda$, pour lesquelles en plus de la limite
   on a une convergence exponentielle.
 
-  \begin{lemma} \label{lemma:expo}
+  \begin{lemma}
+    \label{lem:conv_expo}
     Pour tout $n \in \N$ et tout $f\in\Lambda$, on a $\No{\lambda^{-n}\L^nf - h} \leq (\lVert h\rVert + K)(1 - \eta)^n = A\beta^n$
     avec $0 < \beta < 1$ et $A > 0$.
   \end{lemma}
@@ -173,7 +180,8 @@
   $$\Cr{r} = \left\{f \in \Csp{n} \mid \var_r(f) = 0 \right\} \text{ et } \mathcal C = \bigcup_{r\geq 0}{\Cr{r}}.$$
   On établira la densité de $\mathcal C$ dans un prochain lemme.
 
-  \begin{lemma} \label{lemma:Cr}
+  \begin{lemma}
+    \label{lem:Lambda_stb_mult_Cr}
     Soit $F \in \Lambda$ et $f \in \Cr{r}$ tels que $fF\not= 0$ et $f \geq 0$.
     Alors, $\frac{1}{\nu(fF)\lambda}\L^r(fF) \in \Lambda$.
   \end{lemma}
@@ -204,7 +212,8 @@
     Et enfin, on a bien $\nu(\nu(fF)^{-1}\lambda^{-r}\L^r(fF)) = 1$, ce qui conclut ce lemme.
   \end{proof}
 
-  \begin{lemma} \label{lemma:fF}
+  \begin{lemma}
+    \label{lem:rpf_3_LambdaCr}
     Soit $f \in \Cr{r}$, $F \in \Lambda$ et $n \in \N$.
     Alors,
     $$\No{\frac 1 {\lambda^{n+r}} \L^{n+r}(fF) - \nu(fF)h} \leq A\nu(|fF|)\beta^n.$$
@@ -226,6 +235,7 @@
   \end{proof}
 
   \begin{lemma}
+    \label{lem:unionCr_strong_density}
     L'ensemble $\mathcal C = \bigcup_{r\geq 0}{\Cr{r}}$ vérifie la propriété suivante :
     $$\forall f \in \Csp{n}, \forall \varepsilon > 0, \exists g_1, g_2 \in \mathcal C, \No{g_1 - g_2} \leq \varepsilon \text{ et } g_1\leq f\leq g_2,$$
     et donc $\mathcal C$ est dense dans $\Csp{n}$.
@@ -248,6 +258,7 @@
   sans la convergence exponentielle.
 
   \begin{proposition}
+    \label{prop:rpf_3}
     Soit $f \in \Csp{n}$, alors
     $$\No{\frac 1 {\lambda^m} \L^mf - \nu(f)h} \underset{m \to \infty}{\longrightarrow} 0.$$
   \end{proposition}
