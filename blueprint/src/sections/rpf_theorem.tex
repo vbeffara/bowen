@@ -1,0 +1,281 @@
+\section{Théorème de Perron-Frobenius de Ruelle}
+
+  \begin{definition}
+    Soit $\phi \in \Hsp{n} = \Csp{n} \cap \Hs{n}$. On appelle opérateur de transfert ou opérateur de Ruelle l'application
+    $\L_{\phi} \colon \Csp{n} \longrightarrow \Csp{n} $ définie par :
+    $$ \forall f \in \Csp{n}, \forall x \in \s_n, \L_{\phi}f(x) = \sum_{\sigma y = x}{e^{\phi(y)}f(y)}.$$
+  \end{definition}
+
+  \begin{remark}
+    A noter que le passage aux fonctions définies sur $\Csp{n}$ rend $\sigma$ non injective, et donc $\L$ a toujours $n$ termes dans la somme
+    qui le définit. C'est grâce à cette restriction que l'opérateur de transfert $\L$ devient intéressant.
+  \end{remark}
+
+  Pour la suite on fixe $\phi \in \Hsp{n}$ et des constantes $b > 0, \alpha \in ]0, 1[$ vérifiant $\var_k\phi \leq b\alpha^k$, pour tout $k \in \N$.
+
+  \begin{theorem}[Théorème de Perron-Frobenius de Ruelle] \label{thm:rpf}
+    Soit $\phi \in \Hsp{n}$ et $\L = \L_{\phi}$. Alors il existe $\lambda > 0, \nu \in \Msp{n}$ et $h \in \Csp{n}, h > 0$ tels que :
+    \begin{enumerate}
+      \item $\nu$ vérifie $\L^*\nu = \lambda\nu$,
+      \item $h$ vérifie $\L h = \lambda h$ et $\nu(h) = 1$,
+      \item et pour toute fonction $g \in \Csp{n}$, on a
+	$$\No{\frac 1 {\lambda^m} \L^mg - \nu(g)h} \underset{m\to\infty}{\longrightarrow} 0.$$
+    \end{enumerate}
+  \end{theorem}
+
+  Pour prouver ce théorème, nous allons avoir besoin de quelques lemmes.
+
+  \begin{proposition}
+    Il existe $\nu \in \Msp{n}$ tel que $\L^*\nu = \lambda\nu$.
+  \end{proposition}
+
+  \begin{proof}
+    Comme $\L1(x) = \sum_{\sigma y = x}{e^{\phi(y)}} > 0$ pour tout $x \in \s_n$, on a nécessairement $\L^*\mu(1) > 0$ pour tout $\mu \in \Msp{n}$.
+    On peut alors poser $G(\mu) = \frac 1 {\L^*\mu(1)}\L^*\mu \in \Msp{n}$ pour toute mesure $\mu \in \Msp{n}$,
+    ce qui donne une application $G\colon \Msp{n} \longrightarrow \Msp{n}$,
+    (on peut se permettre $\Csp{n}^* = \Msp{n}$ grâce au théorème de Riesz).
+    Ainsi définie, $G$ est continue de $\Msp{n}$ dans lui-même. Or $\Msp{n}$ est un compact convexe.
+    Par le théorème de Schauder-Tychonoff, on en déduit que $G$ admet un point fixe $\nu \in \Msp{n}$.
+    On pose alors $\lambda = \L^*\nu(1)$ et on a la relation voulue : $\L\nu = \lambda\nu$.
+  \end{proof}
+
+  Pour la suite on notera pour tout $m \in \N$, les constantes
+  $$B_m = \exp{\left(\sum_{k\geq m+1}{2b\alpha^k}\right)} \hspace{0.5em}\text{ et }\hspace{0.5em} K = \lambda B_0 e^{\lVert\phi\rVert}.$$
+
+  On cherche à construire $h$ comme un point fixe vérifiant (2), pour ce faire on considère l'ensemble $\Lambda \subseteq \Csp{n}$
+  définie par :
+  $$\forall f \in \Csp{n}, f\in \Lambda \iff
+  \left\{\begin{array}{l}
+    f \geq 0, \\
+    \nu(f) = 1, \\
+    \forall m \in \N, \forall x \in \s_n, x' \in C(x, m), f(x) \leq B_m f(x').
+  \end{array}\right.$$
+  On remarque que $1 \in \Lambda$, ce qui assure que $\Lambda \not= \emptyset$.
+
+  \begin{lemma} \label{lemma:compact}
+    L'ensemble $\Lambda$ est compact. De plus si $f \in \Csp{n}$, alors $\inf \frac 1 \lambda \L f \geq K^{-1}$.
+  \end{lemma}
+
+  \begin{proof}
+    Pour ce faire on va utiliser le théorème d'Ascoli. Dans un premier temps, on va montrer que $\Lambda(x) \subseteq [0, K]$.
+    Soit $f \in \Lambda$ et $x \in \sp_n$. Remarquons que pour $z \in \sp_n$ et $x_0 \in \llbracket 1, n \rrbracket$ arbitraire, on a
+    \begin{align*}
+      \frac 1 \lambda \L f(x) = \sum_{\sigma y = x}{e^{\phi(y)}f(y)} &\geq \lambda^{-1}e^{-\lVert\phi\rVert}f(x_0x) \\
+								     &\geq \lambda^{-1}e^{-\lVert\phi\rVert}B_0^{-1}f(z) = \frac 1 K f(z).
+    \end{align*}
+    Donc comme $1 = \nu(f) = \nu(\frac 1 \lambda \L f) \geq \frac 1 K f(z)$, on en déduit que $\lVert f\rVert \leq K$.
+    De plus, comme $\nu(f) = 1$, il existe $z \in \sp_n$ tel que $f(z) \geq 1$. En appliquant l'inégalité précédente à un tel $z$,
+    on obtient $\inf{\frac 1 \lambda \L f} \geq \frac 1 K$
+
+    Soit $f \in \Lambda$ et $x, x' \in \sp_n$ tels que $x' \in C(x, m)$ pour un certain $m \in \N$,
+    alors $f(x) \leq B_mf(x')$ et $f(x') \leq B_mf(x)$. Donc
+    $$\left|f(x) - f(x')\right| \leq (B_m - 1)\lVert f\rVert \leq (B_m - 1)K \underset{m\to\infty}{\longrightarrow} 0.$$
+    Ainsi comme la majoration est indépendante de $f$, $\Lambda$ est équicontinue.
+  \end{proof}
+
+  \begin{proposition}
+    Il existe $h \in \Lambda$ tel que $h > 0$ et vérifie (2) (\textit{ie.} $\nu(h) = 1$ et $\L h = \lambda h$).
+  \end{proposition}
+
+  \begin{proof}
+    On pose $F \colon \Csp{n} \longrightarrow \Csp{n}$ définie par
+    $$\forall f \in \Csp{n}, F(f) = \frac 1 \lambda \L f.$$
+    On vérifie que $\Lambda$ est stable par $F$. Soit $f \in \Lambda$,
+    il est clair que $\frac 1 \lambda \L f$ est positif car $f$ l'est. Aussi,
+    $\nu(\frac 1 \lambda \L f) = \frac 1 \lambda \L^*\nu(f) = \nu(f) = 1$.
+    Enfin, pour $x, x' \in \sp_n$ tels que $x' \in C(x,m)$ pour un certain $m \in \N$, on a pour tout $j \in \llbracket 1, n\rrbracket$
+    $$e^{\phi(jx)}f(jx) \leq e^{\phi(jx') + b\alpha^{m+1}}B_{m+1}f(jx') \leq B_me^{\phi(jx')}f(jx').$$
+    En sommant tous ces termes, on obtient l'inégalité voulue : $\L f(x) \leq B_m\L f(x')$.
+    Par ailleurs, $F$ est continue car $ne^{\lVert\phi\rVert}$-lipschitizienne : pour tout $f,g \in \Csp{n}$ et $x\in\sp_n$, on a
+    $$\left|\L f(x) - \L g(x) \right| \leq \sum_{\sigma y = x}{e^{\phi(y)}\lVert f-g\rVert} \leq ne^{\lVert\phi\rVert}\lVert f-g\rVert,$$
+    et donc $\lVert\L f - \L g\rVert \leq ne^{\lVert\phi\rVert}\lVert f-g\rVert$.
+
+    En appliquant le théorème de Schauder-Tychonoff à $F$ sur $\Lambda$, on obtient un point fixe $h \in \Lambda$
+    qui vérifie alors $\nu(h) = 1$ et $\L h = \lambda h$. De plus, par le lemme précédent,
+    $0 < K^{-1} \leq \inf{\lambda^{-1}\L h} = \inf{h}$, d'où $h > 0$.
+  \end{proof}
+
+  %Comme $\log{B_m}$ converge vers 0 lorsque $m \to \infty$, cette suite est bornée par un réel $L > 0$.
+  %Ainsi $\log{B_m^{-1}}, \log{B_{m+1}e^{b\alpha^m}}$ et $\log{B_m}$ sont dans $[-L', L']$ où $L' = L + b$.
+  %Soit $\Delta = \left\{(x,x)\mid |x|\leq L'\right\}$.
+  %La fonction $f\colon (x,y) \mapsto \frac{e^x - e^y}{x-y}$ est continue et strictement positive sur $[-L', L']^2\setminus\Delta$
+  %et prolongeable par continuité sur $\Delta$ en posant $f(x,x) = e^x.$ pour tout $x \in [-L', L']$.
+  %Finalement, $f$ est continue sur le compact $[-L',L']^2$ donc $f$ est bornée par $u_1, u_2 > 0$ et on a pour tout $x,y \in [-L', L']$ tels que $x<y$,
+  %$$u_1(x-y)\leq e^x - e^y\leq u_2(x-y).$$
+
+  \begin{lemma}
+    Il existe $\eta \in ]0, 1[$ tel que pour toute fonction $f \in \Lambda$, il existe $f' \in \Lambda$ vérifiant
+    $$\frac 1 \lambda \L f = \eta h + (1-\eta)f'.$$
+    De plus, $\eta \leq \min{(\frac{u_1}{u_2} \frac{1-\alpha}{4\No{h}K}, \frac 1 {K\lVert h\rVert})}$.
+  \end{lemma}
+
+  \begin{proof}
+    Soit $\eta \in ]0, 1[$ comme ci-dessus. Soit $f \in \Lambda$ et on pose la fonction $g = \frac 1 \lambda \L f - \eta h$.
+    Alors si $\eta \leq \min{(\frac{u_1}{u_2} \frac{1-\alpha}{4\No{h}K}, \frac 1 {K\lVert h\rVert})}$,
+    on a $\frac 1 {1-\eta}g \in \Lambda$.
+    En effet, l'intégrale de $g$ vaut $\nu(g) = \nu(\lambda^{-1}\L f) -\eta\nu(h) = 1 - \eta$, car $f$ et $h$ sont dans $\Lambda$.
+
+    Aussi $g \geq 0$ dès lors que $\eta \lVert h\rVert \leq \frac 1 K$ car
+    $$g = \lambda^{-1}\L f - \eta h \geq \inf{\lambda^{-1}\L f} - \eta\lVert h\rVert \geq 0,$$
+    d'après le lemme \ref{lemma:compact}.
+
+    Finalement, pour que $\frac 1 {1 - \eta}g \in \Lambda$ on doit avoir $g(x) \leq B_mg(x')$ pour $x \in \sp_n$ et $x'\in C(x,m)$ pour $m \geq 0$,
+    ce qui équivaut à :
+    $$\eta(B_mh(x') - h(x)) \leq B_m \lambda^{-1}\L f(x') - \lambda^{-1}\L f(x).$$
+    Or, $\L f(x) \leq B_{m+1}e^{b\alpha^{m+1}}\L f(x')$ (comme vu dans la preuve du lemme \ref{lemma:compact}).
+    Une condition suffisante est
+    $$\eta(B_m - B_m^{-1})\lVert h\rVert \leq (B_m - B_{m+1}e^{b\alpha^{m+1}})K^{-1},$$
+    car,
+    $$\left\{
+    \begin{array}{l}
+      \eta(B_mh(x') - h(x)) \leq \eta(B_mh(x') - B_m^{-1}h(x')) \leq \eta(B_m-B_m^{-1})\lVert h\rVert, \vspace{1.5em}\\
+      (B_m - B_{m+1}e^{b\alpha^{m+1}})K^{-1} \leq (B_m - B_{m+1}e^{b\alpha^{m+1}})\lambda^{-1}\L f(x') \leq \lambda^{-1}(B_m\L f(x') - \L f(x)).
+    \end{array}\right.$$
+    On rappelle que pour tout compact $K \subseteq \R^2$ et tout $x,y \in K$, on a
+    $u_1(x-y) \leq e^x - e^y \leq u_2(x-y)$, ce qu'on applique ici avec le compact $K = [-L, L]^2$ de sorte que $\pm\log B_m, \log{B_m e^{b\alpha^m}}$
+    soient dans $[-L, L]$.
+
+    Ainsi il suffit de vérifier
+    $$\eta u_2\lVert h\rVert(\log{B_m} - \log{B_m^{-1}}) \leq K^{-1}u_1(\log{B_m} - \log{B_{m+1}} - b\alpha^{m+1}),$$
+    qui est équivalent à
+    $$\eta\lVert h\rVert u_2 \left(\frac{4b\alpha^{m+1}}{1-\alpha}\right) \leq K^{-1}u_1b\alpha^{m+1},$$
+    ou encore
+    $$\eta \leq \frac{u_1}{u_2}\frac{1-\alpha}{4\lVert h\rVert K},$$
+    afin d'avoir $\frac 1 {\eta - 1}g \in \Lambda$.
+  \end{proof}
+
+  Le lemme suivant est le cas particulier du théorème \ref{thm:rpf} pour les fonctions dans $\Lambda$, pour lesquelles en plus de la limite
+  on a une convergence exponentielle.
+
+  \begin{lemma} \label{lemma:expo}
+    Pour tout $n \in \N$ et tout $f\in\Lambda$, on a $\No{\lambda^{-n}\L^nf - h} \leq (\lVert h\rVert + K)(1 - \eta)^n = A\beta^n$
+    avec $0 < \beta < 1$ et $A > 0$.
+  \end{lemma}
+
+  \begin{proof}
+    Remarquons qu'en itérant le lemme précédent,
+    \begin{align*}
+      \lambda^{-1}\L f   &= \eta h + (1 - \eta)f'_1 = (1 - (1 - \eta)^1)h + (1 - \eta)f_1', \vspace{1em}\\
+      \lambda^{-2}\L^2 f &= \lambda^{-1}\L((1 - (1 - \eta))h + (1 - \eta)f'_1) = (1 - (1 - \eta))h + \lambda^{-1}(1 - \eta)\L f'_1 \\
+			 &= (1 - (1 - \eta) + \eta(1 - \eta))h + (1 - \eta)^2f'_2 \\
+		         &= (1 - (1 - \eta)^2)h + (1 - \eta)^2f'_2,
+    \end{align*}
+
+    Ainsi, par récurrence et grâce au lemme précédent, on a pour tout $n \in \N$ et $f \in \Lambda$,
+    $$\frac 1 {\lambda^n}\L^n f = (1 - (1 - \eta)^n)h + (1 - \eta)^nf_n,$$
+    où $f_n \in \Lambda$. Comme $\lVert f_n\rVert \leq K$, on obtient
+    $$\No{\frac 1 {\lambda^n}\L^n f - h} = (1-\eta)^n\lVert h + f_n\rVert \leq (1-\eta)^n(K + \lVert h\rVert).$$
+  \end{proof}
+
+  Avant d'étendre le résultat à toutes les fonctions de $\Csp{n}$, on l'étend d'abord à un sous-ensemble dense
+  constitué des fonctions "en escaliers".
+  On pose alors
+  $$\Cr{r} = \left\{f \in \Csp{n} \mid \var_r(f) = 0 \right\} \text{ et } \mathcal C = \bigcup_{r\geq 0}{\Cr{r}}.$$
+  On établira la densité de $\mathcal C$ dans un prochain lemme.
+
+  \begin{lemma} \label{lemma:Cr}
+    Soit $F \in \Lambda$ et $f \in \Cr{r}$ tels que $fF\not= 0$ et $f \geq 0$.
+    Alors, $\frac{1}{\nu(fF)\lambda}\L^r(fF) \in \Lambda$.
+  \end{lemma}
+
+  \begin{proof}
+    La positivité de $g = \lambda^{-r}\L^r(fF)$ découle de la positivité de $f$ et de $F$.
+    Ensuite, soit $x, x' \in \sp_n$ et $m \in \N$ tels que $x' \in C(x,m)$.
+    Remarquons d'abord que, grâce à une récurrence, on a
+    $$\L^r(fF)(x) = \sum_{j_1, \hdots, j_r \in \llbracket 1, n\rrbracket}{\exp{\left(\sum_{k=0}^{r-1}{\phi(\sigma^k(j_1\hdots j_rx))}\right)}}
+	  f(j_1\hdots j_r x)F(j_1\hdots j_r x).$$
+    Soit $j_1, \hdots, j_r \in \llbracket 1, n\rrbracket$, alors comme $f \in \Cr{r}$ on a $f(j_1\hdots j_r x) = f(j_1\hdots j_r x')$. \\
+    Aussi, $F(j_1\hdots j_r x) \leq B_{m+r} F(j_1\hdots j_r x')$ car les deux suites coïncident sur les $m+r$ premières coordonnées.
+    Enfin,
+    \begin{align*}
+      B_{m+r}\exp{\left(\sum_{k=0}^{r-1}{\phi(\sigma^k(j_1\hdots j_r x))} \right)}
+	&\leq B_{m+r} \exp{\left(\sum_{k=0}^{r-1}{\left(\var_{m+r-k}(\phi) + \phi(\sigma^k(j_1\hdots j_r x'))\right)}\right)} \\
+	&\leq \left(B_{m+r} \exp{\left(\sum_{k = m+1}^{m+r} b\alpha^k\right)}\right) \exp{\left(\sum_{k=0}^{r-1}{\phi(\sigma^k(j_1\hdots j_r x'))}\right)} \\
+	&\leq B_m \exp{\left(\sum_{k=0}^{r-1}{\phi(\sigma^k(j_1\hdots j_r x'))}\right)}.
+    \end{align*}
+    Ainsi, chacun des termes de $\L^r(fF)(x)$ est majoré par $B_m$ fois le terme correspondant dans $\L^r(fF)(x')$, d'où
+    $\L^r(fF)(x) \leq B_m\L^r(fF)(x')$.
+
+    Finalement, il reste à vérifier que $\nu(fF) > 0$. Pour ce faire, si $x, z \in \sp_n$ alors,
+    $$\frac 1 \lambda \L(\L^r(fF))(x) = \lambda^{-1}\sum_{\sigma y=x}{e^{\phi(y)}\L^r(fF)(y)}
+				      \geq \lambda^{-1}e^{-\No{\phi}}B_0^{-1}\L^r(fF)(z) = K^{-1}\L^r(fF)(z).$$
+    Or comme $fF \not= 0$, il existe $z \in \sp_n$ tel que $(fF)(z) > 0$, donc $\L^r(fF)(\sigma^r z) > 0$. Ainsi,
+    $$\nu(fF) = \frac 1 {\lambda^r}\nu(\lambda^{-1}\L(\L^r(fF))) \geq \frac 1 {K\lambda^r} \L^r(fF)(\sigma^r z) > 0.$$
+    Et enfin, on a bien $\nu(\nu(fF)^{-1}\lambda^{-r}\L^r(fF)) = 1$, ce qui conclut ce lemme.
+  \end{proof}
+
+  \begin{lemma} \label{lemma:fF}
+    Soit $f \in \Cr{r}$, $F \in \Lambda$ et $n \in \N$.
+    Alors,
+    $$\No{\frac 1 {\lambda^{n+r}} \L^{n+r}(fF) - \nu(fF)h} \leq A\nu(|fF|)\beta^n.$$
+  \end{lemma}
+
+  \begin{remark}
+    La fonction $F \in \Lambda$ n'a aucune utilité dans la preuve du théorème \ref{thm:rpf} (pour le montrer on prendra $F = 1$),
+    elle sert plus tard pour montrer que $h\cdot\nu$ est la mesure de Gibbs du théorème \ref{thm:gibbs}.
+  \end{remark}
+
+  \begin{proof}
+    Décomposons $f$ en sa partie positive $f^+$ et sa partie négative $f^-$ toute deux positives et vérifiant $f = f^+ - f^-$.
+    Si $f^{\pm}F \not= 0$, alors grâce aux lemmes \ref{lemma:Cr} et \ref{lemma:expo}, on a
+    $$\No{\frac{1}{\lambda^{n+r}}\L^{n+r} (f^{\pm}F) - \nu(f^{\pm}F)h} = \nu(f^{\pm}F)\No{\frac{1}{\lambda^{n+r}\nu(f^{\pm}F)}\L^{n+r}(f^{\pm}F) - h}
+	\leq A\nu(f^{\pm}F)\beta^n.$$
+    Dans le cas où $f^{\pm}F = 0$ l'inégalité est triviale.
+    Ainsi,
+    $$\No{\frac 1 {\lambda^{n+r}} \L^{n+r} (fF) - \nu(fF)h} \leq A(\nu(f^+F) + \nu(f^-F))\beta^n = A\nu(|fF|)\beta^n.$$
+  \end{proof}
+
+  \begin{lemma}
+    L'ensemble $\mathcal C = \bigcup_{r\geq 0}{\Cr{r}}$ vérifie la propriété suivante :
+    $$\forall f \in \Csp{n}, \forall \varepsilon > 0, \exists g_1, g_2 \in \mathcal C, \No{g_1 - g_2} \leq \varepsilon \text{ et } g_1\leq f\leq g_2,$$
+    et donc $\mathcal C$ est dense dans $\Csp{n}$.
+  \end{lemma}
+
+  \begin{proof}
+    Soit $f \in \Csp{n}$ et $\varepsilon > 0$. Alors il existe $r \in \N$ tel que pour tout $x \in \sp_n$ et $x' \in C(x, r)$ on ait
+    $\left|f(x) - f(x')\right| \leq \varepsilon$, car $f$ est continue sur le compact $\sp_n$ donc uniformément continue par le théorème de Heine.
+    On pose alors pour $x \in \sp_n$,
+    $$\left\{\begin{array}{l}
+	g_1(x) = \inf\limits_{z \in \sp_n}{f(x_1\cdots x_r z)}, \\
+	g_2(x) = \sup\limits_{z \in \sp_n}{f(x_1\cdots x_r z)},
+    \end{array}\right.$$
+    de sorte que $g_1 \leq f \leq g_2$ et $g_1, g_2 \in \Cr{r} \subseteq \mathcal C$.
+    De plus, si on note $z, z' \in \sp_n$ tel que $g_1(x) = f(x_1\cdots x_r z)$ et $g_2(x) = f(x_1 \cdots x_r z')$, alors
+    $$\left|g_1(x) - g_2(x)\right| \leq \left|f(x_1\cdots x_r z) - f(x_1\cdots x_r z')\right| \leq \varepsilon.$$
+  \end{proof}
+
+  Enfin, on arrive au dernier lemme permettant d'établir le (3) du théorème \ref{thm:rpf}, pour lequel il ne reste plus que la limite
+  sans la convergence exponentielle.
+
+  \begin{proposition}
+    Soit $f \in \Csp{n}$, alors
+    $$\No{\frac 1 {\lambda^m} \L^mf - \nu(f)h} \underset{m \to \infty}{\longrightarrow} 0.$$
+  \end{proposition}
+
+  \begin{proof}
+    Soit $\varepsilon > 0$, $r \in \N$ et $g_1, g_2 \in \Cr{r}$ comme dans le précédent lemme.
+    On applique le lemme \ref{lemma:fF} avec $F = 1$, ce qui donne pour $m$ assez grand,
+    \begin{align*}
+      \No{\frac 1 {\lambda^m}\L^m g_i - \nu(f)h} &\leq \No{\lambda^{-m}\L^mg_i - \nu(g_i)h} + \left|\nu(g_i) - \nu(f)\right|\No{h} \\
+						 &\leq \varepsilon(1 + \No{h}).
+    \end{align*}
+    De plus, on a $\lambda^{-m}\L^mg_1 \leq \lambda^{-m}\L^mf \leq \lambda^{-m}\L^mg_2$ et donc pour $m$ assez grand,
+    $$-\varepsilon(1 + \No{h}) \leq \lambda^{-m}\L^mg_1 - \nu(f)h
+			       \leq \lambda^{-m}\L^mf - \nu(f)h \leq \lambda^{-m}\L^mg_2 - \nu(f)h
+								\leq \varepsilon(1+\No{h}).
+    $$
+    Finalement, on a bien $\lim_{m\to\infty}{\No{\lambda^{-m}\L^mf - \nu(f)h}} = 0$, pour tout $f \in \Csp{n}$.
+  \end{proof}
+
+  \begin{remark}
+    La densité de $\mathcal C$ dans $\Csp{n}$, à savoir
+    $$\forall f \in\Csp{n}, \forall \varepsilon > 0, \exists r \in \N, \exists f_r\in \Cr{r}, \No{f - f_r} \leq \varepsilon,$$
+    ne suffit pas pour conclure. En effet, si on a un telle fonction $f_r \in \Cr{r}$ pour un certain $r \in \N$,
+    \begin{align*}
+      \No{\frac 1 {\lambda^m}\L^mf  - \nu(f)h} &\leq \frac{1}{\lambda^m}\No{\L^mf - \L^mf_r}
+						      + \No{\frac 1 {\lambda^m}\L^mf_r - \nu(f_r)h}
+						      + |\nu(f_r) - \nu(f)|\No{h} \\
+					    &\leq \frac{1}{\lambda^m}\No{\L^mf - \L^mf_r} + A\nu(|f_r|)\beta^{m - r} + \varepsilon\No{h}.
+    \end{align*}
+    Or, on n'arrive pas à majorer le premier terme, notamment car on ne possède aucune estimation de $\lambda$.
+  \end{remark}

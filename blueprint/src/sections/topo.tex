@@ -1,0 +1,155 @@
+\section{Topologie de $\s_n$}
+
+  \subsection{Définition de l'espace métrique $\s_n$}
+
+  \begin{definition}
+    Soit $n \in \N$.
+    L'ensemble des suites bi-infinies à valeurs dans $\llbracket 1, n\rrbracket$ est noté $\s_n = \prod_{\Z}{\llbracket 1, n\rrbracket}$.
+    Chaque $\llbracket 1, n\rrbracket$ est muni de la topologie discrète,
+    et on munit alors $\s_n$ de la distance produit $d$ donnée par
+    $$\forall x, y \in \s_n,\hspace{1em} d(x, y) = \sum_{i\in\Z}{2^{-|i|}\ind{x_i \not= y_i}} < +\infty.$$
+    On notera $B_d(x, r)$ la boule centrée en $x \in \s_n$ et de rayon $r \geq 0$ pour $d$.
+  \end{definition}
+
+  \begin{proposition}
+    L'espace métrique $(\s_n, d)$ est compact.
+  \end{proposition}
+
+  \begin{proof}
+    Chacun des $\llbracket 1, n\rrbracket$ est compact pour sa topologie.
+    En tant que produit $\s_n$ est donc également compact, grâce au théorème de Tychonoff.
+  \end{proof}
+
+  %\begin{proposition}
+    %L'ensemble $\s_n$ est compact.
+  %\end{proposition}
+
+  %\begin{proof}
+    %Chacun des $\llbracket 1, n\rrbracket$ est compact pour sa topologie.
+    %En tant que produit $\s_n$ est donc également compact, grâce au théorème de Tychonoff.
+  %\end{proof}
+
+  \begin{proposition}
+    Pour $x, y \in \s_n$ distincts, notons $N = \min\left\{i \in \N \mid x_i \not= y_i \text{ ou } x_{-i} \not= y_{-i}\right\}$.
+    Alors $d_{\beta}(x, y) = \beta^N$ et $d_{\beta}(x, x) = 0$ définit une distance sur $\s_n$ et est équivalente à la distance $d$,
+    et ce pour tout $\beta \in ]0, 1[$.
+  \end{proposition}
+
+  \begin{proof}
+    Soit $\beta \in ]0, 1[$. Alors $d_{\beta}$ est distance car $d_{\beta}$ est clairement symétrique, $d(x, y) = 0 \iff x = y$ pour tout $x,y\in\s_n$
+    et $d_{\beta}$ vérifie l'inégalité triangulaire.
+
+    De plus, $d_{\beta}$ est équivalente à $d$. En effet pour $r > 0$, montrons qu'il existe $r_1, r_2 > 0$ tel que pour tout $x \in \s_n$ on ait
+    $$B_{\beta}(x, r_1) \subseteq  B_d(x, r) \subseteq B_{\beta}(x, r_2).$$
+    Soit $y \in \s_n$. Supposons que $y \in B_d(x, r)$, alors $d(x, y) < r$, en particulier
+    $$\forall i \in \Z, \hspace{1em}2^{-|i|}\ind{x_i \not= y_i} \leq r$$
+    Soit $i \in \Z$, si $2^{-|i|} > r$, alors nécessairement $x_i = y_i$ et $|i| < -\frac{r}{\log{2}}$,
+    alors en posant $r_2 = \beta^{-\frac{r}{\log{2}}}$ on a $y \in B_{\beta}(x, r_2)$, ce qui prouve une des deux inclusions.
+
+    Supposons désormais que $x \in B_{\beta}(x, r)$, c'est-à-dire $d_{\beta}(x, y) < r$,
+    donc $x$ et $y$ coïncident sur les $m_r = \frac{r}{\log{\beta}}$ premières coordonnées.
+    Ainsi,
+    $$d(x, y) = \sum_{i\in\Z}{2^{-|i|}\ind{x_i \not= y_i}} \leq 2\sum_{i \geq m_r + 1}{2^i} = 2^{1 - m_r} = r_1.$$
+    et finalement, $y \in B_d(x, r_1)$. Donc les distances sont équivalentes et les topologies associées à ces distances sont les mêmes.
+  \end{proof}
+
+  On notera donc dans la suite, $B_{\beta}(x, r)$ les boules de centre $x \in \s_n$ et de rayon $r > 0$ pour la distance $d_{\beta}$,
+  et $B(x, r) = B_{\frac 1 2}(x, r)$.
+  On peut alors noter que si $y \in B_{\beta}(x, r)$, si on note $m_r = \frac{r}{\log{\beta}}$, alors $x$ et $y$ coïncident sur les coordonnées entre
+  $-m_r$ et $m_r$ :
+  $$\forall i \in \llbracket -m_r, m_r \rrbracket, \hspace{1em} x_i = y_i.$$
+
+  \subsection{Propriétés topologiques de $\s_n$}
+
+  \begin{definition}
+    Soit $\phi \in \Cs{n}$. La fonction de variation d'ordre $k$ est donné par :
+    $$\var_k(\phi) = \sup\left\{|\phi(x) - \phi(y)| : \forall i \in \llbracket -k, k\rrbracket, x_i = y_i \right\}.$$
+  \end{definition}
+
+  \begin{proposition}
+    Soit $\beta \in ]0, 1[$.
+    Soit $\phi \in \Cs{n}$, si pour tout $k \in \N$ on $\var_k(\phi) \leq b\alpha^k$ pour certaines constantes $b > 0$ et $\alpha \in ]0, 1[$,
+    alors il existe $\beta \in ]0, 1[$ tel que $\phi$ soit hölderienne pour $d_{\beta}$.
+  \end{proposition}
+
+  \begin{definition}
+    On notera $\Hs{n}$ l'ensemble des fonctions $\phi \in \Cs{n}$ pour lesquels il existe $\alpha \in ]0, 1[$ et $b > 0$ vérifiant
+    $$\forall k \in \N, \hspace{1em} \var_k(\phi) \leq b\alpha^k.$$
+  \end{definition}
+
+  %Les résultats présentés dans la section Préliminaires s'appliquent donc pour $\s_n$. Cependant on peut caractériser de manière plus précise
+  %la forme des ouverts de $\s_n$.
+
+  \begin{proposition} \label{prop:separable}
+    Pour tout $m \in \N$, soit $T_m = \left\{x \in \s_n \mid \forall|i|>m, x_i=1\right\}$ et $T = \bigcup_{m\geq 0}{T_m}$.
+    L'ensemble $T$ est dense dans $\s_n$ et est dénombrable. Ainsi, $\s_n$ est séparable.
+  \end{proposition}
+
+  \begin{proof}
+    Soit $O$ un ouvert non vide et $x \in O$, alors il existe $r = 2^{-m+1} > 0$ tel que $B(x, r) \subseteq O$.
+    Si on prend $y \in \s_n$ tel que si $i \in \llbracket -m, m \rrbracket$ alors $y_i = x_i$ et sinon $y_i = 1$,
+    alors $y \in T_m$ et $y \in B(x, r)$, donc $O \cap T \not= \emptyset$. Ainsi $T$ est dense dans $\s_n$.
+
+    Pour tout $m \in \N$, l'ensemble $T_m$ contient exactement $n^{2m+1}$ élements, \textit{ie.} $T_m$ est fini.
+    Donc par union dénombrable, $T$ est dénombrable.
+  \end{proof}
+
+  \begin{proposition} \label{prop:boules}
+    Soit $O$ un ouvert de $\s_n$. Pour tout $x \in O$, on note $r_x > 0$ tel que $B(x, r_x) \subseteq O$.
+    Alors il existe $\mathcal R \subseteq \s_n$ dénombrable tel que
+    $$O = \bigsqcup_{x\in\mathcal R}{B(x, r_x)},$$
+    où $\bigsqcup$ dénote l'union disjointe.
+  \end{proposition}
+
+  \begin{proof}
+    Soit $O$ un ouvert de $\s_n$, alors $O = \bigcup_{x \in O}{B(x, r_x)}$.
+    Cette union n'est pas disjointe et indicée sur un ensemble fini. On introduit alors la relation :
+    $$\forall x,y \in O, x\sim y \iff B(x, r_x) \cap B(y, r_y) \not= \emptyset.$$
+    Cette relation est clairement une relation d'équivalence. De plus on a pour $x, y \in O$,
+    $$x \sim y \iff B(x, r_x) \subseteq B(y, r_y) \text{ ou } B(y, r_y) \subseteq B(x, r_x).$$
+    En effet, supposons que $B(x, r_x) \cap B(y, r_y) \not= \emptyset$, alors soit $z$ dans l'intersection, on note $m_x = -\frac{r_x}{\log 2}$
+    et $m_y = -\frac{r_y}{\log 2}$.
+    Sans perte de généralité, on peut supposer que $m_y \leq m_x$. On a alors
+    $$\left\{\begin{array}{l}
+	\forall i \in \llbracket -m_x, m_x \rrbracket, x_i = z_i, \vspace{0.5em}\\
+      \forall i \in \llbracket -m_y, m_y \rrbracket, y_i = z_i.
+    \end{array}\right.$$
+    Alors, pour tout $i \in \llbracket -m_y, m_y \rrbracket, x_i = y_i$ et donc $B(x, r_x) \subseteq B(y, r_y)$.
+    Ainsi, il existe un système de représentant $\mathcal R \subseteq O$ pour la relation $\sim$ tel que
+    $$O = \bigcup_{x\in O}{B(x, r_x)} = \bigsqcup_{x\in\mathcal R}{B(x, r_x)}.$$
+
+    Il reste à montrer que $\mathcal R$ est au plus dénombrable.
+    Pour tout $x \in \mathcal R$, il existe $h(x) \in T$ tel que $h(x) \in B(x, r_x)$.
+    L'application $h \colon \mathcal R \longrightarrow T$ ainsi définie est donc injective et $T$ est dénombrable,
+    ainsi $\mathcal R$ est dénombrable.
+  \end{proof}
+
+  \begin{definition}
+    L'application de décalage (\textit{shift} en anglais) $\sigma$ sur $\s_n$ est donnée par
+    $$(\sigma x)_i = x_{i+1}$$
+    pour tout $x \in \s_n$ et $i \in \Z$.
+    Cette application est alors un homéomorphisme de $\s_n$.
+  \end{definition}
+
+  \begin{definition}
+    Soit $x\in \s_n$. On définit les cyclindres de centre $x$ et de rayon $m \in \N$ par
+    $$C(x, m) = \left\{y \in \s_n \mid \forall i \in \llbracket 0, m - 1 \rrbracket, x_i = y_i\right\}.$$
+    de cette manière on peut les relier aux boules pour la distance $d_{\beta}$ aux cyclindres :
+    $$C(x,2m+1) = \sigma^{-m}(B_{\beta}(\sigma^mx, \beta^m)).$$
+  \end{definition}
+
+  %\begin{definition}
+    %Soit $\phi \in \Cs{n}$. On introduit la fonction de variation d'ordre $k$ par
+    %$$\var_k(\phi) = \sup\left\{|\phi(x) - \phi(y)| : \forall i \in \llbracket -k, k\rrbracket, x_i = y_i \right\}.$$
+  %\end{definition}
+
+  %\begin{proposition}
+    %Soit $\phi \in \Cs{n}$, si pour tout $k \in \N$ on $\var_k(\phi) \leq b\alpha^k$ pour certaines constantes $b > 0$ et $\alpha \in ]0, 1[$,
+    %alors il existe $\beta \in ]0, 1[$ tel que $\phi$ soit hölderienne pour $d_{\beta}$.
+  %\end{proposition}
+
+  %\begin{definition}
+    %On notera $\Hs{n}$ l'ensemble des fonctions $\phi \in \Cs{n}$ pour lesquels il existe $\alpha \in ]0, 1[$ et $b > 0$ vérifiant
+    %$$\forall k \in \N, \var_k(\phi) \leq b\alpha^k.$$
+  %\end{definition}
+

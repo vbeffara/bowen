@@ -1,0 +1,127 @@
+\section{Réduction de $\s_n$ à $\sp_n$}
+
+  Pour prouver l'existence de telles mesures, on commence par montrer que peu importe la fonction de potentiel $\phi$ dans $\Hs{n}$,
+  on peut commencer par trouver une fonction de potentiel $\psi \in \Hsp{n}$
+  ne dépendant que des coordonnées positives ayant la même mesure de Gibbs que $\phi$.
+
+  \begin{definition}
+    Soit $\phi, \psi \in \Cs{n}$. On dit que $\phi$ et $\psi$ sont équivalentes et on note $\phi \sim \psi$ dès lors
+    qu'il existe $u \in \Cs{n}$ vérifiant :
+    $$\phi = \psi - u + u \circ \sigma.$$
+  \end{definition}
+
+  Le prochain lemme justifie l'introduction de cette relation :
+
+  \begin{lemma}
+    Soit $\phi \sim \psi \in \Hs{n}$. Dans ce cas, $\mu_{\phi} = \mu_{\psi}$ et $P(\phi) = P(\psi)$.
+  \end{lemma}
+
+  \begin{proof}
+    Soit $u \in \Cs{n}$ tel que $\phi - \psi = u\circ \sigma - u$. Alors
+    \begin{align*}\left|S_m\phi(x) - S_m\psi(x)\right| &= \left|\sum_{k=0}^{m-1}(\phi - \psi)(\sigma^k x)\right|
+							= \left|\sum_{k=0}^{m-1}(u(\sigma^{k+1}x) - u(\sigma^k x))\right| \\
+						       &= \left|u(\sigma^m x) - u(x)\right| \leq 2 \lVert u \rVert
+    \end{align*}
+
+    Ainsi pour $m \in \N$ et $x \in \s_n$, on a
+    $$c_1 e^{-2\lVert u\rVert} \leq \frac{\mu_{\phi}(C(x, m))}{e^{-P(\phi)m + S_m\phi(x) + 2\lVert u\rVert}}
+			       \leq \frac{\mu_{\phi} (C(x, m))}{e^{-P(\phi)m + S_m\psi(x)}}
+			       \leq \frac{\mu_{\phi}(C(x, m))}{e^{-P(\phi)m + S_m\phi(x) - 2\lVert u\rVert}} \leq c_2 e^{2\lVert u\rVert}$$
+
+    Donc $\mu_{\phi}$ et $P(\phi)$ conviennent aussi pour $\psi$.
+  \end{proof}
+
+  \begin{remark}
+    Soit $\phi \overset{u}{\sim} \psi \in \Cs{n}$. Si $\sum_k{u\circ\sigma^k}$ converge,
+    alors
+    $$u = \sum_{k=0}^{\infty}{(\phi - \psi) \circ \sigma^k}$$
+
+    Cette remarque permet de mieux comprendre la forme de la fonction $u$ dans un cadre favorable,
+    et de donner l'intuition de ce qu'elle pourrait être pour donner une fonction équivalente à $\phi$ dépendant uniquement des coordonnées positives.
+  \end{remark}
+
+  \begin{proof}[Preuve de la remarque précédente]
+    La convergence de $\sum_{k \geq 0}{(u - u\circ\sigma)\circ\sigma^k} = \sum_k{(\phi - \psi)\circ\sigma^k}$ est assuré
+    par celle de $\sum_k{u\circ\sigma^k}$.
+    Ainsi par téléscopage,
+    $u(x) = \sum_{k=0}^{\infty}{(u - u \circ \sigma)(\sigma^k x)} = \sum_{k=0}^{\infty}{(\phi - \psi)(\sigma^k x)}$.
+  \end{proof}
+
+  Avant le prochain lemme on introduit la fonction $r \colon \s_n \longrightarrow \s_n$ définie par
+  $$\forall i \in \Z, \forall x \in \s_n, (r(x))_i = \left\{
+    \begin{array}{ll}
+      x_i &\text{ si } i \geq 0, \\
+      1   &\text{ si } i < 0.
+    \end{array} \right. = 111\hdots x_{|\geq 0}$$
+    De sorte que si $x, y \in \s_n$ ont les mêmes coordonnées positives (\textit{ie.} $\forall i \geq 0, x_i = y_i$), alors $r(x) = r(y)$.
+
+    De plus, lorsqu'on compose $r$ avec $\sigma$, on garde l'indépendance vis-à-vis des coordonnées négatives :
+    si $x = \cdots x_{-2}x_{-1}\textcolor{ForestGreen}{x_0} x_1 x_2 x_3\cdots \in \s_n$, alors on a :
+    \begin{align*}
+        x           = \cdots x_{-2}x_{-1}   &\textcolor{ForestGreen}{x_0} x_1 x_2\cdots \\
+	\sigma x    = \cdots\cdot x_{-1}x_0 &\textcolor{ForestGreen}{x_1}x_2 x_3\cdots \\
+	r(\sigma x) = \cdots\cdots\cdot 111 &\textcolor{ForestGreen}{x_1}x_2x_3\cdots \\
+	r(x)	    = \cdots\cdots\cdot 111 &\textcolor{ForestGreen}{x_0}x_1 x_2\cdots \\
+	\sigma r(x) = \cdots\cdots 11x_0    &\textcolor{ForestGreen}{x_1}x_2 x_3\cdots
+    \end{align*}
+    Donc $\sigma \circ r$ et $r \circ \sigma$ diffèrent seulement à la coordonnées -1 et ne dépendent que des coordonnées positives de $x$.
+
+  \begin{lemma}
+    Soit $\phi \in \Hs{n}$, et
+    $$\psi := \phi \circ r + \left(\sum_{k=0}^{\infty}{\phi \circ \sigma^k}\right)\circ(\sigma \circ r - r \circ \sigma).$$
+    Alors,
+    \begin{enumerate}
+      \item $\psi \in \Hs{n}$ et ne dépend que des coordonnées positives,
+      \item Si on note $u = \sum_{k\geq 0}{\phi\circ\sigma^k - \phi\circ(\sigma^k r)}$, alors $u \in \Cs{n}$,
+      \item De plus, $\phi \overset{u}{\sim} \psi$.
+    \end{enumerate}
+  \end{lemma}
+
+  \begin{proof}
+    Soit $b \in \R$ et $\alpha \in ]0, 1[$ tels que $var_k\phi \leq b\alpha^k$.
+    Pour $k \geq 0$, $\sigma^k x$ et $\sigma^k r(x)$ coïncident de $-k$ à $+\infty$ donc
+    $\left|\phi(\sigma^k x) - \phi(\sigma^k r(x))\right| \leq b\alpha^k$ et ainsi comme $|\alpha| < 1$, la série converge normalement
+    pour tout $x \in \s_n$. Donc $u$ est bien définie et est continue.
+
+    Ensuite vérifions que $\psi = \phi - u + u \circ \sigma$. Pour $N \in \N$,
+    \begin{align*}
+      &\phi(x) - \sum_{k=0}^{N}{\left(\phi(\sigma^k x)    - \phi(\sigma^k r(x))\right)}
+	       + \sum_{k=0}^{N}{\left(\phi(\sigma^{k+1}x) - \phi(\sigma^k r(\sigma x))\right)} \\
+      &= \phi(r(x)) - \sum_{k=0}^{N-1}{\left(\phi(\sigma^{k+1} x) - \phi(\sigma^{k+1} r(x))\right)}
+		    + \sum_{k=0}^{N}{\left(\phi(\sigma^{k+1}x) 	  - \phi(\sigma^k r(\sigma x))\right)} \\
+      &= \phi(r(x)) + \underbrace{\phi(\sigma^{N+1}x) - \phi(\sigma^N r(\sigma x))}_{\leq b\alpha^N}
+		    + \sum_{k=0}^{N-1}{\left(\phi(\sigma^{k+1}r(x)) - \phi(\sigma^k r(\sigma x)) \right)} \\
+      &\longrightarrow \psi(x) \\
+      &\longrightarrow \phi(x) - u(x) + u(\sigma x)
+    \end{align*}
+    lorsque $N \to \infty$. Ainsi $\psi = \phi - u + u\circ\sigma$ \textit{ie.} $\phi \overset{u}{\sim} \psi$.
+
+    Soit $x \in \s_n$ et $y \in C(x, m)$. Soit $k \in \N$, distinguons plusieurs cas :
+    \begin{itemize}
+      \item Comme $\sigma^kx$ et $\sigma^kr(x)$ coïncident jusqu'à la $k$-ième coordonnée,
+	$$\left|\phi(\sigma^kx) - \phi(\sigma^kr(x)) - (\phi(\sigma^ky) - \phi(\sigma^kr(y)))\right|
+	      \leq 2b\alpha^k$$
+      \item Si $k \leq \lfloor\frac m 2\rfloor$, on peut faire mieux :
+	\begin{align*}
+	  &\left|\phi(\sigma^kx) - \phi(\sigma^ky) + \phi(\sigma^kr(x)) - \phi(\sigma^kr(y)) \right| \\
+	  &\leq \underbrace{\left|\phi(\sigma^kx) - \phi(\sigma^ky)\right|}_{\leq var_{m-k}\phi \leq b\alpha^{m-k}}
+	  + \underbrace{\left|\phi(\sigma^kr(x)) - \phi(\sigma^kr(y))\right|}_{\leq b\alpha^{m-k}} \\
+	  &\leq 2b\alpha^{m-k}
+	\end{align*}
+	car $\sigma^kx$ et $\sigma^ky$ coïncident sur $[-m - k, m - k]$
+    \end{itemize}
+    Donc en sommant chacun des termes,
+    \begin{align*}
+      \left|u(x) - u(y)\right|
+	    \leq 2b\left(\sum_{k=0}^{\lfloor\frac m 2\rfloor}{\alpha^{m - k}} + \sum_{k > \lfloor \frac m 2 \rfloor}{\alpha^k}\right)
+	    &\leq 4b\sum_{k > \lfloor \frac m 2 \rfloor}{\alpha^k} = \frac{4b}{1-\alpha}\alpha^{\lfloor\frac m 2\rfloor} \\
+	    &\leq \frac{4b\alpha}{1 - \alpha}(\sqrt{\alpha})^m
+    \end{align*}
+    Ainsi $u \in \Hs{n}$ et donc $\psi \in \Hs{n}$ également.
+  \end{proof}
+
+  \begin{remark}
+    On remarque que la construction de $\psi$ dépend entièrement de la fonction $r$, ce qui signifie qu'il existe d'autres fonctions $\psi_r \in \Hs{n}$
+    ne dépendant que des coordonnées positives et équivalentes à $\phi$.
+    %On a montré ici une construction possible parmi l'infinité de fonctions $\psi = \psi_r$ existante.
+  \end{remark}

@@ -1,0 +1,145 @@
+\section{Construction d'une mesure de Gibbs}
+
+  Soit $\lambda, \nu$ et $h$ comme dans le théorème 3.1.
+  On pose $\mu = h \cdot \nu \in \Msp{n}$.
+
+  \begin{lemma}
+    La mesure de probabilité $\mu = h \cdot \nu$ est invariante par $\sigma$ :
+    $$\sigma_*\mu = \mu.$$
+  \end{lemma}
+
+  \begin{proof}
+    Soit $f, g \in \Csp{n}$, on remarque que $(\L f)g = \L (f\cdot(g\circ\sigma))$.
+    En effet, pour $x \in \s_n$, on a
+    \begin{align*}
+      ((\L f) g)(x) &= \sum_{y\in\sigma^{-1}x}{e^{\phi(y)}f(y)g(x)} = \sum_{y\in\sigma^{-1}x}{e^{\phi(y)}f(y)g(\sigma y)} \\
+		    &= \L(f\cdot(g\circ\sigma))(x).
+    \end{align*}
+    Donc pour $f \in \Csp{n}$,
+    \begin{align*}
+      \mu(f) &= \nu(h\cdot f) = \nu(\lambda^{-1}(\L h)\cdot f) = \lambda^{-1}\nu\left(\L(h\cdot(f\circ\sigma))\right) \\
+	     &= \lambda^{-1}\L^*\nu(h\cdot(f\circ\sigma)) = \nu(h\cdot(f\circ\sigma)) = \mu(f\circ\sigma).
+    \end{align*}
+  \end{proof}
+
+  A chaque fonction $f \in \Cs{n}$, on associe une nouvelle fonction $[f] \in \Csp{n}$ définie par :
+  $$\forall x \in \sp_n, [f](x) = \min\left\{f(y)\mid y \in \s_n, \forall i \geq 0, x_i = y_i\right\}.$$
+  De cette façon, on retire la dépendance de $f$ par rapport à ses coordonnées négatives.
+  Par ailleurs, si $f \in \Csp{n}$, alors $[f] = f$.
+
+  \begin{lemma}
+    Pour tout $f \in \Cs{n}$, la suite $(\mu([f\circ\sigma^m]))_{m \geq 0}$ admet une limite, que l'on note $G(f)$.
+    De plus $G$ vérifie $G(1) = 1$ et pour toute fonction $f \in \Cs{n}$, $f \geq 0$, on a $G(f) \geq 0$.
+
+    Par ailleurs, $$G(f \circ \sigma) = G(f).$$
+  \end{lemma}
+
+  \begin{proof}
+    Soit $f \in \Cs{n}$, on va montrer que $(\mu([f\circ\sigma^n]))$ est une suite de Cauchy. Soit $m, k \in \N$,
+    alors pour tout $x \in \sp_n$, il existe $y, y' \in \s_n$ tel que
+    \begin{align*}
+	[f\circ\sigma^m](\sigma^k x) &= f(\sigma^m(\cdots y_{-2}y_{-1}\textcolor{ForestGreen}{x_k}x_{k+1}\cdots))
+		= f(\cdots y_{-1}x_k\cdots \textcolor{ForestGreen}{x_{m+k}}x_{m+k+1}\cdots), \\
+	[f\circ\sigma^{m+k}](x) &= f(\sigma^{m+k}(\cdots y'_{-2}y'_{-1}\textcolor{ForestGreen}{x_0}x_1\cdots))
+	    = f(\cdots y'_{-1}x_0\cdots\textcolor{ForestGreen}{x_{m+k}}x_{m+k+1}\cdots).
+    \end{align*}
+    Ainsi,
+    $$\No{[f\circ\sigma^m]\circ\sigma^k - [f\circ\sigma^{m+k}]} \leq \var_k(f),$$
+    et donc,
+    $$\left| \mu([f\circ\sigma^m]) - \mu([f\circ\sigma^{m+k}]) \right| = \left|\mu\left([f\circ\sigma^m]\circ\sigma^k - [f\circ\sigma^{m+k}]\right) \right|
+		\leq \var_k(f) \longrightarrow 0,$$
+    lorsque $k \to \infty$, car $f$ est continue.
+    On a alors prouvé que $(\mu([f\circ\sigma^m]))_m$ est une suite de Cauchy, ce qui assure sa convergence vers un réel $G(f)$.
+
+    Comme $1 \in \Csp{n}$ et pour tout $m\in\N$ on a $1\circ\sigma^m = 1$, d'où
+    $$\mu([1 \circ\sigma^m]) = \mu(1) = 1.$$
+
+    Enfin, si $f \in \Cs{n}$ est positive, alors $[f] \geq 0$ et donc pour tout $m \in \N, [f \circ \sigma^m] \geq 0$,
+    d'où $G(f) \geq 0$.
+  \end{proof}
+
+  Grâce au lemme précédent, on a construit une forme linéaire $G$ et par l'identification rendue possible par le théorème de Riesz,
+  on peut considérer la mesure $\tilde{\mu} \in \Mss{n}$ associée à $G$.
+
+  \begin{theorem} \label{thm:existence}
+    La mesure $\tilde\mu$ est une mesure de Gibbs pour $\phi \in \Hsp{n}$.
+  \end{theorem}
+
+  Pour prouver ce résultat, nous allons avoir besoin d'un lemme supplémentaire. Pour ce faire, on défini la constante $a$ donnée par :
+  $$a = \sum_{k=0}^{\infty}{\var_k(\phi)} < \infty.$$
+
+  \begin{lemma}
+    Soit $x, y \in \s_n$ et $m \in \N$ tels que $y \in C(x, m)$.
+    Alors,
+    $$\left| S_m\phi(x) - S_m\phi(y)\right| \leq a.$$
+  \end{lemma}
+
+  \begin{proof}
+    Pour $y \in \s_n$, on définit $y' \in \s_n$ par
+    $$y'_i = \left\{\begin{array}{ll}
+	x_i &\text{ si } i < 0, \\
+	y_i &\text{ sinon.}
+    \end{array}\right.$$
+    Pour $k \geq 0$, on a alors $\phi(\sigma^ky) = \phi(\sigma^ky')$ car $\phi \in \Csp{n}$. Ainsi,
+    \begin{align*}
+      \left|S_m\phi(x) - S_m\phi(y)\right| = \left|S_m\phi(x) - S_m\phi(y')\right| &\leq \sum_{k=0}^{m-1}{\left|\phi(\sigma^kx) - \phi(\sigma^ky')\right|} \\
+										   &\leq \sum_{k=0}^{m-1}{\var_{m-1-k}(\phi)} \leq a.
+    \end{align*}
+  \end{proof}
+
+  \begin{proof}[Preuve du théorème \ref{thm:existence}]
+    Soit $E = C(x,m) = \left\{y \in \s_n \mid \forall i \in \llbracket 0, m - 1\rrbracket, x_i = y_i\right\}$, et on veut montrer que
+    $$c_1 e^{-Pm+S_m\phi(x)} \leq \tilde\mu(E) \leq c_2 e^{-Pm + S_m\phi(x)},$$
+    pour certaines constantes $c_1, c_2 > 0$ et $P \in \R$.
+
+    Pour tout $z \in \sp_n$, il existe un unique $y' = x_0x_1\cdots x_{m-1}z_0z_1\cdots \in \sp_n$ tel que $\sigma^my' = z$
+    et $y'_i = x_i$ pour $0 \leq i \leq m - 1$. Ainsi,
+    $$\L^m(h\ind{E})(z) = \sum_{\sigma^m y = z}{e^{S_m\phi(y)}h(y)\ind{E}(y)} \leq e^{S_m\phi(y')}h(y') \leq e^{S_m\phi(x)}e^a \No{h},$$
+    et donc, comme $\ind{E} \in \Csp{n}$, on a $\tilde\mu(E) = \mu(E)$, d'où
+    $$\tilde\mu(E) = \nu(h\ind{E}) = \lambda^{-m}\nu(\L^m(h\ind{E})) \leq \lambda^{-m}e^{S_m\phi(x)}\No{h}e^a.$$
+    On peut alors poser $c_2 = e^a\No{h} > 0$.
+    Pour l'autre inégalité, remarquons que pour $z \in \sp_n$, il existe au moins un $y' = x_0x_1\cdots 1 z_0z_1\cdots \in \sp_n$ tel que
+    $\sigma^{m+1}y' = z$ et $x_i = y'_i$ pour $i \in \llbracket 0, m-1\rrbracket$, ce qui donne
+    \begin{align*}
+      \L^{m+1}(h\ind{E})(z) &= \sum_{\sigma^{m+1}y=z}{e^{S_m\phi(y) + \phi(\sigma^m y)}h(y)\ind{E}(y)} \\
+			    &\geq e^{S_m\phi(y') - \No{\phi}}h(y') \\
+			    &\geq (\inf h)e^{-\No{\phi} - a}e^{S_m\phi(x)},
+    \end{align*}
+    et donc
+    $$\tilde\mu(E) = \nu(h\ind{E}) = \lambda^{-(m+1)}\nu(\L^{m+1}(h\ind{E}))
+    \geq \lambda^{-m}e^{S_m\phi(x)}\underbrace{(\lambda(\inf h)e^{-\No{\phi}-a})}_{c_2}.$$
+    On a les inégalités souhaitées avec $P = \log{\lambda}$, ce qui montre que $\tilde\mu$ est bien une mesure de Gibbs.
+  \end{proof}
+
+  \begin{proposition}
+    La mesure $\tilde\mu$ est mélangeante par rapport à $\sigma$ : pour tout boréliens $E, F \in \mathcal B(\s_n)$ on a
+    $$\tilde\mu(E \cap \sigma^{-m} F) \underset{m\to\infty}{\longrightarrow} \tilde\mu(E)\tilde\mu(F).$$
+  \end{proposition}
+
+  \begin{proof}
+    Soit $x \in \s_n$, et $f \in \Csp{n}$. On prouve par récurrence que
+    $$\L^mf(x) = \sum_{\sigma^my=x}{e^{S_m\phi(y)}f(y)}.$$
+    Ainsi, si $g \in \Csp{n}$, on a
+    $$((\L^mf)\cdot g)(x) = \sum_{\sigma^my = x}{e^{S_m\phi(y)}f(y)g(\sigma^my)} = \L^m(f\cdot(g\circ\sigma^m)).$$
+
+    Pour prouver que $\tilde\mu$ est mélangeante, il suffit de le montrer pour $E, F$ dans la base de la topologie de $\s_n$.
+    Soit alors $a, b \in \s_n$ et $E = \{y \in \s_n \mid y_i = a_i, r \leq i \leq s \}$ et $F = \{y \in \s_n \mid y_i = b_i, r \leq i \leq s \}$.
+    Comme $\tilde\mu$ est invariante par $\sigma$, on peut supposer $r, u \geq 0$, de telle sorte que $\ind{E}, \ind{F} \in \Csp{n}$.
+    \begin{align*}
+      \tilde\mu(E\cap\sigma^{-m}F) &= \tilde\mu(\ind{E}\ind{\sigma^{-m}F}) = \tilde\mu(\ind{E}(\ind{F}\circ\sigma^m)) \\
+				   &= \nu(h\ind{E}(\ind{F}\circ\sigma^m)) \\
+				   &= \lambda^{-m}\L^{*m}\nu(h\ind{E}(\ind{F}\circ\sigma^m)) \\
+				   &= \nu(\lambda^{-m}\L^m(h\ind{E})\ind{F}).
+    \end{align*}
+    De là, on obtient grâce au lemme \ref{lemma:fF} et au fait que $\ind{E} \in \Cr{s}$
+    \begin{align*}
+      \left|\tilde\mu(E\cap\sigma^{-m}F)-\tilde\mu(E)\tilde\mu(F)\right| &= \left|\mu(E\cap\sigma^{-m}F) - \nu(h\ind{E})\nu(h\ind{F})\right| \\
+									 &= \left|\nu\left[(\lambda^{-m}\L^m(h\ind{E})-\nu(h\ind{E})h)\ind{F}\right]\right| \\
+									 &\leq \No{\lambda^{-m}\L^m(h\ind{E}) - \nu(h\ind{E})h}\nu(F) \\
+									 &\leq A\nu(h\ind{E})\nu(F)\beta^{m-s} \longrightarrow 0,
+    \end{align*}
+    lorsque $m \to \infty$, ce qui permet de conclure.
+  \end{proof}
+
+  Finalement, on a construit une mesure de Gibbs mélangeante donc ergodique. En vertu de la proposition \ref{prop:unique},
+  cette mesure est l'unique mesure de Gibbs pour cette fonction de potentiel $\phi$.

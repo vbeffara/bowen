@@ -1,0 +1,85 @@
+\section{Unicité de la mesure de Gibbs}
+
+\begin{theorem} \label{thm:gibbs}
+    Soit $\phi \in \mathcal H(\s_n)$, alors il existe une unique mesure $\mu_{\phi} = \mu \in \mathcal M_{\sigma}(\s_n)$ tel qu'il existe
+    $P(\phi) = P \in \R$, $c_1, c_2 > 0$ vérifiant
+    $$\frac{\mu(C(x, m))}{\exp(-Pm + S_m\phi(x))} \in [c_1, c_2]$$
+    pour tout $x \in \s_n$ et $m \in \N$, où $S_m\phi(x) = \sum_{k=0}^{m-1}(\phi(\sigma^k x))$
+  \end{theorem}
+
+  Dans les sections suivantes, on construira une mesure de Gibbs mélangeante notamment grâce au théorème de Ruelle.
+  C'est l'ergodicité de cette mesure qui entrainera l'unicité de la mesure de Gibbs.
+
+  \begin{definition}
+    Soit $\mu \in \Ms{n}$. On dit que
+    \begin{itemize}
+      \item $\mu$ est ergodique (par rapport à $\sigma$) si pour tout borélien $E \in \mathcal{B}(\s_n)$ tels que $\sigma^{-1}E=E$, on a
+	$$\mu(E) = 0 \text{ ou } \mu(E^c) = 0,$$
+      \item $\mu$ est mélangeante (par rapport à $\sigma$) si pour tout borélien $E, F \in \mathcal{B}(\s_n)$, on a
+	$$\mu(E\cap\sigma^{-n}F) \underset{n\to\infty}{\longrightarrow} \mu(E)\mu(F).$$
+    \end{itemize}
+  \end{definition}
+
+  \begin{remark}
+    On a l'implication "mélangeante" $\implies$ "ergodique".
+  \end{remark}
+
+  \begin{lemma}
+    Soit $f \colon \s_n \longrightarrow \R$ intégrable par rapport à une mesure $\mu \in \Mss{n}$ ergodique.
+    Supposons que $f \circ \sigma = f$ $\mu$-presque partout.
+    Alors $f$ est constante $\mu$-presque partout.
+  \end{lemma}
+
+  \begin{proof}
+    Pour montrer ce lemme on considére les ensembles $E_c = f^{-1}(\{c\})$ pour tout $c\in\R$.
+    Comme $f \circ \sigma = f$ $\mu$-p.p., on a $\sigma^{-1}E_c = E_c$, et donc par ergodicité de $\mu$,
+    $$\mu(E_c) = 0 \text{ ou } \mu(E_c) = 1.$$
+    Il est donc clair qu'il existe au plus un $c\in\R$ tel que $f = c$ pour $\mu$-presque tout $x \in \s_n$.
+  \end{proof}
+
+  \begin{proposition} \label{prop:unique}
+    Supposons qu'il existe une mesure de Gibbs $\mu$ ergodique pour $\phi \in \Cs{n}$.
+    Alors cette mesure est l'unique mesure de Gibbs associé à $\phi$.
+  \end{proposition}
+
+  \begin{proof}
+    Soit $\mu, \mu' \in \Msp{n}$ deux mesures de Gibbs avec $\mu$ ergodique, $c_1, c_1', c_2, c_2' > 0$ et $P, P' \in \R$
+    des constantes telles que pour tout $m \in \N$ et $x \in \s_n$ on ait
+    $$\left\{\begin{array}{lll}
+	c_1  &\leq \frac{\mu(C(x,m))}{\exp{(-Pm + S_m\phi(x))}} &\leq c_2 \vspace{1em} \\
+	c_1' &\leq \frac{\mu'(C(x,m))}{\exp{(-P'm + S_m\phi(x))}} &\leq c_2'
+      \end{array}\right.$$
+
+      D'abord, montrons que $P = P'$.
+      Soit $m \in \N$ et $T_m = \left\{x \in \s_n \mid x_i = 1 \text{ si } i \not\in \llbracket 0, m-1 \rrbracket \right\}$,
+      de telle sorte que $\s_n = \bigsqcup_{x\in T_m}{C(x,m)}$, et $T_m$ est fini.
+      On a alors
+      $$c_1'e^{-P'm}\sum_{x\in T_m}{e^{S_m\phi(x)}} \leq \sum_{x\in T_m}{\mu'(C(x,m))}
+            = 1 = \sum_{x\in T_m}{\mu'(C(x, m))} \leq c_2'e^{-P'm}\sum_{x\in T_m}{e^{S_m\phi(x)}},$$
+      et donc
+      $$P - \frac 1 m \log{c_2'} \leq \frac 1 m \log{\sum_{x\in T_m}{e^{S_m\phi(x)}}} \leq P - \frac 1 m \log{c_1'}.$$
+      Par le théorème des gendarmes, on trouve donc $P' = \lim_{m\to\infty}{\frac 1 m\sum_{x\in T_m}{e^{S_m\phi(x)}}}$.
+      Grâce au même raisonnement, on en conclut que $P = P'$ car ils sont tout deux égaux à la même limite.
+
+      Grâce aux estimations sur $\mu$ et $\mu'$ sur les cylindres, on a alors pour tout $x \in \s_n$ et $m \in \N$,
+      $$\mu'(C(x, m)) \leq \frac{c_2'}{c_1}\mu(C(x, m)).$$
+      Comme $\mu$ et $\mu'$ sont invariantes par $\sigma$, on peut étendre le résultat sur les ensembles de la forme
+      $\left\{y\in\s_n \mid \forall i \in \llbracket -m, m\rrbracket, x_i = y_i\right\}$ pour tout $x \in \s_n$ et $m \in \N$,
+      c'est-à-dire sur une base de la topologie de $\s_n$.
+      De plus, comme tout ouvert de $\s_n$ est une union disjointe dénombrable de ces éléments d'après la proposition \ref{prop:boules},
+      on peut alors étendre cette inégalité aux ouverts de $\s_n$.
+      Par régularité extérieure par rapport aux ouverts, on a pour tout borélien $B \in \Bo{\s_n}$,
+      $$\mu'(B) = \inf\left\{\mu'(O) \mid O \text{ ouvert }, B \subseteq O\right\}.$$
+      De là, on a pour tout ouvert $B \subseteq O$,
+      $$\mu'(B) \leq \mu'(O) \leq \frac{c'_2}{c_1} \mu(O),$$
+      et donc $\mu'(B) \leq \frac{c'_2}{c_1}\inf\{\mu(O) \mid O \text{ ouvert }, B \subseteq O\} = \frac{c_2'}{c_1}\mu(B)$.
+      Donc pour tout borélien $B \in \Bo{\s_n}$ on a $\mu'(B) \leq \frac{c_2'}{c_1}\mu(B)$, ainsi $\mu'$ est absolument continue par rapport à $\mu$.
+      D'après le théorème de Radon-Nikodym, $\mu'$ admet une densité $f$ par rapport à $\mu$.
+      En appliquant $\sigma$, on obtient
+      $$\mu' = \sigma_*\mu' = (f\circ\sigma^{-1})\cdot\sigma_*\mu = (f\circ\sigma^{-1})\cdot\mu.$$
+      Par unicité de la dérivée de Radon-Nikodym, $f = f \circ \sigma^{-1}$ $\mu$-presque partout.
+      Or comme $\mu$ est ergodique par hypothèse, alors il existe une constante $c \in \R$ tel que $f = c$ $\mu$-presque partout.
+      Finalement,
+      $$1 = \mu'(\s_n) = \int_{\s_n}{c\,d\mu} = c.$$
+      Donc $\mu = \mu'$, ce qui prouve l'unicité.
+  \end{proof}
