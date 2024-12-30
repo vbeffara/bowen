@@ -17,7 +17,7 @@
 
   \begin{theorem}[Théorème de Perron-Frobenius de Ruelle]
     \label{thm:rpf}
-    \uses{def:transfert_operator, def:holder_fn_set, def:meas_set, def:fn_c0, prop:rpf_1, prop:rpf_2, prop:rpf_3}
+    \uses{def:transfert_operator, def:holder_fn_set, def:meas_set, prop:rpf_1, prop:rpf_2, prop:rpf_3}
     Soit $\phi \in \Hsp{n}$ et $\L = \L_{\phi}$. Alors il existe $\lambda > 0, \nu \in \Msp{n}$ et $h \in \Csp{n}, h > 0$ tels que :
     \begin{enumerate}
       \item $\nu$ vérifie $\L^*\nu = \lambda\nu$,
@@ -62,7 +62,7 @@
 
   \begin{lemma}
     \label{lem:Lambda_compact}
-    \uses{def:fn_c0, def:transfert_operator}
+    \uses{def:transfert_operator}
     L'ensemble $\Lambda$ est compact. De plus si $f \in \Csp{n}$, alors $\inf \frac 1 \lambda \L f \geq K^{-1}$.
   \end{lemma}
 
@@ -87,7 +87,7 @@
 
   \begin{proposition}
     \label{prop:rpf_2}
-    \uses{def:fn_c0}
+    \uses{def:transfert_operator, prop:rpf_1}
     Il existe $h \in \Lambda$ tel que $h > 0$ et vérifie (2) (\textit{ie.} $\nu(h) = 1$ et $\L h = \lambda h$).
   \end{proposition}
 
@@ -121,7 +121,7 @@
 
   \begin{lemma}
     \label{lem:Lf_decomp}
-    \uses{def:transfert_operator}
+    \uses{def:transfert_operator, prop:rpf_2}
     Il existe $\eta \in ]0, 1[$ tel que pour toute fonction $f \in \Lambda$, il existe $f' \in \Lambda$ vérifiant
     $$\frac 1 \lambda \L f = \eta h + (1-\eta)f'.$$
     De plus, $\eta \leq \min{(\frac{u_1}{u_2} \frac{1-\alpha}{4\No{h}K}, \frac 1 {K\lVert h\rVert})}$.
@@ -129,7 +129,7 @@
 
   \begin{proof}
     \proves{lem:Lf_decomp}
-    \uses{lem:Lambda_compact} % + Compacité et continuité
+    \uses{lem:Lambda_compact, prop:rpf_2} % + Compacité et continuité
     Soit $\eta \in ]0, 1[$ comme ci-dessus. Soit $f \in \Lambda$ et on pose la fonction $g = \frac 1 \lambda \L f - \eta h$.
     Alors si $\eta \leq \min{(\frac{u_1}{u_2} \frac{1-\alpha}{4\No{h}K}, \frac 1 {K\lVert h\rVert})}$,
     on a $\frac 1 {1-\eta}g \in \Lambda$.
@@ -169,7 +169,7 @@
 
   \begin{lemma}
     \label{lem:conv_expo}
-    \uses{def:transfert_operator}
+    \uses{def:transfert_operator, prop:rpf_1}
     Pour tout $n \in \N$ et tout $f\in\Lambda$, on a $\No{\lambda^{-n}\L^nf - h} \leq (\lVert h\rVert + K)(1 - \eta)^n = A\beta^n$
     avec $0 < \beta < 1$ et $A > 0$.
   \end{lemma}
@@ -258,7 +258,7 @@
 
   \begin{lemma}
     \label{lem:unionCr_strong_density}
-    \uses{def:fn_c0}
+    \uses{def:topo_sn}
     L'ensemble $\mathcal C = \bigcup_{r\geq 0}{\Cr{r}}$ vérifie la propriété suivante :
     $$\forall f \in \Csp{n}, \forall \varepsilon > 0, \exists g_1, g_2 \in \mathcal C, \No{g_1 - g_2} \leq \varepsilon \text{ et } g_1\leq f\leq g_2,$$
     et donc $\mathcal C$ est dense dans $\Csp{n}$.
@@ -284,7 +284,7 @@
 
   \begin{proposition}
     \label{prop:rpf_3}
-    \uses{def:transfert_operator}
+    \uses{def:transfert_operator, prop:rpf_1, prop:rpf_2}
     Soit $f \in \Csp{n}$, alors
     $$\No{\frac 1 {\lambda^m} \L^mf - \nu(f)h} \underset{m \to \infty}{\longrightarrow} 0.$$
   \end{proposition}

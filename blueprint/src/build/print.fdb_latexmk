@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1735499706.82894 "print.tex" "build/print.pdf" "print" 1735499708.0791 0
+["pdflatex"] 1735565541.11085 "print.tex" "build/print.pdf" "print" 1735565542.3857 0
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1727349926 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1727349926 1528 f853c4d1b4e0550255e02831fdc8496f ""
   "/usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1727349926 1004 54797486969f23fa377b128694d548df ""
@@ -119,18 +119,17 @@
   "/usr/share/texmf-dist/tex/latex/xcolor/xcolor.sty" 1727349926 55487 80a65caedd3722f4c20a14a69e785d8f ""
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1727349926 41588 b43d3e860a4f94167ee1e725ff526a72 ""
   "/var/lib/texmf/web2c/xetex/xelatex.fmt" 1733955690 9587337 0bee07329382d0b8631dce1e8038eefb ""
-  "build/print.aux" 1735499707.89713 3290 62fe09db0a8aa2bb62d2fa788c2f4ac3 "pdflatex"
-  "build/print.out" 1735499707.90047 1512 fea8da6fb46794b08d85fcfb218ab571 "pdflatex"
-  "content.tex" 1735482901.91649 530 0e0150bf11aca5aae0e337c8e3658c72 ""
+  "build/print.aux" 1735565542.20176 3125 49f2b11448fda76c5784997ef0cd03cf "pdflatex"
+  "build/print.out" 1735565542.2051 1409 e736eb7ed68a5034284c433c94bb9bdd "pdflatex"
+  "content.tex" 1735507065.84852 498 18261c467c68f5383f1fcbd8f508e365 ""
   "macros/common.tex" 1735484375.75709 2141 d523fe87ba16a52c71ff56aaa3772c40 ""
   "macros/print.tex" 1735482931.99897 1796 440b16ce5925bf1f2471a6f7779066e4 ""
   "print.tex" 1735406888.23038 918 6f3f50fb5bd3a8907f40429e4a31681c ""
-  "sections/construction.tex" 1735499706.40713 8302 47a9fa1218991c20052634a0e8edfaac ""
-  "sections/intro.tex" 1735481965.14435 2853 d1c9d5466f2908724c3c481b8cff749e ""
-  "sections/reduction.tex" 1735498199.55215 7349 fd8e06e58e532ceca9f2f02593578809 ""
-  "sections/rpf_theorem.tex" 1735499321.46959 18049 f76584f507bec2f9e9c290e94cfe7468 ""
-  "sections/topo.tex" 1735497604.65694 8148 6fbc491e60f108d28d0b9424d06df4d3 ""
-  "sections/unicite.tex" 1735497889.23456 6298 d220e32874ef33b58854cf71b8469bf8 ""
+  "sections/construction.tex" 1735506219.72774 8648 ddf37ea1f91475b6f95394ec42720c60 ""
+  "sections/reduction.tex" 1735565110.82536 7338 dea044c979ae040a944b8640ef215cf5 ""
+  "sections/rpf_theorem.tex" 1735565539.89855 18303 3bb38c8a40e040c329c8bb5fc236bc15 ""
+  "sections/topo.tex" 1735565083.3765 8109 fd495189691c55966ec623b27617ca48 ""
+  "sections/unicite.tex" 1735565080.36995 6342 17fc44b18f199cb7a8fc59841a33ea44 ""
   (generated)
   "build/print.aux"
   "build/print.log"
