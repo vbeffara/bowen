@@ -4,6 +4,7 @@
 
   \begin{definition}
     \label{def:topo_sn}
+    \leanok
     Soit $n \in \N$.
     L'ensemble des suites bi-infinies à valeurs dans $\llbracket 1, n\rrbracket$ est noté $\s_n = \prod_{\Z}{\llbracket 1, n\rrbracket}$.
     Chaque $\llbracket 1, n\rrbracket$ est muni de la topologie discrète,
@@ -62,6 +63,7 @@
   On notera $\Cs{n}$ l'ensemble des fonctions continues $f \colon \s_n \longrightarrow \R$.
 
   \begin{definition}
+    \uses{def:topo_sn}
     \label{def:var_potentiel}
     Soit $\phi \in \Cs{n}$. La fonction de variation d'ordre $k$ est donné par :
     $$\var_k(\phi) = \sup\left\{|\phi(x) - \phi(y)| : \forall i \in \llbracket -k, k\rrbracket, x_i = y_i \right\}.$$
@@ -139,6 +141,7 @@
 
   \begin{definition}
     \label{def:shift}
+    \uses{def:topo_sn}
     \leanok
     \lean{shift}
     L'application de décalage (\textit{shift} en anglais) $\sigma$ sur $\s_n$ est donnée par
