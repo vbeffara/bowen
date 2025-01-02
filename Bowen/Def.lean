@@ -27,3 +27,4 @@ noncomputable instance : PseudoEMetricSpace (Bernoulli n) where
 #synth CompactSpace (Bernoulli n)
 
 def shift (x : Bernoulli n) : Bernoulli n := fun i => x (i + 1)
+
