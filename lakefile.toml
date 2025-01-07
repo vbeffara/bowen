@@ -1,6 +1,6 @@
 name = "bowen"
 version = "0.1.0"
-defaultTargets = ["bowen"]
+defaultTargets = ["Bowen"]
 
 [[lean_lib]]
 name = "Bowen"
