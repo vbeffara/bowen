@@ -28,3 +28,6 @@ noncomputable instance : PseudoEMetricSpace (Bernoulli n) where
 
 def shift (x : Bernoulli n) : Bernoulli n := fun i => x (i + 1)
 
+def IsGibbs (φ : Bernoulli n → ℝ) (μ : Measure (Bernoulli n)) : Prop :=
+  ∃ P : ℝ, ∃ c₁ c₂ : ENNReal, ∀ x : Bernoulli n, ∀ m : ℕ,
+    μ {y | EqOn x y (Ico 0 m)} / nnexp (- P * m + ∑ k < m, φ (shift^[k] x)) ∈ Icc c₁ c₂
