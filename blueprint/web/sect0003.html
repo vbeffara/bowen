@@ -12,9 +12,9 @@
 <meta name="generator" content="plasTeX" />
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Existence et unicité des mesures de Gibbs.: Unicité de la mesure de Gibbs</title>
-<link rel="next" href="sect0004.html" title="Réduction de Σn à Σ+n" />
-<link rel="prev" href="sect0002.html" title="Topologie de Σn" />
+<title>Existence et unicité des mesures de Gibbs.: Réduction de \(\Sigma _n\) à \(\Sigma ^+_n\)</title>
+<link rel="next" href="sect0004.html" title="Théorème de Perron-Frobenius de Ruelle" />
+<link rel="prev" href="sect0002.html" title="Unicité de la mesure de Gibbs" />
 <link rel="up" href="index.html" title="Existence et unicité des mesures de Gibbs." />
 <link rel="stylesheet" href="styles/theme-white.css" />
 <link rel="stylesheet" href="styles/extra_styles.css" />
@@ -30,32 +30,29 @@
 <nav class="toc">
 <ul class="sub-toc-0">
 <li class="">
-  <a href="sect0001.html"><span class="toc_ref"></span> <span class="toc_entry">Introduction</span></a>
- </li>
-<li class="">
-  <a href="sect0002.html"><span class="toc_ref"></span> <span class="toc_entry">Topologie de \(\Sigma _n\)</span></a>
+  <a href="sect0001.html"><span class="toc_ref"></span> <span class="toc_entry">Topologie de \(\Sigma _n\)</span></a>
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0002.html#a0000000013"><span class="toc_ref"></span> <span class="toc_entry">Définition de l’espace métrique \(\Sigma _n\)</span></a>
+  <a href="sect0001.html#a0000000007"><span class="toc_ref"></span> <span class="toc_entry">Définition de l’espace métrique \(\Sigma _n\)</span></a>
  </li>
 <li class="">
-  <a href="sect0002.html#a0000000014"><span class="toc_ref"></span> <span class="toc_entry">Propriétés topologiques de \(\Sigma _n\)</span></a>
+  <a href="sect0001.html#a0000000017"><span class="toc_ref"></span> <span class="toc_entry">Propriétés topologiques de \(\Sigma _n\)</span></a>
  </li>
 
   </ul>
  </li>
+<li class="">
+  <a href="sect0002.html"><span class="toc_ref"></span> <span class="toc_entry">Unicité de la mesure de Gibbs</span></a>
+ </li>
 <li class=" active current">
-  <a href="sect0003.html"><span class="toc_ref"></span> <span class="toc_entry">Unicité de la mesure de Gibbs</span></a>
+  <a href="sect0003.html"><span class="toc_ref"></span> <span class="toc_entry">Réduction de \(\Sigma _n\) à \(\Sigma ^+_n\)</span></a>
  </li>
 <li class="">
-  <a href="sect0004.html"><span class="toc_ref"></span> <span class="toc_entry">Réduction de \(\Sigma _n\) à \(\Sigma ^+_n\)</span></a>
+  <a href="sect0004.html"><span class="toc_ref"></span> <span class="toc_entry">Théorème de Perron-Frobenius de Ruelle</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html"><span class="toc_ref"></span> <span class="toc_entry">Théorème de Perron-Frobenius de Ruelle</span></a>
- </li>
-<li class="">
-  <a href="sect0006.html"><span class="toc_ref"></span> <span class="toc_entry">Construction d’une mesure de Gibbs</span></a>
+  <a href="sect0005.html"><span class="toc_ref"></span> <span class="toc_entry">Construction d’une mesure de Gibbs</span></a>
  </li>
 </ul>
 </nav>
@@ -65,51 +62,9 @@
 
 
 <div class="main-text">
-<h1 id="a0000000004"> Unicité de la mesure de Gibbs</h1>
-<p>Dans un premier temps, on introduit quelques notations. </p>
-<p><div class="definition_thmwrapper " id="def:meas_set">
-  <div class="definition_thmheading">
-    <span class="definition_thmcaption">
-    Définition
-    </span>
-    <span class="definition_thmlabel">15</span>
-  </div>
-  <div class="definition_thmcontent">
-  <p> On note \(\mathcal{M}(\Sigma _{n})\) l’ensemble des mesures de probabilité sur \(\Sigma _n\), et \(\mathcal{M}_{\sigma }(\Sigma _{n})\) le sous-ensemble de \(\mathcal{M}(\Sigma _{n})\) constitué des mesures \(\sigma \)-invariantes. </p>
-
-  </div>
-</div> </p>
-<p><div class="definition_thmwrapper " id="def:gibbs_meas">
-  <div class="definition_thmheading">
-    <span class="definition_thmcaption">
-    Définition
-    </span>
-    <span class="definition_thmlabel">16</span>
-  </div>
-  <div class="definition_thmcontent">
-  <p> def:meas_set, def:shift, def:fn_c0 Soit \(\phi \in \mathcal{C} (\Sigma _{n})\) et \(\mu \in \mathcal{M}(\Sigma _{n})\). On dit que \(\mu \) est une mesure de Gibbs pour un potentiel \(\phi \) si \(\mu \in \mathcal{M}_{\sigma }(\Sigma _{n})\) et s’il existe \(P(\phi ) \in \mathbf R\) et \(c_1, c_2 {\gt} 0\) tels qu’on ait </p>
-<div class="displaymath" id="a0000000038">
-  \[ \frac{\mu (C(x, m))}{\exp (-Pm + \sum _{k=1}^{m-1}{\phi (\sigma ^k(x))})} \in [c_1, c_2] \]
-</div>
-<p> pour tout \(x \in \Sigma _n\) et \(m \in \mathbf N\). </p>
-
-  </div>
-</div> </p>
-<p>Dans cette section, on montre la partie concernant l’unicité du théorème suivant. </p>
-<p><div class="theorem_thmwrapper " id="thm:gibbs">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Théoreme
-    </span>
-    <span class="theorem_thmlabel">17</span>
-  </div>
-  <div class="theorem_thmcontent">
-  <p> def:holder_fn_set, def:meas_set, def:gibbs_meas Soit \(\phi \in \mathcal H(\Sigma _n)\), alors il existe une unique mesure de Gibbs \(\mu _{\phi } = \mu \in \mathcal M_{\sigma }(\Sigma _n)\) </p>
-
-  </div>
-</div> </p>
-<p>Dans les sections suivantes, on construira une mesure de Gibbs mélangeante notamment grâce au théorème de Ruelle. C’est l’ergodicité de cette mesure qui entrainera l’unicité de la mesure de Gibbs. </p>
-<p><div class="definition_thmwrapper " id="def:ergodique">
+<h1 id="a0000000004"> Réduction de \(\Sigma _n\) à \(\Sigma ^+_n\)</h1>
+<p>Pour prouver l’existence de telles mesures, on commence par montrer que peu importe la fonction de potentiel \(\phi \) dans \(\mathcal{H} (\Sigma _{n})\), on peut commencer par trouver une fonction de potentiel \(\psi \in \mathcal{H} (\Sigma _{n}^+)\) ne dépendant que des coordonnées positives ayant la même mesure de Gibbs que \(\phi \). </p>
+<p><div class="definition_thmwrapper " id="def:fn_equiv">
   <div class="definition_thmheading">
     <span class="definition_thmcaption">
     Définition
@@ -117,40 +72,103 @@
     <span class="definition_thmlabel">18</span>
   </div>
   <div class="definition_thmcontent">
-  <p> def:meas_set, def:shift Soit \(\mu \in \mathcal{M}(\Sigma _{n})\). On dit que \(\mu \) est ergodique (par rapport à \(\sigma \)) si pour tout borélien \(E \in \mathcal{B}(\Sigma _n)\) tels que \(\sigma ^{-1}E=E\), on a </p>
-<div class="displaymath" id="a0000000039">
-  \[ \mu (E) = 0 \text{ ou } \mu (E^c) = 0, \]
+  <p> def:shift Soit \(\phi , \psi \in \mathcal{C} (\Sigma _{n})\). On dit que \(\phi \) et \(\psi \) sont équivalentes et on note \(\phi \sim \psi \) dès lors qu’il existe \(u \in \mathcal{C} (\Sigma _{n})\) vérifiant : </p>
+<div class="displaymath" id="a0000000049">
+  \[ \phi = \psi - u + u \circ \sigma . \]
 </div>
 
   </div>
 </div> </p>
-<p><div class="definition_thmwrapper " id="def:mixing">
-  <div class="definition_thmheading">
-    <span class="definition_thmcaption">
-    Définition
+<p>Le prochain lemme justifie l’introduction de cette relation : </p>
+<p><div class="lemma_thmwrapper " id="rm:eq_if_equiv">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemme
     </span>
-    <span class="definition_thmlabel">19</span>
+    <span class="lemma_thmlabel">19</span>
   </div>
-  <div class="definition_thmcontent">
-  <p> def:meas_set, def:shift Soit \(\mu \in \mathcal{M}(\Sigma _{n})\). On dit que \(\mu \) est mélangeante (par rapport à \(\sigma \)) si pour tout borélien \(E, F \in \mathcal{B}(\Sigma _n)\), on a </p>
-<div class="displaymath" id="a0000000040">
-  \[ \mu (E\cap \sigma ^{-n}F) \underset {n\to \infty }{\longrightarrow } \mu (E)\mu (F). \]
-</div>
+  <div class="lemma_thmcontent">
+  <p> def:fn_equiv, def:gibbs_meas Soit \(\phi \sim \psi \in \mathcal{H} (\Sigma _{n})\). Dans ce cas, \(\mu _{\phi } = \mu _{\psi }\) et \(P(\phi ) = P(\psi )\). </p>
 
   </div>
 </div> </p>
-<p><div class="remark_thmwrapper " id="a0000000041">
+<p><div class="proof_wrapper" id="a0000000050">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+  </div>
+</div> lem:fn_equiv_imp_gibbs_eq Soit \(u \in \mathcal{C} (\Sigma _{n})\) tel que \(\phi - \psi = u\circ \sigma - u\). Alors <div class="displaymath" id="a0000000051">
+  
+</div>S_mφ(x) - S_mψ(x) = ∑_k=0^m-1(φ- ψ)(σ^k x) = ∑_k=0^m-1(u(σ^k+1x) - u(σ^k x)) <br />= u(σ^m x) - u(x) ≤2 u <div class="displaymath" id="a0000000052">
+  
+</div> </p>
+<p>Ainsi pour \(m \in \mathbf N\) et \(x \in \Sigma _n\), on a </p>
+<div class="displaymath" id="a0000000053">
+  \[ c_1 e^{-2\lVert u\rVert } \leq \frac{\mu _{\phi }(C(x, m))}{e^{-P(\phi )m + S_m\phi (x) + 2\lVert u\rVert }} \leq \frac{\mu _{\phi } (C(x, m))}{e^{-P(\phi )m + S_m\psi (x)}} \leq \frac{\mu _{\phi }(C(x, m))}{e^{-P(\phi )m + S_m\phi (x) - 2\lVert u\rVert }} \leq c_2 e^{2\lVert u\rVert } \]
+</div>
+<p>Donc \(\mu _{\phi }\) et \(P(\phi )\) conviennent aussi pour \(\psi \). <div class="proof_wrapper" id="a0000000054">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+  </div>
+</div> </p>
+<p><div class="remark_thmwrapper " id="a0000000055">
   <div class="remark_thmheading">
     <span class="remark_thmcaption">
     Remarque
     </span>
   </div>
   <div class="remark_thmcontent">
-  <p>On a l’implication "mélangeante" \(\implies \) "ergodique". </p>
+  <p> Soit \(\phi \overset {u}{\sim } \psi \in \mathcal{C} (\Sigma _{n})\). Si \(\sum _k{u\circ \sigma ^k}\) converge, alors </p>
+<div class="displaymath" id="a0000000056">
+  \[ u = \sum _{k=0}^{\infty }{(\phi - \psi ) \circ \sigma ^k} \]
+</div>
+<p>Cette remarque permet de mieux comprendre la forme de la fonction \(u\) dans un cadre favorable, et de donner l’intuition de ce qu’elle pourrait être pour donner une fonction équivalente à \(\phi \) dépendant uniquement des coordonnées positives. </p>
 
   </div>
 </div> </p>
-<p><div class="lemma_thmwrapper " id="lem:sig_inv_imp_cst">
+<p><div class="proof_wrapper" id="a0000000057">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+  </div>
+</div>[Preuve de la remarque précédente] rm:eq_if_equiv La convergence de \(\sum _{k \geq 0}{(u - u\circ \sigma )\circ \sigma ^k} = \sum _k{(\phi - \psi )\circ \sigma ^k}\) est assuré par celle de \(\sum _k{u\circ \sigma ^k}\). Ainsi par téléscopage, \(u(x) = \sum _{k=0}^{\infty }{(u - u \circ \sigma )(\sigma ^k x)} = \sum _{k=0}^{\infty }{(\phi - \psi )(\sigma ^k x)}\). <div class="proof_wrapper" id="a0000000058">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+  </div>
+</div> </p>
+<p>Avant le prochain lemme on introduit la fonction \(r \colon \Sigma _n \longrightarrow \Sigma _n\) définie par </p>
+<div class="displaymath" id="a0000000059">
+  \[ \forall i \in \mathbf Z, \forall x \in \Sigma _n, (r(x))_i = \left\{  \begin{array}{ll} x_i & \text{ si } i \geq 0, \\ 1 & \text{ si } i {\lt} 0. \end{array} \right. = 111\hdots x_{|\geq 0} \]
+</div>
+<p> De sorte que si \(x, y \in \Sigma _n\) ont les mêmes coordonnées positives (<i class="itshape">ie.</i> \(\forall i \geq 0, x_i = y_i\)), alors \(r(x) = r(y)\). </p>
+<p>De plus, lorsqu’on compose \(r\) avec \(\sigma \), on garde l’indépendance vis-à-vis des coordonnées négatives : si \(x = \cdots x_{-2}x_{-1}\textcolor {ForestGreen}{x_0} x_1 x_2 x_3\cdots \in \Sigma _n\), alors on a : <div class="displaymath" id="a0000000060">
+  
+</div> x = x_-2x_-1 <span style="None"></span>ForestGreenx_0 x_1 x_2<br />σx = ·x_-1x_0 <span style="None"></span>ForestGreenx_1x_2 x_3<br />r(σx) = ·111 <span style="None"></span>ForestGreenx_1x_2x_3<br />r(x) = ·111 <span style="None"></span>ForestGreenx_0x_1 x_2<br />σr(x) = 11x_0 <span style="None"></span>ForestGreenx_1x_2 x_3<div class="displaymath" id="a0000000061">
+  
+</div> Donc \(\sigma \circ r\) et \(r \circ \sigma \) diffèrent seulement à la coordonnées -1 et ne dépendent que des coordonnées positives de \(x\). </p>
+<p><div class="lemma_thmwrapper " id="lem:fn_equiv_pos_coords">
   <div class="lemma_thmheading">
     <span class="lemma_thmcaption">
     Lemme
@@ -158,11 +176,23 @@
     <span class="lemma_thmlabel">20</span>
   </div>
   <div class="lemma_thmcontent">
-  <p> def:ergodique Soit \(f \colon \Sigma _n \longrightarrow \mathbf R\) intégrable par rapport à une mesure \(\mu \in \mathcal{M}_{\sigma }(\Sigma _{n})\) ergodique. Supposons que \(f \circ \sigma = f\) \(\mu \)-presque partout. Alors \(f\) est constante \(\mu \)-presque partout. </p>
+  <p> def:fn_equiv, def:holder_fn_set Soit \(\phi \in \mathcal{H} (\Sigma _{n})\), et </p>
+<div class="displaymath" id="a0000000062">
+  \[ \psi := \phi \circ r + \left(\sum _{k=0}^{\infty }{\phi \circ \sigma ^k}\right)\circ (\sigma \circ r - r \circ \sigma ). \]
+</div>
+<p> Alors, </p>
+<ol class="enumerate">
+  <li><p>\(\psi \in \mathcal{H} (\Sigma _{n})\) et ne dépend que des coordonnées positives, </p>
+</li>
+  <li><p>Si on note \(u = \sum _{k\geq 0}{\phi \circ \sigma ^k - \phi \circ (\sigma ^k r)}\), alors \(u \in \mathcal{C} (\Sigma _{n})\), </p>
+</li>
+  <li><p>De plus, \(\phi \overset {u}{\sim } \psi \). </p>
+</li>
+</ol>
 
   </div>
 </div> </p>
-<p><div class="proof_wrapper" id="a0000000042">
+<p><div class="proof_wrapper" id="a0000000063">
   <div class="proof_heading">
     <span class="proof_caption">
     
@@ -172,11 +202,31 @@
   <div class="proof_content">
   
   </div>
-</div> lem:sig_inv_imp_cst Pour montrer ce lemme on considére les ensembles \(E_c = f^{-1}(\{ c\} )\) pour tout \(c\in \mathbf R\). Comme \(f \circ \sigma = f\) \(\mu \)-p.p., on a \(\sigma ^{-1}E_c = E_c\), et donc par ergodicité de \(\mu \), </p>
-<div class="displaymath" id="a0000000043">
-  \[ \mu (E_c) = 0 \text{ ou } \mu (E_c) = 1. \]
+</div> lem:fn_equiv_pos_coords Soit \(b \in \mathbf R\) et \(\alpha \in ]0, 1[\) tels que \(var_k\phi \leq b\alpha ^k\). Pour \(k \geq 0\), \(\sigma ^k x\) et \(\sigma ^k r(x)\) coïncident de \(-k\) à \(+\infty \) donc \(\left|\phi (\sigma ^k x) - \phi (\sigma ^k r(x))\right| \leq b\alpha ^k\) et ainsi comme \(|\alpha | {\lt} 1\), la série converge normalement pour tout \(x \in \Sigma _n\). Donc \(u\) est bien définie et est continue. </p>
+<p>Ensuite vérifions que \(\psi = \phi - u + u \circ \sigma \). Pour \(N \in \mathbf N\), <div class="displaymath" id="a0000000064">
+  
+</div> φ(x) - ∑_k=0^Nφ(σ^k x) - φ(σ^k r(x)) + ∑_k=0^Nφ(σ^k+1x) - φ(σ^k r(σx)) <br />= φ(r(x)) - ∑_k=0^N-1φ(σ^k+1 x) - φ(σ^k+1 r(x)) + ∑_k=0^Nφ(σ^k+1x) - φ(σ^k r(σx)) <br />= φ(r(x)) + φ(σ^N+1x) - φ(σ^N r(σx))_≤bα^N + ∑_k=0^N-1φ(σ^k+1r(x)) - φ(σ^k r(σx))  <br />ψ(x) <br />φ(x) - u(x) + u(σx) <div class="displaymath" id="a0000000065">
+  
+</div> lorsque \(N \to \infty \). Ainsi \(\psi = \phi - u + u\circ \sigma \) <i class="itshape">ie.</i> \(\phi \overset {u}{\sim } \psi \). </p>
+<p>Soit \(x \in \Sigma _n\) et \(y \in C(x, m)\). Soit \(k \in \mathbf N\), distinguons plusieurs cas : </p>
+<ul class="itemize">
+  <li><p>Comme \(\sigma ^kx\) et \(\sigma ^kr(x)\) coïncident jusqu’à la \(k\)-ième coordonnée, </p>
+<div class="displaymath" id="a0000000066">
+  \[ \left|\phi (\sigma ^kx) - \phi (\sigma ^kr(x)) - (\phi (\sigma ^ky) - \phi (\sigma ^kr(y)))\right| \leq 2b\alpha ^k \]
 </div>
-<p> Il est donc clair qu’il existe au plus un \(c\in \mathbf R\) tel que \(f = c\) pour \(\mu \)-presque tout \(x \in \Sigma _n\). <div class="proof_wrapper" id="a0000000044">
+</li>
+  <li><p>Si \(k \leq \lfloor \frac m2\rfloor \), on peut faire mieux : <div class="displaymath" id="a0000000067">
+  
+</div> φ(σ^kx) - φ(σ^ky) + φ(σ^kr(x)) - φ(σ^kr(y))  <br />≤φ(σ^kx) - φ(σ^ky)_≤var_m-kφ≤bα^m-k + φ(σ^kr(x)) - φ(σ^kr(y))_≤bα^m-k <br />≤2bα^m-k <div class="displaymath" id="a0000000068">
+  
+</div> car \(\sigma ^kx\) et \(\sigma ^ky\) coïncident sur \([-m - k, m - k]\) </p>
+</li>
+</ul>
+<p> Donc en sommant chacun des termes, <div class="displaymath" id="a0000000069">
+  
+</div> u(x) - u(y) ≤2b∑_k=0^α^m - k + ∑_k &gt;  α^k ≤4b∑_k &gt;  α^k = α^ <br />≤(α)^m <div class="displaymath" id="a0000000070">
+  
+</div> Ainsi \(u \in \mathcal{H} (\Sigma _{n})\) et donc \(\psi \in \mathcal{H} (\Sigma _{n})\) également. <div class="proof_wrapper" id="a0000000071">
   <div class="proof_heading">
     <span class="proof_caption">
     
@@ -187,70 +237,15 @@
   
   </div>
 </div> </p>
-<p><div class="proposition_thmwrapper " id="prop:unique">
-  <div class="proposition_thmheading">
-    <span class="proposition_thmcaption">
-    Proposition
+<p><div class="remark_thmwrapper " id="a0000000072">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remarque
     </span>
-    <span class="proposition_thmlabel">21</span>
   </div>
-  <div class="proposition_thmcontent">
-  <p> def:ergodique, def:gibbs_meas Supposons qu’il existe une mesure de Gibbs \(\mu \) ergodique pour \(\phi \in \mathcal{C} (\Sigma _{n})\). Alors cette mesure est l’unique mesure de Gibbs associé à \(\phi \). </p>
+  <div class="remark_thmcontent">
+  <p>On remarque que la construction de \(\psi \) dépend entièrement de la fonction \(r\), ce qui signifie qu’il existe d’autres fonctions \(\psi _r \in \mathcal{H} (\Sigma _{n})\) ne dépendant que des coordonnées positives et équivalentes à \(\phi \). </p>
 
-  </div>
-</div> </p>
-<p><div class="proof_wrapper" id="a0000000045">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    
-    </span>
-    <span class="expand-proof">▼</span>
-  </div>
-  <div class="proof_content">
-  
-  </div>
-</div> prop:unique lem:sig_inv_imp_cst, prop:boules Soit \(\mu , \mu ' \in \mathcal{M} (\Sigma _{n}^+)\) deux mesures de Gibbs avec \(\mu \) ergodique, \(c_1, c_1', c_2, c_2' {\gt} 0\) et \(P, P' \in \mathbf R\) des constantes telles que pour tout \(m \in \mathbf N\) et \(x \in \Sigma _n\) on ait </p>
-<div class="displaymath" id="a0000000046">
-  \[ \left\{ \begin{array}{lll} c_1 & \leq \frac{\mu (C(x,m))}{\exp {(-Pm + S_m\phi (x))}} & \leq c_2 \vspace{1em} \\ c_1’ & \leq \frac{\mu '(C(x,m))}{\exp {(-P’m + S_m\phi (x))}} & \leq c_2’ \end{array}\right. \]
-</div>
-<p>D’abord, montrons que \(P = P'\). Soit \(m \in \mathbf N\) et \(T_m = \left\{ x \in \Sigma _n \mid x_i = 1 \text{ si } i \not\in [\! [0, m-1 ]\! ]\right\} \), de telle sorte que \(\Sigma _n = \bigsqcup _{x\in T_m}{C(x,m)}\), et \(T_m\) est fini. On a alors </p>
-<div class="displaymath" id="a0000000047">
-  \[ c_1'e^{-P'm}\sum _{x\in T_m}{e^{S_m\phi (x)}} \leq \sum _{x\in T_m}{\mu ’(C(x,m))} = 1 = \sum _{x\in T_m}{\mu ’(C(x, m))} \leq c_2'e^{-P'm}\sum _{x\in T_m}{e^{S_m\phi (x)}}, \]
-</div>
-<p> et donc </p>
-<div class="displaymath" id="a0000000048">
-  \[ P - \frac1m \log {c_2’} \leq \frac1m \log {\sum _{x\in T_m}{e^{S_m\phi (x)}}} \leq P - \frac1m \log {c_1’}. \]
-</div>
-<p> Par le théorème des gendarmes, on trouve donc \(P' = \lim _{m\to \infty }{\frac1m\sum _{x\in T_m}{e^{S_m\phi (x)}}}\). Grâce au même raisonnement, on en conclut que \(P = P'\) car ils sont tout deux égaux à la même limite. </p>
-<p>Grâce aux estimations sur \(\mu \) et \(\mu '\) sur les cylindres, on a alors pour tout \(x \in \Sigma _n\) et \(m \in \mathbf N\), </p>
-<div class="displaymath" id="a0000000049">
-  \[ \mu '(C(x, m)) \leq \frac{c_2'}{c_1}\mu (C(x, m)). \]
-</div>
-<p> Comme \(\mu \) et \(\mu '\) sont invariantes par \(\sigma \), on peut étendre le résultat sur les ensembles de la forme \(\left\{ y\in \Sigma _n \mid \forall i \in [\! [-m, m]\! ], x_i = y_i\right\} \) pour tout \(x \in \Sigma _n\) et \(m \in \mathbf N\), c’est-à-dire sur une base de la topologie de \(\Sigma _n\). De plus, comme tout ouvert de \(\Sigma _n\) est une union disjointe dénombrable de ces éléments d’après la proposition <a href="sect0002.html#prop:boules">12</a>, on peut alors étendre cette inégalité aux ouverts de \(\Sigma _n\). Par régularité extérieure par rapport aux ouverts, on a pour tout borélien \(B \in \mathcal{B}(\Sigma _n)\), </p>
-<div class="displaymath" id="a0000000050">
-  \[ \mu '(B) = \inf \left\{ \mu '(O) \mid O \text{ ouvert }, B \subseteq O\right\} . \]
-</div>
-<p> De là, on a pour tout ouvert \(B \subseteq O\), </p>
-<div class="displaymath" id="a0000000051">
-  \[ \mu '(B) \leq \mu '(O) \leq \frac{c'_2}{c_1} \mu (O), \]
-</div>
-<p> et donc \(\mu '(B) \leq \frac{c'_2}{c_1}\inf \{ \mu (O) \mid O \text{ ouvert }, B \subseteq O\}  = \frac{c_2'}{c_1}\mu (B)\). Donc pour tout borélien \(B \in \mathcal{B}(\Sigma _n)\) on a \(\mu '(B) \leq \frac{c_2'}{c_1}\mu (B)\), ainsi \(\mu '\) est absolument continue par rapport à \(\mu \). D’après le théorème de Radon-Nikodym, \(\mu '\) admet une densité \(f\) par rapport à \(\mu \). En appliquant \(\sigma \), on obtient </p>
-<div class="displaymath" id="a0000000052">
-  \[ \mu ' = \sigma _*\mu ' = (f\circ \sigma ^{-1})\cdot \sigma _*\mu = (f\circ \sigma ^{-1})\cdot \mu . \]
-</div>
-<p> Par unicité de la dérivée de Radon-Nikodym, \(f = f \circ \sigma ^{-1}\) \(\mu \)-presque partout. Or comme \(\mu \) est ergodique par hypothèse, alors il existe une constante \(c \in \mathbf R\) tel que \(f = c\) \(\mu \)-presque partout. Finalement, </p>
-<div class="displaymath" id="a0000000053">
-  \[ 1 = \mu '(\Sigma _n) = \int _{\Sigma _n}{c\, d\mu } = c. \]
-</div>
-<p> Donc \(\mu = \mu '\), ce qui prouve l’unicité. <div class="proof_wrapper" id="a0000000054">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    
-    </span>
-    <span class="expand-proof">▼</span>
-  </div>
-  <div class="proof_content">
-  
   </div>
 </div>  </p>
 
@@ -260,11 +255,11 @@
 </div> <!-- wrapper -->
 
 <nav class="prev_up_next">
-  <a href="sect0002.html" title="Topologie de \(\Sigma _n\)"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+  <a href="sect0002.html" title="Unicité de la mesure de Gibbs"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
 </a>
   <a href="index.html" title="Existence et unicité des mesures de Gibbs."><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
 </a>
-  <a href="sect0004.html" title="Réduction de \(\Sigma _n\) à \(\Sigma ^+_n\)"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+  <a href="sect0004.html" title="Théorème de Perron-Frobenius de Ruelle"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
 </a>
 </nav>
 

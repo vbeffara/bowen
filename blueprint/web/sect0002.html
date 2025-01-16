@@ -12,9 +12,9 @@
 <meta name="generator" content="plasTeX" />
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Existence et unicité des mesures de Gibbs.: Topologie de \(\Sigma _n\)</title>
-<link rel="next" href="sect0003.html" title="Unicité de la mesure de Gibbs" />
-<link rel="prev" href="sect0001.html" title="Introduction" />
+<title>Existence et unicité des mesures de Gibbs.: Unicité de la mesure de Gibbs</title>
+<link rel="next" href="sect0003.html" title="Réduction de Σn à Σ+n" />
+<link rel="prev" href="sect0001.html" title="Topologie de Σn" />
 <link rel="up" href="index.html" title="Existence et unicité des mesures de Gibbs." />
 <link rel="stylesheet" href="styles/theme-white.css" />
 <link rel="stylesheet" href="styles/extra_styles.css" />
@@ -30,32 +30,29 @@
 <nav class="toc">
 <ul class="sub-toc-0">
 <li class="">
-  <a href="sect0001.html"><span class="toc_ref"></span> <span class="toc_entry">Introduction</span></a>
- </li>
-<li class=" active current">
-  <a href="sect0002.html"><span class="toc_ref"></span> <span class="toc_entry">Topologie de \(\Sigma _n\)</span></a>
-  <span class="expand-toc">▼</span>
-  <ul class="sub-toc-1 active">
+  <a href="sect0001.html"><span class="toc_ref"></span> <span class="toc_entry">Topologie de \(\Sigma _n\)</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0002.html#a0000000013"><span class="toc_ref"></span> <span class="toc_entry">Définition de l’espace métrique \(\Sigma _n\)</span></a>
+  <a href="sect0001.html#a0000000007"><span class="toc_ref"></span> <span class="toc_entry">Définition de l’espace métrique \(\Sigma _n\)</span></a>
  </li>
 <li class="">
-  <a href="sect0002.html#a0000000014"><span class="toc_ref"></span> <span class="toc_entry">Propriétés topologiques de \(\Sigma _n\)</span></a>
+  <a href="sect0001.html#a0000000017"><span class="toc_ref"></span> <span class="toc_entry">Propriétés topologiques de \(\Sigma _n\)</span></a>
  </li>
 
   </ul>
  </li>
-<li class="">
-  <a href="sect0003.html"><span class="toc_ref"></span> <span class="toc_entry">Unicité de la mesure de Gibbs</span></a>
+<li class=" active current">
+  <a href="sect0002.html"><span class="toc_ref"></span> <span class="toc_entry">Unicité de la mesure de Gibbs</span></a>
  </li>
 <li class="">
-  <a href="sect0004.html"><span class="toc_ref"></span> <span class="toc_entry">Réduction de \(\Sigma _n\) à \(\Sigma ^+_n\)</span></a>
+  <a href="sect0003.html"><span class="toc_ref"></span> <span class="toc_entry">Réduction de \(\Sigma _n\) à \(\Sigma ^+_n\)</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html"><span class="toc_ref"></span> <span class="toc_entry">Théorème de Perron-Frobenius de Ruelle</span></a>
+  <a href="sect0004.html"><span class="toc_ref"></span> <span class="toc_entry">Théorème de Perron-Frobenius de Ruelle</span></a>
  </li>
 <li class="">
-  <a href="sect0006.html"><span class="toc_ref"></span> <span class="toc_entry">Construction d’une mesure de Gibbs</span></a>
+  <a href="sect0005.html"><span class="toc_ref"></span> <span class="toc_entry">Construction d’une mesure de Gibbs</span></a>
  </li>
 </ul>
 </nav>
@@ -65,267 +62,51 @@
 
 
 <div class="main-text">
-<h1 id="a0000000003"> Topologie de \(\Sigma _n\)</h1>
-<h2 id="a0000000013"> Définition de l’espace métrique \(\Sigma _n\)</h2>
-<p><div class="definition_thmwrapper " id="def:topo_sn">
+<h1 id="a0000000003"> Unicité de la mesure de Gibbs</h1>
+<p>Dans un premier temps, on introduit quelques notations. </p>
+<p><div class="definition_thmwrapper " id="def:meas_set">
   <div class="definition_thmheading">
     <span class="definition_thmcaption">
     Définition
     </span>
-    <span class="definition_thmlabel">4</span>
+    <span class="definition_thmlabel">11</span>
   </div>
   <div class="definition_thmcontent">
-  <p> Soit \(n \in \mathbf N\). L’ensemble des suites bi-infinies à valeurs dans \([\! [1, n]\! ]\) est noté \(\Sigma _n = \prod _{\mathbf Z}{[\! [1, n]\! ]}\). Chaque \([\! [1, n]\! ]\) est muni de la topologie discrète, et on munit alors \(\Sigma _n\) de la distance produit \(d\) donnée par </p>
-<div class="displaymath" id="a0000000015">
-  \[ \forall x, y \in \Sigma _n,\hspace{1em} d(x, y) = \sum _{i\in \mathbf Z}{2^{-|i|}\mathbf{1}_{x_i \not= y_i}} {\lt} +\infty . \]
-</div>
-<p> On notera \(B_d(x, r)\) la boule centrée en \(x \in \Sigma _n\) et de rayon \(r \geq 0\) pour \(d\). </p>
+  <p> On note \(\mathcal{M}(\Sigma _{n})\) l’ensemble des mesures de probabilité sur \(\Sigma _n\), et \(\mathcal{M}_{\sigma }(\Sigma _{n})\) le sous-ensemble de \(\mathcal{M}(\Sigma _{n})\) constitué des mesures \(\sigma \)-invariantes. </p>
 
   </div>
 </div> </p>
-<p><div class="proposition_thmwrapper " id="prop:sn_compact">
-  <div class="proposition_thmheading">
-    <span class="proposition_thmcaption">
-    Proposition
-    </span>
-    <span class="proposition_thmlabel">5</span>
-  </div>
-  <div class="proposition_thmcontent">
-  <p> def:topo_sn L’espace métrique \((\Sigma _n, d)\) est compact. </p>
-
-  </div>
-</div> </p>
-<p><div class="proof_wrapper" id="a0000000016">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    
-    </span>
-    <span class="expand-proof">▼</span>
-  </div>
-  <div class="proof_content">
-  
-  </div>
-</div> prop:sn_compact Chacun des \([\! [1, n]\! ]\) est compact pour sa topologie. En tant que produit \(\Sigma _n\) est donc également compact, grâce au théorème de Tychonoff. <div class="proof_wrapper" id="a0000000017">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    
-    </span>
-    <span class="expand-proof">▼</span>
-  </div>
-  <div class="proof_content">
-  
-  </div>
-</div> </p>
-<p><div class="proposition_thmwrapper " id="prop:dist_equiv">
-  <div class="proposition_thmheading">
-    <span class="proposition_thmcaption">
-    Proposition
-    </span>
-    <span class="proposition_thmlabel">6</span>
-  </div>
-  <div class="proposition_thmcontent">
-  <p> def:topo_sn Pour \(x, y \in \Sigma _n\) distincts, notons \(N = \min \left\{ i \in \mathbf N\mid x_i \not= y_i \text{ ou } x_{-i} \not= y_{-i}\right\} \). Alors \(d_{\beta }(x, y) = \beta ^N\) et \(d_{\beta }(x, x) = 0\) définit une distance sur \(\Sigma _n\) et est équivalente à la distance \(d\), et ce pour tout \(\beta \in ]0, 1[\). </p>
-
-  </div>
-</div> </p>
-<p><div class="proof_wrapper" id="a0000000018">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    
-    </span>
-    <span class="expand-proof">▼</span>
-  </div>
-  <div class="proof_content">
-  
-  </div>
-</div> prop:dist_equiv Soit \(\beta \in ]0, 1[\). Alors \(d_{\beta }\) est distance car \(d_{\beta }\) est clairement symétrique, \(d(x, y) = 0 \iff x = y\) pour tout \(x,y\in \Sigma _n\) et \(d_{\beta }\) vérifie l’inégalité triangulaire. </p>
-<p>De plus, \(d_{\beta }\) est équivalente à \(d\). En effet pour \(r {\gt} 0\), montrons qu’il existe \(r_1, r_2 {\gt} 0\) tel que pour tout \(x \in \Sigma _n\) on ait </p>
-<div class="displaymath" id="a0000000019">
-  \[ B_{\beta }(x, r_1) \subseteq B_d(x, r) \subseteq B_{\beta }(x, r_2). \]
-</div>
-<p> Soit \(y \in \Sigma _n\). Supposons que \(y \in B_d(x, r)\), alors \(d(x, y) {\lt} r\), en particulier </p>
-<div class="displaymath" id="a0000000020">
-  \[ \forall i \in \mathbf Z, \hspace{1em}2^{-|i|}\mathbf{1}_{x_i \not= y_i} \leq r \]
-</div>
-<p> Soit \(i \in \mathbf Z\), si \(2^{-|i|} {\gt} r\), alors nécessairement \(x_i = y_i\) et \(|i| {\lt} -\frac{r}{\log {2}}\), alors en posant \(r_2 = \beta ^{-\frac{r}{\log {2}}}\) on a \(y \in B_{\beta }(x, r_2)\), ce qui prouve une des deux inclusions. </p>
-<p>Supposons désormais que \(x \in B_{\beta }(x, r)\), c’est-à-dire \(d_{\beta }(x, y) {\lt} r\), donc \(x\) et \(y\) coïncident sur les \(m_r = \frac{r}{\log {\beta }}\) premières coordonnées. Ainsi, </p>
-<div class="displaymath" id="a0000000021">
-  \[ d(x, y) = \sum _{i\in \mathbf Z}{2^{-|i|}\mathbf{1}_{x_i \not= y_i}} \leq 2\sum _{i \geq m_r + 1}{2^i} = 2^{1 - m_r} = r_1. \]
-</div>
-<p> et finalement, \(y \in B_d(x, r_1)\). Donc les distances sont équivalentes et les topologies associées à ces distances sont les mêmes. <div class="proof_wrapper" id="a0000000022">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    
-    </span>
-    <span class="expand-proof">▼</span>
-  </div>
-  <div class="proof_content">
-  
-  </div>
-</div> </p>
-<p>On notera donc dans la suite, \(B_{\beta }(x, r)\) les boules de centre \(x \in \Sigma _n\) et de rayon \(r {\gt} 0\) pour la distance \(d_{\beta }\), et \(B(x, r) = B_{\frac12}(x, r)\). On peut alors noter que si \(y \in B_{\beta }(x, r)\), si on note \(m_r = \frac{r}{\log {\beta }}\), alors \(x\) et \(y\) coïncident sur les coordonnées entre \(-m_r\) et \(m_r\) : </p>
-<div class="displaymath" id="a0000000023">
-  \[ \forall i \in [\! [-m_r, m_r ]\! ], \hspace{1em} x_i = y_i. \]
-</div>
-<h2 id="a0000000014"> Propriétés topologiques de \(\Sigma _n\)</h2>
-<p><div class="definition_thmwrapper " id="def:fn_c0">
+<p><div class="definition_thmwrapper " id="def:gibbs_meas">
   <div class="definition_thmheading">
     <span class="definition_thmcaption">
     Définition
     </span>
-    <span class="definition_thmlabel">7</span>
+    <span class="definition_thmlabel">12</span>
   </div>
   <div class="definition_thmcontent">
-  <p> On notera \(\mathcal{C} (\Sigma _{n})\) l’ensemble des fonctions continues \(f \colon \Sigma _n \longrightarrow \mathbf R\). </p>
-
-  </div>
-</div> </p>
-<p><div class="definition_thmwrapper " id="def:var_potentiel">
-  <div class="definition_thmheading">
-    <span class="definition_thmcaption">
-    Définition
-    </span>
-    <span class="definition_thmlabel">8</span>
-  </div>
-  <div class="definition_thmcontent">
-  <p> def:fn_c0 Soit \(\phi \in \mathcal{C} (\Sigma _{n})\). La fonction de variation d’ordre \(k\) est donné par : </p>
-<div class="displaymath" id="a0000000024">
-  \[ \var _k(\phi ) = \sup \left\{ |\phi (x) - \phi (y)| : \forall i \in [\! [-k, k]\! ], x_i = y_i \right\} . \]
-</div>
-
-  </div>
-</div> </p>
-<p><div class="proposition_thmwrapper " id="prop:equiv_holder">
-  <div class="proposition_thmheading">
-    <span class="proposition_thmcaption">
-    Proposition
-    </span>
-    <span class="proposition_thmlabel">9</span>
-  </div>
-  <div class="proposition_thmcontent">
-  <p> def:var_potentiel Soit \(\beta \in ]0, 1[\). Soit \(\phi \in \mathcal{C} (\Sigma _{n})\), si pour tout \(k \in \mathbf N\) on \(\var _k(\phi ) \leq b\alpha ^k\) pour certaines constantes \(b {\gt} 0\) et \(\alpha \in ]0, 1[\), alors il existe \(\beta \in ]0, 1[\) tel que \(\phi \) soit hölderienne pour \(d_{\beta }\). </p>
-
-  </div>
-</div> </p>
-<p><div class="definition_thmwrapper " id="def:holder_fn_set">
-  <div class="definition_thmheading">
-    <span class="definition_thmcaption">
-    Définition
-    </span>
-    <span class="definition_thmlabel">10</span>
-  </div>
-  <div class="definition_thmcontent">
-  <p> def:var_potentiel On notera \(\mathcal{H} (\Sigma _{n})\) l’ensemble des fonctions \(\phi \in \mathcal{C} (\Sigma _{n})\) pour lesquels il existe \(\alpha \in ]0, 1[\) et \(b {\gt} 0\) vérifiant </p>
-<div class="displaymath" id="a0000000025">
-  \[ \forall k \in \mathbf N, \hspace{1em} \var _k(\phi ) \leq b\alpha ^k. \]
-</div>
-
-  </div>
-</div> </p>
-<p><div class="proposition_thmwrapper " id="prop:separable">
-  <div class="proposition_thmheading">
-    <span class="proposition_thmcaption">
-    Proposition
-    </span>
-    <span class="proposition_thmlabel">11</span>
-  </div>
-  <div class="proposition_thmcontent">
-  <p> Pour tout \(m \in \mathbf N\), soit \(T_m = \left\{ x \in \Sigma _n \mid \forall |i|{\gt}m, x_i=1\right\} \) et \(T = \bigcup _{m\geq 0}{T_m}\). L’ensemble \(T\) est dense dans \(\Sigma _n\) et est dénombrable. Ainsi, \(\Sigma _n\) est séparable. </p>
-
-  </div>
-</div> </p>
-<p><div class="proof_wrapper" id="a0000000026">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    
-    </span>
-    <span class="expand-proof">▼</span>
-  </div>
-  <div class="proof_content">
-  
-  </div>
-</div> prop:separable def:topo_sn, prop:dist_equiv Soit \(O\) un ouvert non vide et \(x \in O\), alors il existe \(r = 2^{-m+1} {\gt} 0\) tel que \(B(x, r) \subseteq O\). Si on prend \(y \in \Sigma _n\) tel que si \(i \in [\! [-m, m ]\! ]\) alors \(y_i = x_i\) et sinon \(y_i = 1\), alors \(y \in T_m\) et \(y \in B(x, r)\), donc \(O \cap T \not= \emptyset \). Ainsi \(T\) est dense dans \(\Sigma _n\). </p>
-<p>Pour tout \(m \in \mathbf N\), l’ensemble \(T_m\) contient exactement \(n^{2m+1}\) élements, <i class="itshape">ie.</i> \(T_m\) est fini. Donc par union dénombrable, \(T\) est dénombrable. <div class="proof_wrapper" id="a0000000027">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    
-    </span>
-    <span class="expand-proof">▼</span>
-  </div>
-  <div class="proof_content">
-  
-  </div>
-</div> </p>
-<p><div class="proposition_thmwrapper " id="prop:boules">
-  <div class="proposition_thmheading">
-    <span class="proposition_thmcaption">
-    Proposition
-    </span>
-    <span class="proposition_thmlabel">12</span>
-  </div>
-  <div class="proposition_thmcontent">
-  <p> Soit \(O\) un ouvert de \(\Sigma _n\). Pour tout \(x \in O\), on note \(r_x {\gt} 0\) tel que \(B(x, r_x) \subseteq O\). Alors il existe \(\mathcal R \subseteq \Sigma _n\) dénombrable tel que </p>
-<div class="displaymath" id="a0000000028">
-  \[ O = \bigsqcup _{x\in \mathcal R}{B(x, r_x)}, \]
-</div>
-<p> où \(\bigsqcup \) dénote l’union disjointe. </p>
-
-  </div>
-</div> </p>
-<p><div class="proof_wrapper" id="a0000000029">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    
-    </span>
-    <span class="expand-proof">▼</span>
-  </div>
-  <div class="proof_content">
-  
-  </div>
-</div> prop:boules prop:separable, prop:dist_equiv Soit \(O\) un ouvert de \(\Sigma _n\), alors \(O = \bigcup _{x \in O}{B(x, r_x)}\). Cette union n’est pas disjointe et indicée sur un ensemble fini. On introduit alors la relation : </p>
-<div class="displaymath" id="a0000000030">
-  \[ \forall x,y \in O, x\sim y \iff B(x, r_x) \cap B(y, r_y) \not= \emptyset . \]
-</div>
-<p> Cette relation est clairement une relation d’équivalence. De plus on a pour \(x, y \in O\), </p>
-<div class="displaymath" id="a0000000031">
-  \[ x \sim y \iff B(x, r_x) \subseteq B(y, r_y) \text{ ou } B(y, r_y) \subseteq B(x, r_x). \]
-</div>
-<p> En effet, supposons que \(B(x, r_x) \cap B(y, r_y) \not= \emptyset \), alors soit \(z\) dans l’intersection, on note \(m_x = -\frac{r_x}{\log 2}\) et \(m_y = -\frac{r_y}{\log 2}\). Sans perte de généralité, on peut supposer que \(m_y \leq m_x\). On a alors </p>
+  <p> def:meas_set, def:shift IsGibbs Soit \(\phi \in \mathcal{C} (\Sigma _{n})\) et \(\mu \in \mathcal{M}(\Sigma _{n})\). On dit que \(\mu \) est une mesure de Gibbs pour un potentiel \(\phi \) si \(\mu \in \mathcal{M}_{\sigma }(\Sigma _{n})\) et s’il existe \(P(\phi ) \in \mathbf R\) et \(c_1, c_2 {\gt} 0\) tels qu’on ait </p>
 <div class="displaymath" id="a0000000032">
-  \[ \left\{ \begin{array}{l} \forall i \in [\! [-m_x, m_x ]\! ], x_i = z_i, \vspace{0.5em}\\ \forall i \in [\! [-m_y, m_y ]\! ], y_i = z_i. \end{array}\right. \]
+  \[ \frac{\mu (C(x, m))}{\exp (-Pm + \sum _{k=1}^{m-1}{\phi (\sigma ^k(x))})} \in [c_1, c_2] \]
 </div>
-<p> Alors, pour tout \(i \in [\! [-m_y, m_y ]\! ], x_i = y_i\) et donc \(B(x, r_x) \subseteq B(y, r_y)\). Ainsi, il existe un système de représentant \(\mathcal R \subseteq O\) pour la relation \(\sim \) tel que </p>
-<div class="displaymath" id="a0000000033">
-  \[ O = \bigcup _{x\in O}{B(x, r_x)} = \bigsqcup _{x\in \mathcal R}{B(x, r_x)}. \]
-</div>
-<p>Il reste à montrer que \(\mathcal R\) est au plus dénombrable. Pour tout \(x \in \mathcal R\), il existe \(h(x) \in T\) tel que \(h(x) \in B(x, r_x)\). L’application \(h \colon \mathcal R \longrightarrow T\) ainsi définie est donc injective et \(T\) est dénombrable, ainsi \(\mathcal R\) est dénombrable. <div class="proof_wrapper" id="a0000000034">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    
-    </span>
-    <span class="expand-proof">▼</span>
-  </div>
-  <div class="proof_content">
-  
-  </div>
-</div> </p>
-<p><div class="definition_thmwrapper " id="def:shift">
-  <div class="definition_thmheading">
-    <span class="definition_thmcaption">
-    Définition
-    </span>
-    <span class="definition_thmlabel">13</span>
-  </div>
-  <div class="definition_thmcontent">
-  <p> L’application de décalage (<i class="itshape">shift</i> en anglais) \(\sigma \) sur \(\Sigma _n\) est donnée par </p>
-<div class="displaymath" id="a0000000035">
-  \[ (\sigma x)_i = x_{i+1} \]
-</div>
-<p> pour tout \(x \in \Sigma _n\) et \(i \in \mathbf Z\). Cette application est alors un homéomorphisme de \(\Sigma _n\). </p>
+<p> pour tout \(x \in \Sigma _n\) et \(m \in \mathbf N\). </p>
 
   </div>
 </div> </p>
-<p><div class="definition_thmwrapper " id="def:cylindres">
+<p>Dans cette section, on montre la partie concernant l’unicité du théorème suivant. </p>
+<p><div class="theorem_thmwrapper " id="thm:gibbs">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Théoreme
+    </span>
+    <span class="theorem_thmlabel">13</span>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> def:holder_fn_set, def:gibbs_meas, thm:existence, prop:mu_mixing, prop:unique, lem:fn_equiv_pos_coords Soit \(\phi \in \mathcal H(\Sigma _n)\), alors il existe une unique mesure de Gibbs \(\mu _{\phi } = \mu \in \mathcal M_{\sigma }(\Sigma _n)\) </p>
+
+  </div>
+</div> </p>
+<p>Dans les sections suivantes, on construira une mesure de Gibbs mélangeante notamment grâce au théorème de Ruelle. C’est l’ergodicité de cette mesure qui entrainera l’unicité de la mesure de Gibbs. </p>
+<p><div class="definition_thmwrapper " id="def:ergodique">
   <div class="definition_thmheading">
     <span class="definition_thmcaption">
     Définition
@@ -333,15 +114,140 @@
     <span class="definition_thmlabel">14</span>
   </div>
   <div class="definition_thmcontent">
-  <p> prop:dist_equiv, def:topo_sn Soit \(x\in \Sigma _n\). On définit les cyclindres de centre \(x\) et de rayon \(m \in \mathbf N\) par </p>
-<div class="displaymath" id="a0000000036">
-  \[ C(x, m) = \left\{ y \in \Sigma _n \mid \forall i \in [\! [0, m - 1 ]\! ], x_i = y_i\right\} . \]
-</div>
-<p> de cette manière on peut les relier aux boules pour la distance \(d_{\beta }\) aux cyclindres : </p>
-<div class="displaymath" id="a0000000037">
-  \[ C(x,2m+1) = \sigma ^{-m}(B_{\beta }(\sigma ^mx, \beta ^m)). \]
+  <p> def:meas_set, def:shift Soit \(\mu \in \mathcal{M}(\Sigma _{n})\). On dit que \(\mu \) est ergodique (par rapport à \(\sigma \)) si pour tout borélien \(E \in \mathcal{B}(\Sigma _n)\) tels que \(\sigma ^{-1}E=E\), on a </p>
+<div class="displaymath" id="a0000000033">
+  \[ \mu (E) = 0 \text{ ou } \mu (E^c) = 0, \]
 </div>
 
+  </div>
+</div> </p>
+<p><div class="definition_thmwrapper " id="def:mixing">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Définition
+    </span>
+    <span class="definition_thmlabel">15</span>
+  </div>
+  <div class="definition_thmcontent">
+  <p> def:meas_set, def:shift Soit \(\mu \in \mathcal{M}(\Sigma _{n})\). On dit que \(\mu \) est mélangeante (par rapport à \(\sigma \)) si pour tout borélien \(E, F \in \mathcal{B}(\Sigma _n)\), on a </p>
+<div class="displaymath" id="a0000000034">
+  \[ \mu (E\cap \sigma ^{-n}F) \underset {n\to \infty }{\longrightarrow } \mu (E)\mu (F). \]
+</div>
+
+  </div>
+</div> </p>
+<p><div class="remark_thmwrapper " id="a0000000035">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remarque
+    </span>
+  </div>
+  <div class="remark_thmcontent">
+  <p>On a l’implication "mélangeante" \(\implies \) "ergodique". </p>
+
+  </div>
+</div> </p>
+<p><div class="lemma_thmwrapper " id="lem:sig_inv_imp_cst">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemme
+    </span>
+    <span class="lemma_thmlabel">16</span>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> def:ergodique Soit \(f \colon \Sigma _n \longrightarrow \mathbf R\) intégrable par rapport à une mesure \(\mu \in \mathcal{M}_{\sigma }(\Sigma _{n})\) ergodique. Supposons que \(f \circ \sigma = f\) \(\mu \)-presque partout. Alors \(f\) est constante \(\mu \)-presque partout. </p>
+
+  </div>
+</div> </p>
+<p><div class="proof_wrapper" id="a0000000036">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+  </div>
+</div> lem:sig_inv_imp_cst Pour montrer ce lemme on considére les ensembles \(E_c = f^{-1}(\{ c\} )\) pour tout \(c\in \mathbf R\). Comme \(f \circ \sigma = f\) \(\mu \)-p.p., on a \(\sigma ^{-1}E_c = E_c\), et donc par ergodicité de \(\mu \), </p>
+<div class="displaymath" id="a0000000037">
+  \[ \mu (E_c) = 0 \text{ ou } \mu (E_c) = 1. \]
+</div>
+<p> Il est donc clair qu’il existe au plus un \(c\in \mathbf R\) tel que \(f = c\) pour \(\mu \)-presque tout \(x \in \Sigma _n\). <div class="proof_wrapper" id="a0000000038">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+  </div>
+</div> </p>
+<p><div class="proposition_thmwrapper " id="prop:unique">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">17</span>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> def:ergodique, def:gibbs_meas Supposons qu’il existe une mesure de Gibbs \(\mu \) ergodique pour \(\phi \in \mathcal{C} (\Sigma _{n})\). Alors cette mesure est l’unique mesure de Gibbs associé à \(\phi \). </p>
+
+  </div>
+</div> </p>
+<p><div class="proof_wrapper" id="a0000000039">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+  </div>
+</div> prop:unique lem:sig_inv_imp_cst, prop:boules Soit \(\mu , \mu ' \in \mathcal{M} (\Sigma _{n}^+)\) deux mesures de Gibbs avec \(\mu \) ergodique, \(c_1, c_1', c_2, c_2' {\gt} 0\) et \(P, P' \in \mathbf R\) des constantes telles que pour tout \(m \in \mathbf N\) et \(x \in \Sigma _n\) on ait </p>
+<div class="displaymath" id="a0000000040">
+  \[ \left\{ \begin{array}{lll} c_1 & \leq \frac{\mu (C(x,m))}{\exp {(-Pm + S_m\phi (x))}} & \leq c_2 \vspace{1em} \\ c_1’ & \leq \frac{\mu '(C(x,m))}{\exp {(-P’m + S_m\phi (x))}} & \leq c_2’ \end{array}\right. \]
+</div>
+<p>D’abord, montrons que \(P = P'\). Soit \(m \in \mathbf N\) et \(T_m = \left\{ x \in \Sigma _n \mid x_i = 1 \text{ si } i \not\in [\! [0, m-1 ]\! ]\right\} \), de telle sorte que \(\Sigma _n = \bigsqcup _{x\in T_m}{C(x,m)}\), et \(T_m\) est fini. On a alors </p>
+<div class="displaymath" id="a0000000041">
+  \[ c_1'e^{-P'm}\sum _{x\in T_m}{e^{S_m\phi (x)}} \leq \sum _{x\in T_m}{\mu ’(C(x,m))} = 1 = \sum _{x\in T_m}{\mu ’(C(x, m))} \leq c_2'e^{-P'm}\sum _{x\in T_m}{e^{S_m\phi (x)}}, \]
+</div>
+<p> et donc </p>
+<div class="displaymath" id="a0000000042">
+  \[ P - \frac1m \log {c_2’} \leq \frac1m \log {\sum _{x\in T_m}{e^{S_m\phi (x)}}} \leq P - \frac1m \log {c_1’}. \]
+</div>
+<p> Par le théorème des gendarmes, on trouve donc \(P' = \lim _{m\to \infty }{\frac1m\sum _{x\in T_m}{e^{S_m\phi (x)}}}\). Grâce au même raisonnement, on en conclut que \(P = P'\) car ils sont tout deux égaux à la même limite. </p>
+<p>Grâce aux estimations sur \(\mu \) et \(\mu '\) sur les cylindres, on a alors pour tout \(x \in \Sigma _n\) et \(m \in \mathbf N\), </p>
+<div class="displaymath" id="a0000000043">
+  \[ \mu '(C(x, m)) \leq \frac{c_2'}{c_1}\mu (C(x, m)). \]
+</div>
+<p> Comme \(\mu \) et \(\mu '\) sont invariantes par \(\sigma \), on peut étendre le résultat sur les ensembles de la forme \(\left\{ y\in \Sigma _n \mid \forall i \in [\! [-m, m]\! ], x_i = y_i\right\} \) pour tout \(x \in \Sigma _n\) et \(m \in \mathbf N\), c’est-à-dire sur une base de la topologie de \(\Sigma _n\). De plus, comme tout ouvert de \(\Sigma _n\) est une union disjointe dénombrable de ces éléments d’après la proposition <a href="sect0001.html#prop:boules">8</a>, on peut alors étendre cette inégalité aux ouverts de \(\Sigma _n\). Par régularité extérieure par rapport aux ouverts, on a pour tout borélien \(B \in \mathcal{B}(\Sigma _n)\), </p>
+<div class="displaymath" id="a0000000044">
+  \[ \mu '(B) = \inf \left\{ \mu '(O) \mid O \text{ ouvert }, B \subseteq O\right\} . \]
+</div>
+<p> De là, on a pour tout ouvert \(B \subseteq O\), </p>
+<div class="displaymath" id="a0000000045">
+  \[ \mu '(B) \leq \mu '(O) \leq \frac{c'_2}{c_1} \mu (O), \]
+</div>
+<p> et donc \(\mu '(B) \leq \frac{c'_2}{c_1}\inf \{ \mu (O) \mid O \text{ ouvert }, B \subseteq O\}  = \frac{c_2'}{c_1}\mu (B)\). Donc pour tout borélien \(B \in \mathcal{B}(\Sigma _n)\) on a \(\mu '(B) \leq \frac{c_2'}{c_1}\mu (B)\), ainsi \(\mu '\) est absolument continue par rapport à \(\mu \). D’après le théorème de Radon-Nikodym, \(\mu '\) admet une densité \(f\) par rapport à \(\mu \). En appliquant \(\sigma \), on obtient </p>
+<div class="displaymath" id="a0000000046">
+  \[ \mu ' = \sigma _*\mu ' = (f\circ \sigma ^{-1})\cdot \sigma _*\mu = (f\circ \sigma ^{-1})\cdot \mu . \]
+</div>
+<p> Par unicité de la dérivée de Radon-Nikodym, \(f = f \circ \sigma ^{-1}\) \(\mu \)-presque partout. Or comme \(\mu \) est ergodique par hypothèse, alors il existe une constante \(c \in \mathbf R\) tel que \(f = c\) \(\mu \)-presque partout. Finalement, </p>
+<div class="displaymath" id="a0000000047">
+  \[ 1 = \mu '(\Sigma _n) = \int _{\Sigma _n}{c\, d\mu } = c. \]
+</div>
+<p> Donc \(\mu = \mu '\), ce qui prouve l’unicité. <div class="proof_wrapper" id="a0000000048">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
   </div>
 </div>  </p>
 
@@ -351,11 +257,11 @@
 </div> <!-- wrapper -->
 
 <nav class="prev_up_next">
-  <a href="sect0001.html" title="Introduction"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+  <a href="sect0001.html" title="Topologie de \(\Sigma _n\)"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
 </a>
   <a href="index.html" title="Existence et unicité des mesures de Gibbs."><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
 </a>
-  <a href="sect0003.html" title="Unicité de la mesure de Gibbs"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+  <a href="sect0003.html" title="Réduction de \(\Sigma _n\) à \(\Sigma ^+_n\)"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
 </a>
 </nav>
 
