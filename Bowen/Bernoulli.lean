@@ -43,19 +43,6 @@ namespace Bernoulli
   def cylinder (x : Bernoulli n) (m : ℕ) : Set (Bernoulli n) :=
     {y : Bernoulli n | ∀ i ∈ Ico 0 m, x i = y i}
 
-  def shift (x : Bernoulli n) : Bernoulli n := (x ∘ (· + 1))
-
-  structure InvariantProb (μ : Measure (Bernoulli n)) where
-    prob : μ (Set.univ) = 1
-    invariant : ∀ s, μ s = μ (preimage shift s)
-
-  def IsGibbs (φ : Bernoulli n → ℝ) (μ : Measure (Bernoulli n)) : Prop :=
-    InvariantProb μ ∧
-    ∃ P : ℝ, ∃ c₁ c₂ : NNReal, ∀ x : Bernoulli n, ∀ m : ℕ,
-      μ (cylinder x m) / nnexp (- P * m + ∑ k < m, φ (shift^[k] x)) ∈ Icc (c₁ : ENNReal) (c₂: ENNReal)
-
-  structure Holder (φ : Bernoulli n → ℝ) where
-    isHolder : ∃ b : NNReal, ∃ α ∈ Ioo 0 1, ∀ x y : Bernoulli n, ∀ k : ℕ,
-      y ∈ cylinder x k → |φ x - φ y| ≤ b * α ^ k
+  def shift (x : Bernoulli n) : Bernoulli n := fun i => x (i + 1)
 
 end Bernoulli
