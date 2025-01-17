@@ -10,35 +10,28 @@ namespace Bernoulli
 
   variable {n : ℕ} (x y z : Bernoulli n) {φ : Bernoulli n → ℝ}
 
-  noncomputable def diff (x y : Bernoulli n) : ℤ → NNReal :=
-    Set.indicator {i | x i ≠ y i} (fun i => nnexp (- |i|))
+  instance : MetricSpace (Fin n) where
+    dist x y := if x = y then 0 else 1
+    dist_self x := by simp
+    dist_comm x y := by simp [dist]; congr 1; simp [eq_comm]
+    dist_triangle x y z := by
+      simp_all [dist]
+      by_cases h1 : x = z <;> simp_all [h1]
+      . by_cases h2 : y = z <;> simp_all [h2, eq_comm]
+      . by_cases h2 : x = y <;> simp_all [h2]
+        by_cases h3 : y = z <;> simp_all [h3]
+    eq_of_dist_eq_zero := by
+      intro x y h
+      simp [dist] at h
+      exact h
 
-  @[simp] lemma summable : Summable fun i => (x.diff y i : ℝ) := by
-    simp [diff]
-    apply Summable.indicator
-    apply Summable.of_nat_of_neg <;> simpa using Real.summable_exp_neg_nat
+  noncomputable instance : MetricSpace (Bernoulli n) := PiCountable.metricSpace
 
-  noncomputable def dist (x y : Bernoulli n) : ℝ := ∑' i, diff x y i
+  instance : CompactSpace (Fin n) := Finite.compactSpace
+  instance : CompactSpace (Bernoulli n) := Pi.compactSpace -- or Function.compactSpace
 
-  @[simp] lemma dist_self : dist x x = 0 := by simp [dist, diff]
-
-  lemma dist_comm : x.dist y = y.dist x := by
-    simp [dist] ; congr ; ext i
-    simp [diff] ; congr ; ext i ; exact ne_comm
-
-  lemma dist_triangle : dist x z ≤ dist x y + dist y z := by
-    simp [dist, ← tsum_add]
-    apply tsum_mono (by simp) (by simp [Summable.add])
-    intro i ; dsimp ; norm_cast
-    by_cases h1 : x i = z i <;> simp [diff, h1]
-    by_cases h2 : x i = y i <;> simp [h2]
-    have h3 : ¬y i = z i := by simpa [← h2]
-    simp [h3]
-
-  noncomputable instance : MetricSpace (Bernoulli n) := by
-    apply MetricSpace.ofDistTopology dist dist_self dist_comm dist_triangle
-    · sorry
-    · sorry
+  theorem bernoulli_is_compact : IsCompact (Set.univ : Set (Bernoulli n)) :=
+    by exact Pi.compactSpace.isCompact_univ
 
   def cylinder (x : Bernoulli n) (m : ℕ) : Set (Bernoulli n) :=
     {y : Bernoulli n | ∀ i ∈ Ico 0 m, x i = y i}
