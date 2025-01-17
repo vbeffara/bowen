@@ -34,6 +34,8 @@
   \begin{definition}
     \label{def:ergodique}
     \uses{def:meas_set, def:shift}
+    \leanok
+    \lean{IsErgodic}
     Soit $\mu \in \Ms{n}$.
     On dit que $\mu$ est ergodique (par rapport à $\sigma$) si pour tout borélien $E \in \mathcal{B}(\s_n)$ tels que $\sigma^{-1}E=E$, on a
 	$$\mu(E) = 0 \text{ ou } \mu(E^c) = 0,$$
@@ -42,6 +44,8 @@
   \begin{definition}
     \label{def:mixing}
     \uses{def:meas_set, def:shift}
+    \leanok
+    \lean{IsMixing}
     Soit $\mu \in \Ms{n}$. On dit que $\mu$ est mélangeante (par rapport à $\sigma$) si pour tout borélien $E, F \in \mathcal{B}(\s_n)$, on a
 	$$\mu(E\cap\sigma^{-n}F) \underset{n\to\infty}{\longrightarrow} \mu(E)\mu(F).$$
   \end{definition}
@@ -53,6 +57,8 @@
   \begin{lemma}
     \label{lem:sig_inv_imp_cst}
     \uses{def:ergodique}
+    \leanok
+    \lean{ergodic_shift_inv_imp_cst}
     Soit $f \colon \s_n \longrightarrow \R$ intégrable par rapport à une mesure $\mu \in \Mss{n}$ ergodique.
     Supposons que $f \circ \sigma = f$ $\mu$-presque partout.
     Alors $f$ est constante $\mu$-presque partout.
@@ -69,6 +75,8 @@
   \begin{proposition}
     \label{prop:unique}
     \uses{def:ergodique, def:gibbs_meas}
+    \leanok
+    \lean{Uniqueness.gibbs_ergodic_unique}
     Supposons qu'il existe une mesure de Gibbs $\mu$ ergodique pour $\phi \in \Cs{n}$.
     Alors cette mesure est l'unique mesure de Gibbs associé à $\phi$.
   \end{proposition}

@@ -5,6 +5,7 @@
   \begin{definition}
     \label{def:topo_sn}
     \leanok
+    \lean{Bernoulli}
     Soit $n \in \N$.
     L'ensemble des suites bi-infinies à valeurs dans $\llbracket 1, n\rrbracket$ est noté $\s_n = \prod_{\Z}{\llbracket 1, n\rrbracket}$.
     Chaque $\llbracket 1, n\rrbracket$ est muni de la topologie discrète,
@@ -16,11 +17,14 @@
   \begin{proposition}
     \label{prop:sn_compact}
     \uses{def:topo_sn}
+    \leanok
+    \lean{Bernoulli.bernoulli_is_compact}
     L'espace métrique $(\s_n, d)$ est compact.
   \end{proposition}
 
   \begin{proof}
     \proves{prop:sn_compact}
+    \leanok
     Chacun des $\llbracket 1, n\rrbracket$ est compact pour sa topologie.
     En tant que produit $\s_n$ est donc également compact, grâce au théorème de Tychonoff.
   \end{proof}
@@ -69,14 +73,6 @@
     Soit $\phi \in \Cs{n}$. La fonction de variation d'ordre $k$ est donné par :
     $$\var_k(\phi) = \sup\left\{|\phi(x) - \phi(y)| : \forall i \in \llbracket -k, k\rrbracket, x_i = y_i \right\}.$$
   \end{definition}
-
-  \begin{proposition}
-    \label{prop:equiv_holder}
-    \uses{def:var_potentiel}
-    Soit $\beta \in ]0, 1[$.
-    Soit $\phi \in \Cs{n}$, si pour tout $k \in \N$ on $\var_k(\phi) \leq b\alpha^k$ pour certaines constantes $b > 0$ et $\alpha \in ]0, 1[$,
-    alors il existe $\beta \in ]0, 1[$ tel que $\phi$ soit hölderienne pour $d_{\beta}$.
-  \end{proposition}
 
   \begin{definition}
     \label{def:holder_fn_set}
