@@ -44,3 +44,10 @@ namespace Uniqueness
     := sorry
 
 end Uniqueness
+
+namespace Equiv
+
+  def equiv (f : Bernoulli n → ℝ) (g : Bernoulli n → ℝ) : Prop :=
+    ∃ u : Bernoulli n → ℝ, Continuous u ∧ f = g - u + (u ∘ shift)
+
+end Equiv

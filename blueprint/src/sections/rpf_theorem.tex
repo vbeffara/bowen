@@ -3,6 +3,8 @@
   \begin{definition}
     \label{def:transfert_operator}
     \uses{def:shift}
+    \leanok
+    \lean{RPF.transfert}
     Soit $\phi \in \Hsp{n} = \Csp{n} \cap \Hs{n}$. On appelle opérateur de transfert ou opérateur de Ruelle l'application
     $\L_{\phi} \colon \Csp{n} \longrightarrow \Csp{n} $ définie par :
     $$ \forall f \in \Csp{n}, \forall x \in \s_n, \L_{\phi}f(x) = \sum_{\sigma y = x}{e^{\phi(y)}f(y)}.$$
@@ -31,7 +33,7 @@
 
   \begin{proposition}
     \label{prop:rpf_1}
-    \uses{def:meas_set}
+    \uses{def:meas_set, def:transfert_operator}
     Il existe $\nu \in \Msp{n}$ tel que $\L^*\nu = \lambda\nu$.
   \end{proposition}
 
