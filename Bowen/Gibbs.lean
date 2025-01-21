@@ -20,6 +20,10 @@ structure Holder (φ : Bernoulli n → ℝ) where
   isHolder : ∃ b : NNReal, ∃ α ∈ Ioo 0 1, ∀ x y : Bernoulli n, ∀ k : ℕ,
     y ∈ cylinder x k → |φ x - φ y| ≤ b * α ^ k
 
+lemma holder_imp_continuous (φ : Bernoulli n → ℝ)
+  : Holder φ → Continuous φ
+  := by intro hφ; sorry
+
 def IsErgodic (μ : Measure (Bernoulli n)) : Prop :=
   InvariantProb μ ∧
   ∀ s, preimage shift s = s → μ s = 0 ∨ μ s = 1
@@ -49,5 +53,16 @@ namespace Equiv
 
   def equiv (f : Bernoulli n → ℝ) (g : Bernoulli n → ℝ) : Prop :=
     ∃ u : Bernoulli n → ℝ, Continuous u ∧ f = g - u + (u ∘ shift)
+
+  theorem equiv_imp_eq_gibbs (φ ψ : Bernoulli n → ℝ) (μ ν : Measure (Bernoulli n))
+    : Holder φ ∧ Holder ψ ∧ equiv φ ψ ∧ IsGibbs φ μ ∧ IsGibbs ψ ν → μ = ν
+    := sorry
+
+  def DependOnlyPosCoords (φ : Bernoulli n → ℝ) : Prop :=
+    ∀ x y : Bernoulli n, (∀ i : ℕ, x i = y i) → φ x = φ y
+
+  lemma equiv_pos_coords (φ : Bernoulli n → ℝ)
+    : ∃ ψ : Bernoulli n → ℝ, DependOnlyPosCoords ψ ∧ equiv φ ψ
+    := sorry
 
 end Equiv

@@ -8,7 +8,7 @@ noncomputable def nnexp (x : ℝ) : NNReal := ⟨exp x, exp_nonneg x⟩
 
 namespace Bernoulli
 
-  variable {n : ℕ} (x y z : Bernoulli n) {φ : Bernoulli n → ℝ}
+  variable {n : ℕ} (x y z : Bernoulli n) {φ : Bernoulli n → ℝ} {a : Fin n}
 
   instance : MetricSpace (Fin n) where
     dist x y := if x = y then 0 else 1
@@ -37,5 +37,24 @@ namespace Bernoulli
     {y : Bernoulli n | ∀ i ∈ Ico 0 m, x i = y i}
 
   def shift (x : Bernoulli n) : Bernoulli n := fun i => x (i + 1)
+
+  def finite_bernoulli (a : Fin n) (m : ℕ) : Set (Bernoulli n) := {x | ∀ i : ℤ, |i| > m → x i = a}
+
+  instance : T2Space (Bernoulli n) where
+    t2 := by
+      intro x y hneq
+      sorry
+
+  lemma bernoulli_is_T2 : T2Space (Bernoulli n) := by infer_instance
+
+  def ball (x : Bernoulli n) (m : ℕ) : Set (Bernoulli n)
+    := {y | ∀ i ∈ Icc ((-m) : ℤ) m, x i = y i}
+
+  lemma ball_open : ∀ x : Bernoulli n, ∀ m, IsOpen (ball x m)
+    := by sorry
+
+  lemma open_iff_countable_ball_union (s : Set (Bernoulli n))
+    : IsOpen s ↔ ∃ b : ℕ → Bernoulli n, ∃ r : ℕ → ℕ, s = sUnion {ball (b i) (r i) | i : ℕ}
+    := by sorry
 
 end Bernoulli
