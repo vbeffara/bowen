@@ -19,6 +19,8 @@
   \begin{lemma}
     \label{lem:fn_equiv_imp_gibbs_eq}
     \uses{def:fn_equiv, def:gibbs_meas}
+    \leanok
+    \lean{Equiv.equiv_imp_gibbs_eq}
     Soit $\phi \sim \psi \in \Hs{n}$. Dans ce cas, $\mu_{\phi} = \mu_{\psi}$ et $P(\phi) = P(\psi)$.
   \end{lemma}
 
@@ -78,6 +80,8 @@
   \begin{lemma}
     \label{lem:fn_equiv_pos_coords}
     \uses{def:fn_equiv, def:holder_fn_set}
+    \leanok
+    \lean{Equiv.DependOnlyPosCoords, Equiv.equiv_pos_coords}
     Soit $\phi \in \Hs{n}$, et
     $$\psi := \phi \circ r + \left(\sum_{k=0}^{\infty}{\phi \circ \sigma^k}\right)\circ(\sigma \circ r - r \circ \sigma).$$
     Alors,
