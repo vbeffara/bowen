@@ -29,7 +29,14 @@
     \end{enumerate}
   \end{theorem}
 
-  Pour prouver ce théorème, nous allons avoir besoin de quelques lemmes.
+  Pour prouver ce théorème, nous allons avoir besoin de quelques lemmes et notamment du théorème suivant dû à Schauder et Tychonoff.
+
+  \begin{theorem}[Théorème de point fixe de Schauder-Tychonoff]
+    \label{thm:schauder}
+
+    Soit $K$ un sous-ensemble compact convexe d'un espace vectoriel topologique locallement convexe.
+    Alors toute application $G \colon K \longrightarrow K$ continue admet un point fixe.
+  \end{theorem}
 
   \begin{proposition}
     \label{prop:rpf_1}
@@ -39,7 +46,7 @@
 
   \begin{proof}
     \proves{prop:rpf_1}
-    \uses{def:meas_set} % + Schauder-Tychonoff & Riesz
+    \uses{def:meas_set, thm:schauder} % + Riesz
     Comme $\L1(x) = \sum_{\sigma y = x}{e^{\phi(y)}} > 0$ pour tout $x \in \s_n$, on a nécessairement $\L^*\mu(1) > 0$ pour tout $\mu \in \Msp{n}$.
     On peut alors poser $G(\mu) = \frac 1 {\L^*\mu(1)}\L^*\mu \in \Msp{n}$ pour toute mesure $\mu \in \Msp{n}$,
     ce qui donne une application $G\colon \Msp{n} \longrightarrow \Msp{n}$,
@@ -95,7 +102,7 @@
 
   \begin{proof}
     \proves{prop:rpf_2}
-    \uses{lem:Lambda_compact}
+    \uses{lem:Lambda_compact, thm:schauder}
     On pose $F \colon \Csp{n} \longrightarrow \Csp{n}$ définie par
     $$\forall f \in \Csp{n}, F(f) = \frac 1 \lambda \L f.$$
     On vérifie que $\Lambda$ est stable par $F$. Soit $f \in \Lambda$,
