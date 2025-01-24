@@ -11,6 +11,26 @@ theorem schauder_tychonoff
   {K : Set E} (hK : IsCompact K) (hK_convex : Convex ℝ K) (f : E → E) :
   ContinuousOn f K ∧ (f '' K ⊆ K) → ∃ x ∈ K, f x = x := sorry
 
+noncomputable def pullback_aux {X : Type*} [TopologicalSpace X] [MeasurableSpace X]
+  [OpensMeasurableSpace X] [CompactSpace X] (L : C(X, NNReal) → C(X, NNReal)) (μ : ProbabilityMeasure X) :
+  CompactlySupportedContinuousMap X NNReal →ₗ[NNReal] NNReal :=
+    { toFun := fun f => ⟨∫ x, L f x ∂μ, sorry⟩,
+      map_add' := sorry,
+      map_smul' := sorry
+    }
+
+noncomputable def pullback_measure {X : Type*} [TopologicalSpace X] [MeasurableSpace X] [T2Space X]
+  [OpensMeasurableSpace X] [CompactSpace X] [BorelSpace X]
+  (L : C(X, NNReal) → C(X, NNReal)) (μ : ProbabilityMeasure X) :
+  Measure X :=
+    (rieszContent (pullback_aux L μ)).measure
+
+noncomputable def pullback {X : Type*} [TopologicalSpace X] [MeasurableSpace X] [T2Space X]
+  [OpensMeasurableSpace X] [CompactSpace X] [BorelSpace X]
+  (L : C(X, NNReal) → C(X, NNReal)) (μ : ProbabilityMeasure X) :
+  ProbabilityMeasure X :=
+    ⟨pullback_measure L μ, sorry⟩
+
 namespace RPF
 
   abbrev PBernoulli (n : ℕ) := ℕ → Fin n
@@ -50,8 +70,6 @@ namespace RPF
   theorem im_transfert_continuous (hφ : Continuous φ)
     : Continuous (transfert φ)
     := by sorry
-
-  -- noncomputable def transfert_measure (φ : PBernoulli n → ℝ) (μ : Measure (PBernoulli n)) :=
 
   variable {hφ : Holder φ b α}
 
