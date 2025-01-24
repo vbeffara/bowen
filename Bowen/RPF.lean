@@ -12,7 +12,7 @@ theorem schauder_tychonoff
   ContinuousOn f K ∧ (f '' K ⊆ K) → ∃ x ∈ K, f x = x := sorry
 
 noncomputable def pullback_aux {X : Type*} [TopologicalSpace X] [MeasurableSpace X]
-  [OpensMeasurableSpace X] [CompactSpace X] (L : C(X, NNReal) → C(X, NNReal)) (μ : ProbabilityMeasure X) :
+  [OpensMeasurableSpace X] [CompactSpace X] (L : C(X, NNReal) →ₗ[NNReal] C(X, NNReal)) (μ : Measure X) :
   CompactlySupportedContinuousMap X NNReal →ₗ[NNReal] NNReal :=
     { toFun := fun f => ⟨∫ x, L f x ∂μ, sorry⟩,
       map_add' := sorry,
@@ -21,21 +21,21 @@ noncomputable def pullback_aux {X : Type*} [TopologicalSpace X] [MeasurableSpace
 
 noncomputable def pullback_measure {X : Type*} [TopologicalSpace X] [MeasurableSpace X] [T2Space X]
   [OpensMeasurableSpace X] [CompactSpace X] [BorelSpace X]
-  (L : C(X, NNReal) → C(X, NNReal)) (μ : ProbabilityMeasure X) :
+  (L : C(X, NNReal) →ₗ[NNReal] C(X, NNReal)) (μ : Measure X) :
   Measure X :=
     (rieszContent (pullback_aux L μ)).measure
 
 noncomputable def pullback {X : Type*} [TopologicalSpace X] [MeasurableSpace X] [T2Space X]
   [OpensMeasurableSpace X] [CompactSpace X] [BorelSpace X]
-  (L : C(X, NNReal) → C(X, NNReal)) (μ : ProbabilityMeasure X) :
-  ProbabilityMeasure X :=
-    ⟨pullback_measure L μ, sorry⟩
+  (L : C(X, NNReal) →ₗ[NNReal] C(X, NNReal)) (μ : Measure X) :
+  Measure X :=
+    pullback_measure L μ
 
 namespace RPF
 
   abbrev PBernoulli (n : ℕ) := ℕ → Fin n
 
-  variable {n : ℕ} {x y z : PBernoulli n} {φ : PBernoulli n → ℝ} {b : NNReal} {α : Ioo 0 1}
+  variable {n : ℕ} {x y z : PBernoulli n}
 
   instance : MetricSpace (Fin n) where
     dist x y := if x = y then 0 else 1
@@ -56,25 +56,56 @@ namespace RPF
 
   def cylinder (x : PBernoulli n) (k : ℕ) : Set (PBernoulli n) := {y | ∀ i ∈ Ico 0 k, x i = y i}
 
-  structure Holder (φ : PBernoulli n → ℝ) (b : NNReal) (α : Ioo 0 1) where
+  structure Holder (n : ℕ) (b : NNReal) (α : Ioo 0 1) where
+    toFun : PBernoulli n → ℝ
     isHolder : ∀ x y : PBernoulli n, ∀ k : ℕ,
-      y ∈ cylinder x k → |φ x - φ y| ≤ b * α ^ k
+      y ∈ cylinder x k → |toFun x - toFun y| ≤ b * α ^ k
 
   def shift (x : PBernoulli n) : PBernoulli n := fun i => x (i + 1)
 
+  -- Définition de l'opérateur de transfert
   instance : Fintype (preimage shift {x}) := sorry
 
   noncomputable def transfert (φ : PBernoulli n → ℝ) (f : PBernoulli n → ℝ) : PBernoulli n → ℝ :=
     fun x => ∑ y ∈ preimage shift {x}, f y * exp (φ y)
 
-  theorem im_transfert_continuous (hφ : Continuous φ)
-    : Continuous (transfert φ)
-    := by sorry
+  theorem im_transfert_continuous (f : C(PBernoulli n, ℝ)) :
+    Continuous (transfert φ f) :=
+      by sorry
 
-  variable {hφ : Holder φ b α}
 
-  -- theorem rpf1 (hφ : Holder φ b α)
+  variable {b : NNReal} {α : Ioo 0 1}
 
-  -- noncomputable def B (m : ℕ) := exp (∑' k ∈ {k : ℕ | k > m}, 2 * b * α^k)
+  noncomputable def L (φ : Holder n b α):
+    C(PBernoulli n, ℝ) →ₗ[ℝ] C(PBernoulli n, ℝ) :=
+    {
+      toFun := λ f : C(PBernoulli n, ℝ) => {
+        toFun := transfert φ.toFun f,
+        continuous_toFun := im_transfert_continuous f
+      }
+      map_add' := sorry,
+      map_smul' := sorry
+    }
+
+  -- TODO: Essayer de split en plusieurs lemmes intermédiaires pour plus comprehensible.
+  noncomputable def Lpos (φ : Holder n b α) :
+    C(PBernoulli n, NNReal) →ₗ[NNReal] C(PBernoulli n, NNReal) :=
+    {
+      toFun := λ f : C(PBernoulli n, NNReal) => {
+        toFun := λ x : PBernoulli n => ⟨L φ ⟨(λ y : PBernoulli n => (f y).toReal), sorry⟩ x, sorry⟩,
+        continuous_toFun := by sorry
+      },
+      map_add' := sorry,
+      map_smul' := sorry
+    }
+
+  /-- Définition de la mesure pullback par l'opérateur de transfert associé au potentiel holdérien φ -/
+  noncomputable def Lpb (φ : Holder n b α) :
+    Measure (PBernoulli n) → Measure (PBernoulli n) :=
+      λ μ => pullback (Lpos φ) μ
+
+  /-- Partie 1 du théorème de Ruelle de Perron-Frobenius -/
+  theorem RPF1 : ∃ ν : Measure (PBernoulli n), ∃ a : NNReal, Lpb φ ν = a • ν :=
+    sorry
 
 end RPF
