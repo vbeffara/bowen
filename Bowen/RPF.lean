@@ -117,4 +117,10 @@ namespace RPF
     (a φ) > 0 ∧ Lpb φ (ν φ) = (a φ) • (ν φ) :=
     by exact choose_spec (choose_spec (RPF1 φ))
 
+  noncomputable def logBm (_ : Holder n b α) : ℕ → ℝ :=
+    λ m => 2 * b * ∑' k, if k > m then (α : ℝ)^k else 0
+
+  noncomputable def Bm (φ : Holder n b α) : ℕ → NNReal :=
+    λ m => ⟨exp (logBm φ m), exp_nonneg (logBm φ m)⟩
+
 end RPF
