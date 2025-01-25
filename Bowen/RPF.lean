@@ -77,6 +77,8 @@ namespace RPF
 
   variable {b : NNReal} {α : Ioo 0 1}
 
+  /-- RPF1 -/
+
   noncomputable def L (φ : Holder n b α):
     C(PBernoulli n, ℝ) →ₗ[ℝ] C(PBernoulli n, ℝ) :=
     {
@@ -118,6 +120,8 @@ namespace RPF
     (a φ) > 0 ∧ Lpb φ (ν φ) = (a φ) • (ν φ) :=
     by exact choose_spec (choose_spec (RPF1 φ))
 
+  /-- RPF2 -/
+
   noncomputable def logBm (_ : Holder n b α) : ℕ → ℝ :=
     λ m => 2 * b * tsum (fun k : Ioi m => (α : ℝ)^(k : ℕ))
 
@@ -157,5 +161,14 @@ namespace RPF
   theorem RPF2_explicit (φ : Holder n b α) :
     (h φ) ∈ Λ φ ∧ (h φ) > 0 ∧ ∫ x, (h φ) x ∂(ν φ) = 1 ∧ (L φ (h φ)) = (a φ) • (h φ) :=
     by exact choose_spec (RPF2 φ)
+
+  /-- RPF3 -/
+
+  def decomp (φ : Holder n b α) (η : ℝ) (f : C(PBernoulli n, ℝ)) : Prop :=
+    ∃ f' : C(PBernoulli n, ℝ), f' ∈ (Λ φ) ∧
+      (a φ) • (L φ f) = η • (h φ) + (1 - η) • f'
+
+  lemma Lf_decomp (φ : Holder n b α) :
+    ∃ η : ℝ, ∀ f : C(PBernoulli n, ℝ), f ∈ (Λ φ) ∧ η > 0 ∧ decomp φ η f := sorry
 
 end RPF
