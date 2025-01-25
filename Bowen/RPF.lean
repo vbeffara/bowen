@@ -169,6 +169,12 @@ namespace RPF
       (a φ) • (L φ f) = η • (h φ) + (1 - η) • f'
 
   lemma Lf_decomp (φ : Holder n b α) :
-    ∃ η : ℝ, ∀ f : C(PBernoulli n, ℝ), f ∈ (Λ φ) ∧ η > 0 ∧ decomp φ η f := sorry
+    ∃ η : ℝ, η > 0 ∧ ∀ f : C(PBernoulli n, ℝ), f ∈ (Λ φ) ∧ decomp φ η f := sorry
+
+  noncomputable def η (φ : Holder n b α) : ℝ := choose (Lf_decomp φ)
+
+  lemma Lf_decomp_explicit (φ : Holder n b α) :
+    (η φ) > 0 ∧ ∀ f, f ∈ (Λ φ) ∧ decomp φ (η φ) f :=
+    by exact choose_spec (Lf_decomp φ)
 
 end RPF
