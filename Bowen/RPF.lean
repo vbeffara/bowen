@@ -56,8 +56,9 @@ namespace RPF
 
   def cylinder (x : PBernoulli n) (k : ℕ) : Set (PBernoulli n) := {y | ∀ i ∈ Ico 0 k, x i = y i}
 
+  -- TODO: A revoir pour que cette structure soit inclus dans C_c
   structure Holder (n : ℕ) (b : NNReal) (α : Ioo 0 1) where
-    toFun : PBernoulli n → ℝ
+    toFun : CompactlySupportedContinuousMap (PBernoulli n) ℝ
     isHolder : ∀ x y : PBernoulli n, ∀ k : ℕ,
       y ∈ cylinder x k → |toFun x - toFun y| ≤ b * α ^ k
 
@@ -118,9 +119,43 @@ namespace RPF
     by exact choose_spec (choose_spec (RPF1 φ))
 
   noncomputable def logBm (_ : Holder n b α) : ℕ → ℝ :=
-    λ m => 2 * b * ∑' k, if k > m then (α : ℝ)^k else 0
+    λ m => 2 * b * tsum (fun k : Ioi m => (α : ℝ)^(k : ℕ))
 
   noncomputable def Bm (φ : Holder n b α) : ℕ → NNReal :=
     λ m => ⟨exp (logBm φ m), exp_nonneg (logBm φ m)⟩
+
+  /-- Norme infinie d'une fonction holderienne -/
+  noncomputable def norm (φ : Holder n b α) : NNReal := sSup {|φ.toFun x| | x : PBernoulli n}
+
+  noncomputable def K (φ : Holder n b α) : NNReal :=
+    (a φ) * (Bm φ 0) * ⟨exp (norm φ), exp_nonneg (norm φ)⟩
+
+  def IsBmBounded (φ : Holder n b α) (f : C(PBernoulli n, ℝ)) : Prop :=
+    ∀ m : ℕ, ∀ x x': PBernoulli n, x' ∈ cylinder x m → f x ≤ (Bm φ m) * f x'
+
+  noncomputable def Λ (φ : Holder n b α) : Set (C(PBernoulli n, ℝ)) :=
+    {f : C(PBernoulli n, ℝ) | f ≥ 0 ∧ ∫ x, f x ∂(ν φ) = 1 ∧ IsBmBounded φ f}
+
+  def one : C(PBernoulli n, ℝ) :=
+    {
+      toFun := λ x => 1,
+      continuous_toFun := sorry
+    }
+
+  lemma Lambda_one (φ : Holder n b α) : one ∈ Λ φ := sorry
+
+  lemma Lf_ge_invK (φ : Holder n b α) (f : C(PBernoulli n, ℝ)) :
+    ∀ x : PBernoulli n, K φ * (L φ f) x ≥ a φ := sorry
+
+  lemma Lambda_IsCompact (φ : Holder n b α) : IsCompact (Λ φ) := sorry
+
+  theorem RPF2 (φ : Holder n b α) :
+    ∃ h : C(PBernoulli n, ℝ), h ∈ Λ φ ∧ h > 0 ∧ ∫ x, h x ∂(ν φ) = 1 ∧ (L φ h) = (a φ) • h := sorry
+
+  noncomputable def h (φ : Holder n b α) : C(PBernoulli n, ℝ) := choose (RPF2 φ)
+
+  theorem RPF2_explicit (φ : Holder n b α) :
+    (h φ) ∈ Λ φ ∧ (h φ) > 0 ∧ ∫ x, (h φ) x ∂(ν φ) = 1 ∧ (L φ (h φ)) = (a φ) • (h φ) :=
+    by exact choose_spec (RPF2 φ)
 
 end RPF
