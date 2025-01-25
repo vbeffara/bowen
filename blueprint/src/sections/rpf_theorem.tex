@@ -76,6 +76,8 @@
   \begin{lemma}
     \label{lem:Lambda_compact}
     \uses{def:transfert_operator}
+    \leanok
+    \lean{RPF.Lambda_IsCompact, RPF.Lf_ge_invK}
     L'ensemble $\Lambda$ est compact. De plus si $f \in \Csp{n}$, alors $\inf \frac 1 \lambda \L f \geq K^{-1}$.
   \end{lemma}
 
@@ -101,6 +103,8 @@
   \begin{proposition}
     \label{prop:rpf_2}
     \uses{def:transfert_operator, prop:rpf_1, lem:Lambda_compact}
+    \leanok
+    \lean{RPF.RPF2, RPF.RPF2_explicit}
     Il existe $h \in \Lambda$ tel que $h > 0$ et vérifie (2) (\textit{ie.} $\nu(h) = 1$ et $\L h = \lambda h$).
   \end{proposition}
 
