@@ -1,6 +1,6 @@
 import Mathlib
 
-open Set Real MeasureTheory
+open Set Real MeasureTheory Classical
 
 
 /-- Schauder-Tychonoff Theorem: A compact convex subset of a locally convex linear
@@ -105,7 +105,16 @@ namespace RPF
       λ μ => pullback (Lpos φ) μ
 
   /-- Partie 1 du théorème de Ruelle de Perron-Frobenius -/
-  theorem RPF1 : ∃ ν : Measure (PBernoulli n), ∃ a : NNReal, Lpb φ ν = a • ν :=
+  theorem RPF1 (φ : Holder n b α) :
+    ∃ ν : ProbabilityMeasure (PBernoulli n), ∃ a : NNReal, a > 0 ∧ Lpb φ ν.toMeasure = a • ν.toMeasure :=
     sorry
+
+  noncomputable def ν (φ : Holder n b α) : ProbabilityMeasure (PBernoulli n) := choose (RPF1 φ)
+
+  noncomputable def a (φ : Holder n b α) : NNReal := choose (choose_spec (RPF1 φ))
+
+  theorem RPF1_explicit (φ : Holder n b α) :
+    (a φ) > 0 ∧ Lpb φ (ν φ) = (a φ) • (ν φ) :=
+    by exact choose_spec (choose_spec (RPF1 φ))
 
 end RPF

@@ -44,7 +44,7 @@
     \label{prop:rpf_1}
     \uses{def:meas_set, def:transfert_operator}
     \leanok
-    \lean{RPF.RPF1}
+    \lean{RPF.RPF1, RPF.RPF1_explicit}
     Il existe $\nu \in \Msp{n}$ tel que $\L^*\nu = \lambda\nu$.
   \end{proposition}
 
@@ -100,7 +100,7 @@
 
   \begin{proposition}
     \label{prop:rpf_2}
-    \uses{def:transfert_operator, prop:rpf_1}
+    \uses{def:transfert_operator, prop:rpf_1, lem:Lambda_compact}
     Il existe $h \in \Lambda$ tel que $h > 0$ et vérifie (2) (\textit{ie.} $\nu(h) = 1$ et $\L h = \lambda h$).
   \end{proposition}
 
