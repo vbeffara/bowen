@@ -270,6 +270,8 @@
   \begin{proof}
     \proves{lem:rpf_3_LambdaCr}
     \uses{lem:Lambda_stb_mult_Cr, lem:conv_expo}
+    \leanok
+    \lean{RPF.RPF3_Lam_Cr}
     Décomposons $f$ en sa partie positive $f^+$ et sa partie négative $f^-$ toute deux positives et vérifiant $f = f^+ - f^-$.
     Si $f^{\pm}F \not= 0$, alors grâce aux lemmes \ref{lem:Lambda_stb_mult_Cr} et \ref{lem:conv_expo}, on a
     $$\No{\frac{1}{\lambda^{n+r}}\L^{n+r} (f^{\pm}F) - \nu(f^{\pm}F)h} = \nu(f^{\pm}F)\No{\frac{1}{\lambda^{n+r}\nu(f^{\pm}F)}\L^{n+r}(f^{\pm}F) - h}

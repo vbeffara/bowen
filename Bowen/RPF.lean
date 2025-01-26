@@ -202,4 +202,13 @@ namespace RPF
       (1 / ((a φ : ℝ) * (∫ x, ((f * F) x) ∂(ν φ)))) • (L φ)^[r] (f * F) ∈ Λ φ :=
     sorry
 
+  noncomputable def norm_Lf_sub_nu_h (φ : Holder n b α) (f: C(PBernoulli n, ℝ)) : ℕ → NNReal :=
+    λ k => norm ((1 / (a φ)^k) • (L φ)^[k] f - (∫ x, f x ∂(ν φ)) • (h φ))
+
+  lemma RPF3_Lam_Cr (φ : Holder n b α) (r : ℕ) :
+    ∃ A β : ℝ, A > 0 ∧ β ∈ Ioo 0 1 ∧
+      ∀ f F : C(PBernoulli n, ℝ), f ∈ C_r r ∧ F ∈ (Λ φ) →
+        norm_Lf_sub_h φ (f * F) (n + r) ≤ A * (β ^ n) * (∫ x, |(f * F) x|∂(ν φ)) :=
+    sorry
+
 end RPF
