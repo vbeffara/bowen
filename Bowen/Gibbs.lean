@@ -5,7 +5,6 @@ import Bowen.RPF
 open Real MeasureTheory Set Topology
 open Filter
 open Bernoulli
-open RPF
 
 variable {n : ℕ}
 
