@@ -1,6 +1,6 @@
 import Mathlib
 
-open Set Real MeasureTheory Classical
+open Set Real MeasureTheory Classical Filter
 
 
 /-- Schauder-Tychonoff Theorem: A compact convex subset of a locally convex linear
@@ -216,6 +216,10 @@ namespace RPF
       g₁ ∈ C ∧ g₂ ∈ C ∧
       norm (g₁ - g₂) ≤ ε ∧
       g₁ ≤ f ≤ g₂ :=
+    sorry
+
+  theorem RPF3 (φ : Holder n b α) :
+    ∀ f : C(PBernoulli n, ℝ), Tendsto (norm_Lf_sub_nu_h φ f) atTop (nhds 0) :=
     sorry
 
 end RPF
