@@ -187,5 +187,19 @@ namespace RPF
       norm_Lf_sub_h φ f k ≤ A * β ^ k :=
     sorry
 
+  noncomputable def var_k (φ : C(PBernoulli n, ℝ)) : ℕ → NNReal :=
+    λ k => sSup { d | ∀ x y : PBernoulli n, x ∈ cylinder y k ∧ d = |φ x - φ y|}
+
+  /-- Fonction en escaliers à n^r étages -/
+  noncomputable def C_r : ℕ → Set (C(PBernoulli n, ℝ)) :=
+    λ r => {f | var_k f r = 0}
+
+  /-- Ensemble des fonctions en escaliers -/
+  noncomputable def C : Set (C(PBernoulli n, ℝ)) := ⋃ r, C_r r
+
+  lemma stab_mul_Cr (φ : Holder n b α) (F f : C(PBernoulli n, ℝ)) (r : ℕ) :
+    f ∈ C_r r ∧ F ∈ Λ φ ∧ f * F ≠ 0 ∧ f ≥ 0 →
+      (1 / ((a φ : ℝ) * (∫ x, ((f * F) x) ∂(ν φ)))) • (L φ)^[r] (f * F) ∈ Λ φ :=
+    sorry
 
 end RPF
