@@ -129,10 +129,10 @@ namespace RPF
     λ m => ⟨exp (logBm φ m), exp_nonneg (logBm φ m)⟩
 
   /-- Norme infinie d'une fonction holderienne -/
-  noncomputable def norm (φ : Holder n b α) : NNReal := sSup {|φ.toFun x| | x : PBernoulli n}
+  noncomputable def holderNorm (φ : Holder n b α) : NNReal := sSup {|φ.toFun x| | x : PBernoulli n}
 
   noncomputable def K (φ : Holder n b α) : NNReal :=
-    (a φ) * (Bm φ 0) * ⟨exp (norm φ), exp_nonneg (norm φ)⟩
+    (a φ) * (Bm φ 0) * ⟨exp (holderNorm φ), exp_nonneg (holderNorm φ)⟩
 
   def IsBmBounded (φ : Holder n b α) (f : C(PBernoulli n, ℝ)) : Prop :=
     ∀ m : ℕ, ∀ x x': PBernoulli n, x' ∈ cylinder x m → f x ≤ (Bm φ m) * f x'
@@ -176,5 +176,16 @@ namespace RPF
   lemma Lf_decomp_explicit (φ : Holder n b α) :
     (η φ) > 0 ∧ ∀ f, f ∈ (Λ φ) ∧ decomp φ (η φ) f :=
     by exact choose_spec (Lf_decomp φ)
+
+  noncomputable def norm (f : C(PBernoulli n, ℝ)) : NNReal := sSup {|f x| | x : PBernoulli n}
+
+  noncomputable def norm_Lf_sub_h (φ : Holder n b α) (f : C(PBernoulli n, ℝ)) : ℕ → NNReal :=
+    λ k => norm ((1 / (a φ)^k) • (L φ)^[k] f - (h φ))
+
+  lemma conv_expo (φ : Holder n b α) :
+    ∃ A β : ℝ, A > 0 ∧ β ∈ Ioo 0 1 ∧ ∀ k : ℕ, ∀ f : C(PBernoulli n, ℝ), f ∈ (Λ φ) →
+      norm_Lf_sub_h φ f k ≤ A * β ^ k :=
+    sorry
+
 
 end RPF
