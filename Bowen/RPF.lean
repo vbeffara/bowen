@@ -162,6 +162,12 @@ namespace RPF
     (h φ) ∈ Λ φ ∧ (h φ) > 0 ∧ ∫ x, (h φ) x ∂(ν φ) = 1 ∧ (L φ (h φ)) = (a φ) • (h φ) :=
     by exact choose_spec (RPF2 φ)
 
+  noncomputable def h_pos (φ : Holder n b α) : C(PBernoulli n, NNReal) :=
+    {
+      toFun := λ x => ⟨(h φ) x, sorry⟩,
+      continuous_toFun := sorry
+    }
+
   /-- RPF3 -/
 
   def decomp (φ : Holder n b α) (η : ℝ) (f : C(PBernoulli n, ℝ)) : Prop :=
@@ -221,5 +227,12 @@ namespace RPF
   theorem RPF3 (φ : Holder n b α) :
     ∀ f : C(PBernoulli n, ℝ), Tendsto (norm_Lf_sub_nu_h φ f) atTop (nhds 0) :=
     sorry
+
+  noncomputable def μ (φ : Holder n b α) : Measure (PBernoulli n) :=
+    (ν φ).toMeasure.withDensity (λ x => h_pos φ x)
+
+  lemma mu_prob (φ : Holder n b α) : IsProbabilityMeasure (μ φ) := sorry
+
+  lemma mu_shift_inv (φ : Holder n b α) : (μ φ).map shift = μ φ := sorry
 
 end RPF
