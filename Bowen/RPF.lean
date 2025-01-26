@@ -211,4 +211,11 @@ namespace RPF
         norm_Lf_sub_h φ (f * F) (n + r) ≤ A * (β ^ n) * (∫ x, |(f * F) x|∂(ν φ)) :=
     sorry
 
+  lemma C_strong_density :
+    ∀ f : C(PBernoulli n, ℝ), ∀ ε > 0, ∃ g₁ g₂ : C(PBernoulli n, ℝ),
+      g₁ ∈ C ∧ g₂ ∈ C ∧
+      norm (g₁ - g₂) ≤ ε ∧
+      g₁ ≤ f ≤ g₂ :=
+    sorry
+
 end RPF
