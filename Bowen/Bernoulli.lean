@@ -2,15 +2,19 @@ import Mathlib
 
 open Real MeasureTheory Set
 
-abbrev Bernoulli (n : ℕ) := ℤ → Fin n
+class ContainN (X : Type*) extends Encodable X where
+  fromNat : ℕ → X
+  shift : X → X
 
-noncomputable def nnexp (x : ℝ) : NNReal := ⟨exp x, exp_nonneg x⟩
+variable {X : Type*} [ContainN X]
+
+abbrev Bernoulli (X : Type*) [Encodable X] (n : ℕ) := X → Fin n
 
 namespace Bernoulli
 
-  variable {n : ℕ} (x y z : Bernoulli n) {φ : Bernoulli n → ℝ} {a : Fin n}
+  variable {n : ℕ} (x y z : Bernoulli X n) {φ : Bernoulli X n → ℝ} {a : Fin n}
 
-  instance : MetricSpace (Fin n) where
+  instance (X : Type*) [DecidableEq X] : MetricSpace X where
     dist x y := if x = y then 0 else 1
     dist_self x := by simp
     dist_comm x y := by simp [dist]; congr 1; simp [eq_comm]
@@ -25,36 +29,27 @@ namespace Bernoulli
       simp [dist] at h
       exact h
 
-  noncomputable instance : MetricSpace (Bernoulli n) := PiCountable.metricSpace
+  noncomputable instance : MetricSpace (Bernoulli X n) := PiCountable.metricSpace
 
-  instance : CompactSpace (Fin n) := Finite.compactSpace
-  instance : CompactSpace (Bernoulli n) := Pi.compactSpace -- or Function.compactSpace
+  -- instance bernoulli_is_compact : CompactSpace (Bernoulli X n) := Pi.compactSpace
 
-  theorem bernoulli_is_compact : IsCompact (Set.univ : Set (Bernoulli n)) :=
-    by exact Pi.compactSpace.isCompact_univ
+  def cylinder (x : Bernoulli X n) (m : ℕ) : Set (Bernoulli X n) :=
+    {y | EqOn x y {ContainN.fromNat i | i ∈ Ico 0 m}}
 
-  def cylinder (x : Bernoulli n) (m : ℕ) : Set (Bernoulli n) :=
-    {y : Bernoulli n | ∀ i ∈ Ico 0 m, x i = y i}
+  def shift (x : Bernoulli X n) : Bernoulli X n := x ∘ ContainN.shift
 
-  def shift (x : Bernoulli n) : Bernoulli n := fun i => x (i + 1)
+  -- instance : TopologicalSpace.SeparableSpace (Bernoulli X n) :=
+  --   TopologicalSpace.instSeparableSpaceForallOfCountable
 
-  def finite_bernoulli (a : Fin n) (m : ℕ) : Set (Bernoulli n) := {x | ∀ i : ℤ, |i| > m → x i = a}
+  instance : ContainN ℤ where
+    fromNat n := ↑n
+    shift n := n + 1
 
-  instance : T2Space (Bernoulli n) where
-    t2 := by
-      intro x y hneq
-      sorry
-
-  lemma bernoulli_is_T2 : T2Space (Bernoulli n) := by infer_instance
-
-  def ball (x : Bernoulli n) (m : ℕ) : Set (Bernoulli n)
-    := {y | ∀ i ∈ Icc ((-m) : ℤ) m, x i = y i}
-
-  lemma ball_open : ∀ x : Bernoulli n, ∀ m, IsOpen (ball x m)
-    := by sorry
-
-  lemma open_iff_countable_ball_union (s : Set (Bernoulli n))
-    : IsOpen s ↔ ∃ b : ℕ → Bernoulli n, ∃ r : ℕ → ℕ, s = sUnion {ball (b i) (r i) | i : ℕ}
-    := by sorry
+  -- Valide sur Z, peut-être ailleurs également
+  lemma open_iff_disjoint_union_ball (O : Set (Bernoulli ℤ n)) :
+    IsOpen O ↔ ∃ b : ℕ → Bernoulli ℤ n, ∃ r : ℕ → NNReal,
+      O = ⋃ i : ℕ, (Metric.ball (b i) (r i) : Set (Bernoulli ℤ n)) ∧
+      Pairwise (Function.onFun Disjoint (λ i => Metric.ball (b i) (r i))):=
+    sorry
 
 end Bernoulli

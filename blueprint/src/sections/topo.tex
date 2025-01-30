@@ -18,11 +18,11 @@
     \label{prop:sn_compact}
     \uses{def:topo_sn}
     \leanok
-    \lean{Bernoulli.bernoulli_is_compact}
     L'espace métrique $(\s_n, d)$ est compact.
   \end{proposition}
 
   \begin{proof}
+    \lean{Bernoulli.bernoulli_is_compact}
     \proves{prop:sn_compact}
     \leanok
     Chacun des $\llbracket 1, n\rrbracket$ est compact pour sa topologie.
@@ -97,7 +97,6 @@
     \label{prop:separable}
     \uses{def:topo_sn}
     \leanok
-    \lean{Bernoulli.bernoulli_is_T2}
     Pour tout $m \in \N$, soit $T_m = \left\{x \in \s_n \mid \forall|i|>m, x_i=1\right\}$ et $T = \bigcup_{m\geq 0}{T_m}$.
     L'ensemble $T$ est dense dans $\s_n$ et est dénombrable. Ainsi, $\s_n$ est séparable.
   \end{proposition}
@@ -105,6 +104,7 @@
   \begin{proof}
     \proves{prop:separable}
     \uses{def:topo_sn}
+    \leanok
     Soit $O$ un ouvert non vide et $x \in O$, alors il existe $r = 2^{-m+1} > 0$ tel que $B(x, r) \subseteq O$.
     Si on prend $y \in \s_n$ tel que si $i \in \llbracket -m, m \rrbracket$ alors $y_i = x_i$ et sinon $y_i = 1$,
     alors $y \in T_m$ et $y \in B(x, r)$, donc $O \cap T \not= \emptyset$. Ainsi $T$ est dense dans $\s_n$.
@@ -117,8 +117,7 @@
     \label{prop:boules}
     \uses{def:topo_sn}
     \leanok
-    \lean{Bernoulli.ball_open}
-    \lean{Bernoulli.open_iff_countable_ball_union}
+    \lean{Bernoulli.open_iff_disjoint_union_ball}
     Soit $O$ un ouvert de $\s_n$. Pour tout $x \in O$, on note $r_x > 0$ tel que $B(x, r_x) \subseteq O$.
     Alors il existe $\mathcal R \subseteq \s_n$ dénombrable tel que
     $$O = \bigsqcup_{x\in\mathcal R}{B(x, r_x)},$$
