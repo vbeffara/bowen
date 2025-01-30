@@ -61,6 +61,7 @@ namespace Equiv
   def DependOnlyPosCoords (φ : Bernoulli ℤ n → ℝ) : Prop :=
     ∀ x y : Bernoulli ℤ n, (∀ i : ℕ, x i = y i) → φ x = φ y
 
-  lemma equiv_pos_coords (φ : Bernoulli ℤ n → ℝ) : ∃ ψ : Bernoulli ℤ n → ℝ, DependOnlyPosCoords ψ ∧ equiv φ ψ := sorry
+  lemma equiv_pos_coords (φ : Bernoulli ℤ n → ℝ) :
+    ∃ ψ : Bernoulli ℤ n → ℝ, DependOnlyPosCoords ψ ∧ equiv φ ψ := sorry
 
 end Equiv

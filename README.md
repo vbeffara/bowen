@@ -11,3 +11,6 @@ Blueprint : https://daurrian.github.io/bowen/blueprint/index.html
 
 Completer la structure du code lean pour pouvoir écrire la preuve du théorème sans les preuves des lemmes intermédiaires.
 
+Finir de modifier le fichier RPF.lean
+
+Update les liens vers les decls lean dans les fichiers tex
