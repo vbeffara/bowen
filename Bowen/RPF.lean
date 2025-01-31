@@ -113,36 +113,31 @@ namespace RPF
   noncomputable def K : NNReal :=
     (a φ) * (Bm φ 0) * ⟨exp (HolderLike.norm φ), exp_nonneg (HolderLike.norm φ)⟩
 
-  /- def IsBmBounded (f : C(Bernoulli ℕ n, ℝ)) : Prop := -/
-  /-   ∀ m : ℕ, ∀ x x': Bernoulli ℕ n, x' ∈ cylinder x m → f x ≤ (Bm φ m) * f x' -/
+  def IsBmBounded (f : C(Bernoulli ℕ n, ℝ)) : Prop :=
+    ∀ m : ℕ, ∀ x x': Bernoulli ℕ n, x' ∈ cylinder x m → f x ≤ (Bm φ m) * f x'
 
-  /- noncomputable def Λ : Set (C(Bernoulli ℕ n, ℝ)) := -/
-  /-   {f : C(Bernoulli ℕ n, ℝ) | f ≥ 0 ∧ ∫ x, f x ∂(ν φ) = 1 ∧ IsBmBounded φ f} -/
-  structure Λ (f : C(Bernoulli ℕ n, ℝ)) where
-    pos : f ≥ 0
-    int_one : ∫ x, f x ∂(ν φ) = 1
-    isBmBounded : ∀ m : ℕ, ∀ x x' : Bernoulli ℕ n, x' ∈ cylinder x m → f x ≤ (Bm φ m) * f x'
+  noncomputable def Λ : Set (C(Bernoulli ℕ n, ℝ)) :=
+    {f : C(Bernoulli ℕ n, ℝ) | f ≥ 0 ∧ ∫ x, f x ∂(ν φ) = 1 ∧ IsBmBounded φ f}
 
   def one : C(Bernoulli ℕ n, ℝ) :=
     {
-      toFun := λ x => 1,
-      continuous_toFun := sorry
+      toFun := λ _ => 1,
+      continuous_toFun := continuous_const
     }
 
-  lemma Lambda_one : Λ φ one := sorry
+  lemma Lambda_one : one ∈ (Λ φ) := by sorry
 
-  lemma Lf_ge_invK (f : C(Bernoulli ℕ n, ℝ)) :
-    ∀ x : Bernoulli ℕ n, K φ * (L φ f) x ≥ a φ := sorry
+  lemma Lf_ge_invK (f : C(Bernoulli ℕ n, ℝ)) (x : Bernoulli ℕ n) : K φ * (L φ f) x ≥ a φ := sorry
 
   lemma Lambda_IsCompact : IsCompact (Λ φ) := sorry
 
   theorem RPF2 :
-    ∃ h : C(Bernoulli ℕ n, ℝ), Λ φ h ∧ h > 0 ∧ ∫ x, h x ∂(ν φ) = 1 ∧ (L φ h) = (a φ) • h := sorry
+    ∃ h : C(Bernoulli ℕ n, ℝ), h ∈ Λ φ ∧ h > 0 ∧ ∫ x, h x ∂(ν φ) = 1 ∧ (L φ h) = (a φ) • h := sorry
 
   noncomputable def h : C(Bernoulli ℕ n, ℝ) := choose (RPF2 φ)
 
   theorem RPF2_explicit :
-    Λ φ (h φ) ∧ (h φ) > 0 ∧ ∫ x, (h φ) x ∂(ν φ) = 1 ∧ (L φ (h φ)) = (a φ) • (h φ) :=
+    h φ ∈ Λ φ ∧ (h φ) > 0 ∧ ∫ x, (h φ) x ∂(ν φ) = 1 ∧ (L φ (h φ)) = (a φ) • (h φ) :=
     by exact choose_spec (RPF2 φ)
 
   noncomputable def h_pos : C(Bernoulli ℕ n, NNReal) :=
@@ -154,16 +149,15 @@ namespace RPF
   /-- RPF3 -/
 
   def decomp (η : ℝ) (f : C(Bernoulli ℕ n, ℝ)) : Prop :=
-    ∃ f' : C(Bernoulli ℕ n, ℝ), (Λ φ) f' ∧
+    ∃ f' : C(Bernoulli ℕ n, ℝ), f' ∈ Λ φ ∧
       (a φ) • (L φ f) = η • (h φ) + (1 - η) • f'
 
   lemma Lf_decomp :
-    ∃ η : ℝ, η > 0 ∧ ∀ f : C(Bernoulli ℕ n, ℝ), Λ φ f ∧ decomp φ η f := sorry
+    ∃ η : ℝ, η > 0 ∧ ∀ f : C(Bernoulli ℕ n, ℝ), f ∈ Λ φ ∧ decomp φ η f := sorry
 
   noncomputable def η : ℝ := choose (Lf_decomp φ)
 
-  lemma Lf_decomp_explicit :
-    (η φ) > 0 ∧ ∀ f, Λ φ f ∧ decomp φ (η φ) f :=
+  lemma Lf_decomp_explicit : (η φ) > 0 ∧ ∀ f, f ∈ Λ φ ∧ decomp φ (η φ) f :=
     choose_spec (Lf_decomp φ)
 
   noncomputable def norm (f : C(Bernoulli ℕ n, ℝ)) : NNReal := sSup {|f x| | x : Bernoulli ℕ n}
@@ -172,7 +166,7 @@ namespace RPF
     λ k => norm ((1 / (a φ)^k) • (L φ)^[k] f - (h φ))
 
   lemma conv_expo :
-    ∃ A β : ℝ, A > 0 ∧ β ∈ Ioo 0 1 ∧ ∀ k : ℕ, ∀ f : C(Bernoulli ℕ n, ℝ), Λ φ f →
+    ∃ A β : ℝ, A > 0 ∧ β ∈ Ioo 0 1 ∧ ∀ k : ℕ, ∀ f : C(Bernoulli ℕ n, ℝ), f ∈ Λ φ →
       norm_Lf_sub_h φ f k ≤ A * β ^ k :=
     sorry
 
@@ -188,7 +182,7 @@ namespace RPF
 
   lemma stab_mul_Cr (F f : C(Bernoulli ℕ n, ℝ)) (r : ℕ)
     (hf : f ∈ C_r r) (hF : Λ φ F) (hfF : f * F ≠ 0) (hf_pos : f ≥ 0):
-      Λ φ ((1 / ((a φ : ℝ) * (∫ x, ((f * F) x) ∂(ν φ)))) • (L φ)^[r] (f * F)) :=
+      ((1 / ((a φ : ℝ) * (∫ x, ((f * F) x) ∂(ν φ)))) • (L φ)^[r] (f * F)) ∈ Λ φ :=
     sorry
 
   noncomputable def norm_Lf_sub_nu_h (f: C(Bernoulli ℕ n, ℝ)) : ℕ → NNReal :=
@@ -196,7 +190,7 @@ namespace RPF
 
   lemma RPF3_Lam_Cr (r : ℕ) :
     ∃ A β : ℝ, A > 0 ∧ β ∈ Ioo 0 1 ∧
-      ∀ f F : C(Bernoulli ℕ n, ℝ), f ∈ C_r r ∧ Λ φ F →
+      ∀ f F : C(Bernoulli ℕ n, ℝ), f ∈ C_r r ∧ F ∈ Λ φ →
         norm_Lf_sub_h φ (f * F) (n + r) ≤ A * (β ^ n) * (∫ x, |(f * F) x|∂(ν φ)) :=
     sorry
 
@@ -207,8 +201,8 @@ namespace RPF
       g₁ ≤ f ≤ g₂ :=
     sorry
 
-  theorem RPF3 :
-    ∀ f : C(Bernoulli ℕ n, ℝ), Tendsto (norm_Lf_sub_nu_h φ f) atTop (nhds 0) :=
+  theorem RPF3 (f : C(Bernoulli ℕ n, ℝ)):
+    Tendsto (norm_Lf_sub_nu_h φ f) atTop (nhds 0) :=
     sorry
 
   noncomputable def μ : Measure (Bernoulli ℕ n) :=
