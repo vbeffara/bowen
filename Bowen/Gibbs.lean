@@ -13,7 +13,7 @@ noncomputable def nnexp (x : ℝ) : NNReal := ⟨exp x, exp_nonneg x⟩
 instance : ContainN ℤ where
   fromNat x := ↑x
   shift x := x + 1
-  cylinder_supp k := Icc (-k) k
+  var_supp k := Icc (-k) k
 
 class InvariantProb (μ : Measure (Bernoulli ℤ n)) extends IsProbabilityMeasure μ where
   invariant : ∀ s, μ s = μ (f ⁻¹' s)

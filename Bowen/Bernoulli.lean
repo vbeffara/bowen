@@ -5,11 +5,11 @@ open Real MeasureTheory Set
 class ContainN (X : Type*) extends Encodable X where
   fromNat : ℕ → X
   shift : X → X
-  cylinder_supp : ℕ -> Set X
+  var_supp : ℕ -> Set X
 
 variable {X : Type*} [ContainN X]
 
-abbrev Bernoulli (X : Type*) [Encodable X] (n : ℕ) := X → Fin n
+abbrev Bernoulli (X : Type*) [ContainN X] (n : ℕ) := X → Fin n
 
 namespace Bernoulli
 
@@ -45,7 +45,7 @@ namespace Bernoulli
   instance : ContainN ℤ where
     fromNat n := ↑n
     shift n := n + 1
-    cylinder_supp n := Icc (-n) n
+    var_supp n := Icc (-n) n
 
   -- Valide sur Z, peut-être ailleurs également
   lemma open_iff_disjoint_union_ball (O : Set (Bernoulli ℤ n)) :
@@ -59,7 +59,8 @@ end Bernoulli
 class HolderLike {X : Type*} [ContainN X] (φ : Bernoulli X n → ℝ) where
   α : {x : ℝ // x ∈ Ioo 0 1}
   b : NNReal
-  isHolderLike : ∀ k : ℕ,
-    sSup {diff | ∀ x y, EqOn x y (ContainN.cylinder_supp k) ∧ diff = |φ x - φ y|} ≤ b * (α : ℝ)^k
+  var : ℕ → NNReal := λ k => sSup {diff | ∀ x y, EqOn x y (ContainN.var_supp k) ∧ diff = |φ x - φ y|}
+  isHolderLike : ∀ k : ℕ, var k ≤ b * (α : ℝ)^k
+  norm : NNReal := sSup {|φ x| | x : Bernoulli X n}
 
 lemma holder_imp_continuous (φ : Bernoulli X n → ℝ) [HolderLike φ] : Continuous φ := sorry
