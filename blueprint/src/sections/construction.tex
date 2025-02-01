@@ -35,6 +35,8 @@
   \begin{lemma}
     \label{lem:meas_seq_conv_to_sig_inv}
     \uses{lem:hNu_sig_inv} % + Riesz
+    \leanok
+    \lean{has_limit, has_limit_pos, G, G_one_eq_one}
     Pour tout $f \in \Cs{n}$, la suite $(\mu([f\circ\sigma^m]))_{m \geq 0}$ admet une limite, que l'on note $G(f)$.
     De plus $G$ vérifie $G(1) = 1$ et pour toute fonction $f \in \Cs{n}$, $f \geq 0$, on a $G(f) \geq 0$.
 
@@ -73,6 +75,8 @@
   \begin{theorem}
     \label{thm:existence}
     \uses{lem:meas_seq_conv_to_sig_inv, def:gibbs_meas, def:holder_fn_set}
+    \leanok
+    \lean{is_gibbs}
     La mesure $\tilde\mu$ est une mesure de Gibbs pour $\phi \in \Hsp{n}$.
   \end{theorem}
 
@@ -82,6 +86,8 @@
   \begin{lemma}
     \label{lem:birkhoff_sum_ineq}
     \uses{def:shift, def:topo_sn}
+    \leanok
+    \lean{birkhoff_ineq}
     Soit $x, y \in \s_n$ et $m \in \N$ tels que $y \in C(x, m)$.
     Alors,
     $$\left| S_m\phi(x) - S_m\phi(y)\right| \leq a.$$
@@ -130,6 +136,8 @@
   \begin{proposition}
     \label{prop:mu_mixing}
     \uses{def:mixing, thm:existence}
+    \leanok
+    \lean{mu_mixing}
     La mesure $\tilde\mu$ est mélangeante par rapport à $\sigma$ : pour tout boréliens $E, F \in \mathcal B(\s_n)$ on a
     $$\tilde\mu(E \cap \sigma^{-m} F) \underset{m\to\infty}{\longrightarrow} \tilde\mu(E)\tilde\mu(F).$$
   \end{proposition}

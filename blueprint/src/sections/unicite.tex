@@ -25,8 +25,18 @@
   \begin{theorem}
     \label{thm:gibbs}
     \uses{def:holder_fn_set, def:gibbs_meas, thm:existence, prop:mu_mixing, prop:unique, lem:fn_equiv_pos_coords, lem:fn_equiv_imp_gibbs_eq}
+    \leanok
+    \lean{gibbs, gibbs_unique}
     Soit $\phi \in \mathcal H(\s_n)$, alors il existe une unique mesure de Gibbs $\mu_{\phi} = \mu \in \mathcal M_{\sigma}(\s_n)$
   \end{theorem}
+
+  \begin{proof}
+    \proves{thm:gibbs}
+    \uses{prop:unique, thm:existence}
+    \leanok
+    \lean{gibbs, gibbs_unique}
+    La preuve découle des lemmes et propositions qui suivent.
+  \end{proof}
 
   Dans les sections suivantes, on construira une mesure de Gibbs mélangeante notamment grâce au théorème de Ruelle.
   C'est l'ergodicité de cette mesure qui entrainera l'unicité de la mesure de Gibbs.
