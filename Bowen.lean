@@ -5,3 +5,4 @@ import Bowen.Bernoulli
 import Bowen.Gibbs
 import Bowen.RPF
 import Bowen.SchauderTychonoff
+import Bowen.Existence
