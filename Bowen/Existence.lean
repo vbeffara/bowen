@@ -80,7 +80,7 @@ lemma var_summable (φ : Bernoulli ℤ n → ℝ) [HolderLike φ] : Summable (Ho
 noncomputable def var_sum (φ : Bernoulli ℤ n → ℝ) [HolderLike φ] : NNReal :=
   ∑' k, (HolderLike.var φ) k
 
-lemma bikhoff_ineq (φ : Bernoulli ℤ n → ℝ) [HolderLike φ] (x y : Bernoulli ℤ n) (m : ℕ)
+lemma birkhoff_ineq (φ : Bernoulli ℤ n → ℝ) [HolderLike φ] (x y : Bernoulli ℤ n) (m : ℕ)
   (hxy : y ∈ cylinder x m) :
     |∑ k ∈ Ico 0 m, φ (shift^[k] x) - φ (shift^[k] y)| ≤ var_sum φ :=
   sorry
