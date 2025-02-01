@@ -94,4 +94,4 @@ instance is_gibbs : IsGibbs φ (μ_gibbs (φ' φ)) where
   gibbs_prop := sorry
 
 instance mu_mixing : IsMixing (μ_gibbs (φ' φ)) where
-  mixing := sorry
+  mixing e f := sorry
