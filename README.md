@@ -13,6 +13,6 @@ Completer la structure du code lean pour pouvoir écrire la preuve du théorème
 
 ## Problemes
 
-![pb in proof](./assets/pb1)
+![pb in proof](./assets/pb1.png)
 
 Fonctionne pour résoudre l'équation x^2 = x avec x réel mais ne fonctionne pas ici et l'erreur aide pas.
