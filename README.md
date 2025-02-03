@@ -11,6 +11,8 @@ Blueprint : https://daurrian.github.io/bowen/blueprint/index.html
 
 Completer la structure du code lean pour pouvoir écrire la preuve du théorème sans les preuves des lemmes intermédiaires.
 
-Finir de modifier le fichier RPF.lean
+## Problemes
 
-Update les liens vers les decls lean dans les fichiers tex
+![pb in proof](./assets/pb1)
+
+Fonctionne pour résoudre l'équation x^2 = x avec x réel mais ne fonctionne pas ici et l'erreur aide pas.
