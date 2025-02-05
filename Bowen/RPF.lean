@@ -37,7 +37,14 @@ namespace RPF
   /- def shift (x : Bernoulli ℕ n) : Bernoulli ℕ n := fun i => x (i + 1) -/
 
   -- Définition de l'opérateur de transfert
-  instance : Fintype (preimage shift {x}) := sorry
+  instance : Fintype (preimage shift {x}) where
+    elems := {
+      val := sorry
+      nodup := sorry
+    }
+    complete := by
+      intro p
+      sorry
 
   noncomputable def transfert (φ : Bernoulli ℕ n → ℝ) (f : Bernoulli ℕ n → ℝ) : Bernoulli ℕ  n → ℝ :=
     fun x => ∑ y ∈ preimage shift {x}, f y * exp (φ y)
@@ -57,8 +64,21 @@ namespace RPF
         toFun := transfert φ f,
         continuous_toFun := im_transfert_continuous f
       }
-      map_add' := sorry,
-      map_smul' := sorry
+      map_add' := by
+        intros f g
+        simp
+        congr
+        simp
+        funext x
+        simp [transfert]
+        sorry
+      map_smul' := by
+        intros a f
+        simp
+        congr
+        funext x
+        simp [transfert]
+        sorry
     }
 
   -- TODO: Essayer de split en plusieurs lemmes intermédiaires pour plus comprehensible.
@@ -80,8 +100,19 @@ namespace RPF
 
   /-- Partie 1 du théorème de Ruelle de Perron-Frobenius -/
   theorem RPF1 :
-    ∃ ν : ProbabilityMeasure (Bernoulli ℕ n), ∃ a : NNReal, a > 0 ∧ Lpb φ ν.toMeasure = a • ν.toMeasure :=
-    sorry
+    ∃ ν : ProbabilityMeasure (Bernoulli ℕ n), ∃ a : NNReal, a > 0
+    ∧ Lpb φ ν.toMeasure = a • ν.toMeasure := by
+      let G : C(Measure (Bernoulli ℕ n), Measure (Bernoulli ℕ n)) := {
+        toFun := fun μ => (1 / μ univ) • (Lpb φ μ)
+        continuous_toFun := sorry
+      }
+      let K := {μ : Measure (Bernoulli ℕ n) | IsProbabilityMeasure μ}
+      have K_compact : IsCompact K := sorry
+      -- have K_convex : Convex ℝ K := sorry
+      have K_stable : G '' K ⊆ K := sorry
+      -- have fixed : ∃ μ, G μ = μ := schauder_tychonoff K_compact K_convex G G.continuous_toFun K_stable
+      sorry
+
 
   noncomputable def ν : ProbabilityMeasure (Bernoulli ℕ n) := choose (RPF1 φ)
 
