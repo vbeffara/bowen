@@ -100,21 +100,30 @@ namespace RPF
 
   /-- Partie 1 du théorème de Ruelle de Perron-Frobenius -/
   theorem RPF1 :
-    ∃ ν : ProbabilityMeasure (Bernoulli ℕ n), ∃ a : NNReal, a > 0
-    ∧ Lpb φ ν.toMeasure = a • ν.toMeasure := by
+    ∃ ν : Measure (Bernoulli ℕ n), ∃ a : NNReal, a > 0
+    ∧ Lpb φ ν = a • ν := by
       let G : C(Measure (Bernoulli ℕ n), Measure (Bernoulli ℕ n)) := {
         toFun := fun μ => (1 / μ univ) • (Lpb φ μ)
         continuous_toFun := sorry
       }
-      let K := {μ : Measure (Bernoulli ℕ n) | IsProbabilityMeasure μ}
+      let K : Set (Measure (Bernoulli ℕ n)) := univ
       have K_compact : IsCompact K := sorry
-      -- have K_convex : Convex ℝ K := sorry
+      have K_convex : Convex NNReal K := sorry
       have K_stable : G '' K ⊆ K := sorry
-      -- have fixed : ∃ μ, G μ = μ := schauder_tychonoff K_compact K_convex G G.continuous_toFun K_stable
+      have G_continuous : ContinuousOn G K := Continuous.continuousOn (G.continuous_toFun)
+
+      -- have fixed : ∃ μ, G μ = μ := schauder_tychonoff K_compact K_convex G G_continuous K_stable
+      have fixed : ∃ μ ∈ K, G μ = μ := sorry
+
+      let ν : Measure (Bernoulli ℕ n) := choose fixed
+      use ν
+      have relation : G ν = ν := by exact (choose_spec fixed).right
+      simp [G] at relation
+      -- use (ν univ)
       sorry
 
 
-  noncomputable def ν : ProbabilityMeasure (Bernoulli ℕ n) := choose (RPF1 φ)
+  noncomputable def ν : Measure (Bernoulli ℕ n) := choose (RPF1 φ)
 
   noncomputable def a : NNReal := choose (choose_spec (RPF1 φ))
 
@@ -229,7 +238,7 @@ namespace RPF
     sorry
 
   noncomputable def μ : Measure (Bernoulli ℕ n) :=
-    (ν φ).toMeasure.withDensity (λ x => h_pos φ x)
+    (ν φ).withDensity (λ x => h_pos φ x)
 
   lemma mu_prob : IsProbabilityMeasure (μ φ) := sorry
 
