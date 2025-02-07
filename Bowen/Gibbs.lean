@@ -58,7 +58,29 @@ end Uniqueness
 namespace Equiv
 
   def equiv (f g : Bernoulli ℤ n → ℝ) : Prop :=
-    ∃ u : Bernoulli ℤ n → ℝ, Continuous u ∧ f = g - u + (u ∘ shift)
+    ∃ u, Continuous u ∧ f = g - u + (u ∘ shift)
+
+  def u_equiv (f g u: Bernoulli ℤ n → ℝ) : Prop :=
+    Continuous u ∧ f = g - u + (u ∘ shift)
+
+  lemma u_equiv_sym (f g u : Bernoulli ℤ n → ℝ) (h_equiv : u_equiv f g u) : u_equiv g f (-u) := by
+    have relation : f = g - u + (u ∘ shift) := by exact h_equiv.right
+    have eq : (-u) ∘ shift = - u ∘ shift := by rfl
+    split_ands
+    . exact @Continuous.neg ℝ (Bernoulli ℤ n) _ _ _ _ u (h_equiv.left) -- Fonctionne pas sans @
+    . subst relation; rw [eq]; simp; ring
+
+  lemma equiv_sym (f g : Bernoulli ℤ n → ℝ) (h_equiv : equiv f g) : equiv g f := by
+    let u := choose h_equiv
+    use -u
+    have hu_equiv : u_equiv f g u := choose_spec (h_equiv)
+    exact u_equiv_sym f g u hu_equiv
+
+  lemma birkhoff_ineq (f g : Bernoulli ℤ n → ℝ) (u : C(Bernoulli ℤ n, ℝ)) (h_equiv : u_equiv f g u)
+    (m : ℕ) (x : Bernoulli ℤ n) :
+    ∑ k < m, (f (shift^[k] x) - g (shift^[k] x)) ≤ 2 * ‖u‖ := by
+      have relation : f = g - u + (u ∘ shift) := h_equiv.right
+      subst relation
 
   theorem equiv_imp_eq_gibbs (φ ψ : Bernoulli ℤ n → ℝ) (μ : Measure (Bernoulli ℤ n))
     [HolderLike φ] [HolderLike ψ] [hgibbs : IsGibbs φ μ] (h_equiv : equiv φ ψ) :
@@ -70,9 +92,11 @@ namespace Equiv
         }
         have u_relation := (choose_spec (h_equiv)).right
         have birkhoff_ineq1 (m : ℕ) (x : Bernoulli ℤ n) :
-          ∑ k < m, φ (shift^[k] x) - ∑ k ∈ Ico 0 m, ψ (shift^[k] x) ≤ 2 * ‖u‖ := by sorry
+          ∑ k < m, (φ (shift^[k] x) - ψ (shift^[k] x)) ≤ 2 * ‖u‖ := by
+          exact (birkhoff_ineq φ ψ u (choose_spec h_equiv) m x)
         have birkhoff_ineq2 (m : ℕ) (x : Bernoulli ℤ n) :
-          ∑ k < m, ψ (shift^[k] x) - ∑ k ∈ Ico 0 m, φ (shift^[k] x) ≤ 2 * ‖u‖ := by sorry
+          ∑ k < m, (ψ (shift^[k] x) - φ (shift^[k] x)) ≤ 2 * ‖u‖ := by sorry
+          -- exact (birkhoff_ineq ψ φ u (choose_spec h_equiv) m x)
         let P : ℝ := choose (hgibbs.gibbs_prop)
         let c₁ := choose (choose_spec hgibbs.gibbs_prop)
         let c₂ := choose (choose_spec (choose_spec hgibbs.gibbs_prop))
