@@ -81,6 +81,7 @@ namespace Equiv
     ∑ k < m, (f (shift^[k] x) - g (shift^[k] x)) ≤ 2 * ‖u‖ := by
       have relation : f = g - u + (u ∘ shift) := h_equiv.right
       subst relation
+      sorry -- comment faire le téléscopage ?
 
   theorem equiv_imp_eq_gibbs (φ ψ : Bernoulli ℤ n → ℝ) (μ : Measure (Bernoulli ℤ n))
     [HolderLike φ] [HolderLike ψ] [hgibbs : IsGibbs φ μ] (h_equiv : equiv φ ψ) :
@@ -95,8 +96,9 @@ namespace Equiv
           ∑ k < m, (φ (shift^[k] x) - ψ (shift^[k] x)) ≤ 2 * ‖u‖ := by
           exact (birkhoff_ineq φ ψ u (choose_spec h_equiv) m x)
         have birkhoff_ineq2 (m : ℕ) (x : Bernoulli ℤ n) :
-          ∑ k < m, (ψ (shift^[k] x) - φ (shift^[k] x)) ≤ 2 * ‖u‖ := by sorry
-          -- exact (birkhoff_ineq ψ φ u (choose_spec h_equiv) m x)
+          ∑ k < m, (ψ (shift^[k] x) - φ (shift^[k] x)) ≤ 2 * ‖u‖ := by
+            rw [← norm_neg]
+            exact birkhoff_ineq ψ φ (-u) (u_equiv_sym φ ψ u (choose_spec h_equiv)) m x
         let P : ℝ := choose (hgibbs.gibbs_prop)
         let c₁ := choose (choose_spec hgibbs.gibbs_prop)
         let c₂ := choose (choose_spec (choose_spec hgibbs.gibbs_prop))
@@ -120,6 +122,7 @@ namespace Equiv
           rw [exp_le_exp]
           sorry
         simp
+        have ineq := gibbs_ineq.right.right x m
         split_ands
         . sorry
         . sorry
