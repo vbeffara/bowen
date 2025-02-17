@@ -23,22 +23,49 @@ class IsGibbs (φ : Bernoulli ℤ n → ℝ) (μ : Measure (Bernoulli ℤ n)) ex
     μ (cylinder x m) / nnexp (- P * m + ∑ k ∈ Ico 0 m, φ (shift^[k] x)) ∈ Icc (c₁ : ENNReal) (c₂: ENNReal)
 
 class IsErgodic (μ : Measure (Bernoulli ℤ n)) extends InvariantProb μ where
-  ergodicity : ∀ s, f⁻¹' s = s → μ s = 0 ∨ μ s = 1
+  ergodicity : ∀ s, shift⁻¹' s = s → μ s = 0 ∨ μ s = 1
 
 class IsMixing (μ : Measure (Bernoulli ℤ n)) extends InvariantProb μ where
   mixing : ∀ e f, Tendsto (fun n => μ (e ∩ preimage shift^[n] f)) atTop (nhds (μ e * μ f))
 
 instance mixing_imp_ergodic (μ : Measure (Bernoulli ℤ n)) [IsMixing μ] : IsErgodic μ where
   ergodicity := by
-    intros f s hs
-    have intersect_trivial : ∀ n, s ∩ (shift^[n])⁻¹' s = s := sorry
-    have lim : Tendsto (fun _ : ℕ => μ s) atTop (nhds (μ s * μ s)) := by sorry
-    have lim2 : Tendsto (fun _ : ℕ => μ s) atTop (nhds (μ s)) := by exact tendsto_const_nhds
-    have eq : μ s * μ s = μ s := by exact tendsto_nhds_unique lim lim2
-    -- rw [← IsIdempotentElem.iff_eq_zero_or_one]
+    intros s hs
+
+    let seq (k : ℕ) : ENNReal := μ (s ∩ shift^[k]⁻¹' s)
+    have seq_simp : seq = (fun _ => μ s) := by
+      have recu : ∀ k, (shift^[k])⁻¹' s = s := by
+        intros k; induction k with
+        | zero => simp
+        | succ k hr =>
+            simp only [Function.iterate_succ]
+            rw [@preimage_comp _ _ _ shift shift^[k] s, hr]
+            exact hs
+      ext k
+      simp [seq]
+      rw [recu k, inter_self]
+
+    have eq : μ s * μ s = μ s := by
+      have lim : Tendsto seq atTop (nhds (μ s * μ s)) := by exact IsMixing.mixing s s
+      have lim2 : Tendsto seq atTop (nhds (μ s)) := by
+        rw [seq_simp]
+        exact tendsto_const_nhds
+      exact tendsto_nhds_unique lim lim2
+
+    let r := μ s
+    have r_le_one : r ≤ 1 := by
+      have fact : 1 = μ univ := by simp only [measure_univ]
+      simp only [r]
+      rw [fact]
+      apply μ.mono
+      simp
+    have eqn : r * r - r = 0 := by rw [eq]; simp
+    /- have fact : r * (r - 1) = 0 := by rw [ENNReal.mul_sub] -/
+    -- rw [← @IsIdempotentElem.iff_eq_zero_or_one _ _ (μ s).toReal]
     -- exact eq
     sorry
 
+-- TODO : Refactor using ae
 lemma ergodic_shift_inv_imp_cst (μ : Measure (Bernoulli ℤ n)) [IsErgodic μ] (f : Bernoulli ℤ n → ℝ)
   (hf : Integrable f μ) (hμ : μ {x | (f ∘ shift) x = f x} = 1) :
     ∃ c, μ (f⁻¹' {c}) = 1 := by
@@ -120,6 +147,8 @@ namespace Equiv
         have exp_ineq1 :
           exp (- 2 * ‖u‖ + ∑ k ∈ Ico 0 m, φ (shift^[k] x)) ≤ exp (∑ k ∈ Ico 0 m, ψ (shift^[k] x)) := by
           rw [exp_le_exp]
+          simp
+          /- apply birkhoff_ineq φ ψ u  -/
           sorry
         simp
         have ineq := gibbs_ineq.right.right x m
