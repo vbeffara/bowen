@@ -53,17 +53,32 @@ instance mixing_imp_ergodic (μ : Measure (Bernoulli ℤ n)) [IsMixing μ] : IsE
       exact tendsto_nhds_unique lim lim2
 
     let r := μ s
-    have r_le_one : r ≤ 1 := by
-      have fact : 1 = μ univ := by simp only [measure_univ]
-      simp only [r]
-      rw [fact]
-      apply μ.mono
-      simp
-    have eqn : r * r - r = 0 := by rw [eq]; simp
-    /- have fact : r * (r - 1) = 0 := by rw [ENNReal.mul_sub] -/
-    -- rw [← @IsIdempotentElem.iff_eq_zero_or_one _ _ (μ s).toReal]
-    -- exact eq
-    sorry
+    have r_fin : r ≠ ⊤ := by
+      intro htop
+      have r_le_one : r ≤ 1 := by
+        have fact : 1 = μ univ := by simp only [measure_univ]
+        simp only [r]
+        rw [fact]
+        apply μ.mono
+        simp
+      rw [htop] at r_le_one
+      simp only [top_le_iff, ENNReal.one_ne_top] at r_le_one
+
+    have factored : r * (r - 1) = 0 := by
+      have eqn : r * r - r = 0 := by rw [eq]; simp
+      have hyp : (0 : ENNReal) < 1 → 1 < r → r ≠ ⊤ := by
+        intros h1 h2
+        exact r_fin
+      rw [ENNReal.mul_sub hyp]
+      simpa
+
+    simp only [mul_eq_zero] at factored
+    by_cases hzero : r = 0
+    . left; exact hzero
+    . right
+      simp_all
+      sorry
+
 
 -- TODO : Refactor using ae
 lemma ergodic_shift_inv_imp_cst (μ : Measure (Bernoulli ℤ n)) [IsErgodic μ] (f : Bernoulli ℤ n → ℝ)
