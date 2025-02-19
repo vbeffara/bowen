@@ -101,6 +101,7 @@ namespace RPF
   /-- Partie 1 du théorème de Ruelle de Perron-Frobenius -/
   theorem RPF1 :
     ∃ ν : Measure (Bernoulli ℕ n), ∃ a : NNReal, a > 0
+    ∧ IsProbabilityMeasure ν
     ∧ Lpb φ ν = a • ν := by
       let G : C(Measure (Bernoulli ℕ n), Measure (Bernoulli ℕ n)) := {
         toFun := fun μ => (1 / μ univ) • (Lpb φ μ)
@@ -128,7 +129,7 @@ namespace RPF
   noncomputable def a : NNReal := choose (choose_spec (RPF1 φ))
 
   theorem RPF1_explicit (φ : Bernoulli ℕ n → ℝ) [HolderLike φ]:
-    a φ > 0 ∧ Lpb φ (ν φ) = a φ • ν φ :=
+    a φ > 0 ∧ IsProbabilityMeasure (ν φ) ∧ Lpb φ (ν φ) = a φ • ν φ :=
     by exact choose_spec (choose_spec (RPF1 φ))
 
   /-- RPF2 -/
@@ -157,7 +158,32 @@ namespace RPF
       continuous_toFun := continuous_const
     }
 
-  lemma Lambda_one : one ∈ (Λ φ) := by sorry
+  lemma Lambda_one : one ∈ (Λ φ) := by
+    unfold Λ
+    rw [mem_setOf]
+    split_ands
+    . intro x
+      simp
+      simp [one]
+
+    . simp_all [one]
+      have prob : (ν φ) univ = 1 := by
+        rw [← isProbabilityMeasure_iff]
+        exact (RPF1_explicit φ).right.left
+      simp_all only [ENNReal.one_toReal]
+    . unfold IsBmBounded
+      intro m x x' _
+      simp [one, Bm, logBm]
+      apply mul_nonneg
+      apply mul_nonneg
+      . linarith
+      . simp_all
+      . apply tsum_nonneg
+        intro i
+        apply pow_nonneg
+        have α_ineq : (0 : ℝ) < HolderLike.α φ := by sorry
+        sorry
+
 
   lemma Lf_ge_invK (f : C(Bernoulli ℕ n, ℝ)) (x : Bernoulli ℕ n) : K φ * (L φ f) x ≥ a φ := sorry
 
