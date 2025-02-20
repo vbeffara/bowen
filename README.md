@@ -17,3 +17,5 @@ Completer la structure du code lean pour pouvoir écrire la preuve du théorème
 
 - RPF1 : Schauder-Tychonoff nécessite d'avoir un espace vectoriel mais un ensemble de mesures n'est
 pas un espace vectoriel.
+
+- `ergodic_shift_inv_imp_cst` : Vérifier l'énoncé (peut-être faux)
