@@ -79,15 +79,23 @@ instance mixing_imp_ergodic (μ : Measure (Bernoulli ℤ n)) [IsMixing μ] : IsE
       simp_all
       sorry
 
-
--- TODO : Refactor using ae
-lemma ergodic_shift_inv_imp_cst (μ : Measure (Bernoulli ℤ n)) [IsErgodic μ] (f : Bernoulli ℤ n → ℝ)
-  (hf : Integrable f μ) (hμ : μ {x | (f ∘ shift) x = f x} = 1) :
-    ∃ c, μ (f⁻¹' {c}) = 1 := by
-      let Ec : ℝ → Set (Bernoulli ℤ n) :=
-        fun c => (f ⁻¹' {c})
-      have shift_inv c : shift ⁻¹' (Ec c) = Ec c := sorry
-      sorry
+  lemma ergodic_shift_inv_imp_cst (μ : Measure (Bernoulli ℤ n)) [IsErgodic μ] (f : Bernoulli ℤ n → ℝ)
+    (hf : Integrable f μ) (h_inv : f ∘ shift =ᵐ[μ] f) :
+      ∃ c, ∀ᵐ x ∂μ, f x = c := by
+    let Ec : ℝ → Set (Bernoulli ℤ n) := fun c => f⁻¹' {c}
+    have shift_inv (c : ℝ) (hc : c ∈ f '' univ) : shift ⁻¹' (Ec c) = Ec c := by
+      simp at hc
+      let x := choose hc
+      have im_x : f x = c := choose_spec hc
+      rw [subset_antisymm_iff]
+      split_ands
+      . intro y hy
+        simp at hy
+        sorry -- FIX : inclusion presque surement
+      . intro y hy
+        simp_all [Ec]
+        sorry -- FIX : inclusion presque surement
+    sorry
 
 namespace Uniqueness
 
