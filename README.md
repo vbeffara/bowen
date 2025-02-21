@@ -11,6 +11,9 @@ Blueprint : https://daurrian.github.io/bowen/blueprint/index.html
 
 Completer la structure du code lean pour pouvoir écrire la preuve du théorème sans les preuves des lemmes intermédiaires.
 
+Ajouter la preuve du fait que dans un espace ultramétrique, tout ouvert est une union disjointe de boules.
+De plus, si l'espace est séparable alors l'union est dénombrable.
+
 ## Problemes
 
 - Comment prouver `example (r : ENNReal) (hr : r - 1 = 0) : r = 1 := by sorry` ?
