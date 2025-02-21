@@ -12,8 +12,8 @@ variable {n : ℕ} (φ : Bernoulli ℕ n → ℝ) [HolderLike φ]
 
 noncomputable def CZtoCN (f : C(Bernoulli ℤ n, ℝ)) : C(Bernoulli ℕ n, ℝ) :=
   {
-    toFun := λ x : Bernoulli ℕ n =>
-      sInf {v | ∀ y : Bernoulli ℤ n, ∀ i ∈ Ici 0, x i = y i ∧ v = f y}
+    toFun x := sInf {v | ∀ y : Bernoulli ℤ n, ∀ i ∈ Ici 0, x i = y i ∧ v = f y}
+    -- ça impose que f soit constante non ?
     continuous_toFun := sorry
   }
 

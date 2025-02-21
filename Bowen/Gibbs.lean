@@ -117,7 +117,7 @@ namespace Equiv
     have relation : f = g - u + (u ∘ shift) := by exact h_equiv.right
     have eq : (-u) ∘ shift = - u ∘ shift := by rfl
     split_ands
-    . exact @Continuous.neg ℝ (Bernoulli ℤ n) _ _ _ _ u (h_equiv.left) -- Fonctionne pas sans @
+    . exact (h_equiv.left).neg -- Fonctionne pas sans @ -- si
     . subst relation; rw [eq]; simp; ring
 
   lemma equiv_sym (f g : Bernoulli ℤ n → ℝ) (h_equiv : equiv f g) : equiv g f := by
@@ -131,7 +131,15 @@ namespace Equiv
     ∑ k < m, (f (shift^[k] x) - g (shift^[k] x)) ≤ 2 * ‖u‖ := by
       have relation : f = g - u + (u ∘ shift) := h_equiv.right
       subst relation
-      sorry -- comment faire le téléscopage ?
+      convert_to ∑ k ∈ Finset.range m, (u (shift^[k+1] x) - u (shift^[k] x)) ≤ 2 * ‖u‖
+      · congr
+        · ext i ; simp
+        · ext k
+          rw [Function.iterate_succ']
+          simp
+          ring
+      rw [Finset.sum_range_sub (fun k => u (shift^[k] x)) m]
+      sorry
 
   theorem equiv_imp_eq_gibbs (φ ψ : Bernoulli ℤ n → ℝ) (μ : Measure (Bernoulli ℤ n))
     [HolderLike φ] [HolderLike ψ] [hgibbs : IsGibbs φ μ] (h_equiv : equiv φ ψ) :
