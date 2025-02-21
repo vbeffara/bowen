@@ -35,7 +35,9 @@ namespace Bernoulli
   -- instance bernoulli_is_compact : CompactSpace (Bernoulli X n) := Pi.compactSpace
 
   def cylinder (x : Bernoulli X n) (m : ℕ) : Set (Bernoulli X n) :=
-    {y | EqOn x y {ContainN.fromNat i | i ∈ Ico 0 m}}
+    {y | EqOn x y (ContainN.fromNat '' Ico 0 m)}
+    -- {y | EqOn x y {ContainN.fromNat i | i ∈ Ico 0 m}}
+    -- c'est pas à ça que servirait `var_supp` ?
 
   def shift (x : Bernoulli X n) : Bernoulli X n := x ∘ ContainN.shift
 
@@ -53,6 +55,8 @@ namespace Bernoulli
       O = ⋃ i : ℕ, (Metric.ball (b i) (r i) : Set (Bernoulli ℤ n)) ∧
       Pairwise (Function.onFun Disjoint (λ i => Metric.ball (b i) (r i))):=
     sorry
+    -- https://math.stackexchange.com/a/194200/135190
+    -- `IsUltrametricDist` et
 
 end Bernoulli
 
@@ -62,5 +66,21 @@ class HolderLike {X : Type*} [ContainN X] (φ : Bernoulli X n → ℝ) where
   var : ℕ → NNReal := λ k => sSup {diff | ∀ x y, EqOn x y (ContainN.var_supp k) ∧ diff = |φ x - φ y|}
   isHolderLike : ∀ k : ℕ, var k ≤ b * (α : ℝ)^k
   norm : NNReal := sSup {|φ x| | x : Bernoulli X n}
+  -- faut vraiment m'expliquer pourquoi ce n'est pas `HolderWith`
+
+-- Le `:=` ne veut pas dire ce qu'on pense c'est une valeur par défaut
+class Toto where
+  x : ℕ := 1
+instance toto1 : Toto where
+instance toto2 : Toto where x := 2
+#eval toto1.x -- 1
+#eval toto2.x -- 2
+
+noncomputable example (φ : Bernoulli X n → ℝ) : HolderLike φ where
+  α := ⟨1/2, by { simp ; norm_num }⟩
+  b := 0
+  var _ := 0
+  norm := 0
+  isHolderLike k := by simp
 
 lemma holder_imp_continuous (φ : Bernoulli X n → ℝ) [HolderLike φ] : Continuous φ := sorry
