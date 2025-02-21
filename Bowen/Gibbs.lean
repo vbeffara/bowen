@@ -78,6 +78,8 @@ instance mixing_imp_ergodic (μ : Measure (Bernoulli ℤ n)) [IsMixing μ] : IsE
     . right
       simp_all
       sorry
+    -- problem : r-1 = 0 → r ≤ 1 for ENNReal
+    -- solution : lift tactic
 
   lemma ergodic_shift_inv_imp_cst (μ : Measure (Bernoulli ℤ n)) [IsErgodic μ] (f : Bernoulli ℤ n → ℝ)
     (hf : Integrable f μ) (h_inv : f ∘ shift =ᵐ[μ] f) :
