@@ -28,58 +28,27 @@ class IsErgodic (μ : Measure (Bernoulli ℤ n)) extends InvariantProb μ where
 class IsMixing (μ : Measure (Bernoulli ℤ n)) extends InvariantProb μ where
   mixing : ∀ e f, Tendsto (fun n => μ (e ∩ preimage shift^[n] f)) atTop (nhds (μ e * μ f))
 
-instance mixing_imp_ergodic (μ : Measure (Bernoulli ℤ n)) [IsMixing μ] : IsErgodic μ where
-  ergodicity := by
-    intros s hs
+theorem eq_zero_or_one_or_top_of_mul_self {x : ENNReal} (hx : x * x = x) :
+    (x = 0) ∨ (x = 1) ∨ (x = ⊤) := by
+  cases x with
+  | top => tauto
+  | coe x =>
+    obtain ⟨x, x_nonneg⟩ := x
+    simp only [ENNReal.coe_eq_zero, ENNReal.coe_eq_one, ENNReal.coe_ne_top, or_false]
+    apply eq_zero_or_one_of_sq_eq_self
+    simpa only [sq, ← ENNReal.coe_mul, ENNReal.coe_inj] using hx
 
-    let seq (k : ℕ) : ENNReal := μ (s ∩ shift^[k]⁻¹' s)
-    have seq_simp : seq = (fun _ => μ s) := by
-      have recu : ∀ k, (shift^[k])⁻¹' s = s := by
-        intros k; induction k with
-        | zero => simp
-        | succ k hr =>
-            simp only [Function.iterate_succ]
-            rw [@preimage_comp _ _ _ shift shift^[k] s, hr]
-            exact hs
-      ext k
-      simp [seq]
-      rw [recu k, inter_self]
+@[simp] theorem iterate_preimage {s : Set (Bernoulli ℤ n)} (hs : shift ⁻¹' s = s) {k : ℕ} :
+    shift^[k] ⁻¹' s = s := by
+  induction k with
+  | zero => simp
+  | succ k hr => simp [preimage_comp, hr, hs]
 
-    have eq : μ s * μ s = μ s := by
-      have lim : Tendsto seq atTop (nhds (μ s * μ s)) := by exact IsMixing.mixing s s
-      have lim2 : Tendsto seq atTop (nhds (μ s)) := by
-        rw [seq_simp]
-        exact tendsto_const_nhds
-      exact tendsto_nhds_unique lim lim2
-
-    let r := μ s
-    have r_fin : r ≠ ⊤ := by
-      intro htop
-      have r_le_one : r ≤ 1 := by
-        have fact : 1 = μ univ := by simp only [measure_univ]
-        simp only [r]
-        rw [fact]
-        apply μ.mono
-        simp
-      rw [htop] at r_le_one
-      simp only [top_le_iff, ENNReal.one_ne_top] at r_le_one
-
-    have factored : r * (r - 1) = 0 := by
-      have eqn : r * r - r = 0 := by rw [eq]; simp
-      have hyp : (0 : ENNReal) < 1 → 1 < r → r ≠ ⊤ := by
-        intros h1 h2
-        exact r_fin
-      rw [ENNReal.mul_sub hyp]
-      simpa
-
-    simp only [mul_eq_zero] at factored
-    by_cases hzero : r = 0
-    . left; exact hzero
-    . right
-      simp_all
-      sorry
-    -- problem : r-1 = 0 → r ≤ 1 for ENNReal
-    -- solution : lift tactic
+instance (μ : Measure (Bernoulli ℤ n)) [IsMixing μ] : IsErgodic μ where
+  ergodicity s hs := by
+    have h1 : μ s * μ s = μ s := by symm ; simpa [hs] using IsMixing.mixing s s
+    have h2 := eq_zero_or_one_or_top_of_mul_self h1
+    simp_all
 
   lemma ergodic_shift_inv_imp_cst (μ : Measure (Bernoulli ℤ n)) [IsErgodic μ] (f : Bernoulli ℤ n → ℝ)
     (hf : Integrable f μ) (h_inv : f ∘ shift =ᵐ[μ] f) :
