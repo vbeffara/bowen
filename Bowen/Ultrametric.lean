@@ -32,20 +32,23 @@ lemma open_eq_union_ball {X : Type*} [PseudoMetricSpace X] (O : Set X) (hO : IsO
 def rel (U : Set (Set X)) (u v : Set X) : Prop :=
   ∃ w ∈ {b : Set X | ∃ x r, 0 < r ∧ b = ball x r} ∩ U, u ⊆ w ∧ v ⊆ w
 
-instance (U : Set (Set X)) :
-    IsEquiv {b : Set X | ∃ x r, 0 < r ∧ b = ball x r ∧ b ∈ U} (fun ⟨u, _⟩ ⟨v, _⟩ => rel U u v) where
-  refl u := by
+-- Transitivite vient de la distance ultrametrique
+lemma rel_equiv (U : Set (Set X)) :
+    Equivalence (fun (u v : {b : Set X | ∃ x r, 0 < r ∧ b = ball x r ∧ b ∈ U}) => rel U u v) where
+  refl := by
+    intro u
     obtain ⟨u, xu, ru, ru_pos, u_ball, u_in_U⟩ := u
     simp_all only [rel, mem_setOf_eq, and_self]
     use u
     simp_all only [mem_inter_iff, mem_setOf_eq, subset_refl, and_true]
     exact ⟨xu, ⟨ru, ru_pos, rfl⟩⟩
-  symm u v := by
-    intro huv
+  symm := by
+    intros u v huv
     simp_all only [rel]
     obtain ⟨w, hwU, huw, hvw⟩ := huv
     exact ⟨w, hwU, hvw, huw⟩
-  trans u v w := by
+  trans := by
+    intros u v w
     obtain ⟨u, xu, ru, ru_pos, u_ball, u_in_U⟩ := u
     obtain ⟨v, xv, rv, rv_pos, v_ball, v_in_U⟩ := v
     obtain ⟨w, xw, rw, rw_pos, w_ball, w_in_U⟩ := w
