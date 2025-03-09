@@ -85,21 +85,19 @@ lemma rel_equiv (U : Set (Set X)) :
       . exact u_sub_s
       . exact subset_trans w_sub_t t_sub
 
+instance balls_U (U : Set (Set X)) : Setoid {b | ∃ x r, 0 < r ∧ b = ball x r ∧ b ∈ U} where
+  r := fun u v => rel U u v
+  iseqv := rel_equiv U
+
+def Urepr (U : Set (Set X)) : Set (Set X) := {x | ∃ (q : Quotient (balls_U U)), Quotient.out q = x}
+
+lemma has_max (U : Set (Set X)) (u : Quotient (balls_U U)) :
+    ∃ v : {b : Set X | ∃ x r, 0 < r ∧ b = ball x r ∧ b ∈ U},
+      Maximal (fun w => ⟦w⟧ = u) v := sorry
+  -- TODO : Verfier que c'est vrai
+  -- Piste : Lemme de Zorn
+
 theorem open_eq_disjoint_union_ball (O : Set X) (hO : IsOpen O) :
     ∃ s ⊆ {b : Set X | ∃ x r, b = ball x r}, O = ⋃₀ s ∧ s.PairwiseDisjoint id := by
   sorry
 
-/- lemma open_eq_disjoint_union_ball (O : Set X) (hO : IsOpen O) : -/
-/-   ∃ C : Set X, ∃ r : X → ℝ, -/
-/-     (∀ x ∈ O, r x > 0) ∧ -/
-/-     O = ⋃ x ∈ C, ball x (r x) ∧ -/
-/-     PairwiseDisjoint C (fun x => ball x (r x)) := by -/
-/-   rw [exists_swap] -/
-/-   let r := choose (open_eq_union_ball O hO) -/
-/-   have r_pos (x : X) (hx : x ∈ O) : r x > 0 := (choose_spec (open_eq_union_ball O hO)).left x hx -/
-/-   have r_iUnion : O = ⋃ x ∈ O, ball x (r x) := (choose_spec (open_eq_union_ball O hO)).right -/
-/-   use r -/
-/-   simp only [exists_and_left] -/
-/-   constructor -/
-/-   . exact r_pos -/
-/-   . sorry -/
