@@ -4,54 +4,38 @@ open TopologicalSpace Metric Set Classical
 
 variable {X : Type*} [PseudoMetricSpace X] [IsUltrametricDist X]
 
+def balls (X : Type*) [PseudoMetricSpace X] : Set (Set X) := {b | ∃ x r, 0 < r ∧ b = ball x r}
+
 lemma metric_space_topological_basis {X : Type*} [PseudoMetricSpace X] :
-    IsTopologicalBasis {b : Set X | ∃ x r, 0 < r ∧ b = ball x r} := by
-  have h_open : ∀ o ∈ {b : Set X | ∃ x r, 0 < r ∧ b = ball x r}, IsOpen o := by
-    intros b hb
-    simp_all only [mem_setOf_eq]
-    obtain ⟨x, r, r_pos, b_eq_ball⟩ := hb
-    rw [b_eq_ball]
+    IsTopologicalBasis (balls X) := by
+  have h_open : ∀ o ∈ balls X, IsOpen o := by
+    rintro s ⟨x, r, -, rfl⟩
     exact isOpen_ball
-  have h_nhds : ∀ (x : X) (u : Set X), x ∈ u → IsOpen u →
-      ∃ v ∈ {b : Set X | ∃ x r, 0 < r ∧ b = ball x r}, x ∈ v ∧ v ⊆ u := by
-    intros x u hx_in_u hu_open
+  have h_nhds x u (hx_in_u : x ∈ u) (hu_open : IsOpen u) : ∃ v ∈ balls X, x ∈ v ∧ v ⊆ u := by
     rw [isOpen_iff] at hu_open
     obtain ⟨r, r_pos, h_ball_sub⟩ := hu_open x hx_in_u
-    use ball x r
-    split_ands
-    . simp_all
-      exact ⟨x, r, r_pos, rfl⟩
-    . simp_all
-    . exact h_ball_sub
+    refine ⟨ball x r, ⟨x, r, r_pos, rfl⟩, mem_ball_self r_pos, h_ball_sub⟩
   exact isTopologicalBasis_of_isOpen_of_nhds h_open h_nhds
 
 lemma open_eq_union_ball {X : Type*} [PseudoMetricSpace X] (O : Set X) (hO : IsOpen O) :
-    ∃ s ⊆ {b : Set X | ∃ x r, 0 < r ∧ b = ball x r}, O = ⋃₀ s := by
-      exact IsTopologicalBasis.open_eq_sUnion metric_space_topological_basis hO
+    ∃ s ⊆ balls X, O = ⋃₀ s :=
+  IsTopologicalBasis.open_eq_sUnion metric_space_topological_basis hO
 
-def rel (U : Set (Set X)) (u v : Set X) : Prop :=
-  ∃ w ∈ {b : Set X | ∃ x r, 0 < r ∧ b = ball x r} ∩ U, u ⊆ w ∧ v ⊆ w
+def rel (U : Set (Set X)) (u v : Set X) : Prop := ∃ w ∈ balls X ∩ U, u ⊆ w ∧ v ⊆ w
 
 -- Transitivite vient de la distance ultrametrique
 lemma rel_equiv (U : Set (Set X)) :
-    Equivalence (fun (u v : {b : Set X | ∃ x r, 0 < r ∧ b = ball x r ∧ b ∈ U}) => rel U u v) where
-  refl := by
-    intro u
-    obtain ⟨u, xu, ru, ru_pos, u_ball, u_in_U⟩ := u
-    simp_all only [rel, mem_setOf_eq, and_self]
-    use u
-    simp_all only [mem_inter_iff, mem_setOf_eq, subset_refl, and_true]
-    exact ⟨xu, ⟨ru, ru_pos, rfl⟩⟩
+    Equivalence (fun (u v : {b ∈ balls X | b ∈ U}) => rel U u v) where
+  refl s := ⟨s, by simp⟩
   symm := by
     intros u v huv
     simp_all only [rel]
     obtain ⟨w, hwU, huw, hvw⟩ := huv
     exact ⟨w, hwU, hvw, huw⟩
   trans := by
-    intros u v w
-    obtain ⟨u, xu, ru, ru_pos, u_ball, u_in_U⟩ := u
-    obtain ⟨v, xv, rv, rv_pos, v_ball, v_in_U⟩ := v
-    obtain ⟨w, xw, rw, rw_pos, w_ball, w_in_U⟩ := w
+    rintro ⟨u, ⟨⟨xu, ru, ru_pos, u_ball⟩, u_in_U⟩⟩
+    rintro ⟨v, ⟨⟨xv, rv, rv_pos, v_ball⟩, v_in_U⟩⟩
+    rintro ⟨w, ⟨⟨xw, rw, rw_pos, w_ball⟩, w_in_U⟩⟩
     intros huv hvw
     simp_all only [rel, mem_inter_iff]
     obtain ⟨s, ⟨⟨xs, rs, rs_pos, s_ball⟩, hsU⟩, u_sub_s, v_sub_s⟩ := huv
@@ -85,19 +69,17 @@ lemma rel_equiv (U : Set (Set X)) :
       . exact u_sub_s
       . exact subset_trans w_sub_t t_sub
 
-instance balls_U (U : Set (Set X)) : Setoid {b | ∃ x r, 0 < r ∧ b = ball x r ∧ b ∈ U} where
+instance balls_U (U : Set (Set X)) : Setoid {b ∈ balls X | b ∈ U} where
   r := fun u v => rel U u v
   iseqv := rel_equiv U
 
 def Urepr (U : Set (Set X)) : Set (Set X) := {x | ∃ (q : Quotient (balls_U U)), Quotient.out q = x}
 
 lemma has_max (U : Set (Set X)) (u : Quotient (balls_U U)) :
-    ∃ v : {b : Set X | ∃ x r, 0 < r ∧ b = ball x r ∧ b ∈ U},
-      Maximal (fun w => ⟦w⟧ = u) v := sorry
+    ∃ v : {b ∈ balls X | b ∈ U}, Maximal (fun w => ⟦w⟧ = u) v := sorry
   -- TODO : Verfier que c'est vrai
   -- Piste : Lemme de Zorn
 
 theorem open_eq_disjoint_union_ball (O : Set X) (hO : IsOpen O) :
     ∃ s ⊆ {b : Set X | ∃ x r, b = ball x r}, O = ⋃₀ s ∧ s.PairwiseDisjoint id := by
   sorry
-
