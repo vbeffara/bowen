@@ -21,23 +21,23 @@ lemma open_eq_union_ball {X : Type*} [PseudoMetricSpace X] (O : Set X) (hO : IsO
     ∃ s ⊆ balls X, O = ⋃₀ s :=
   IsTopologicalBasis.open_eq_sUnion metric_space_topological_basis hO
 
-def rel (U : Set (balls X)) (u v : U) : Prop := ∃ w : U, u.1.1 ⊆ w ∧ v.1.1 ⊆ w
+def rel (U : Set (balls X)) (u v : U) : Prop := ∃ w ∈ U, u.1.1 ⊆ w ∧ v.1.1 ⊆ w
 
 -- Transitivite vient de la distance ultrametrique
 lemma rel_equiv {U : Set (balls X)} : Equivalence (rel U) where
   refl s := ⟨s, by simp⟩
   symm {u v} := by
-    rintro ⟨w, hw⟩
-    exact ⟨w, hw.symm⟩
+    rintro ⟨w, hw1, hw⟩
+    exact ⟨w, hw1, hw.symm⟩
   trans {u v w} := by
-    rintro ⟨s, u_sub_s, v_sub_s⟩ ⟨t, v_sub_t, w_sub_t⟩
-    have key : s.1.1 ⊆ t.1.1 ∨ t.1.1 ⊆ s.1.1 ∨ Disjoint s.1.1 t.1.1 := by
-      obtain ⟨⟨s, xs, rs, rs_pos, rfl⟩, hsU⟩ := s
-      obtain ⟨⟨t, xt, rt, rt_pos, rfl⟩, htU⟩ := t
+    rintro ⟨s, sU, u_sub_s, v_sub_s⟩ ⟨t, tU, v_sub_t, w_sub_t⟩
+    have key : s.1 ⊆ t.1 ∨ t.1 ⊆ s.1 ∨ Disjoint s.1 t.1 := by
+      obtain ⟨s, xs, rs, rs_pos, rfl, hsU⟩ := s
+      obtain ⟨t, xt, rt, rt_pos, rfl, htU⟩ := t
       apply IsUltrametricDist.ball_subset_trichotomy
     rcases key with s_sub | t_sub | dis
-    · exact ⟨t, u_sub_s.trans s_sub, w_sub_t⟩
-    · exact ⟨s, u_sub_s, w_sub_t.trans t_sub⟩
+    · exact ⟨t, tU, u_sub_s.trans s_sub, w_sub_t⟩
+    · exact ⟨s, sU, u_sub_s, w_sub_t.trans t_sub⟩
     · contrapose dis
       apply Nonempty.not_disjoint
       rcases v with ⟨⟨v, xv, rv, rv_pos, rfl⟩, hvU⟩
