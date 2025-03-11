@@ -31,11 +31,6 @@ lemma rel_equiv {U : Set (balls X)} : Equivalence (rel U) where
     exact ⟨w, hw.symm⟩
   trans {u v w} := by
     rintro ⟨s, u_sub_s, v_sub_s⟩ ⟨t, v_sub_t, w_sub_t⟩
-    have : ¬ Disjoint s.1.1 t.1.1 := by
-      apply Nonempty.not_disjoint
-      rcases v with ⟨⟨v, xv, rv, rv_pos, rfl⟩, hvU⟩
-      have : xv ∈ ball xv rv := mem_ball_self rv_pos
-      refine ⟨xv, v_sub_s this, v_sub_t this⟩
     have key : s.1.1 ⊆ t.1.1 ∨ t.1.1 ⊆ s.1.1 ∨ Disjoint s.1.1 t.1.1 := by
       obtain ⟨⟨s, xs, rs, rs_pos, rfl⟩, hsU⟩ := s
       obtain ⟨⟨t, xt, rt, rt_pos, rfl⟩, htU⟩ := t
@@ -43,7 +38,11 @@ lemma rel_equiv {U : Set (balls X)} : Equivalence (rel U) where
     rcases key with s_sub | t_sub | dis
     · exact ⟨t, u_sub_s.trans s_sub, w_sub_t⟩
     · exact ⟨s, u_sub_s, w_sub_t.trans t_sub⟩
-    · contradiction
+    · contrapose dis
+      apply Nonempty.not_disjoint
+      rcases v with ⟨⟨v, xv, rv, rv_pos, rfl⟩, hvU⟩
+      have : xv ∈ ball xv rv := mem_ball_self rv_pos
+      exact ⟨xv, v_sub_s this, v_sub_t this⟩
 
 instance balls_U (U : Set (balls X)) : Setoid U := ⟨rel U, rel_equiv⟩
 
