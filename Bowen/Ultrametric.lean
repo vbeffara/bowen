@@ -8,14 +8,13 @@ def balls (X : Type*) [PseudoMetricSpace X] : Set (Set X) := {b | ∃ x, ∃ r >
 
 lemma metric_space_topological_basis {X : Type*} [PseudoMetricSpace X] :
     IsTopologicalBasis (balls X) := by
-  have h_open : ∀ o ∈ balls X, IsOpen o := by
-    rintro s ⟨x, r, -, rfl⟩
+  refine isTopologicalBasis_of_isOpen_of_nhds ?_ ?_
+  . rintro s ⟨x, r, _, rfl⟩
     exact isOpen_ball
-  have h_nhds x u (hx_in_u : x ∈ u) (hu_open : IsOpen u) : ∃ v ∈ balls X, x ∈ v ∧ v ⊆ u := by
+  . intros x u hx_in_u hu_open
     rw [isOpen_iff] at hu_open
     obtain ⟨r, r_pos, h_ball_sub⟩ := hu_open x hx_in_u
     refine ⟨ball x r, ⟨x, r, r_pos, rfl⟩, mem_ball_self r_pos, h_ball_sub⟩
-  exact isTopologicalBasis_of_isOpen_of_nhds h_open h_nhds
 
 lemma open_eq_union_ball {X : Type*} [PseudoMetricSpace X] (O : Set X) (hO : IsOpen O) :
     ∃ s ⊆ balls X, O = ⋃₀ s :=
