@@ -45,6 +45,19 @@ lemma rel_equiv {U : Set (balls X)} : Equivalence (rel U) where
 
 instance balls_U (U : Set (balls X)) : Setoid U := ⟨rel U, rel_equiv⟩
 
+lemma union_mem_balls {ι : Type*} [Nonempty ι] (C : ι → X) (R : ι → ℝ) (hR : ∀ i, 0 < R i)
+    {x : X} (h1 : ∀ i, x ∈ ball (C i) (R i)) (h2 : BddAbove (range R)) :
+    ⋃ i, ball (C i) (R i) ∈ balls X := by
+  refine ⟨x, iSup R, ?_, ?_⟩
+  · let i₀ : ι := Nonempty.some inferInstance
+    have h1 := hR i₀
+    have h2 := le_ciSup h2 i₀
+    linarith
+  · have (i) : ball (C i) (R i) = ball x (R i) := IsUltrametricDist.ball_eq_of_mem (h1 i)
+    ext z
+    symm
+    simpa [this] using lt_ciSup_iff h2
+
 -- def Urepr (U : Set (Set X)) : Set (Set X) := {x | ∃ (q : Quotient (balls_U U)), Quotient.out q = x}
 
 lemma has_max (U : Set (balls X)) (u : Quotient (balls_U U)) :
