@@ -60,10 +60,12 @@ lemma union_mem_balls {ι : Type*} [Nonempty ι] (C : ι → X) (R : ι → ℝ)
 
 lemma union_balls_mem_balls (U : Set (balls X)) :
     ⋃₀ U ∈ balls X := by
-  simp only [sUnion_image]
-  let C (a : U) := choose a.1.2.out
-  let r (a : U) := choose (choose_spec a.1.2.out)
-  have Cr_prop (a : U) := choose_spec (choose_spec a.1.2.out)
+  have key (a : U) : ∃ x, ∃ r > 0, a.1.1 = ball x r := a.1.2
+  choose C r hr hCr using key
+  simp only [sUnion_image, biUnion_eq_iUnion, hCr]
+  have hU : Nonempty U := sorry
+  obtain ⟨x, hx⟩ : ∃ x, ∀ i, x ∈ ball (C i) (r i) := sorry
+  apply union_mem_balls C r hr hx
   sorry
 
 def equiv_class (U : Set (balls X)) (u : U) : Set U := {v : U | rel U u v}
