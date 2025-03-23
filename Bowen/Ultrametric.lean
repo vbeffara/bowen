@@ -43,14 +43,53 @@ lemma rel_equiv {U : Set (balls X)} : Equivalence (rel U) where
       have : xv ∈ ball xv rv := mem_ball_self rv_pos
       exact ⟨xv, v_sub_s this, v_sub_t this⟩
 
-instance balls_U (U : Set (balls X)) : Setoid U := ⟨rel U, rel_equiv⟩
+instance quot_U (U : Set (balls X)) : Setoid U := ⟨rel U, rel_equiv⟩
 
--- def Urepr (U : Set (Set X)) : Set (Set X) := {x | ∃ (q : Quotient (balls_U U)), Quotient.out q = x}
+lemma union_mem_balls {ι : Type*} [Nonempty ι] (C : ι → X) (R : ι → ℝ) (hR : ∀ i, 0 < R i)
+    {x : X} (h1 : ∀ i, x ∈ ball (C i) (R i)) (h2 : BddAbove (range R)) :
+    ⋃ i, ball (C i) (R i) ∈ balls X := by
+  refine ⟨x, iSup R, ?_, ?_⟩
+  · let i₀ : ι := Nonempty.some inferInstance
+    have h1 := hR i₀
+    have h2 := le_ciSup h2 i₀
+    linarith
+  · have (i) : ball (C i) (R i) = ball x (R i) := IsUltrametricDist.ball_eq_of_mem (h1 i)
+    ext z
+    symm
+    simpa [this] using lt_ciSup_iff h2
 
-lemma has_max (U : Set (balls X)) (u : Quotient (balls_U U)) :
-    ∃ v : U, Maximal (fun w => ⟦w⟧ = u) v := sorry
-  -- TODO : Verfier que c'est vrai
-  -- Piste : Lemme de Zorn
+lemma union_balls_mem_balls (U : Set (balls X)) :
+    ⋃₀ U ∈ balls X := by
+  simp only [sUnion_image]
+  let C (a : U) := choose a.1.2.out
+  let r (a : U) := choose (choose_spec a.1.2.out)
+  have Cr_prop (a : U) := choose_spec (choose_spec a.1.2.out)
+  sorry
+
+def equiv_class (U : Set (balls X)) (u : U) : Set U := {v : U | rel U u v}
+
+-- FIX : réécrire les hyp : IsUltrametricDist pas utilisé
+lemma union_class_eq (U : Set (balls X)) (u : U) :
+    ⋃ (v ∈ equiv_class U u), v = ⋃ v ∈ {w : U | u.1.1 ⊆ w.1.1}, v.1.1 := by
+  apply subset_antisymm
+  all_goals rw [subset_def]
+  all_goals intros w hw
+  all_goals simp_all only [mem_iUnion, exists_prop, mem_setOf_eq]
+  . obtain ⟨v, ⟨s, hsU, hu_sub_s, hv_sub_s⟩, hw_mem_v⟩ := hw
+    use ⟨s, hsU⟩
+    simp only
+    exact ⟨hu_sub_s, mem_of_mem_of_subset hw_mem_v hv_sub_s⟩
+  . obtain ⟨v, u_sub_v, w_mem_v⟩ := hw
+    refine ⟨v, ?_, w_mem_v⟩
+    simp [equiv_class, rel]
+    use v
+    simp [exists_prop]
+    exact u_sub_v
+
+lemma union_class_mem_balls (U : Set (balls X)) (u : U) :
+    ⋃ (v ∈ equiv_class U u), v ∈ balls X := by
+  have v_ball (v : U) (hv : v ∈ equiv_class U u) : v.1.1 ∈ balls X := sorry
+  sorry
 
 theorem open_eq_disjoint_union_ball (O : Set X) (hO : IsOpen O) :
     ∃ s ⊆ balls X, O = ⋃₀ s ∧ s.PairwiseDisjoint id := by
