@@ -58,37 +58,49 @@ lemma union_mem_balls {ι : Type*} [Nonempty ι] (C : ι → X) (R : ι → ℝ)
     symm
     simpa [this] using lt_ciSup_iff h2
 
-lemma union_balls_mem_balls (U : Set (balls X)) :
-    ⋃₀ U ∈ balls X := by
-  simp only [sUnion_image]
-  let C (a : U) := choose a.1.2.out
-  let r (a : U) := choose (choose_spec a.1.2.out)
-  have Cr_prop (a : U) := choose_spec (choose_spec a.1.2.out)
-  sorry
-
 def equiv_class (U : Set (balls X)) (u : U) : Set U := {v : U | rel U u v}
 
 -- FIX : réécrire les hyp : IsUltrametricDist pas utilisé
 lemma union_class_eq (U : Set (balls X)) (u : U) :
-    ⋃ (v ∈ equiv_class U u), v = ⋃ v ∈ {w : U | u.1.1 ⊆ w.1.1}, v.1.1 := by
+    ⋃ (v : equiv_class U u), v = ⋃ v : {w : U // u.1.1 ⊆ w.1.1}, v.1.1.1 := by
   apply subset_antisymm
   all_goals rw [subset_def]
   all_goals intros w hw
   all_goals simp_all only [mem_iUnion, exists_prop, mem_setOf_eq]
-  . obtain ⟨v, ⟨s, hsU, hu_sub_s, hv_sub_s⟩, hw_mem_v⟩ := hw
-    use ⟨s, hsU⟩
-    simp only
-    exact ⟨hu_sub_s, mem_of_mem_of_subset hw_mem_v hv_sub_s⟩
-  . obtain ⟨v, u_sub_v, w_mem_v⟩ := hw
-    refine ⟨v, ?_, w_mem_v⟩
+  all_goals simp
+  . obtain ⟨⟨v, ⟨s, s_mem_U, u_sub_s, v_sub_s⟩⟩, w_mem_v⟩ := hw
+    refine ⟨s, u_sub_s, ?_⟩
+    simp
+    exact ⟨s_mem_U, mem_of_mem_of_subset w_mem_v v_sub_s⟩
+  . obtain ⟨⟨v, u_sub_v⟩, hv⟩ := hw
+    refine ⟨v, ?_, hv⟩
     simp [equiv_class, rel]
     use v
-    simp [exists_prop]
-    exact u_sub_v
+    simpa
 
-lemma union_class_mem_balls (U : Set (balls X)) (u : U) :
-    ⋃ (v ∈ equiv_class U u), v ∈ balls X := by
-  have v_ball (v : U) (hv : v ∈ equiv_class U u) : v.1.1 ∈ balls X := sorry
+lemma union_class_mem_balls (U : Set (balls X)) (u : U) (hu : u.1.1.Nonempty) :
+  -- (h_uclass_bdd : ∃ x r, 0 < r ∧ ⋃ (v ∈ equiv_class U u), v ⊆ ball x r) : -- Hyp : l'union est bornée
+    ⋃ (v : equiv_class U u), v ∈ balls X := by
+  have v_ball (v : U) (hv : v ∈ equiv_class U u) : v.1.1 ∈ balls X := by simp
+  let C (v : {w : U // u.1.1 ⊆ w.1.1}) := choose v.1.1.2.out
+  let r (v : {w : U // u.1.1 ⊆ w.1.1}) := choose (choose_spec v.1.1.2.out)
+  have r_pos (v : {w : U // u.1.1 ⊆ w.1.1}) : 0 < r v := (choose_spec (choose_spec v.1.1.2.out)).left
+  have v_ball (v : {w : U // u.1.1 ⊆ w.1.1}) : v = ball (C v) (r v) :=
+    (choose_spec (choose_spec v.1.1.2.out)).right
+
+  have union_ball :
+    ⋃ v : {w : U // u.1.1 ⊆ w.1.1}, v = ⋃ v : {w : U // u.1.1 ⊆ w.1.1}, ball (C v) (r v) := by
+    simp only [v_ball]
+  rw [union_class_eq U u, union_ball]
+
+  obtain ⟨x, x_mem_u⟩ := hu
+  have h1 (v : {w : U // u.1.1 ⊆ w.1.1}) : x ∈ ball (C v) (r v) := by
+    rw [← v_ball v]
+    obtain ⟨v, u_sub_v⟩ := v
+    exact mem_of_mem_of_subset x_mem_u u_sub_v
+  have sU_nonempty : Nonempty {w : U // u.1.1 ⊆ w.1.1} := ⟨u, by simp⟩
+  refine union_mem_balls C r r_pos h1 ?_
+  -- TODO : Ajouter que l'union est bornee pour avoir BddAbove r
   sorry
 
 theorem open_eq_disjoint_union_ball (O : Set X) (hO : IsOpen O) :
