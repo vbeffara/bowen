@@ -88,15 +88,11 @@ lemma union_class_eq (U : Set (balls X)) (u : U) :
     use v
     simpa
 
-lemma union_class_mem_balls (U : Set (balls X)) (u : U) (hu : u.1.1.Nonempty) :
-  -- (h_uclass_bdd : ∃ x r, 0 < r ∧ ⋃ (v ∈ equiv_class U u), v ⊆ ball x r) : -- Hyp : l'union est bornée
+lemma union_class_mem_balls (U : Set (balls X)) (u : U) (hu : u.1.1.Nonempty)
+  (Ubdd : ∃ (x: X), ∃ r > 0, ⋃₀ U ⊆ ball x r) : -- Hypothèse gratuite si l'ouvert est borné
     ⋃ (v : equiv_class U u), v ∈ balls X := by
-  have v_ball (v : U) (hv : v ∈ equiv_class U u) : v.1.1 ∈ balls X := by simp
-  let C (v : {w : U // u.1.1 ⊆ w.1.1}) := choose v.1.1.2.out
-  let r (v : {w : U // u.1.1 ⊆ w.1.1}) := choose (choose_spec v.1.1.2.out)
-  have r_pos (v : {w : U // u.1.1 ⊆ w.1.1}) : 0 < r v := (choose_spec (choose_spec v.1.1.2.out)).left
-  have v_ball (v : {w : U // u.1.1 ⊆ w.1.1}) : v = ball (C v) (r v) :=
-    (choose_spec (choose_spec v.1.1.2.out)).right
+  have key (v : {w : U // u.1.1 ⊆ w.1.1}) := v.1.1.2.out
+  choose C r r_pos v_ball using key
 
   have union_ball :
     ⋃ v : {w : U // u.1.1 ⊆ w.1.1}, v = ⋃ v : {w : U // u.1.1 ⊆ w.1.1}, ball (C v) (r v) := by
@@ -110,7 +106,25 @@ lemma union_class_mem_balls (U : Set (balls X)) (u : U) (hu : u.1.1.Nonempty) :
     exact mem_of_mem_of_subset x_mem_u u_sub_v
   have sU_nonempty : Nonempty {w : U // u.1.1 ⊆ w.1.1} := ⟨u, by simp⟩
   refine union_mem_balls C r r_pos h1 ?_
-  -- TODO : Ajouter que l'union est bornee pour avoir BddAbove r
+
+  rw [bddAbove_def]
+  obtain ⟨x, R, R_pos, U_union_sub_ball⟩ := Ubdd
+  use R
+  intros rb rb_range
+  simp only [range, mem_setOf_eq] at rb_range
+  obtain ⟨w, rb_eq⟩ := rb_range
+  have w_sub_ball : w.1.1.1 ⊆ ball x R := by
+    refine subset_trans ?_ U_union_sub_ball
+    simp only [sUnion_image]
+    apply subset_iUnion_of_subset ⟨w.1.1, w.1.1.2⟩
+    simp
+  rw [v_ball w] at w_sub_ball
+  have ball_eq_ballC : ball x R = ball (C w) R := by
+    refine IsUltrametricDist.ball_eq_of_mem ?_
+    apply mem_of_subset_of_mem w_sub_ball
+    exact mem_ball_self (r_pos w)
+  rw [ball_eq_ballC, rb_eq] at w_sub_ball
+  -- FIX : Missing lemma in Mathlib : w_sub_ball → rb ≤ R
   sorry
 
 theorem open_eq_disjoint_union_ball (O : Set X) (hO : IsOpen O) :
