@@ -58,16 +58,6 @@ lemma union_mem_balls {ι : Type*} [Nonempty ι] (C : ι → X) (R : ι → ℝ)
     symm
     simpa [this] using lt_ciSup_iff h2
 
-lemma union_balls_mem_balls (U : Set (balls X)) :
-    ⋃₀ U ∈ balls X := by
-  have key (a : U) : ∃ x, ∃ r > 0, a.1.1 = ball x r := a.1.2
-  choose C r hr hCr using key
-  simp only [sUnion_image, biUnion_eq_iUnion, hCr]
-  have hU : Nonempty U := sorry
-  obtain ⟨x, hx⟩ : ∃ x, ∀ i, x ∈ ball (C i) (r i) := sorry
-  apply union_mem_balls C r hr hx
-  sorry
-
 def equiv_class (U : Set (balls X)) (u : U) : Set U := {v : U | rel U u v}
 
 -- FIX : réécrire les hyp : IsUltrametricDist pas utilisé
