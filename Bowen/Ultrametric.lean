@@ -139,6 +139,8 @@ lemma union_class_mem_balls (U : Set (balls X)) (u : U)
   push_neg at h
   exact le_of_lt h
 
+noncomputable def repr_set (U : Set (balls X)) : Set (balls X) :=
+  {b | ∃ rb : Quotient (quot_U U), rb.out = b}
 
 theorem open_eq_disjoint_union_ball (O : Set X) (hO : IsOpen O) :
     ∃ s ⊆ balls X, O = ⋃₀ s ∧ s.PairwiseDisjoint id := by
