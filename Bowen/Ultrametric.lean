@@ -2,7 +2,7 @@ import Mathlib
 
 open TopologicalSpace Metric Set Classical
 
-variable {X : Type*} [PseudoMetricSpace X] [IsUltrametricDist X]
+variable {X : Type*} [PseudoMetricSpace X] [hX : IsUltrametricDist X]
 
 def balls (X : Type*) [PseudoMetricSpace X] : Set (Set X) := {b | ∃ x, ∃ r > 0, b = ball x r}
 
@@ -71,6 +71,7 @@ lemma union_balls_mem_balls (U : Set (balls X)) :
 def equiv_class (U : Set (balls X)) (u : U) : Set U := {v : U | rel U u v}
 
 -- FIX : réécrire les hyp : IsUltrametricDist pas utilisé
+omit hX in
 lemma union_class_eq (U : Set (balls X)) (u : U) :
     ⋃ (v : equiv_class U u), v = ⋃ v : {w : U // u.1.1 ⊆ w.1.1}, v.1.1.1 := by
   apply subset_antisymm
@@ -88,44 +89,66 @@ lemma union_class_eq (U : Set (balls X)) (u : U) :
     use v
     simpa
 
-lemma union_class_mem_balls (U : Set (balls X)) (u : U) (hu : u.1.1.Nonempty)
+lemma union_class_mem_balls (U : Set (balls X)) (u : U)
   (Ubdd : ∃ (x: X), ∃ r > 0, ⋃₀ U ⊆ ball x r) : -- Hypothèse gratuite si l'ouvert est borné
     ⋃ (v : equiv_class U u), v ∈ balls X := by
   have key (v : {w : U // u.1.1 ⊆ w.1.1}) := v.1.1.2.out
   choose C r r_pos v_ball using key
 
-  have union_ball :
-    ⋃ v : {w : U // u.1.1 ⊆ w.1.1}, v = ⋃ v : {w : U // u.1.1 ⊆ w.1.1}, ball (C v) (r v) := by
-    simp only [v_ball]
-  rw [union_class_eq U u, union_ball]
-
-  obtain ⟨x, x_mem_u⟩ := hu
-  have h1 (v : {w : U // u.1.1 ⊆ w.1.1}) : x ∈ ball (C v) (r v) := by
-    rw [← v_ball v]
-    obtain ⟨v, u_sub_v⟩ := v
-    exact mem_of_mem_of_subset x_mem_u u_sub_v
-  have sU_nonempty : Nonempty {w : U // u.1.1 ⊆ w.1.1} := ⟨u, by simp⟩
-  refine union_mem_balls C r r_pos h1 ?_
-
-  rw [bddAbove_def]
   obtain ⟨x, R, R_pos, U_union_sub_ball⟩ := Ubdd
-  use R
-  intros rb rb_range
-  simp only [range, mem_setOf_eq] at rb_range
-  obtain ⟨w, rb_eq⟩ := rb_range
-  have w_sub_ball : w.1.1.1 ⊆ ball x R := by
+  let ra (w : {w : U // u.1.1 ⊆ w.1.1}) : ℝ := if r w ≥ R then R else r w
+  have ra_pos (w : {w : U // u.1.1 ⊆ w.1.1}) : ra w > 0 := by
+    by_cases h : r w ≥ R
+    all_goals simp [ra, h]
+    . exact R_pos
+    . exact r_pos w
+
+  have U_ball_eq (w : {w : U // u.1.1 ⊆ w.1.1}) : ball x R = ball (C w) R := by
+    refine IsUltrametricDist.ball_eq_of_mem ?_
+    refine mem_of_mem_of_subset (mem_ball_self (r_pos w)) ?_
     refine subset_trans ?_ U_union_sub_ball
+    rw [←v_ball w]
     simp only [sUnion_image]
     apply subset_iUnion_of_subset ⟨w.1.1, w.1.1.2⟩
     simp
-  rw [v_ball w] at w_sub_ball
-  have ball_eq_ballC : ball x R = ball (C w) R := by
-    refine IsUltrametricDist.ball_eq_of_mem ?_
-    apply mem_of_subset_of_mem w_sub_ball
-    exact mem_ball_self (r_pos w)
-  rw [ball_eq_ballC, rb_eq] at w_sub_ball
-  -- FIX : Missing lemma in Mathlib : w_sub_ball → rb ≤ R
-  sorry
+
+  have ball_r_eq_ra (w : {w : U // u.1.1 ⊆ w.1.1}) : ball (C w) (r w) = ball (C w) (ra w) := by
+    by_cases h : r w ≥ R
+    all_goals simp [ra, h]
+    refine subset_antisymm ?_ (ball_subset_ball h)
+    rw [←U_ball_eq w]
+    refine subset_trans ?_ U_union_sub_ball
+    rw [← v_ball w]
+    simp only [sUnion_image]
+    apply subset_iUnion_of_subset ⟨w.1.1, w.1.1.2⟩
+    simp
+
+  have union_ball :
+      ⋃ v : {w : U // u.1.1 ⊆ w.1.1}, v = ⋃ v : {w : U // u.1.1 ⊆ w.1.1}, ball (C v) (ra v) := by
+    simp only [v_ball]; exact iUnion_congr ball_r_eq_ra
+  rw [union_class_eq U u, union_ball]
+
+  have h1 (w : {w : U // u.1.1 ⊆ w.1.1}) : (C ⟨u, subset_rfl⟩) ∈ ball (C w) (ra w) := by
+    rw [←ball_r_eq_ra w, ←v_ball w]
+    refine mem_of_mem_of_subset ?_ w.2
+    set u' : {w : U // u.1.1 ⊆ w.1.1} := ⟨u, subset_rfl⟩
+    rw [v_ball u']
+    exact mem_ball_self (r_pos u')
+
+  have sU_nonempty : Nonempty {w : U // u.1.1 ⊆ w.1.1} := ⟨u, by simp⟩
+  refine union_mem_balls C ra ra_pos h1 ?_
+  rw [bddAbove_def]
+  use R
+  intro rw hrw
+  simp only [range, mem_setOf_eq] at hrw
+  obtain ⟨w, rw_eq⟩ := hrw
+  rw [← rw_eq]
+  simp [ra]
+  by_cases h : R ≤ r w
+  all_goals simp [h]
+  push_neg at h
+  exact le_of_lt h
+
 
 theorem open_eq_disjoint_union_ball (O : Set X) (hO : IsOpen O) :
     ∃ s ⊆ balls X, O = ⋃₀ s ∧ s.PairwiseDisjoint id := by
