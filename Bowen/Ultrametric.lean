@@ -17,8 +17,24 @@ lemma metric_space_topological_basis {X : Type*} [PseudoMetricSpace X] :
     refine ⟨ball x r, ⟨x, r, r_pos, rfl⟩, mem_ball_self r_pos, h_ball_sub⟩
 
 lemma open_eq_union_ball {X : Type*} [PseudoMetricSpace X] (O : Set X) (hO : IsOpen O) :
-    ∃ s ⊆ balls X, O = ⋃₀ s :=
-  IsTopologicalBasis.open_eq_sUnion metric_space_topological_basis hO
+    ∃ s : Set (balls X), O = ⋃₀ s := by
+  /- #check IsTopologicalBasis.open_eq_sUnion metric_space_topological_basis hO -/
+  obtain ⟨s, s_sub_balls, o_eq_union_s⟩ :=
+    IsTopologicalBasis.open_eq_sUnion metric_space_topological_basis hO
+  let s' : Set (balls X) := {⟨u.1, mem_of_mem_of_subset u.2 s_sub_balls⟩ | u : s}
+  use s'
+  rw [o_eq_union_s]
+  simp [sUnion_image, sUnion_eq_iUnion]
+  ext x
+  constructor
+  all_goals intro x_mem
+  . simp_all [s']
+    obtain ⟨b, b_mem_s, x_mem_b⟩ := x_mem
+    use b
+    exact ⟨b_mem_s, mem_of_mem_of_subset b_mem_s s_sub_balls, x_mem_b⟩
+  . simp_all [s']
+    obtain ⟨b, b_mem_s, b_mem_balls, x_mem_b⟩ := x_mem
+    exact ⟨b, b_mem_s, x_mem_b⟩
 
 def rel (U : Set (balls X)) (u v : U) : Prop := ∃ w ∈ U, u.1.1 ⊆ w ∧ v.1.1 ⊆ w
 
@@ -139,9 +155,24 @@ lemma union_class_mem_balls (U : Set (balls X)) (u : U)
   push_neg at h
   exact le_of_lt h
 
-noncomputable def repr_set (U : Set (balls X)) : Set (balls X) :=
+def repr_set (U : Set (balls X)) : Set U :=
   {b | ∃ rb : Quotient (quot_U U), rb.out = b}
 
-theorem open_eq_disjoint_union_ball (O : Set X) (hO : IsOpen O) :
+def max_ball (U : Set (balls X)) (u : U) (Ubdd : ∃ (x: X), ∃ r > 0, ⋃₀ U ⊆ ball x r) : balls X :=
+  ⟨⋃ (v : equiv_class U u), v, union_class_mem_balls U u Ubdd⟩
+
+/- lemma dis (U : Set (balls X)) (u v : U) (Ubdd : ∃ (x : X), ∃ r > 0, ⋃₀ U ⊆ ball x r) -/
+/-   (h : max_ball U u Ubdd \) -/
+
+theorem open_eq_disjoint_union_ball
+  (O : Set X) (hO : IsOpen O) (O_bdd : ∃ (x : X), ∃ r > 0, O ⊆ ball x r) :
     ∃ s ⊆ balls X, O = ⋃₀ s ∧ s.PairwiseDisjoint id := by
+  obtain ⟨U, U_sub_balls, O_eq_union_U⟩ := open_eq_union_ball O hO
+  obtain ⟨xo, ro, ro_pos, o_sub_ball⟩ := O_bdd
+
+  /- have Ubdd : ∃ (x : X), ∃ r > 0, ⋃₀ U ⊆ ball x r := by -/
+  /-   refine ⟨xo, ro, ro_pos, ?union_sub_ball⟩ -/
+  /-   rw [← O_eq_union_U] -/
+  /-   exact o_sub_ball -/
+
   sorry
