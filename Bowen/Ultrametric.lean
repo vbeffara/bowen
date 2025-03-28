@@ -167,12 +167,33 @@ def max_ball (U : Set (balls X)) (u : U) (Ubdd : ∃ (x: X), ∃ r > 0, ⋃₀ U
 theorem open_eq_disjoint_union_ball
   (O : Set X) (hO : IsOpen O) (O_bdd : ∃ (x : X), ∃ r > 0, O ⊆ ball x r) :
     ∃ s ⊆ balls X, O = ⋃₀ s ∧ s.PairwiseDisjoint id := by
-  obtain ⟨U, U_sub_balls, O_eq_union_U⟩ := open_eq_union_ball O hO
   obtain ⟨xo, ro, ro_pos, o_sub_ball⟩ := O_bdd
+  obtain ⟨U, o_eq_U_union⟩ := open_eq_union_ball O hO
 
-  /- have Ubdd : ∃ (x : X), ∃ r > 0, ⋃₀ U ⊆ ball x r := by -/
-  /-   refine ⟨xo, ro, ro_pos, ?union_sub_ball⟩ -/
-  /-   rw [← O_eq_union_U] -/
-  /-   exact o_sub_ball -/
+  have Ubdd : ∃ (x : X), ∃ r > 0, ⋃₀ U ⊆ ball x r := by
+    refine ⟨xo, ro, ro_pos, ?_⟩
+    rw [← o_eq_U_union]
+    exact o_sub_ball
+
+  let max_balls : Set (balls X) := {max_ball U u Ubdd | u ∈ repr_set U}
+
+  have max_balls_sub_balls : ↑max_balls ⊆ balls X := by simp
+  have o_eq_union_max_balls : O = ⋃₀ max_balls := by
+    rw [o_eq_U_union]
+    ext x -- FIX : Surement pas la meilleure maniere de faire
+    constructor
+    all_goals intro x_mem
+    all_goals simp at x_mem
+    . obtain ⟨b, ⟨b_mem_balls, b_mem_U⟩, x_mem_b⟩ := x_mem
+      simp
+      refine ⟨b, ⟨b_mem_balls, ?_⟩, x_mem_b⟩ -- FIX : b ~> max_ball U b Ubdd
+      sorry
+    . obtain ⟨b, ⟨b_mem_balls, b_mem_max_balls⟩, x_mem_b⟩ := x_mem
+      simp [max_balls] at b_mem_max_balls
+      obtain ⟨c, c_mem_balls, ⟨c_mem_U, c_repr, b_eq_max_ball⟩⟩ := b_mem_max_balls
+      simp only [sUnion_image]
+      sorry
+
+  refine ⟨max_balls, max_balls_sub_balls, o_eq_union_max_balls, ?disjoint⟩
 
   sorry
