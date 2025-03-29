@@ -164,9 +164,29 @@ def max_ball (U : Set (balls X)) (u : U) (Ubdd : ∃ (x: X), ∃ r > 0, ⋃₀ U
 /- lemma dis (U : Set (balls X)) (u v : U) (Ubdd : ∃ (x : X), ∃ r > 0, ⋃₀ U ⊆ ball x r) -/
 /-   (h : max_ball U u Ubdd \) -/
 
-lemma partition_union (U : Set (balls X)) (Ubdd : ∃ (x : X), ∃ r > 0, U ⊆ ball x r) :
-    ⋃ u : U, u = ⋃ (u : repr_set U), max_ball U u Ubdd := by
+lemma partition_union (U : Set (balls X)) (Ubdd : ∃ (x : X), ∃ r > 0, ⋃₀ U ⊆ ball x r) :
+    ⋃ u ∈ U, u = ⋃ (u ∈ repr_set U), (max_ball U u Ubdd).1 := by
+  ext x
+  constructor
+  all_goals intro x_mem
+  all_goals simp_all
+  . obtain ⟨u, ⟨u_balls, u_mem_U⟩, x_mem_u⟩ := x_mem
+    let u : U := ⟨⟨u, u_balls⟩, u_mem_U⟩
+    let ur : U := @Quotient.out U (quot_U U) ⟦u⟧ -- quot_U ne peut pas être deviné
+    have ur_is_repr : ur ∈ repr_set U := by simp [repr_set]
 
+    refine ⟨ur, ur.1.2, ?_⟩
+    simp [max_ball]
+    split_ands
+    . exact ur_is_repr
+    . refine ⟨u, ?hu, x_mem_u⟩
+      refine ⟨u.1.2, u.2, ?_⟩
+      simp [equiv_class, ur]
+      exact Quotient.mk_out u
+  . obtain ⟨u, u_balls, ⟨u_in_U, u_repr, x_mem_max_ball⟩⟩ := x_mem
+    simp [max_ball] at x_mem_max_ball
+    obtain ⟨w, ⟨w_balls, ⟨w_mem_u, w_mem_equiv_u⟩⟩, x_mem_w⟩ := x_mem_max_ball
+    exact ⟨w, ⟨w_balls, w_mem_u⟩, x_mem_w⟩
 
 theorem open_eq_disjoint_union_ball
   (O : Set X) (hO : IsOpen O) (O_bdd : ∃ (x : X), ∃ r > 0, O ⊆ ball x r) :
@@ -184,27 +204,10 @@ theorem open_eq_disjoint_union_ball
   have max_balls_sub_balls : ↑max_balls ⊆ balls X := by simp
   have o_eq_union_max_balls : O = ⋃₀ max_balls := by
     rw [o_eq_U_union]
-    ext x -- FIX : Surement pas la meilleure maniere de faire
-    constructor
-    all_goals intro x_mem
-    all_goals simp at x_mem
-    . obtain ⟨b, ⟨b_mem_balls, b_mem_U⟩, x_mem_b⟩ := x_mem
-      simp
-      /- refine ⟨b, ⟨b_mem_balls, ?_⟩, x_mem_b⟩ -- FIX : b ~> max_ball U b Ubdd -/
-      set bU : U := ⟨⟨b, b_mem_balls⟩, b_mem_U⟩
-      let brU : U := @Quotient.out U (quot_U U) ⟦bU⟧ -- quot_U ne peut pas être deviné
-      refine ⟨max_ball U bU Ubdd, ?is_max_ball, ?contain_x⟩
-      . simp [max_balls]
-        use brU
-        simp [repr_set]
-        simp only [max_ball, Subtype.mk.injEq]
-        sorry
-      sorry
-    . obtain ⟨b, ⟨b_mem_balls, b_mem_max_balls⟩, x_mem_b⟩ := x_mem
-      simp [max_balls] at b_mem_max_balls
-      obtain ⟨c, c_mem_balls, ⟨c_mem_U, c_repr, b_eq_max_ball⟩⟩ := b_mem_max_balls
-      simp only [sUnion_image]
-      sorry
+    simp only [sUnion_image]
+    rw [partition_union U Ubdd]
+    simp only [max_balls, mem_setOf_eq, iUnion_exists]
+    sorry
 
   refine ⟨max_balls, max_balls_sub_balls, o_eq_union_max_balls, ?disjoint⟩
 
