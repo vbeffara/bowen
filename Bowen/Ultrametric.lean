@@ -231,7 +231,7 @@ lemma Obdd (O_bdd : ∃ (x : X), ∃ r > 0, O ⊆ ball x r) :
   obtain ⟨xo, ro, ro_pos, o_sub_ball⟩ := O_bdd
   exact ⟨xo, ro, ro_pos, sUnion_ballsIn.trans o_sub_ball⟩
 
-example (hO : IsOpen O) (O_bdd : ∃ (x : X), ∃ r > 0, O ⊆ ball x r) :
+theorem partition (hO : IsOpen O) (O_bdd : ∃ (x : X), ∃ r > 0, O ⊆ ball x r) :
     let Φ := iBall (Obdd O_bdd)
     ⋃ s, Φ s = O ∧ Pairwise (onFun Disjoint (fun s => (Φ s).1)) := by
   intro Φ ; simp [Φ] ; constructor
@@ -247,7 +247,61 @@ example (hO : IsOpen O) (O_bdd : ∃ (x : X), ∃ r > 0, O ⊆ ball x r) :
       apply subset_iUnion_of_subset ⟨b, h1⟩
       dsimp [max_ball]
       refine subset_iUnion_of_subset ⟨_, rel_equiv.refl _⟩ subset_rfl
-  · sorry
+  · apply Quotient.ind ; rintro b1
+    apply Quotient.ind ; rintro b2
+    simp [disjoint_iff, iBall, quot_U]
+    contrapose!
+    rintro hx
+    set B1 := max_ball (Obdd O_bdd) b1 with hB1
+    set B2 := max_ball (Obdd O_bdd) b2 with hB2
+    rcases B1 with ⟨β1, x1, r1, hr1, rfl⟩
+    rcases B2 with ⟨β2, x2, r2, hr2, rfl⟩
+    dsimp at hx
+    have := IsUltrametricDist.ball_subset_trichotomy x1 x2 r1 r2
+    rcases this with case_1 | case_2 | case_3
+    · refine ⟨⟨ball x2 r2, x2, r2, hr2, rfl⟩, ?_, ?_, ?_⟩
+      · unfold max_ball at hB2
+        simp at hB2
+        simp [hB2]
+        apply iUnion₂_subset
+        rintro s hs
+        apply iUnion₂_subset
+        rintro h1 -
+        exact h1
+      · refine subset_trans ?_ case_1
+        unfold max_ball at hB1
+        simp at hB1
+        simp [hB1]
+        apply subset_iUnion_of_subset ↑b1
+        simp [equiv_class, rel_equiv.refl]
+      · rw [hB2]
+        intro x hx
+        refine ⟨b2, ?_, hx⟩
+        · simp [mem_range, equiv_class]
+          exact rel_equiv.refl _
+    · refine ⟨⟨ball x1 r1, x1, r1, hr1, rfl⟩, ?_, ?_, ?_⟩
+      · unfold max_ball at hB1
+        simp at hB1
+        simp [hB1]
+        apply iUnion₂_subset
+        rintro s hs
+        apply iUnion₂_subset
+        rintro h1 -
+        exact h1
+      · rw [hB1]
+        intro x hx
+        refine ⟨b1, ?_, hx⟩
+        · simp [mem_range, equiv_class]
+          exact rel_equiv.refl _
+      · refine subset_trans ?_ case_2
+        unfold max_ball at hB2
+        simp at hB2
+        simp [hB2]
+        apply subset_iUnion_of_subset ↑b2
+        simp [equiv_class, rel_equiv.refl]
+    · simp [disjoint_iff] at case_3
+      simp [nonempty_iff_ne_empty] at hx
+      contradiction
 
 theorem open_eq_disjoint_union_ball
   (O : Set X) (hO : IsOpen O) (O_bdd : ∃ (x : X), ∃ r > 0, O ⊆ ball x r) :
