@@ -173,27 +173,27 @@ def repr_set (U : Set (balls X)) : Set U :=
 example (U : Set (balls X)) : repr_set U = Set.range (Quotient.out : Quotient (quot_U U) → _) := by
   ext u; simp [repr_set]
 
-def max_ball (U : Set (balls X)) (u : U) (Ubdd : ∃ (x: X), ∃ r > 0, ⋃₀ U ⊆ ball x r) : balls X :=
+def max_ball {U : Set (balls X)} (Ubdd : ∃ (x : X), ∃ r > 0, ⋃₀ U ⊆ ball x r) (u : U) : balls X :=
   ⟨⋃ (v : equiv_class U u), v, union_class_mem_balls U u Ubdd⟩
 
-def toto (U : Set (balls X)) (Ubdd : ∃ (x: X), ∃ r > 0, ⋃₀ U ⊆ ball x r) :
+lemma equiv_iff {X : Type*} {R : X → X → Prop} (hR : Equivalence R) {x y : X} (h : R x y) {z : X} :
+    R x z ↔ R y z :=
+  ⟨hR.trans (hR.symm h), hR.trans h⟩
+
+def iBall (U : Set (balls X)) (Ubdd : ∃ (x: X), ∃ r > 0, ⋃₀ U ⊆ ball x r) :
     Quotient (quot_U U) → balls X := by
-  let f (u : U) : balls X := max_ball U u Ubdd
-  apply Quotient.lift f
+  apply Quotient.lift (max_ball Ubdd)
   rintro a b hab
-  simp [f, max_ball, equiv_class]
-  convert rfl using 3
-  · ext u
-    constructor <;> intro h
-    · exact rel_equiv.trans hab h
-    · exact rel_equiv.trans (rel_equiv.symm hab) h
-  · sorry
+  have : equiv_class U a = equiv_class U b := by
+    ext v
+    exact equiv_iff rel_equiv hab
+  simp [max_ball, this]
 
 /- lemma dis (U : Set (balls X)) (u v : U) (Ubdd : ∃ (x : X), ∃ r > 0, ⋃₀ U ⊆ ball x r) -/
 /-   (h : max_ball U u Ubdd \) -/
 
 lemma partition_union (U : Set (balls X)) (Ubdd : ∃ (x : X), ∃ r > 0, ⋃₀ U ⊆ ball x r) :
-    ⋃ u ∈ U, u = ⋃ (u ∈ repr_set U), (max_ball U u Ubdd).1 := by
+    ⋃ u ∈ U, u = ⋃ (u ∈ repr_set U), (max_ball Ubdd u).1 := by
   ext x
   constructor
   all_goals intro x_mem
@@ -225,8 +225,6 @@ example (O : Set X) (hO : IsOpen O) (O_bdd : ∃ (x : X), ∃ r > 0, O ⊆ ball 
     rw [← o_eq_U_union]
     exact o_sub_ball
 
-  refine ⟨?_, toto U Ubdd, ?_⟩
-  have := toto U Ubdd
   sorry
   -- Add proof here
 
@@ -241,7 +239,7 @@ theorem open_eq_disjoint_union_ball
     rw [← o_eq_U_union]
     exact o_sub_ball
 
-  let max_balls : Set (balls X) := {max_ball U u Ubdd | u ∈ repr_set U}
+  let max_balls : Set (balls X) := {max_ball Ubdd u | u ∈ repr_set U}
 
   have max_balls_sub_balls : ↑max_balls ⊆ balls X := by simp
   have o_eq_union_max_balls : O = ⋃₀ max_balls := by
