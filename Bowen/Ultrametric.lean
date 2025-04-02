@@ -2,9 +2,9 @@ import Mathlib
 
 open TopologicalSpace Metric Set Classical Topology Function
 
-variable {X : Type*} [PseudoMetricSpace X] [hX : IsUltrametricDist X]
-
 def balls (X : Type*) [PseudoMetricSpace X] : Set (Set X) := {b | ∃ x, ∃ r > 0, b = ball x r}
+
+variable {X : Type*} [PseudoMetricSpace X] [hX : IsUltrametricDist X] {U : Set (balls X)} {O : Set X}
 
 lemma metric_space_topological_basis {X : Type*} [PseudoMetricSpace X] :
     IsTopologicalBasis (balls X) := by
@@ -16,7 +16,8 @@ lemma metric_space_topological_basis {X : Type*} [PseudoMetricSpace X] :
     obtain ⟨r, r_pos, h_ball_sub⟩ := hu_open x hx_in_u
     refine ⟨ball x r, ⟨x, r, r_pos, rfl⟩, mem_ball_self r_pos, h_ball_sub⟩
 
-lemma open_eq_union_ball {X : Type*} [PseudoMetricSpace X] (O : Set X) (hO : IsOpen O) :
+omit hX in
+lemma open_eq_union_ball (hO : IsOpen O) :
     ∃ s : Set (balls X), O = ⋃₀ s := by
   /- #check IsTopologicalBasis.open_eq_sUnion metric_space_topological_basis hO -/
   obtain ⟨s, s_sub_balls, o_eq_union_s⟩ :=
@@ -36,7 +37,8 @@ lemma open_eq_union_ball {X : Type*} [PseudoMetricSpace X] (O : Set X) (hO : IsO
     obtain ⟨b, b_mem_s, b_mem_balls, x_mem_b⟩ := x_mem
     exact ⟨b, b_mem_s, x_mem_b⟩
 
-lemma open_eq_union_ball' {X : Type*} [PseudoMetricSpace X] (O : Set X) (hO : IsOpen O) :
+omit hX in
+lemma open_eq_union_ball' (hO : IsOpen O) :
     O = ⋃₀ {b | b ∈ balls X ∧ b ⊆ O} := by
   ext x
   constructor
@@ -51,7 +53,7 @@ lemma open_eq_union_ball' {X : Type*} [PseudoMetricSpace X] (O : Set X) (hO : Is
 def rel (U : Set (balls X)) (u v : U) : Prop := ∃ w ∈ U, u.1.1 ⊆ w ∧ v.1.1 ⊆ w
 
 -- Transitivite vient de la distance ultrametrique
-lemma rel_equiv {U : Set (balls X)} : Equivalence (rel U) where
+lemma rel_equiv : Equivalence (rel U) where
   refl s := ⟨s, by simp⟩
   symm {u v} := by
     rintro ⟨w, hw1, hw⟩
@@ -173,7 +175,7 @@ def repr_set (U : Set (balls X)) : Set U :=
 example (U : Set (balls X)) : repr_set U = Set.range (Quotient.out : Quotient (quot_U U) → _) := by
   ext u; simp [repr_set]
 
-def max_ball {U : Set (balls X)} (Ubdd : ∃ (x : X), ∃ r > 0, ⋃₀ U ⊆ ball x r) (u : U) : balls X :=
+def max_ball (Ubdd : ∃ (x : X), ∃ r > 0, ⋃₀ U ⊆ ball x r) (u : U) : balls X :=
   ⟨⋃ (v : equiv_class U u), v, union_class_mem_balls U u Ubdd⟩
 
 lemma equiv_iff {X : Type*} {R : X → X → Prop} (hR : Equivalence R) {x y : X} (h : R x y) {z : X} :
@@ -189,8 +191,7 @@ def iBall (U : Set (balls X)) (Ubdd : ∃ (x: X), ∃ r > 0, ⋃₀ U ⊆ ball x
     exact equiv_iff rel_equiv hab
   simp [max_ball, this]
 
-/- lemma dis (U : Set (balls X)) (u v : U) (Ubdd : ∃ (x : X), ∃ r > 0, ⋃₀ U ⊆ ball x r) -/
-/-   (h : max_ball U u Ubdd \) -/
+
 
 lemma partition_union (U : Set (balls X)) (Ubdd : ∃ (x : X), ∃ r > 0, ⋃₀ U ⊆ ball x r) :
     ⋃ u ∈ U, u = ⋃ (u ∈ repr_set U), (max_ball Ubdd u).1 := by
@@ -219,7 +220,7 @@ lemma partition_union (U : Set (balls X)) (Ubdd : ∃ (x : X), ∃ r > 0, ⋃₀
 example (O : Set X) (hO : IsOpen O) (O_bdd : ∃ (x : X), ∃ r > 0, O ⊆ ball x r) :
     ∃ ι : Type*, ∃ Φ : ι → balls X, (O = ⋃ s, Φ s) ∧ Pairwise (onFun Disjoint (fun s => (Φ s).1)) := by
   obtain ⟨xo, ro, ro_pos, o_sub_ball⟩ := O_bdd
-  obtain ⟨U, o_eq_U_union⟩ := open_eq_union_ball O hO
+  obtain ⟨U, o_eq_U_union⟩ := open_eq_union_ball hO
   have Ubdd : ∃ (x : X), ∃ r > 0, ⋃₀ U ⊆ ball x r := by
     refine ⟨xo, ro, ro_pos, ?_⟩
     rw [← o_eq_U_union]
@@ -232,7 +233,7 @@ theorem open_eq_disjoint_union_ball
   (O : Set X) (hO : IsOpen O) (O_bdd : ∃ (x : X), ∃ r > 0, O ⊆ ball x r) :
     ∃ s ⊆ balls X, O = ⋃₀ s ∧ s.PairwiseDisjoint id := by
   obtain ⟨xo, ro, ro_pos, o_sub_ball⟩ := O_bdd
-  obtain ⟨U, o_eq_U_union⟩ := open_eq_union_ball O hO
+  obtain ⟨U, o_eq_U_union⟩ := open_eq_union_ball hO
 
   have Ubdd : ∃ (x : X), ∃ r > 0, ⋃₀ U ⊆ ball x r := by
     refine ⟨xo, ro, ro_pos, ?_⟩
