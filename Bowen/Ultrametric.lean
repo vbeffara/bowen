@@ -1,6 +1,6 @@
 import Mathlib
 
-open TopologicalSpace Metric Set Classical
+open TopologicalSpace Metric Set Classical Topology Function
 
 variable {X : Type*} [PseudoMetricSpace X] [hX : IsUltrametricDist X]
 
@@ -35,6 +35,18 @@ lemma open_eq_union_ball {X : Type*} [PseudoMetricSpace X] (O : Set X) (hO : IsO
   . simp_all [s']
     obtain ⟨b, b_mem_s, b_mem_balls, x_mem_b⟩ := x_mem
     exact ⟨b, b_mem_s, x_mem_b⟩
+
+lemma open_eq_union_ball' {X : Type*} [PseudoMetricSpace X] (O : Set X) (hO : IsOpen O) :
+    O = ⋃₀ {b | b ∈ balls X ∧ b ⊆ O} := by
+  ext x
+  constructor
+  · intro hx
+    have h1 := Metric.nhds_basis_ball (x := x)
+    have h3 : O ∈ 𝓝 x := hO.mem_nhds hx
+    obtain ⟨r, hr1, hr2⟩:= h1.mem_iff.1 h3
+    refine ⟨ball x r, ⟨⟨x, r, hr1, rfl⟩, hr2⟩, mem_ball_self hr1⟩
+  · rintro ⟨b, ⟨-, hb2⟩, hb3⟩
+    exact hb2 hb3
 
 def rel (U : Set (balls X)) (u v : U) : Prop := ∃ w ∈ U, u.1.1 ⊆ w ∧ v.1.1 ⊆ w
 
@@ -158,8 +170,24 @@ lemma union_class_mem_balls (U : Set (balls X)) (u : U)
 def repr_set (U : Set (balls X)) : Set U :=
   {b | ∃ rb : Quotient (quot_U U), rb.out = b}
 
+example (U : Set (balls X)) : repr_set U = Set.range (Quotient.out : Quotient (quot_U U) → _) := by
+  ext u; simp [repr_set]
+
 def max_ball (U : Set (balls X)) (u : U) (Ubdd : ∃ (x: X), ∃ r > 0, ⋃₀ U ⊆ ball x r) : balls X :=
   ⟨⋃ (v : equiv_class U u), v, union_class_mem_balls U u Ubdd⟩
+
+def toto (U : Set (balls X)) (Ubdd : ∃ (x: X), ∃ r > 0, ⋃₀ U ⊆ ball x r) :
+    Quotient (quot_U U) → balls X := by
+  let f (u : U) : balls X := max_ball U u Ubdd
+  apply Quotient.lift f
+  rintro a b hab
+  simp [f, max_ball, equiv_class]
+  convert rfl using 3
+  · ext u
+    constructor <;> intro h
+    · exact rel_equiv.trans hab h
+    · exact rel_equiv.trans (rel_equiv.symm hab) h
+  · sorry
 
 /- lemma dis (U : Set (balls X)) (u v : U) (Ubdd : ∃ (x : X), ∃ r > 0, ⋃₀ U ⊆ ball x r) -/
 /-   (h : max_ball U u Ubdd \) -/
@@ -187,6 +215,20 @@ lemma partition_union (U : Set (balls X)) (Ubdd : ∃ (x : X), ∃ r > 0, ⋃₀
     simp [max_ball] at x_mem_max_ball
     obtain ⟨w, ⟨w_balls, ⟨w_mem_u, w_mem_equiv_u⟩⟩, x_mem_w⟩ := x_mem_max_ball
     exact ⟨w, ⟨w_balls, w_mem_u⟩, x_mem_w⟩
+
+example (O : Set X) (hO : IsOpen O) (O_bdd : ∃ (x : X), ∃ r > 0, O ⊆ ball x r) :
+    ∃ ι : Type*, ∃ Φ : ι → balls X, (O = ⋃ s, Φ s) ∧ Pairwise (onFun Disjoint (fun s => (Φ s).1)) := by
+  obtain ⟨xo, ro, ro_pos, o_sub_ball⟩ := O_bdd
+  obtain ⟨U, o_eq_U_union⟩ := open_eq_union_ball O hO
+  have Ubdd : ∃ (x : X), ∃ r > 0, ⋃₀ U ⊆ ball x r := by
+    refine ⟨xo, ro, ro_pos, ?_⟩
+    rw [← o_eq_U_union]
+    exact o_sub_ball
+
+  refine ⟨?_, toto U Ubdd, ?_⟩
+  have := toto U Ubdd
+  sorry
+  -- Add proof here
 
 theorem open_eq_disjoint_union_ball
   (O : Set X) (hO : IsOpen O) (O_bdd : ∃ (x : X), ∃ r > 0, O ⊆ ball x r) :
